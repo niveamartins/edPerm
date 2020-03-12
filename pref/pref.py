@@ -277,18 +277,37 @@ def cadastrarturma():
     banco = Banco()
     if (banco.buscar_professor(variavel_turma_id_user) != []):
         variavel_turma_id_user = banco.buscar_professor(variavel_turma_id_user)
-        print(variavel_turma_id_user)
-        print("Um erro com as classes -> /logar")
         cadastrado = banco.cadastrar_turma(variavel_turma_id_user[0], variavel_codigo, variavel_curso)
     else:
-        print("1")
         return 'Usuario não existe'
     if cadastrado:
-        print("2")
         return render_template('CadastroTurma.html', erro_cad = False)
     else:
-        print("3")
         return render_template('CadastroTurma.html', erro_cad = True)
+
+@app.route("/cadastroalunonaturma")
+def cadastroalunonaturma():
+    return render_template('cadastroalunonaturma.html')
+
+@app.route("/cadastraralunonaturma", methods = ['POST'])
+def cadastraralunonaturma():
+    variavel_aluno_id = str(request.form["aluno"])
+    variavel_turma_id = str(request.form["codigo"])
+    
+    banco = Banco()
+    if (banco.buscar_turma(variavel_turma_id) != []):
+            variavel_turma_id = banco.buscar_turma(variavel_turma_id)
+            if(banco.buscar_professor(variavel_aluno_id)):
+                 variavel_aluno_id = banco.buscar_professor(variavel_aluno_id)
+                 cadastrado = banco.cadastrar_alunos(variavel_turma_id[0], variavel_aluno_id[0])
+            else:
+                return 'Aluno não existe'
+    else:
+        return 'Turma não existe'
+    if cadastrado:
+        return render_template('cadastroalunonaturma.html', erro_cad = False)
+    else:
+        return render_template('cadastroalunonaturma.html', erro_cad = True)
 
 @app.route("/listaturma")
 def listarturma():

@@ -392,7 +392,7 @@ class Banco():
                 
             connection.commit()
 
-        result = tbl
+        result = tblistaturma
         return result 
 
     def listarNAceitos(self):
@@ -555,13 +555,10 @@ class Banco():
             return 'usuário não existe'
 
     def cadastrar_turma(self,variavel_turma_id_user, variavel_codigo, variavel_curso):
-        print(variavel_turma_id_user['id'])
-        print(variavel_codigo)
-        print(variavel_curso)
         try:
             with sqlite3.connect('db1.db') as connection:
                 cursor = connection.cursor()
-                cursor.execute('INSERT INTO turma(turma_id_professor, codigo, curso) VALUES(?, ?, ?)', (variavel_turma_id_user, variavel_codigo, variavel_curso))
+                cursor.execute('INSERT INTO turma(turma_id_professor, codigo, curso) VALUES(?, ?, ?)', (variavel_turma_id_user[0], variavel_codigo, variavel_curso))
                 connection.commit()
                 return True
         except:
@@ -580,11 +577,11 @@ class Banco():
 
 
 
-    def cadastrar_alunos(self,variavel_alunos_id_turma, variavel_alunos_id_user, variavel_presenca):
+    def cadastrar_alunos(self,variavel_alunos_id_turma, variavel_alunos_id_user):
         try:
             with sqlite3.connect('db1.db') as connection:
                 cursor = connection.cursor()
-                cursor.execute('INSERT INTO alunos(alunos_id_turma, alunos_id_user, presenca) VALUES(?, ?, ?)', (variavel_alunos_id_turma, variavel_alunos_id_user, variavel_presenca))
+                cursor.execute('INSERT INTO alunos(alunos_id_turma, alunos_id_user) VALUES(?, ?)', (variavel_alunos_id_turma, variavel_alunos_id_user))
                 connection.commit()
                 return True
         except:
@@ -632,6 +629,15 @@ class Banco():
             
             cursor = connection.cursor()
             find_user = ("SELECT * FROM user WHERE usuario = ? AND usuario = ?")
+            resultado = cursor.execute(find_user, (usr, usr)).fetchall()
+        return resultado
+
+    def buscar_turma(self, usr):
+        resultado = []
+        with sqlite3.connect('db1.db') as connection:
+            
+            cursor = connection.cursor()
+            find_user = ("SELECT * FROM turma WHERE codigo = ? AND codigo = ?")
             resultado = cursor.execute(find_user, (usr, usr)).fetchall()
         return resultado
 
