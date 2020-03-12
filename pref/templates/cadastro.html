@@ -1,0 +1,84 @@
+{% extends "base/base.html" %}
+
+{% block head %}
+    <title>Cadastro - Educação Permanente</title>
+{% endblock %}
+
+{% block body %}
+<div class="card">
+    {% if session['logged_in'] %}
+        <p>Você está logado</p>
+    
+    {% else %}
+
+
+    <div class="wrap">
+            <div class="login-form">
+                <div class="form-header">
+                    <h3>Bem vindo, aluno!</h3>
+                    <p>Preencha os formulários para utilizar das funcionalidades do Educação Permanente. </p>
+                </div>
+
+                <form action="/cadastrar" method="POST">
+                
+                <!--User Input-->
+                <div class="form-group">
+                <input type="text" name = "usuario" class="form-input" placeholder="Usuário" required>
+                </div>
+
+                <!--Email Input-->
+                <div class="form-group">
+                <input type="text" name = "email" class="form-input" placeholder="Email" required>
+                </div>
+                <!--Password Input-->
+                <div class="form-group">
+                <input type="password" name = "senha" id = "password" class="form-input" placeholder="Senha" required>
+                </div>
+
+                <!--Confirm Password Input-->
+                <div class="form-group">
+                <input type="password" name = "confirme_senha" id="confirm_password" class="form-input" placeholder="Confirme a Senha" required>
+                </div>
+
+                <!--Sign Up Button-->
+                <div class="form-group">
+                <input type="submit" class  value = "cadastrar">
+                </div>
+                </form>
+
+                <div class="form-footer">
+                Já possui uma conta? <a href="login">Login</a>
+                </div>
+            </div>
+        </div><!--/.wrap-->
+
+    {% endif %}
+
+    {% if erro_cad %}
+    <script>
+        alert("Erro no cadastro");
+    </script>
+    {% endif %}
+
+    <script>
+    
+            var password = document.getElementById("password")
+        , confirm_password = document.getElementById("confirm_password");
+
+        function validatePassword(){
+        if(password.value != confirm_password.value) {
+            confirm_password.setCustomValidity("Insira senhas iguais");
+        } else {
+            confirm_password.setCustomValidity('');
+        }
+        }
+
+        password.onchange = validatePassword;
+        confirm_password.onkeyup = validatePassword;
+    
+    </script>
+
+
+</div>
+{% endblock %}
+

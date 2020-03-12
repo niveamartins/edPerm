@@ -1,7 +1,7 @@
 --turma_id_user = professor
 CREATE TABLE turma(
 id_turma INTEGER PRIMARY KEY AUTOINCREMENT,
-turma_id_user INTEGER NOT NULL,
+turma_id_professor INTEGER NOT NULL,
 codigo VARCHAR(50) NOT NULL,
 curso VARCHAR(50) NOT NULL,
 aulas INTEGER DEFAULT '0' NOT NULL,

@@ -1,0 +1,63 @@
+{% extends "base/base.html" %}
+
+{% block head %}
+    <title>Login - Educação Permanente</title>
+{% endblock %}
+
+{% block body %}
+<div class="card">
+    {% if session['logged_in'] %}
+        <p>Você já está logado</p>
+    
+    {% else %}
+    
+    <div class="wrap">
+            <div class="login-form">
+                <div class="form-header">
+                    <h3>Bem vindo de volta, aluno!</h3>
+                    <p>Realize login para ter acesso a funcionalidades exclusivas. </p>
+                </div>
+
+                <form action="/logar" method="POST">
+                    
+                <!--Email Input-->
+                <div class="form-group">
+                <input type="text" name = "usuario" class="form-input" placeholder="Usuário" required>
+                </div>
+                <!--Password Input-->
+                <div class="form-group">
+                <input type="password" name = "senha" class="form-input" placeholder="Senha" required>
+                </div>
+                <!--Login Button-->
+                <div class="form-group">
+                <input type="submit" class  value = "Login">
+                </div>
+                </form>
+
+                <div class="esqueci">
+                    <a href="esqueci_a_senha">Esqueci a senha</a>
+                </div>
+
+                <div class="form-footer">
+                Não possui uma conta? <a href="cadastro">Cadastro</a>
+                </div>
+            </div>
+        </div><!--/.wrap-->
+
+    <script>
+    function esqueci() {
+      alert("Dó Ré Mi Fa Solamento");
+    }
+    </script>
+    {% endif %}
+
+    {% if erro_log %}
+    <script>
+        alert("Algo de errado não está certo");
+    </script>
+
+    {% endif %}
+
+</div>
+{% endblock %}
+

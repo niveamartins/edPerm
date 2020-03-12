@@ -66,4 +66,33 @@ def listarAlunos(self, variavel_alunos_id_turma, variavel_alunos_id_user):
             result = cursor.execute(lista).fetchall()
             
         return result
+
+def buscar_professor(self, usr):
+        with sqlite3.connect('db1.db') as connection:
+            cursor = connection.cursor()
+            find_prof = ("SELECT id FROM user WHERE usuario = ?")
+            results = cursor.execute(find_prof, (usr)).fetchall()
+        return results
+
+@app.route("/cadastroturma")
+def cadastro():
+    return render_template('CadastroTurma.html')
+
+@app.route("/cadastrarturma", methods = ['POST'])
+def cadastrar():
+    variavel_turma_id_user = str(request.form["professor"]).title()
+    variavel_codigo = str(request.form["codigo da turma"]).title()
+    variavel_curso = str(request.form["curso"])
+    
+    banco = Banco()
+    if (banco.buscar_professor(usr) == []):
+        return 'Usuario não existe'
+    else:
+	variavel_turma_id_user = banco.buscar_professor(usr)
+	cadastrado = banco.cadastrar_turma(variavel_turma_id_user[0], variavel_codigo, variavel_curso)
+    if cadastrado:
+        return render_template('cadastro.html', erro_cad = True)
+    else:
+        return render_template('cadastro.html', erro_cad = True)
+
       

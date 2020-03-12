@@ -1,0 +1,58 @@
+{% extends "base/base.html" %}
+
+{% block head %}
+    <title>Cadastro de Turma - Educação Permanente</title>
+{% endblock %}
+
+{% block body %}
+<div class="card">
+    {% if session['logged_in'] %}
+        <p>Você está logado</p>
+    
+    {% else %}
+
+
+    <div class="wrap">
+            <div class="login-form">
+                <div class="form-header">
+                    <h3>Bem vindo, aluno!</h3>
+                    <p>Preencha os formulários para utilizar das funcionalidades do Educação Permanente. </p>
+                </div>
+
+                <form action="/cadastrarturma" method="POST">
+                
+                <!--User Input-->
+                <div class="form-group">
+                <input type="text" name = "professor" class="form-input" placeholder="Professor" required>
+                </div>
+
+                <!--Email Input-->
+                <div class="form-group">
+                <input type="text" name = "codigo" class="form-input" placeholder="Codigo da Turma" required>
+                </div>
+                <!--Password Input-->
+                <div class="form-group">
+                <input type="text" name = "curso"class="form-input" placeholder="Curso" required>
+                </div>
+   
+                <!--Sign Up Button-->
+                <div class="form-group">
+                <input type="submit" class  value = "cadastrar Turma">
+                </div>
+                </form>
+
+            </div>
+        </div><!--/.wrap-->
+
+    {% endif %}
+
+    {% if erro_cad %}
+    <script>
+        alert("Erro no cadastro");
+    </script>
+    {% endif %}
+
+
+</div>
+{% endblock %}
+

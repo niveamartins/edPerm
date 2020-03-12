@@ -1,0 +1,70 @@
+{% extends "base/base.html" %}
+
+{% block head %}
+    <title>Aceitar topicos - Conhecendo a poli</title>
+{% endblock %}
+
+{% block body %}
+    
+    
+    {% if session['logged_in'] and session['priority'] > 2 %}
+    
+    {% if not eventos %}
+    <div class="card"><p>Nada por aqui</p></div>
+    {% endif %}
+    {% for evento in eventos %}
+    <div class="card">
+        <table class="boxevento">
+            <tr>
+                <th>Evento</th>
+                <th class="info">Informações</th>  
+            </tr>
+                <tr>
+                    <td class=infoevento>Nome</td>
+                    <td>{{evento[1]}}</td>
+                </tr>
+                    <tr>
+                        <td class=infoevento>Data de Início/ Fim</td>
+                        <td>{{evento[4]}} / {{evento[4]}} </td>
+                    </tr>
+
+                    <tr>
+                        <td class=infoevento>Hora</td>
+                        <td>{{evento[5]}} / {{evento[6]}}</td>
+                    </tr>
+    
+                <tr>
+                    <td class=infoevento>Local</td>
+                    <td>{{evento[3]}}</td>
+                </tr>
+                <tr>
+                    <td class=infoevento>Tipo</td>
+                    <td>{{evento[7]}}</td>
+                </tr>
+                <tr>
+                    <td class=infoevento>Assunto</td>
+                    <td>{{evento[8]}}</td>
+                </tr>
+                <tr>
+                    <td class=infoevento>Descrição</td>
+                    <td>{{evento[2]}}</td>
+                </tr>
+            </tr>
+        </table>
+    </br>
+        <div class="botoes">
+            <form action="/topico_aceito" method="POST">
+                <input type="hidden" name="eventos" value="{{evento[0]}}">
+                <input type="submit" class="aceitar" class="aceitar" value="Aceitar Evento">
+                <input type="submit" class="excluir" value="Excluir Evento" formaction="/topico_recusado">
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+
+    {%else%}
+    <p>Seja um colaborador para acessar</p>
+    {% endif %}
+
+
+{% endblock %}
