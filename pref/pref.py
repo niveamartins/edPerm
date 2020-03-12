@@ -305,8 +305,10 @@ def cadastraralunonaturma():
     else:
         return 'Turma não existe'
     if cadastrado:
+        print("3")
         return render_template('cadastroalunonaturma.html', erro_cad = False)
     else:
+        print("4")
         return render_template('cadastroalunonaturma.html', erro_cad = True)
 
 @app.route("/listaturma")

@@ -581,7 +581,7 @@ class Banco():
         try:
             with sqlite3.connect('db1.db') as connection:
                 cursor = connection.cursor()
-                cursor.execute('INSERT INTO alunos(alunos_id_turma, alunos_id_user) VALUES(?, ?)', (variavel_alunos_id_turma, variavel_alunos_id_user))
+                cursor.execute('INSERT INTO alunos(alunos_id_turma, alunos_id_user) VALUES(?, ?)', (variavel_alunos_id_turma[0], variavel_alunos_id_user[0]))
                 connection.commit()
                 return True
         except:
@@ -618,7 +618,7 @@ class Banco():
 
             cursor = connection.cursor()
 
-            lista = ("SELECT * FROM alunos WHERE alunos_id_turma = ? AND alunos_id_user = ?")
+            lista = ("SELECT * FROM alunos WHERE alunos_id_turma = ?")
             result = cursor.execute(lista).fetchall()
             
         return result
