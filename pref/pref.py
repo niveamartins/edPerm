@@ -320,8 +320,13 @@ def listarturma():
 def turma(codigo_turma):
     banco = Banco()
     eventos = banco.buscar_turma(codigo_turma)
-    print(eventos[0])
-    return render_template('listaralunosdaturma.html', ( eventos = banco.buscar_turma(codigo_turma) ,alunosdaturma = banco.listarAlunos(eventos[0][0]) ) )
+    variavel = eventos[0][0]
+    alunodaturma = banco.listarAlunos(variavel)
+    evento = banco.buscar_turma(codigo_turma)
+    print(eventos)
+    print(alunodaturma)
+    print(variavel)
+    return render_template('listaralunosdaturma.html', eventos = evento, alunosdaturma = alunodaturma )
 
 
 @app.route("/seja_colaborador")

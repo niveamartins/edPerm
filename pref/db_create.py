@@ -618,7 +618,7 @@ class Banco():
 
             cursor = connection.cursor()
 
-            lista = ("SELECT * FROM alunos INNER JOIN user ON alunos.alunos_id_user = user.id WHERE alunos_id_turma = ? AND alunos_id_turma = ? ")
+            lista = ("SELECT * FROM alunos INNER JOIN user ON alunos.alunos_id_user = user.id WHERE alunos_id_turma = ? AND alunos_id_turma = ?")
             result = cursor.execute(lista, (variavel_alunos_id_turma, variavel_alunos_id_turma)).fetchall()
             
         return result
@@ -628,7 +628,7 @@ class Banco():
         with sqlite3.connect('db1.db') as connection:
             
             cursor = connection.cursor()
-            find_user = ("SELECT * FROM user INNER JOIN u WHERE usuario = ? AND usuario = ?")
+            find_user = ("SELECT * FROM user WHERE usuario = ? AND usuario = ?")
             resultado = cursor.execute(find_user, (usr, usr)).fetchall()
         return resultado
 
