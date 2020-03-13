@@ -315,7 +315,14 @@ def cadastraralunonaturma():
 def listarturma():
     banco = Banco()
     return render_template('listaturma.html', eventos = banco.listarTurma())
-      
+
+@app.route('/listaturma/<string:codigo_turma>')
+def turma(codigo_turma):
+    banco = Banco()
+    eventos = banco.buscar_turma(codigo_turma)
+    print(eventos[0])
+    return render_template('listaralunosdaturma.html', ( eventos = banco.buscar_turma(codigo_turma) ,alunosdaturma = banco.listarAlunos(eventos[0][0]) ) )
+
 
 @app.route("/seja_colaborador")
 def seja_colaborador():

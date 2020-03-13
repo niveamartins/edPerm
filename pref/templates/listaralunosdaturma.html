@@ -1,0 +1,72 @@
+{% extends "base/base.html" %}
+
+{% block head %}
+    <title>Educação Permanente</title>
+{% endblock %}
+
+<div class="topnav" id="myTopnav">
+        <a href="/" class="active">Inicio</a>
+</div>
+
+{% block body %}
+
+{% if not session['logged_in'] %}
+<div class="alert">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+    <strong>Bem vindo, aluno!</strong> Faça login para uma experiência personalizada!
+</div>
+{% endif %}
+        {% if not eventos %}
+        <p class="card">Nada por aqui</p>
+        {% endif %}
+
+
+
+        {% for evento in eventos %}
+        <div class="card">
+            <table class="boxevento">
+                    
+                <tr>
+                    <th>Turma</th>
+                    <th class="info">Informações</th>
+                    
+                </tr>
+    
+                    <tr>
+                        <td class=infoevento>Professor</td>
+                        <td>{{evento[1]}}</td>
+                    </tr>
+    
+                    <tr>
+                        <td class=infoevento>Codigo da turma</td>
+                        <td>{{evento[2]}}</td>
+                    </tr>
+                
+                    <tr>
+                        <td class=infoevento>Curso</td>
+                        <td>{{evento[3]}}</td>
+                    </tr>
+
+                    <tr>
+                        <td class=infoevento>Número de aulas</td>
+                        <td>{{evento[4]}}</td>
+                    </tr>
+
+                    {% for aluno in alunosdaturma %}
+                    </tr>
+                        <tr>
+                        <td class=infoevento>Aluno</td>
+                        <td>{{aluno[5]}}</td>
+                    </tr>
+
+                    {% endfor %}
+
+                    </tr>             
+            </table>
+        </div>
+        {% endfor %}
+
+        
+    
+{% endblock %}
+
