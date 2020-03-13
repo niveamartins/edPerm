@@ -329,6 +329,33 @@ def turma(codigo_turma):
     return render_template('listaralunosdaturma.html', eventos = evento, alunosdaturma = alunodaturma )
 
 
+@app.route("/listadepresenca")
+def listadepresenca():
+    return render_template('atualizarpresencaaluno.html')
+
+@app.route("/atualizarpresenca", methods = ['POST'])
+def atualizarpresenca():
+    variavel_aluno_id = str(request.form["alunopre"])
+    variavel_turma_id = str(request.form["codigopre"])
+    
+    banco = Banco()
+    if (banco.buscar_turma(variavel_turma_id) != []):
+            if(banco.buscar_aluno(variavel_aluno_id, variavel_turma_id) != []):
+                 variavel_aluno_id = banco.buscar_aluno(variavel_aluno_id, variavel_turma_id)
+                 variavel_turma_id = banco.buscar_turma(variavel_turma_id)
+                 presenca = int(variavel_aluno_id[0][3]) + 1
+                 cadastrado = banco.atualizar_alunos(variavel_aluno_id[0][0], presenca)
+            else:
+                return 'Aluno não existe'
+    else:
+        return 'Turma não existe'
+    if cadastrado:
+        print("3")
+        return render_template('atualizarpresencaaluno.html', erro_cad = False)
+    else:
+        print("4")
+        return render_template('atualizarpresencaaluno.html', erro_cad = True)
+
 @app.route("/seja_colaborador")
 def seja_colaborador():
     return render_template('formulario_colaborador.html')

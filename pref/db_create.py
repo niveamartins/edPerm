@@ -587,6 +587,16 @@ class Banco():
         except:
             return False
 
+    def atualizar_alunos(self, variavel_alunos_id, valordapresenca):
+        try:
+            with sqlite3.connect('db1.db') as connection:
+                cursor = connection.cursor()
+                cursor.execute('UPDATE alunos SET presenca = ? WHERE id_aluno = ?', (valordapresenca, variavel_alunos_id))
+                connection.commit()
+                return True
+        except:
+            return False
+
 
     def listarTurma(self):
 
@@ -639,6 +649,15 @@ class Banco():
             cursor = connection.cursor()
             find_user = ("SELECT * FROM turma WHERE codigo = ? AND codigo = ?")
             resultado = cursor.execute(find_user, (usr, usr)).fetchall()
+        return resultado
+
+    def buscar_aluno(self, usr, codigo):
+        resultado = []
+        with sqlite3.connect('db1.db') as connection:
+            
+            cursor = connection.cursor()
+            find_user = ("SELECT * FROM alunos INNER JOIN user ON alunos.alunos_id_user = user.id INNER JOIN turma ON alunos.alunos_id_turma = turma.id_turma WHERE usuario = ? AND codigo = ?")
+            resultado = cursor.execute(find_user, (usr, codigo)).fetchall()
         return resultado
 
 banco = Banco()
