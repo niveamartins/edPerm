@@ -554,7 +554,7 @@ class Banco():
         except:
             return 'usuário não existe'
 
-    def cadastrar_turma(self,variavel_turma_id_user, variavel_codigo, variavel_curso):
+    def cadastrarTurma(self,variavel_turma_id_user, variavel_codigo, variavel_curso):
         try:
             with sqlite3.connect('db1.db') as connection:
                 cursor = connection.cursor()
@@ -565,7 +565,7 @@ class Banco():
             return False
 
 
-    def cadastrar_horario(self,variavel_horario_id_turma, variavel_dia_da_semana, variavel_horario_inicio, variavel_horario_termino):
+    def cadastrarHorario(self,variavel_horario_id_turma, variavel_dia_da_semana, variavel_horario_inicio, variavel_horario_termino):
         try:
             with sqlite3.connect('db1.db') as connection:
                 cursor = connection.cursor()
@@ -577,7 +577,7 @@ class Banco():
 
 
 
-    def cadastrar_alunos(self,variavel_alunos_id_turma, variavel_alunos_id_user):
+    def cadastrarAlunos(self,variavel_alunos_id_turma, variavel_alunos_id_user):
         try:
             with sqlite3.connect('db1.db') as connection:
                 cursor = connection.cursor()
@@ -587,7 +587,7 @@ class Banco():
         except:
             return False
 
-    def atualizar_alunos(self, variavel_alunos_id, valordapresenca):
+    def atualizarAlunos(self, variavel_alunos_id, valordapresenca):
         try:
             with sqlite3.connect('db1.db') as connection:
                 cursor = connection.cursor()
@@ -633,31 +633,40 @@ class Banco():
             
         return result
 
-    def buscar_professor(self, usr):
+    def buscarProfessor(self, usuario):
         resultado = []
         with sqlite3.connect('db1.db') as connection:
             
             cursor = connection.cursor()
             find_user = ("SELECT * FROM user WHERE usuario = ? AND usuario = ?")
-            resultado = cursor.execute(find_user, (usr, usr)).fetchall()
+            resultado = cursor.execute(find_user, (usuario, usuario)).fetchall()
         return resultado
 
-    def buscar_turma(self, usr):
+    def buscarAluno(self, usuario):
+        resultado = []
+        with sqlite3.connect('db1.db') as connection:
+            
+            cursor = connection.cursor()
+            find_user = ("SELECT * FROM user WHERE usuario = ? AND usuario = ?")
+            resultado = cursor.execute(find_user, (usuario, usuario)).fetchall()
+        return resultado
+
+    def buscarTurma(self, codigo):
         resultado = []
         with sqlite3.connect('db1.db') as connection:
             
             cursor = connection.cursor()
             find_user = ("SELECT * FROM turma WHERE codigo = ? AND codigo = ?")
-            resultado = cursor.execute(find_user, (usr, usr)).fetchall()
+            resultado = cursor.execute(find_user, (codigo, codigo)).fetchall()
         return resultado
 
-    def buscar_aluno(self, usr, codigo):
+    def buscarAlunoPorUsuarioECodigo(self, usuario, codigo):
         resultado = []
         with sqlite3.connect('db1.db') as connection:
             
             cursor = connection.cursor()
             find_user = ("SELECT * FROM alunos INNER JOIN user ON alunos.alunos_id_user = user.id INNER JOIN turma ON alunos.alunos_id_turma = turma.id_turma WHERE usuario = ? AND codigo = ?")
-            resultado = cursor.execute(find_user, (usr, codigo)).fetchall()
+            resultado = cursor.execute(find_user, (usuario, codigo)).fetchall()
         return resultado
 
 banco = Banco()
