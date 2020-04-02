@@ -7,12 +7,8 @@
 {% block body %}
 <div class="card">
     {% if session['logged_in'] %}
-        <p>Você está logado</p>
-    
-    {% else %}
 
-
-    <div class="wrap">
+        <div class="wrap">
             <div class="login-form">
                 <div class="form-header">
                     <h3>Bem vindo, aluno!</h3>
@@ -39,6 +35,13 @@
 
             </div>
         </div><!--/.wrap-->
+
+        
+    
+    {% else %}
+
+    <p>Você precista esta logado!</p>
+    
 
     {% endif %}
 

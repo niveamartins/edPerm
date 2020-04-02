@@ -15,7 +15,9 @@
     <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
     <strong>Bem vindo, aluno!</strong> Faça login para uma experiência personalizada!
 </div>
-{% endif %}
+
+{% else %}
+
         {% if not eventos %}
         <p class="card">Nada por aqui</p>
         {% endif %}
@@ -69,7 +71,9 @@
         </div>
         {% endfor %}
 
-        
-    
+{% endif %}
+
+
+       
 {% endblock %}
 
