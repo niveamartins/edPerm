@@ -6,8 +6,8 @@
 
 {% block body %}
 <div class="card">
-    {% if session['logged_in'] %}
-
+    {% if session['logged_in']%}
+        {%if session['gestor'] == 1 or session['coordenador'] == 1 %}
         <div class="wrap">
             <div class="login-form">
                 <div class="form-header">
@@ -35,8 +35,11 @@
 
             </div>
         </div><!--/.wrap-->
+        {% else %}
 
+        <p>Você não tem permissão para acessar essa página!</p>
         
+        {% endif %}
     
     {% else %}
 
