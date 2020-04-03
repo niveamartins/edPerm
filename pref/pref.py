@@ -2,7 +2,7 @@ from flask import Flask, request, render_template, redirect, url_for, session
 import os, smtplib
 from db_create import Banco
 from pessoas import Pessoa
-
+from geradordeqrcode import Gerador
 
 app = Flask(__name__)
 
@@ -81,6 +81,15 @@ def cadastrar():
     else:
         return 'usuário já existente'
     if cadastrado:
+        busca =  banco.buscar_pessoa(variavel_turma_id_user, senha)
+        if len(busca) > 0:  
+            x = busca[0]  
+            id = x[0]
+            usuario = x[1]
+        print(id)
+        print(usuario)
+        qr = Gerador()
+        qr.gerarQrcode(id,usuario)
         return redirect('/')
     else:
         return render_template('cadastro.html', erro_cad = True)
