@@ -4,7 +4,7 @@
     <title>Login - Educação Permanente</title>
 {% endblock %}
 
-{% block body %}
+{% block content %}
 <div class="card">
     {% if session['logged_in'] %}
         <p>Você já está logado</p>
@@ -43,12 +43,7 @@
                 </div>
             </div>
         </div><!--/.wrap-->
-
-    <script>
-    function esqueci() {
-      alert("Dó Ré Mi Fa Solamento");
-    }
-    </script>
+        
     {% endif %}
 
     {% if erro_log %}

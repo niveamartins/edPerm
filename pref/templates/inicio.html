@@ -8,7 +8,7 @@
         <a href="/" class="active">Inicio</a>
 </div>
 
-{% block body %}
+{% block content %}
 
 {% if not session['logged_in'] %}
 <div class="alert">
@@ -16,61 +16,6 @@
     <strong>Bem vindo, aluno!</strong> Faça login para uma experiência personalizada!
 </div>
 {% endif %}
-        {% if not eventos %}
-        <p class="card">Nada por aqui</p>
-        {% endif %}
-
-
-
-        {% for evento in eventos %}
-        <div class="card">
-            <table class="boxevento">
-                    
-                <tr>
-                    <th>Evento</th>
-                    <th class="info">Informações</th>
-                    
-                </tr>
-    
-                    <tr>
-                        <td class=infoevento>Nome</td>
-                        <td>{{evento[1]}}</td>
-                    </tr>
-    
-                    <tr>
-                        <td class=infoevento>Data de Início/ Fim</td>
-                        <td>{{evento[4]}} / {{evento[-1]}} </td>
-                    </tr>
-
-
-                    <tr>
-                        <td class=infoevento>Hora</td>
-                        <td>{{evento[5]}} / {{evento[6]}}</td>
-                    </tr>
-    
-                    <tr>
-                        <td class=infoevento>Local</td>
-                        <td>{{evento[3]}}</td>
-                    </tr>
-    
-                    <tr>
-                        <td class=infoevento>Tipo</td>
-                        <td>{{evento[7]}}</td>
-                    </tr>
-    
-                    <tr>
-                        <td class=infoevento>Assunto</td>
-                        <td>{{evento[8]}}</td>
-                    </tr>
-    
-                    <tr>
-                        <td class=infoevento>Descrição</td>
-                        <td class="info">{{evento[2]}}</td>
-                    </tr>
-                    </tr>             
-            </table>
-        </div>
-        {% endfor %}
     
 {% endblock %}
 
