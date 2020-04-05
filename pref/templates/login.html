@@ -1,49 +1,35 @@
 {% extends "base/base.html" %}
 
 {% block head %}
-    <title>Login - Educação Permanente</title>
+<title>Login - Educação Permanente</title>
 {% endblock %}
 
 {% block content %}
-<div class="card">
+<main class="main-content-forms">
     {% if session['logged_in'] %}
-        <p>Você já está logado</p>
-    
+    <p class="notification">Você já está logado</p>
+
     {% else %}
-    
-    <div class="wrap">
-            <div class="login-form">
-                <div class="form-header">
-                    <h3>Bem vindo de volta, aluno!</h3>
-                    <p>Realize login para ter acesso a funcionalidades exclusivas. </p>
-                </div>
 
-                <form action="/logar" method="POST">
-                    
-                <!--Email Input-->
-                <div class="form-group">
-                <input type="text" name = "usuario" class="form-input" placeholder="Usuário" required>
-                </div>
+    <div class="form-page-container">
+        <div class="form-container">
+
+            <form action="/logar" method="POST">
+                <h1>Olá! </h1>
+                <p>Realize login para ter acesso a funcionalidades exclusivas.</p>
+                <!--User Input-->
+                <input type="text" name="usuario" class="form-input" placeholder="Usuário" required>
                 <!--Password Input-->
-                <div class="form-group">
-                <input type="password" name = "senha" class="form-input" placeholder="Senha" required>
-                </div>
+                <input type="password" name="senha" class="form-input" placeholder="Senha" required>
                 <!--Login Button-->
-                <div class="form-group">
-                <input type="submit" class  value = "Login">
-                </div>
-                </form>
+                <input type="submit" class="button login" value="Login">
+            <a href="esqueci_a_senha">Esqueceu a senha?</a>
+            <a href="cadastro">Não possui conta? <span class="sign-up">Realize cadastro</span></a>
+            </form>
+        </div> <!--/.form-page-container-container-->
+    </div> <!--/.form-container-->
+</main>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
 
-                <div class="esqueci">
-                    <a href="esqueci_a_senha">Esqueci a senha</a>
-                </div>
-
-                <div class="form-footer">
-                Não possui uma conta? <a href="cadastro">Cadastro</a>
-                </div>
-            </div>
-        </div><!--/.wrap-->
-        
     {% endif %}
 
     {% if erro_log %}
@@ -53,6 +39,5 @@
 
     {% endif %}
 
-</div>
+</main>
 {% endblock %}
-
