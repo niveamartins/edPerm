@@ -1,55 +1,43 @@
 {% extends "base/base.html" %}
 
 {% block head %}
-    <title>Cadastro de Turma - Educação Permanente</title>
+<title>Cadastro de Turma - Educação Permanente</title>
 {% endblock %}
 
 {% block content %}
-<div class="card">
+<div class="main-content-forms">
     {% if session['logged_in'] %}
-        {%if session['gestor'] == 1 or session['coordenador'] == 1 %}
-        <div class="wrap">
-            <div class="login-form">
-                <div class="form-header">
-                    <h3>Bem vindo, aluno!</h3>
-                    <p>Preencha os formulários para utilizar das funcionalidades do Educação Permanente. </p>
-                </div>
+    {%if session['gestor'] == 1 or session['coordenador'] == 1 %}
+    <div class="form-page-container">
+        <div class="form-container">
 
-                <form action="/cadastrarturma" method="POST">
-                
+
+            <form action="/cadastrarturma" method="POST">
+                <h1>Cadastre sua turma! </h1>
+                <p>Cadastre aqui sua turma Educação Permanente.</p>
                 <!--User Input-->
-                <div class="form-group">
-                <input type="text" name = "professor" class="form-input" placeholder="Professor" required>
-                </div>
-
+                <input type="text" name="professor" class="form-input" placeholder="Professor" required>
                 <!--Email Input-->
-                <div class="form-group">
-                <input type="text" name = "codigo" class="form-input" placeholder="Codigo da Turma" required>
-                </div>
+                <input type="text" name="codigo" class="form-input" placeholder="Codigo da Turma" required>
                 <!--Password Input-->
-                <div class="form-group">
-                <input type="text" name = "curso"class="form-input" placeholder="Curso" required>
-                </div>
-   
+                <input type="text" name="curso" class="form-input" placeholder="Curso" required>
                 <!--Sign Up Button-->
-                <div class="form-group">
-                <input type="submit" class  value = "cadastrar Turma">
-                </div>
-                </form>
-
-            </div>
-        </div><!--/.wrap-->
-        {% else %}
-
-        <p>Você não tem permissão para acessar essa página!</p>
-        
-        {% endif %}
-        
+                <input type="submit" class="button login" value="cadastrar Turma">
+            </form>
+        </div> <!--/.form-container-->
+    </div><!--/.form-page-container-->
     
     {% else %}
 
+    <p>Você não tem permissão para acessar essa página!</p>
+
+    {% endif %}
+
+
+    {% else %}
+
     <p>Você está logado</p>
-    
+
 
     {% endif %}
 
@@ -62,4 +50,3 @@
 
 </div>
 {% endblock %}
-

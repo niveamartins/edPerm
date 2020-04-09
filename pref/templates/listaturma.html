@@ -19,35 +19,44 @@
         {% endif %}
 
 
-
+    <div class="card-container">
+        <!-- <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div> -->
         {% for evento in eventos %}
         <div class="card">
-            <table class="boxevento">
+            <div class="type"></div>
+            <table class="card-list">
                     
                 <tr>
                     <th>Turma</th>
-                    <th class="info">Informações</th>
+                    <th>Informações</th>
                     
                 </tr>
     
                     <tr>
-                        <td class=infoevento>Professor</td>
-                        <td>{{evento[1]}}</td>
+                        <td class="name">Professor</td>
+                        <td class="value">{{evento[1]}}</td>
                     </tr>
     
                     <tr>
-                        <td class=infoevento>Codigo da turma</td>
-                        <td>{{evento[2]}}</td>
+                        <td class="name">Código da turma</td>
+                        <td class="value">{{evento[2]}}</td>
                     </tr>
                 
                     <tr>
-                        <td class=infoevento>Curso</td>
-                        <td>{{evento[3]}}</td>
+                        <td class="name">Curso</td>
+                        <td class="value">{{evento[3]}}</td>
                     </tr>
 
                     <tr>
-                        <td class=infoevento>Número de aulas</td>
-                        <td>{{evento[4]}}</td>
+                        <td class="name">Número de aulas</td>
+                        <td class="value">{{evento[4]}}</td>
                     </tr>
     
 
@@ -55,6 +64,6 @@
             </table>
         </div>
         {% endfor %}
-    
+    </div>
 {% endblock %}
 

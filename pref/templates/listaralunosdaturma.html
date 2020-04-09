@@ -1,79 +1,79 @@
 {% extends "base/base.html" %}
 
 {% block head %}
-    <title>Educação Permanente</title>
+<title>Educação Permanente</title>
 {% endblock %}
 
 <div class="topnav" id="myTopnav">
-        <a href="/" class="active">Inicio</a>
+    <a href="/" class="active">Inicio</a>
 </div>
 
 {% block content %}
 
 {% if not session['logged_in'] %}
-<div class="alert">
-    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+<!-- <div class="alert">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
     <strong>Bem vindo, aluno!</strong> Faça login para uma experiência personalizada!
-</div>
+</div> -->
 
 {% else %}
 
-        {% if not eventos %}
-        <p class="card">Nada por aqui</p>
-        {% endif %}
+{% if not eventos %}
+<p class="card">Nada por aqui</p>
+{% endif %}
 
 
+<div class="card-container">
+    {% for evento in eventos %}
+    <div class="card">
+        <table class="card-list">
 
-        {% for evento in eventos %}
-        <div class="card">
-            <table class="boxevento">
-                    
-                <tr>
-                    <th>Turma</th>
-                    <th class="info">Informações</th>
-                    
-                </tr>
-    
-                    <tr>
-                        <td class=infoevento>Professor</td>
-                        <td>{{evento[1]}}</td>
-                    </tr>
-    
-                    <tr>
-                        <td class=infoevento>Codigo da turma</td>
-                        <td>{{evento[2]}}</td>
-                    </tr>
-                
-                    <tr>
-                        <td class=infoevento>Curso</td>
-                        <td>{{evento[3]}}</td>
-                    </tr>
+            <tr>
+                <th>Turma</th>
+                <th>Informações</th>
 
-                    <tr>
-                        <td class=infoevento>Número de aulas</td>
-                        <td>{{evento[4]}}</td>
-                    </tr>
+            </tr>
 
-                    {% for aluno in alunosdaturma %}
-                    <tr>
-                        <tr>
-                        <td class=infoevento>Aluno</td>
-                        <td>{{aluno[5]}}</td>
-                        <td class=infoevento>Presenças</td>
-                        <td>{{aluno[3]}}</td>
-                        </tr> 
-                    </tr>
+            <tr>
+                <td>Professor</td>
+                <td>{{evento[1]}}</td>
+            </tr>
 
-                    {% endfor %}
+            <tr>
+                <td>Codigo da turma</td>
+                <td>{{evento[2]}}</td>
+            </tr>
 
-                    </tr>             
-            </table>
-        </div>
-        {% endfor %}
+            <tr>
+                <td>Curso</td>
+                <td>{{evento[3]}}</td>
+            </tr>
+
+            <tr>
+                <td>Número de aulas</td>
+                <td>{{evento[4]}}</td>
+            </tr>
+
+            {% for aluno in alunosdaturma %}
+            <tr>
+            <tr>
+                <td>Aluno</td>
+                <td>{{aluno[5]}}</td>
+                <td>Presenças</td>
+                <td>{{aluno[3]}}</td>
+            </tr>
+            </tr>
+
+            {% endfor %}
+
+            </tr>
+        </table>
+    </div>
+    {% endfor %}
+</div>
 
 {% endif %}
 
 
-       
-{% endblock %}
 
+{% endblock %}

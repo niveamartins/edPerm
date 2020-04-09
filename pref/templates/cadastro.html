@@ -1,56 +1,39 @@
 {% extends "base/base.html" %}
 
 {% block head %}
-    <title>Cadastro - Educação Permanente</title>
+<title>Cadastro - Educação Permanente</title>
 {% endblock %}
 
 {% block content %}
-<div class="card">
+<div class="main-content-forms">
     {% if session['logged_in'] %}
-        <p>Você está logado</p>
-    
+    <p class="notification">Você está logado</p>
+
     {% else %}
 
 
-    <div class="wrap">
-            <div class="login-form">
-                <div class="form-header">
-                    <h3>Bem vindo, aluno!</h3>
-                    <p>Preencha os formulários para utilizar das funcionalidades do Educação Permanente. </p>
-                </div>
+    <div class="form-page-container">
+        <div class="form-container">
 
-                <form action="/cadastrar" method="POST">
-                
+            <form action="/cadastrar" method="POST">
+                <h1>Bem vindo(a)! </h1>
+                <p>Efetue cadastro para utilização de nossas funcionalidades.</p>
                 <!--User Input-->
-                <div class="form-group">
-                <input type="text" name = "usuario" class="form-input" placeholder="Usuário" required>
-                </div>
-
+                <input type="text" name="usuario" class="form-input" placeholder="Usuário" required>
                 <!--Email Input-->
-                <div class="form-group">
-                <input type="text" name = "email" class="form-input" placeholder="Email" required>
-                </div>
+                <input type="text" name="email" class="form-input" placeholder="Email" required>
                 <!--Password Input-->
-                <div class="form-group">
-                <input type="password" name = "senha" id = "password" class="form-input" placeholder="Senha" required>
-                </div>
-
+                <input type="password" name="senha" id="password" class="form-input" placeholder="Senha" required>
                 <!--Confirm Password Input-->
-                <div class="form-group">
-                <input type="password" name = "confirme_senha" id="confirm_password" class="form-input" placeholder="Confirme a Senha" required>
-                </div>
-
+                <input type="password" name="confirme_senha" id="confirm_password" class="form-input"
+                    placeholder="Confirme a Senha" required>
                 <!--Sign Up Button-->
-                <div class="form-group">
-                <input type="submit" class  value = "cadastrar">
-                </div>
-                </form>
-
-                <div class="form-footer">
-                Já possui uma conta? <a href="login">Login</a>
-                </div>
-            </div>
-        </div><!--/.wrap-->
+                <input type="submit" class="button login" value="cadastrar">
+                <a href="/">Já possui uma conta? <span class="form-highlight">Faça login</span></a>
+            </form>
+        </div> <!--/.form-container-->
+    </div><!--/.form-page-container-->
+    
 
     {% endif %}
 
@@ -61,24 +44,23 @@
     {% endif %}
 
     <script>
-    
-            var password = document.getElementById("password")
-        , confirm_password = document.getElementById("confirm_password");
 
-        function validatePassword(){
-        if(password.value != confirm_password.value) {
-            confirm_password.setCustomValidity("Insira senhas iguais");
-        } else {
-            confirm_password.setCustomValidity('');
-        }
+        var password = document.getElementById("password")
+            , confirm_password = document.getElementById("confirm_password");
+
+        function validatePassword() {
+            if (password.value != confirm_password.value) {
+                confirm_password.setCustomValidity("Insira senhas iguais");
+            } else {
+                confirm_password.setCustomValidity('');
+            }
         }
 
         password.onchange = validatePassword;
         confirm_password.onkeyup = validatePassword;
-    
+
     </script>
 
 
 </div>
 {% endblock %}
-
