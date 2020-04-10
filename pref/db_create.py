@@ -105,7 +105,78 @@ class Banco():
                 return True
         except:
             return False
+
+    def cadastrar_complemento(self,userId, tag, profissao, funcao, superentendencia, cap, unidade):
+        try:
+            with sqlite3.connect('db1.db') as connection:
+                cursor = connection.cursor()
+                cursor.execute('INSERT INTO userComplemento(id_do_user, tag, profissao, funcao, superentendenciaDaSUBPAV, CAP, unidadeBasicaDeSaude) VALUES(?, ?, ?, ?, ?, ?, ?)', (userId, tag, profissao, funcao, superentendencia, cap, unidade))
+                connection.commit()
+                return True
+        except:
+            return False
+
+    def atualizarTag(self, iddosuser, tag):
+        try:
+            with sqlite3.connect('db1.db') as connection:
+                cursor = connection.cursor()
+                cursor.execute('UPDATE userComplemento SET tag = ? WHERE id_do_user = ?', (tag, iddosuser))
+                connection.commit()
+                return True
+        except:
+            return False
    
+    def atualizarProfissao(self, iddosuser, profissao):
+        try:
+            with sqlite3.connect('db1.db') as connection:
+                cursor = connection.cursor()
+                cursor.execute('UPDATE userComplemento SET profissao = ? WHERE id_do_user = ?', (profissao, iddosuser))
+                connection.commit()
+                return True
+        except:
+            return False
+
+    def atualizarFuncao(self, iddosuser, funcao):
+        try:
+            with sqlite3.connect('db1.db') as connection:
+                cursor = connection.cursor()
+                cursor.execute('UPDATE userComplemento SET funcao = ? WHERE id_do_user = ?', (funcao, iddosuser))
+                connection.commit()
+                return True
+        except:
+            return False
+
+    def atualizarSuperentendencia(self, iddosuser, superentendencia):
+        try:
+            with sqlite3.connect('db1.db') as connection:
+                cursor = connection.cursor()
+                cursor.execute('UPDATE userComplemento SET superentendenciaDaSUBPAV = ? WHERE id_do_user = ?', (superentendencia, iddosuser))
+                connection.commit()
+                return True
+        except:
+            return False
+
+    def atualizarCap(self, iddosuser, cap):
+        try:
+            with sqlite3.connect('db1.db') as connection:
+                cursor = connection.cursor()
+                cursor.execute('UPDATE userComplemento SET CAP = ? WHERE id_do_user = ?', (cap, iddosuser))
+                connection.commit()
+                return True
+        except:
+            return False
+
+    def atualizarUnidade(self, iddosuser, unidade):
+        try:
+            with sqlite3.connect('db1.db') as connection:
+                cursor = connection.cursor()
+                cursor.execute('UPDATE userComplemento SET unidadeBasicaDeSaude = ? WHERE id_do_user = ?', (unidade, iddosuser))
+                connection.commit()
+                return True
+        except:
+            return False
+
+
     def buscar_pessoa(self, usr, senha):
         with sqlite3.connect('db1.db') as connection:
             cursor = connection.cursor()
@@ -227,6 +298,15 @@ class Banco():
             
             cursor = connection.cursor()
             find_user = ("SELECT * FROM user WHERE usuario = ? AND usuario = ?")
+            resultado = cursor.execute(find_user, (usuario, usuario)).fetchall()
+        return resultado
+
+    def buscarDadosComplementares(self, usuario):
+        resultado = []
+        with sqlite3.connect('db1.db') as connection:
+            
+            cursor = connection.cursor()
+            find_user = ("SELECT * FROM userComplemento WHERE id_do_user = ? AND id_do_user = ?")
             resultado = cursor.execute(find_user, (usuario, usuario)).fetchall()
         return resultado
 

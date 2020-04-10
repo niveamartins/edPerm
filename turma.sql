@@ -39,3 +39,15 @@ FOREIGN KEY (alunos_id_turma) REFERENCES turma(id_turma),
 FOREIGN KEY (alunos_id_user) REFERENCES user(id)
 );
 
+CREATE TABLE IF NOT EXISTS userComplemento(
+id_complemento INTEGER PRIMARY KEY AUTOINCREMENT,
+id_do_user INTEGER NOT NULL,
+tag VARCHAR(20) NOT NULL,
+profissao VARCHAR(40) NOT NULL,
+funcao VARCHAR(30) NOT NULL,
+superentendenciaDaSUBPAV VARCHAR(20) NOT NULL,
+CAP VARCHAR(20) NOT NULL,
+unidadeBasicaDeSaude VARCHAR(40) NOT NULL,
+FOREIGN KEY (id_do_user) REFERENCES user(id)
+);
+
