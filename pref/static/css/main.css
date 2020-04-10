@@ -9,13 +9,9 @@
   --main-background-color: #efefef;
   --acessibility-color: #77c9d4;
   --elements-color: #57bc90;
-  --elements-second-color: #cd5360;
+  --elements-second-color: #f28500;
   --full-navbar-color: rgba(73, 73, 73, 0.8);
   --desktop-navbar-color: #4dc6f6;
-}
-
-@font-face {
-  
 }
 
 * {
@@ -48,6 +44,15 @@ body {
   color: #fff;
   font-weight: bold;
   font-size: 1.2em;
+
+  display: flex;
+  justify-content: center;
+}
+
+#acessible-elements {
+  color: #fff;
+  font-size: 30px;
+  padding-right: 1em;
 }
 
 header {
@@ -110,10 +115,6 @@ header, footer {
 
 /* NavBar for mobile devices */
 
-nav {
-  background: #fff;
-}
-
 .myNav {
   height: 0%;
   width: 100%;
@@ -121,8 +122,6 @@ nav {
   z-index: 10;
   top: 0;
   left: 0;
-  /* background-color: rgba(40, 111, 180, 0.9); */
-  /* background-color: #2AC4EA; */
   background-color: var(--full-navbar-color);
   overflow-y: hidden;
   transition: 0.5s;
@@ -148,7 +147,6 @@ nav {
 
 .myNav a:hover, .myNav a:focus {
   color: #fff;
-  /* font-size: 2.6em; */
   font-weight: 500;
 }
 
@@ -157,7 +155,61 @@ nav {
   top: 20px;
   right: 45px;
   font-size: 60px;
+} 
+
+.nav__links li a {
+  transition: all 0.3s ease 0s;
+  font-weight: bold;
 }
+.nav__links li a:hover {
+  color: #000;
+}
+.myNav a.middle {
+  position: relative;
+}
+.myNav a.middle:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  bottom: -4px;
+  left: 0;
+  background-color: var(--elements-color);
+  visibility: hidden;
+  transform: scaleX(0);
+  transition: all 0.3s ease-in-out;
+}
+.myNav a.middle:hover:before {
+  visibility: visible;
+  transform: scaleX(1);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .openbtn {
   z-index: 1;
@@ -167,6 +219,16 @@ nav {
   left: 30px;
   display: flex;
   align-items: center;
+}
+
+#nav-elements {
+  color: var(--elements-second-color);
+  font-size: 45px;
+}
+
+#nav-elements:hover {
+  font-size: 48px;
+  transform: translateY(-4px);
 }
 
 /* New Forms */
@@ -189,6 +251,10 @@ nav {
   padding-top: 30px;
   font-weight: bolder;
   margin: 0;
+}
+
+#data {
+  margin-top: 100px;
 }
 
 .form-container a {
@@ -216,6 +282,17 @@ nav {
   padding: 0 50px;
   height: 100%;
   text-align: center;
+
+  /* enable scroll */
+  overflow-y: scroll;
+
+  /* Hide scrollbar for IE and Edge */
+  -ms-overflow-style: none;
+}
+
+/* Hide scrollbar */
+.form-container form::-webkit-scrollbar {
+  display: none;
 }
 
 .form-container input:not([type="submit"]) {
@@ -274,13 +351,13 @@ nav {
 
 .form-highlight {
   font-weight: bold;
+  color: var(--elements-second-color);
   font-size: 1.1em;
 }
 
 /* Cards */
 .card-container {
   margin-top: var(--margin-cards);
-  
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -296,6 +373,7 @@ nav {
   transition: all 0.6s cubic-bezier(.25, .8, .25, 1); 
 
   margin: 2rem;
+  
 }
 .card:hover {
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
@@ -331,18 +409,6 @@ nav {
   font-weight: 700;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
 /* Style will be mobile first */
 
 /* So media will focus on bigger screens */
@@ -355,36 +421,15 @@ nav {
 
 @media only screen and (min-width: 62.625em) {
   /* NavBar Computer Sizes */
-  .nav__links li {
+  
+  #myNav .navbar .nav__links li {
     display: inline-block;
     padding: 0px 20px;
   }
-  .nav__links li a {
-    transition: all 0.3s ease 0s;
-    font-weight: bold;
-  }
-  .nav__links li a:hover {
-    color: #000;
-  }
-  a.middle {
-    position: relative;
-  }
-  a.middle:before {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 4px;
-    bottom: -4px;
-    left: 0;
-    background-color: var(--desktop-navbar-color);
-    visibility: hidden;
-    transform: scaleX(0);
-    transition: all 0.3s ease-in-out;
-  }
-  a.middle:hover:before {
-    visibility: visible;
-    transform: scaleX(1);
-  }
+  
+  
+
+
   /* .openbtn {
     visibility: hidden;
   } */
