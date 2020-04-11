@@ -11,14 +11,18 @@ cursista INTEGER DEFAULT 0 NOT NULL,
 apoiador INTEGER DEFAULT 0 NOT NULL
 );
 
---turma_id_user = professor
+
 CREATE TABLE IF NOT EXISTS turma(
 id_turma INTEGER PRIMARY KEY AUTOINCREMENT,
-turma_id_professor INTEGER NOT NULL,
-codigo VARCHAR(50) NOT NULL,
-curso VARCHAR(50) NOT NULL,
-aulas INTEGER DEFAULT '0' NOT NULL,
-FOREIGN KEY (turma_id_professor) REFERENCES user(id)
+id_responsavel INTEGER NOT NULL,
+nome_do_curso VARCHAR(50) NOT NULL,
+dia VARCHAR(50) NOT NULL,
+hora VARCHAR(50) NOT NULL,
+carga_horaria_total VARCHAR(50) NOT NULL,
+tolerancia VARCHAR(50) NOT NULL,
+modalidade VARCHAR(50) NOT NULL,
+turma_tag VARCHAR(50) NOT NULL,
+FOREIGN KEY (id_responsavel) REFERENCES user(id)
 );
 
 CREATE TABLE IF NOT EXISTS horario(

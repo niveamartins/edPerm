@@ -153,16 +153,21 @@ def cadastroturma():
 
 @app.route("/cadastrarturma", methods = ['POST'])
 def cadastrarturma():
-    variavelProfessor = str(request.form["professor"])
-    variavelCodigo = str(request.form["codigo"])
-    variavelCurso =  str(request.form["curso"])
+    variavelResponsavel = str(request.form["responsavel"])
+    variavelNome = str(request.form["nome"])
+    variavelDia =  str(request.form["dia"])
+    variavelHora = str(request.form["hora"])
+    variavelCarga = str(request.form["carga"])
+    variavelTolerancia =  str(request.form["tolerancia"])
+    variavelModalidade = str(request.form["modalidade"])
+    variavelTag =  str(request.form["tag"])
     
     banco = Banco()
-    if (banco.buscarProfessor(variavelProfessor) != []):
-        variavelProfessor = banco.buscarProfessor(variavelProfessor)
-        cadastrado = banco.cadastrarTurma(variavelProfessor[0], variavelCodigo, variavelCurso)
+    if (banco.buscarProfessor(variavelResponsavel) != []):
+        variavelResponsavel = banco.buscarProfessor(variavelResponsavel)
+        cadastrado = banco.cadastrarTurma(variavelResponsavel[0], variavelNome, variavelDia, variavelHora, variavelCarga, variavelTolerancia, variavelModalidade, variavelTag)
     else:
-        return 'Usuario não existe'
+        return 'Responsavel não cadastrado'
     if cadastrado:
         return render_template('CadastroTurma.html', erro_cad = False)
     else:
@@ -180,18 +185,19 @@ def cadastraralunonaturma():
     banco = Banco()
     if (banco.buscarTurma(variavelTurma) != []):
             variavelTurma = banco.buscarTurma(variavelTurma)
-            if(banco.buscarAluno(variavelAluno)):
+            if(banco.buscarAluno(variavelAluno) !=[]):
                  variavelAluno = banco.buscarAluno(variavelAluno)
-                 cadastrado = banco.cadastrarAlunos(variavelTurma[0], variavelAluno[0])
+                 if(banco.buscarAlunoPorUsuarioECodigo(str(request.form["aluno"]), str(request.form["codigo"])) == []):
+                     cadastrado = banco.cadastrarAlunos(variavelTurma[0], variavelAluno[0])
+                 else:
+                     return 'Aluno ja cadastrado na turma'
             else:
                 return 'Aluno não existe'
     else:
         return 'Turma não existe'
     if cadastrado:
-        print("3")
         return render_template('cadastroalunonaturma.html', erro_cad = False)
     else:
-        print("4")
         return render_template('cadastroalunonaturma.html', erro_cad = True)
 
 @app.route("/listaturma")
@@ -201,14 +207,12 @@ def listarturma():
 
 @app.route('/listaturma/<string:codigo_turma>')
 def turma(codigo_turma):
+    session['nome_da_turma'] = codigo_turma
     banco = Banco()
-    eventos = banco.buscarTurma(codigo_turma)
+    eventos = banco.buscarTurmaComProfessor(codigo_turma)
     variavel = eventos[0][0]
     alunodaturma = banco.listarAlunos(variavel)
-    evento = banco.buscarTurma(codigo_turma)
-    print(eventos)
-    print(alunodaturma)
-    print(variavel)
+    evento = banco.buscarTurmaComProfessor(codigo_turma)
     return render_template('listaralunosdaturma.html', eventos = evento, alunosdaturma = alunodaturma )
 
 
@@ -233,10 +237,8 @@ def atualizarpresenca():
     else:
         return 'Turma não existe'
     if cadastrado:
-        print("3")
         return render_template('atualizarpresencaaluno.html', erro_cad = False)
     else:
-        print("4")
         return render_template('atualizarpresencaaluno.html', erro_cad = True)
 
 
