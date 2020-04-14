@@ -28,7 +28,7 @@ class RelatorioFrequencia():
         }
         print(json.dumps(JSON, indent=4))
 
-
+#Classe alunos abaixo é para efetuar teste apenas
 class Alunos():
 
     def __init__(self,name,Frequencia):
