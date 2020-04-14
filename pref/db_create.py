@@ -50,11 +50,15 @@ class Banco():
         """
             CREATE TABLE IF NOT EXISTS turma(
             id_turma INTEGER PRIMARY KEY AUTOINCREMENT,
-            turma_id_professor INTEGER NOT NULL,
-            codigo VARCHAR(50) NOT NULL,
-            curso VARCHAR(50) NOT NULL,
-            aulas INTEGER DEFAULT '0' NOT NULL,
-            FOREIGN KEY (turma_id_professor) REFERENCES user(id)
+            id_responsavel INTEGER NOT NULL,
+            nome_do_curso VARCHAR(50) NOT NULL,
+            dia VARCHAR(50) NOT NULL,
+            hora VARCHAR(50) NOT NULL,
+            carga_horaria_total VARCHAR(50) NOT NULL,
+            tolerancia VARCHAR(50) NOT NULL,
+            modalidade VARCHAR(50) NOT NULL,
+            turma_tag VARCHAR(50) NOT NULL,
+            FOREIGN KEY (id_responsavel) REFERENCES user(id)
             );
 
         """
@@ -213,11 +217,11 @@ class Banco():
         except:
             return 'usuário não existe'
 
-    def cadastrarTurma(self,variavel_turma_id_user, variavel_codigo, variavel_curso):
+    def cadastrarTurma(self, responsavel, nome, dia, hora, carga, tolerancia, modalidade, tag):
         try:
             with sqlite3.connect('db1.db') as connection:
                 cursor = connection.cursor()
-                cursor.execute('INSERT INTO turma(turma_id_professor, codigo, curso) VALUES(?, ?, ?)', (variavel_turma_id_user[0], variavel_codigo, variavel_curso))
+                cursor.execute('INSERT INTO turma(id_responsavel, nome_do_curso, dia, hora, carga_horaria_total, tolerancia, modalidade, turma_tag) VALUES(?, ?, ?, ?, ?, ?, ?, ?)', (responsavel[0], nome, dia, hora, carga, tolerancia, modalidade, tag))
                 connection.commit()
                 return True
         except:
@@ -263,7 +267,7 @@ class Banco():
 
             cursor = connection.cursor()
 
-            lista = ("SELECT * FROM turma")
+            lista = ("SELECT * FROM turma INNER JOIN user ON turma.id_responsavel = user.id")
             result = cursor.execute(lista).fetchall()
             
         return result
@@ -324,17 +328,27 @@ class Banco():
         with sqlite3.connect('db1.db') as connection:
             
             cursor = connection.cursor()
-            find_user = ("SELECT * FROM turma WHERE codigo = ? AND codigo = ?")
+            find_user = ("SELECT * FROM turma WHERE nome_do_curso = ? AND nome_do_curso = ?")
+            resultado = cursor.execute(find_user, (codigo, codigo)).fetchall()
+        return resultado
+
+    def buscarTurmaComProfessor(self, codigo):
+        resultado = []
+        with sqlite3.connect('db1.db') as connection:
+            
+            cursor = connection.cursor()
+            find_user = ("SELECT * FROM turma INNER JOIN user ON turma.id_responsavel = user.id WHERE nome_do_curso = ? AND nome_do_curso = ?")
             resultado = cursor.execute(find_user, (codigo, codigo)).fetchall()
         return resultado
 
     def buscarAlunoPorUsuarioECodigo(self, usuario, codigo):
         resultado = []
         with sqlite3.connect('db1.db') as connection:
-            
+
             cursor = connection.cursor()
-            find_user = ("SELECT * FROM alunos INNER JOIN user ON alunos.alunos_id_user = user.id INNER JOIN turma ON alunos.alunos_id_turma = turma.id_turma WHERE usuario = ? AND codigo = ?")
+            find_user = ("SELECT * FROM alunos INNER JOIN user ON alunos.alunos_id_user = user.id INNER JOIN turma ON alunos.alunos_id_turma = turma.id_turma WHERE usuario = ? AND nome_do_curso = ?")
             resultado = cursor.execute(find_user, (usuario, codigo)).fetchall()
+            print("Cheguei aqui")
         return resultado
 
 banco = Banco()

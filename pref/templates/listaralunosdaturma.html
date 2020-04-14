@@ -23,54 +23,85 @@
 {% endif %}
 
 
-<div class="card-container">
-    {% for evento in eventos %}
-    <div class="card">
-        <table class="card-list">
+    <div class="card-container">
+        <!-- <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div> -->
+        {% for evento in eventos %}
+        <div class="card">
+            <div class="type"></div>
+            <table class="card-list">
+                    
+                <tr>
+                    <th>Turma</th>
+                    <th>Informações</th>
+                    
+                </tr>
+    
+                    <tr>
+                        <td class="name">Responsavel</td>
+                        <td class="value">{{evento[10]}}</td>
+                    </tr>
+    
+                    <tr>
+                        <td class="name">Nome do curso</td>
+                        <td class="value">{{evento[2]}}</td>
+                    </tr>
+                
+                    <tr>
+                        <td class="name">Dia</td>
+                        <td class="value">{{evento[3]}}</td>
+                    </tr>
 
-            <tr>
-                <th>Turma</th>
-                <th>Informações</th>
+                    <tr>
+                        <td class="name">Hora</td>
+                        <td class="value">{{evento[4]}}</td>
+                    </tr>
+ 
+                    <tr>
+                        <td class="name">Carga horaria total</td>
+                        <td class="value">{{evento[5]}}</td>
+                    </tr>
 
-            </tr>
+                    <tr>
+                        <td class="name">Tolerancia</td>
+                        <td class="value">{{evento[6]}}</td>
+                    </tr>
 
-            <tr>
-                <td>Professor</td>
-                <td>{{evento[1]}}</td>
-            </tr>
+                    <tr>
+                        <td class="name">Modalidade</td>
+                        <td class="value">{{evento[7]}}</td>
+                    </tr>
 
-            <tr>
-                <td>Codigo da turma</td>
-                <td>{{evento[2]}}</td>
-            </tr>
+                    <tr>
+                        <td class="name">Tag</td>
+                        <td class="value">{{evento[8]}}</td>
+                    </tr>
 
-            <tr>
-                <td>Curso</td>
-                <td>{{evento[3]}}</td>
-            </tr>
+                    {% for aluno in alunosdaturma %}
+                    <tr>
+                    <tr>
+                        <td>Aluno</td>
+                        <td>{{aluno[5]}}</td>
+                        <td>Presenças</td>
+                        <td>{{aluno[3]}}</td>
+                    </tr>
+                    </tr>
 
-            <tr>
-                <td>Número de aulas</td>
-                <td>{{evento[4]}}</td>
-            </tr>
+                    {% endfor %}
 
-            {% for aluno in alunosdaturma %}
-            <tr>
-            <tr>
-                <td>Aluno</td>
-                <td>{{aluno[5]}}</td>
-                <td>Presenças</td>
-                <td>{{aluno[3]}}</td>
-            </tr>
-            </tr>
 
-            {% endfor %}
-
-            </tr>
-        </table>
+                    </tr>             
+            </table>
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-</div>
+
 
 {% endif %}
 
