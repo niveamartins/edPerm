@@ -110,6 +110,46 @@ class Banco():
         except:
             return False
 
+    def cadastrar_dados_pessoais(self,userId, nome, cpf, telefone):
+        try:
+            with sqlite3.connect('db1.db') as connection:
+                cursor = connection.cursor()
+                cursor.execute('INSERT INTO userDadosPessoais(id_do_user, nome, cpf, telefone) VALUES(?, ?, ?, ?)', (userId, nome, cpf, telefone))
+                connection.commit()
+                return True
+        except:
+            return False
+
+    def atualizarNome(self, iddosuser, nome):
+        try:
+            with sqlite3.connect('db1.db') as connection:
+                cursor = connection.cursor()
+                cursor.execute('UPDATE userDadosPessoais SET nome = ? WHERE id_do_user = ?', (nome, iddosuser))
+                connection.commit()
+                return True
+        except:
+            return False
+
+    def atualizarCpf(self, iddosuser, cpf):
+        try:
+            with sqlite3.connect('db1.db') as connection:
+                cursor = connection.cursor()
+                cursor.execute('UPDATE userDadosPessoais SET cpf = ? WHERE id_do_user = ?', (cpf, iddosuser))
+                connection.commit()
+                return True
+        except:
+            return False
+
+    def atualizarTelefone(self, iddosuser, telefone):
+        try:
+            with sqlite3.connect('db1.db') as connection:
+                cursor = connection.cursor()
+                cursor.execute('UPDATE userDadosPessoais SET telefone = ? WHERE id_do_user = ?', (telefone, iddosuser))
+                connection.commit()
+                return True
+        except:
+            return False
+
     def cadastrar_complemento(self,userId, tag, profissao, funcao, superentendencia, cap, unidade):
         try:
             with sqlite3.connect('db1.db') as connection:
@@ -314,6 +354,15 @@ class Banco():
             resultado = cursor.execute(find_user, (usuario, usuario)).fetchall()
         return resultado
 
+    def buscarDadosPessoais(self, usuario):
+        resultado = []
+        with sqlite3.connect('db1.db') as connection:
+            
+            cursor = connection.cursor()
+            find_user = ("SELECT * FROM userDadosPessoais WHERE id_do_user = ? AND id_do_user = ?")
+            resultado = cursor.execute(find_user, (usuario, usuario)).fetchall()
+        return resultado
+
     def buscarAluno(self, usuario):
         resultado = []
         with sqlite3.connect('db1.db') as connection:
@@ -348,8 +397,8 @@ class Banco():
             cursor = connection.cursor()
             find_user = ("SELECT * FROM alunos INNER JOIN user ON alunos.alunos_id_user = user.id INNER JOIN turma ON alunos.alunos_id_turma = turma.id_turma WHERE usuario = ? AND nome_do_curso = ?")
             resultado = cursor.execute(find_user, (usuario, codigo)).fetchall()
-            print("Cheguei aqui")
         return resultado
+
 
 banco = Banco()
 x = "Crystian"

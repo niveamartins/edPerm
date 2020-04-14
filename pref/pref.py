@@ -146,6 +146,30 @@ def cadastrarDadosComplementares():
     else:
         return render_template('cadastro.html', erro_cad = True)
 
+@app.route("/cadastrodadospessoais")
+def cadastroDadosPessoais():
+    return render_template('cadastrodadospessoais.html')
+
+@app.route("/cadastrardadospessoais", methods = ['POST'])
+def cadastrarDadosPessoais():
+    nome = str(request.form["nome"]).title()
+    cpf = str(request.form["cpf"]).title()
+    telefone = str(request.form["telefone"])
+    
+    banco = Banco()
+
+    if (banco.buscarDadosPessoais(session['user_id']) == []):
+        cadastrado =  banco.cadastrar_dados_pessoais(session['user_id'], nome, cpf, telefone)
+    else:
+        banco.atualizarNome(session['user_id'], tag)
+        banco.atualizarCpf(session['user_id'], profissao)
+        banco.atualizarTelefone(session['user_id'], funcao)
+        return 'Dados Pessoais atualizado'
+    if cadastrado:
+        return redirect('/')
+    else:
+        return render_template('cadastro.html', erro_cad = True)
+
 
 @app.route("/cadastroturma")
 def cadastroturma():
@@ -209,6 +233,11 @@ def listarturma():
 def turma(codigo_turma):
     session['nome_da_turma'] = codigo_turma
     banco = Banco()
+    soualuno = banco.buscarAlunoPorUsuarioECodigo(session['user'], session['nome_da_turma'])
+    if(soualuno != []):
+        session['inscrito'] = True
+    else:
+        session['inscrito'] = False
     eventos = banco.buscarTurmaComProfessor(codigo_turma)
     variavel = eventos[0][0]
     alunodaturma = banco.listarAlunos(variavel)
@@ -241,6 +270,33 @@ def atualizarpresenca():
     else:
         return render_template('atualizarpresencaaluno.html', erro_cad = True)
 
+@app.route("/cadastraraluno", methods = ['POST'])
+def cadastraraluno():
+    variavelAluno = session['user']
+    variavelTurma = session['nome_da_turma']
+    
+    banco = Banco()
+    if (banco.buscarTurma(variavelTurma) != []):
+            variavelTurma = banco.buscarTurma(variavelTurma)
+            if(banco.buscarAluno(variavelAluno) !=[]):
+                 variavelAluno = banco.buscarAluno(variavelAluno)
+                 if(banco.buscarAlunoPorUsuarioECodigo(session['user'], session['nome_da_turma']) == []):
+                     cadastrado = banco.cadastrarAlunos(variavelTurma[0], variavelAluno[0])
+                 else:
+                     session['nome_da_turma'] = ''
+                     return 'Aluno ja cadastrado na turma'
+            else:
+                session['nome_da_turma'] = ''
+                return 'Aluno não existe'
+    else:
+        session['nome_da_turma'] = ''
+        return 'Turma não existe'
+    if cadastrado:
+        session['nome_da_turma'] = ''
+        return render_template('inicio.html', erro_cad = False)
+    else:
+        session['nome_da_turma'] = ''
+        return render_template('inicio.html', erro_cad = True)
 
 app.secret_key = os.urandom(12)
 if __name__ == "__main__":

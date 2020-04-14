@@ -82,18 +82,28 @@
                         <td class="name">Tag</td>
                         <td class="value">{{evento[8]}}</td>
                     </tr>
+           
+                    {% if session['inscrito'] %}
+                        <p>Sou Inscrito</p>
+                    {% else %}
+                        <form action="/cadastraraluno" method="POST">
+                            <input type="submit" class="button" value="Inscrever">
+                        </form>
+                    {% endif %}
 
                     {% for aluno in alunosdaturma %}
                     <tr>
                     <tr>
-                        <td>Aluno</td>
-                        <td>{{aluno[5]}}</td>
-                        <td>Presenças</td>
-                        <td>{{aluno[3]}}</td>
+                        <td class="name">Aluno</td>
+                        <td class="value">{{aluno[5]}}</td>
+                        <td class="name">Presenças</td>
+                        <td class="value">{{aluno[3]}}</td>
                     </tr>
                     </tr>
 
                     {% endfor %}
+
+
 
 
                     </tr>             

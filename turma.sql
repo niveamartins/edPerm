@@ -55,3 +55,20 @@ unidadeBasicaDeSaude VARCHAR(40) NOT NULL,
 FOREIGN KEY (id_do_user) REFERENCES user(id)
 );
 
+CREATE TABLE IF NOT EXISTS alunoApoiador(
+id_aluno INTEGER PRIMARY KEY AUTOINCREMENT,
+apoiador_id_turma INTEGER NOT NULL,
+apoiador_id_user INTEGER NOT NULL,
+FOREIGN KEY (apoiador_id_turma) REFERENCES turma(id_turma),
+FOREIGN KEY (apoiador_id_user) REFERENCES user(id)
+);
+
+CREATE TABLE IF NOT EXISTS userDadosPessoais(
+id_userDadosPessoais INTEGER PRIMARY KEY AUTOINCREMENT,
+id_do_user INTEGER NOT NULL,
+nome VARCHAR(100) NOT NULL,
+cpf INTEGER NOT NULL,
+telefone VARCHAR(20) NOT NULL,
+FOREIGN KEY (id_do_user) REFERENCES user(id)
+);
+
