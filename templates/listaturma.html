@@ -1,0 +1,94 @@
+{% extends "base/base.html" %}
+
+{% block head %}
+    <title>Educação Permanente</title>
+{% endblock %}
+
+<div class="topnav" id="myTopnav">
+        <a href="/" class="active">Inicio</a>
+</div>
+
+{% block content %}
+
+{% if not session['logged_in'] %}
+    <strong>Bem vindo, aluno!</strong> Faça login para uma experiência personalizada!
+
+{% endif %}
+        {% if not eventos %}
+        <p class="card">Nada por aqui</p>
+        {% endif %}
+
+
+    <div class="card-container">
+        <!-- <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div> -->
+        {% for evento in eventos %}
+        <div class="card">
+            <div class="type"></div>
+            <table class="card-list">
+                    
+                <tr>
+                    <th>Turma</th>
+                    <th>Informações</th>
+                    
+                </tr>
+                    
+
+                    <tr>
+                        <td class="name">Responsavel</td>
+                        <td class="value">{{evento[10]}}</td>
+                    </tr>
+    
+                    <tr>
+                        <td class="name">Nome do curso</td>
+                        <td class="value">{{evento[2]}}</td>
+                    </tr>
+                
+                    <tr>
+                        <td class="name">Dia</td>
+                        <td class="value">{{evento[3]}}</td>
+                    </tr>
+
+                    <tr>
+                        <td class="name">Hora</td>
+                        <td class="value">{{evento[4]}}</td>
+                    </tr>
+ 
+                    <tr>
+                        <td class="name">Carga horaria total</td>
+                        <td class="value">{{evento[5]}}</td>
+                    </tr>
+
+                    <tr>
+                        <td class="name">Tolerancia</td>
+                        <td class="value">{{evento[6]}}</td>
+                    </tr>
+
+                    <tr>
+                        <td class="name">Modalidade</td>
+                        <td class="value">{{evento[7]}}</td>
+                    </tr>
+
+                    <tr>
+                        <td class="name">Tag</td>
+                        <td class="value">{{evento[8]}}</td>
+                    </tr>
+
+                    <tr>
+                        <a href="listaturma/{{evento[2]}}" class="middle" title="Abrir Turma">Abrir Turma</a>
+                    </tr>
+
+
+                    </tr>             
+            </table>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+

@@ -1,0 +1,58 @@
+{% extends "base/base.html" %}
+
+{% block head %}
+    <title>Cadastro de Aluno na Turma - Educação Permanente</title>
+{% endblock %}
+
+{% block content %}
+<div class="card">
+    {% if session['logged_in'] %}
+        
+        <div class="wrap">
+            <div class="login-form">
+                <div class="form-header">
+                    <h3>Bem vindo, aluno!</h3>
+                    <p>Preencha os formulários para utilizar das funcionalidades do Educação Permanente. </p>
+                </div>
+
+                <form action="/atualizarpresenca" method="POST">
+                
+                <!--User Input-->
+                <div class="form-group">
+                <input type="text" name = "alunopre" class="form-input" placeholder="Nome do aluno" required>
+                </div>
+
+                <!--Email Input-->
+                <div class="form-group">
+                <input type="text" name = "codigopre" class="form-input" placeholder="Codigo da Turma" required>
+                </div>
+                
+                <!--Sign Up Button-->
+                <div class="form-group">
+                <input type="submit" class  value = "cadastrar Aluno Na Turma">
+                </div>
+                </form>
+
+            </div>
+        </div><!--/.wrap-->
+
+    
+        
+    
+    {% else %}
+
+
+    <p>Você precisa estar logado</p>
+
+    {% endif %}
+
+    {% if erro_cad %}
+    <script>
+        alert("Erro no cadastro");
+    </script>
+    {% endif %}
+
+
+</div>
+{% endblock %}
+

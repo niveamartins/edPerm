@@ -1,0 +1,62 @@
+{% extends "base/base.html" %}
+
+{% block head %}
+<title>Cadastro de Turma - Educação Permanente</title>
+{% endblock %}
+
+{% block content %}
+<div class="main-content-forms">
+    {% if session['logged_in'] %}
+    {%if session['gestor'] == 1 or session['coordenador'] == 1 %}
+    <div class="form-page-container">
+        <div class="form-container">
+
+
+            <form action="/cadastrarturma" method="POST">
+                <h1>Cadastre sua turma! </h1>
+                <p>Cadastre aqui sua turma Educação Permanente.</p>
+                <!--User Input-->
+                <input type="text" name="responsavel" class="form-input" placeholder="Responsavel" required>
+                <!--Email Input-->
+                <input type="text" name="nome" class="form-input" placeholder="Nome do Curso" required>
+                <!--User Input-->
+                <input type="text" name="dia" class="form-input" placeholder="Dia" required>
+                <!--Email Input-->
+                <input type="text" name="hora" class="form-input" placeholder="Hora" required>
+                <!--Password Input-->
+                <input type="text" name="carga" class="form-input" placeholder="Carga Horaria" required>
+                <!--User Input-->
+                <input type="text" name="tolerancia" class="form-input" placeholder="Tolerancia" required>
+                <!--Password Input-->
+                <input type="text" name="modalidade" class="form-input" placeholder="Modalidade" required>
+                <!--Email Input-->
+                <input type="text" name="tag" class="form-input" placeholder="Tag" required>
+                <!--Sign Up Button-->
+                <input type="submit" class="button login" value="cadastrar Turma">
+            </form>
+        </div> <!--/.form-container-->
+    </div><!--/.form-page-container-->
+    
+    {% else %}
+
+    <p>Você não tem permissão para acessar essa página!</p>
+
+    {% endif %}
+
+
+    {% else %}
+
+    <p>Você está logado</p>
+
+
+    {% endif %}
+
+    {% if erro_cad %}
+    <script>
+        alert("Erro no cadastro");
+    </script>
+    {% endif %}
+
+
+</div>
+{% endblock %}
