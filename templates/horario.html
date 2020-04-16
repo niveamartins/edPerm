@@ -1,7 +1,7 @@
 {% extends "base/base.html" %}
 
 {% block head %}
-<title>Cadastro de Aluno na Turma - Educação Permanente</title>
+<title>Cadastro de Apoiador na Turma - Educação Permanente</title>
 {% endblock %}
 
 {% block content %}
@@ -12,14 +12,18 @@
     <div class="form-page-container">
         <div class="form-container">
 
-            <form action="/cadastraralunonaturma" method="POST">
-                <h1>Cadastre seus alunos! </h1>
-                <p>Cadastre seus alunos em sua turma.</p>
+
+            <form action="/cadastraraula" method="POST">
+                <h1>Cadastre seus Apoiadores! </h1>
+                <p>Cadastre seus apoiadores em sua turma.</p>
                 <!--User Input-->
-                <input type="text" name="aluno" class="form-input" placeholder="Nome do aluno" required>
-                <!--Email Input-->
-                <input type="text" name="codigo" class="form-input" placeholder="Codigo da Turma" required>
-                <!--Sign Up Button-->
+                <input type="text" name="turma" class="form-input" placeholder="Nome da turma" required>
+                <!--User Input-->
+                <input type="text" name="aula" class="form-input" placeholder="Nome da aula" required>
+                <label for="party">Coloque o horario de inicio da aula:</label>
+                <input id="party" type="datetime-local" name="horario">
+                <label for="party">Coloque o horario de termino da aula:</label>
+                <input id="party" type="datetime-local" name="termino">
                 <input type="submit" class="button login" value="cadastrar aluno">
             </form>
 

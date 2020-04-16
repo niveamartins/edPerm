@@ -290,6 +290,16 @@ class Banco():
         except:
             return False
 
+    def cadastrarAlunoApoiador(self,variavel_alunos_id_turma, variavel_alunos_id_user):
+        try:
+            with sqlite3.connect('db1.db') as connection:
+                cursor = connection.cursor()
+                cursor.execute('INSERT INTO alunoApoiador(apoiador_id_turma, apoiador_id_user) VALUES(?, ?)', (variavel_alunos_id_turma[0], variavel_alunos_id_user[0]))
+                connection.commit()
+                return True
+        except:
+            return False
+
     def atualizarAlunos(self, variavel_alunos_id, valordapresenca):
         try:
             with sqlite3.connect('db1.db') as connection:
@@ -396,6 +406,15 @@ class Banco():
 
             cursor = connection.cursor()
             find_user = ("SELECT * FROM alunos INNER JOIN user ON alunos.alunos_id_user = user.id INNER JOIN turma ON alunos.alunos_id_turma = turma.id_turma WHERE usuario = ? AND nome_do_curso = ?")
+            resultado = cursor.execute(find_user, (usuario, codigo)).fetchall()
+        return resultado
+
+    def buscarApoiadorPorUsuarioECodigo(self, usuario, codigo):
+        resultado = []
+        with sqlite3.connect('db1.db') as connection:
+
+            cursor = connection.cursor()
+            find_user = ("SELECT * FROM alunoApoiador INNER JOIN user ON alunoApoiador.apoiador_id_user = user.id INNER JOIN turma ON alunoApoiador.apoiador_id_turma = turma.id_turma WHERE usuario = ? AND nome_do_curso = ?")
             resultado = cursor.execute(find_user, (usuario, codigo)).fetchall()
         return resultado
 

@@ -224,6 +224,7 @@ def cadastraralunonaturma():
     else:
         return render_template('cadastroalunonaturma.html', erro_cad = True)
 
+
 @app.route("/listaturma")
 def listarturma():
     banco = Banco()
@@ -297,6 +298,54 @@ def cadastraraluno():
     else:
         session['nome_da_turma'] = ''
         return render_template('inicio.html', erro_cad = True)
+
+
+@app.route("/cadastroapoiador")
+def cadastroapoiador():
+    return render_template('cadastroapoiador.html')
+
+@app.route("/cadastrarapoiador", methods = ['POST'])
+def cadastrarapoiador():
+    variavelAluno = str(request.form["aluno"])
+    variavelTurma = str(request.form["turma"])
+    
+    banco = Banco()
+    if (banco.buscarTurma(variavelTurma) != []):
+            variavelTurma = banco.buscarTurma(variavelTurma)
+            if(banco.buscarAluno(variavelAluno) !=[]):
+                 variavelAluno = banco.buscarAluno(variavelAluno)
+                 if(banco.buscarApoiadorPorUsuarioECodigo(str(request.form["aluno"]), str(request.form["turma"])) == []):
+                     cadastrado = banco.cadastrarAlunoApoiador(variavelTurma[0], variavelAluno[0])
+                 else:
+                     return 'Aluno ja cadastrado como apoiador da turma'
+            else:
+                return 'Aluno não existe'
+    else:
+        return 'Turma não existe'
+    if cadastrado:
+        return render_template('cadastroapoiador.html', erro_cad = False)
+    else:
+        return render_template('cadastroapoiador.html', erro_cad = True)
+
+@app.route("/cadastroaula")
+def cadastroaula():
+    return render_template('horario.html')
+
+@app.route("/cadastraraula", methods = ['POST'])
+def cadastraraula():
+    variavelturma = str(request.form["turma"])
+    variavelaula = str(request.form["aula"])
+    horario = str(request.form["horario"])
+    termino = str(request.form["termino"])
+    horario = horario[:10] + ' ' + horario[11:] + ':00'
+    termino = termino[:10] + ' ' + termino[11:] + ':00'
+    print(horario)
+    print(termino)
+
+    return render_template('horario.html', erro_cad = False)
+
+
+
 
 app.secret_key = os.urandom(12)
 if __name__ == "__main__":

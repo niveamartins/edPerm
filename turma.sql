@@ -72,3 +72,23 @@ telefone VARCHAR(20) NOT NULL,
 FOREIGN KEY (id_do_user) REFERENCES user(id)
 );
 
+CREATE TABLE IF NOT EXISTS aula(
+id_aula INTEGER PRIMARY KEY AUTOINCREMENT,
+aula_id_turma INTEGER NOT NULL,
+inicio INTEGER NOT NULL,
+termino INTEGER NOT NULL,
+nome VARCHAR(20) NOT NULL,
+FOREIGN KEY (aula_id_turma) REFERENCES turma(id_turma)
+);
+
+CREATE TABLE IF NOT EXISTS presenca(
+id_presenca INTEGER PRIMARY KEY AUTOINCREMENT,
+id_do_user INTEGER NOT NULL,
+id_da_aula INTEGER NOT NULL,
+horario_da_presenca INTEGER NOT NULL,
+FOREIGN KEY (id_do_user) REFERENCES user(id),
+FOREIGN KEY (id_da_aula) REFERENCES aula(id_aula)
+);
+--SELECT (strftime('%s','2004-01-01 02:34:56'));
+
+
