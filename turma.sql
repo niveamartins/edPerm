@@ -90,5 +90,5 @@ FOREIGN KEY (id_do_user) REFERENCES user(id),
 FOREIGN KEY (id_da_aula) REFERENCES aula(id_aula)
 );
 --SELECT (strftime('%s','2004-01-01 02:34:56'));
-
+--select strftime('%s','now') - 10800;
 

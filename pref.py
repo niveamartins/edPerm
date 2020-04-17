@@ -61,6 +61,7 @@ def logar():
             session['cap'] = cap
             session['unidade'] = unidade
 
+
         session['logged_in'] = True
         visitante.validar()
     else:
@@ -253,22 +254,46 @@ def listadepresenca():
 @app.route("/atualizarpresenca", methods = ['POST'])
 def atualizarpresenca():
     variavelAluno = str(request.form["alunopre"])
-    variavelTurma = str(request.form["codigopre"])
     
     banco = Banco()
-    if (banco.buscarTurma(variavelTurma) != []):
-            if(banco.buscarAlunoPorUsuarioECodigo(variavelAluno, variavelTurma) != []):
-                 variavelAluno = banco.buscarAlunoPorUsuarioECodigo(variavelAluno, variavelTurma)
-                 variavelTurma = banco.buscarTurma(variavelTurma)
-                 presenca = int(variavelAluno[0][3]) + 1
-                 cadastrado = banco.atualizarAlunos(variavelAluno[0][0], presenca)
+
+    if (banco.buscarTurma(session['nome_da_turma']) != []):
+            if(banco.buscarApoiadorPorUsuarioECodigo(session['user'], session['nome_da_turma']) != []):
+                if(banco.buscarAulaPorTurmaENome(session['nome_da_turma'], session['aula']) != []):
+                    if(banco.buscarAlunoPorUsuarioECodigo(variavelAluno, session['nome_da_turma']) != []):
+                        if(banco.buscarPresencaPorUsuarioEAula(variavelAluno, session['aula']) == []):
+                            variavelAluno = banco.buscarAlunoPorUsuarioECodigo(variavelAluno, session['nome_da_turma'])
+                            variavelUsuario = banco.buscarAluno(str(request.form["alunopre"]))
+                            variavelAula = banco.buscarAulaPorTurmaENome(session['nome_da_turma'], session['aula'])
+                            inicio = int(variavelAula[0][2])
+                            fim = int(variavelAula[0][3])
+                            horarioDaPresenca = banco.retornaHorarioNow()
+                            horarioDaPresenca = int(horarioDaPresenca[0][0])
+                            cadastrado = banco.cadastrarPresenca(variavelUsuario[0], variavelAula[0], horarioDaPresenca)
+                            if cadastrado:
+                                if(horarioDaPresenca<inicio):
+                                    presenca = int(variavelAluno[0][3]) + fim - inicio
+                                else:
+                                    if(horarioDaPresenca>fim):
+                                        presenca = int(variavelAluno[0][3])
+                                    else:
+                                        presenca = int(variavelAluno[0][3]) + fim - horarioDaPresenca
+                                cadastrado = banco.atualizarAlunos(variavelAluno[0][0], presenca)
+                        else:
+                            return 'Aluno já possui presença nessa aula'
+                    else:
+                        return 'Aluno não existe'
+                else:
+                    return 'Aula não existe'
             else:
-                return 'Aluno não existe'
+                return 'Você não é apoiador dessa turma'
     else:
         return 'Turma não existe'
+
     if cadastrado:
         return render_template('atualizarpresencaaluno.html', erro_cad = False)
     else:
+        banco.apagarPresenca(variavelUsuario[0], variavelAula[0])
         return render_template('atualizarpresencaaluno.html', erro_cad = True)
 
 @app.route("/cadastraraluno", methods = ['POST'])
@@ -333,18 +358,57 @@ def cadastroaula():
 
 @app.route("/cadastraraula", methods = ['POST'])
 def cadastraraula():
+    banco = Banco()
     variavelturma = str(request.form["turma"])
     variavelaula = str(request.form["aula"])
     horario = str(request.form["horario"])
     termino = str(request.form["termino"])
     horario = horario[:10] + ' ' + horario[11:] + ':00'
     termino = termino[:10] + ' ' + termino[11:] + ':00'
-    print(horario)
-    print(termino)
+    teste1 = banco.retornaHorario(horario)
+    teste2 = banco.retornaHorario(termino)
+    teste3 = banco.retornaHorarioNow()
+    teste1 = int(teste1[0][0])
+    teste2 = int(teste2[0][0])
+    teste3 = int(teste3[0][0])
+    if(teste1 >= teste2 or teste3 >= teste2):
+        return 'Horario invalido'
 
-    return render_template('horario.html', erro_cad = False)
+    if (banco.buscarTurma(variavelturma) != []):
+            variavelTurma = banco.buscarTurma(variavelturma)
+            if(banco.buscarAulaPorTurmaENome(variavelturma, variavelaula) ==[]):
+                 cadastrado = banco.cadastrarAula(variavelTurma[0], teste1, teste2, variavelaula)
+            else:
+                return 'Aula Ja cadastrada'
+    else:
+        return 'Turma não existe'
+    if cadastrado:
+        return render_template('cadastroapoiador.html', erro_cad = False)
+    else:
+        return render_template('cadastroapoiador.html', erro_cad = True)
 
+@app.route("/chamada")
+def chamada():
+    return render_template('chamada.html')
 
+@app.route("/chamadapesquisar", methods = ['POST'])
+def chamadapesquisar():
+    variavelTurma = str(request.form["turma"])
+    variavelAula = str(request.form["aula"])
+    
+    banco = Banco()
+    if (banco.buscarTurma(variavelTurma) != []):
+            if(banco.buscarApoiadorPorUsuarioECodigo(session['user'], variavelTurma) != []):
+                if(banco.buscarAulaPorTurmaENome(variavelTurma, variavelAula) != []):
+                     session['aula'] = variavelAula
+                     session['nome_da_turma'] = variavelTurma
+                     return render_template('atualizarpresencaaluno.html', erro_cad = False)
+                else:
+                    return 'Aula não existe'
+            else:
+                return 'Você não é apoiador dessa turma'
+    else:
+        return 'Turma não existe'
 
 
 app.secret_key = os.urandom(12)

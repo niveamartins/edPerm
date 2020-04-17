@@ -418,6 +418,75 @@ class Banco():
             resultado = cursor.execute(find_user, (usuario, codigo)).fetchall()
         return resultado
 
+    def cadastrarAula(self,id_turma, inicio, termino, nome):
+        try:
+            with sqlite3.connect('db1.db') as connection:
+                cursor = connection.cursor()
+                cursor.execute('INSERT INTO aula(aula_id_turma, inicio, termino, nome) VALUES(?, ?, ?, ?)', (id_turma[0], inicio, termino, nome))
+                connection.commit()
+                return True
+        except:
+            return False
+
+    def buscarAulaPorTurmaENome(self, turma, nome):
+        resultado = []
+        with sqlite3.connect('db1.db') as connection:
+
+            cursor = connection.cursor()
+            find_user = ("select * from aula INNER JOIN turma ON aula.aula_id_turma = turma.id_turma WHERE nome_do_curso = ? AND nome = ?")
+            resultado = cursor.execute(find_user, (turma, nome)).fetchall()
+        return resultado
+
+    def retornaHorario(self, horario):
+        resultado = []
+        with sqlite3.connect('db1.db') as connection:
+
+            cursor = connection.cursor()
+            find_user = ("SELECT (strftime('%s',?)) + (strftime('%s',?)) * 0;")
+            resultado = cursor.execute(find_user, (horario, horario)).fetchall()
+        return resultado
+
+    def retornaHorarioNow(self):
+        resultado = []
+        with sqlite3.connect('db1.db') as connection:
+
+            cursor = connection.cursor()
+            find_user = ("select strftime('%s','now') - 10800;")
+            resultado = cursor.execute(find_user).fetchall()
+        return resultado
+
+    def cadastrarPresenca(self, id_user, id_da_aula, horario_da_presenca):
+        try:
+            with sqlite3.connect('db1.db') as connection:
+                cursor = connection.cursor()
+                cursor.execute('INSERT INTO presenca(id_do_user, id_da_aula, horario_da_presenca) VALUES(?, ?, ?)', (id_user[0], id_da_aula[0], horario_da_presenca))
+                connection.commit()
+                return True
+        except:
+            return False
+
+    def buscarPresencaPorUsuarioEAula(self, usuario, aula):
+        resultado = []
+        with sqlite3.connect('db1.db') as connection:
+
+            cursor = connection.cursor()
+            find_user = ("select * from presenca INNER JOIN user ON presenca.id_do_user = user.id INNER JOIN aula ON presenca.id_da_aula = aula.id_aula WHERE usuario = ? AND nome = ?")
+            resultado = cursor.execute(find_user, (usuario, aula)).fetchall()
+        return resultado
+
+
+    def apagarPresenca(self, id_do_user, id_da_aula):
+        try:
+            with sqlite3.connect('db1.db') as connection:
+                cursor = connection.cursor()
+                print(id_do_user[0])
+                print(id_da_aula[0])
+                cursor.execute('DELETE FROM presenca WHERE id_do_user = ? AND id_da_aula = ?', (id_do_user, id_da_aula))
+                connection.commit()
+                return True
+        except:
+            return False
+
 
 banco = Banco()
 x = "Crystian"
