@@ -94,6 +94,7 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 10%;
 }
 
 header, footer {
@@ -116,6 +117,8 @@ header, footer {
 
 .nav__links {
   list-style: none;
+  display: flex;
+  flex-direction: row;
 }
 
 .nav__links li {
