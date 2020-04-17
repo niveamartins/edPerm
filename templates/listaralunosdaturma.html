@@ -10,13 +10,16 @@
 
 {% block content %}
 
-{% if not session['logged_in'] %}
-<!-- <div class="alert">
-    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-    <strong>Bem vindo, aluno!</strong> Faça login para uma experiência personalizada!
-</div> -->
+<!-- Necessário? -->
+<div class="alert-container">
+    {% if not session['logged_in'] %}
+    <div class="alert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        <strong>Bem vindo, aluno!</strong> Faça login para uma experiência personalizada!
+    </div>
+    {% endif %}
+</div>
 
-{% else %}
 
 {% if not eventos %}
 <p class="card">Nada por aqui</p>
@@ -108,17 +111,12 @@
             <td class="value">{{aluno[3]}}</td>
         </tr>
 
-        {% endfor %}
+        {% endfor %} <!--aluno in alunosdaturma-->
     </table>
     </div>
 
     
-    {% endfor %}
+    {% endfor %} <!--evento in eventos-->
 </div>
 
-
-{% endif %}
-
-
-
-{% endblock %}
+{% endblock %} <!--block content-->

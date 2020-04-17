@@ -185,8 +185,6 @@ header, footer {
   transform: translateY(-4px);
 }
 
-/* New Forms */
-
 /* Login/SignUp Form */
 
 .main-content-forms {
@@ -305,6 +303,40 @@ header, footer {
   font-weight: bold;
   color: var(--elements-second-color);
   font-size: 1.1em;
+}
+
+/* Not signed in alert */
+.alert-container {
+  position: absolute;
+  margin: 1em;
+
+  width: 70%;
+  z-index: 1;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.alert {
+  background-color: var(--elements-third-color);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  color: white;
+  font-size: 1.1em;
+  padding: 20px;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 40px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
 }
 
 /* Cards */
@@ -505,9 +537,10 @@ i#more-details.material-icons {
 }
 
 
+/* mudar tamanho para padrão quando for decidido o menu oficial */
 
 /* Responsive layout */
-@media (max-width: 1024px) {
+@media (max-width: 1300px) {
 
   /* FOR NAVBAR */
   /* .logo a {
