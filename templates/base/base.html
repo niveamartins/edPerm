@@ -29,21 +29,34 @@
   <!-- page container styled with css grid -->
   <div class="grid-container">
 
-    <!-- acessibility session: font sizes -->
+    <!-- acessibility session: font sizes (missing) and help -->
     <div class="acessibility">
-      <a href="#" alt="Aumentar fonte" title="Aumentar fonte"> <i class="material-icons"
+      <!-- <a href="#" alt="Aumentar fonte" title="Aumentar fonte"> <i class="material-icons"
           id="acessible-elements">add_circle_outline</i></a>
       <a href="#" alt="Diminuir fonte" title="Diminuir fonte"><i class="material-icons"
-          id="acessible-elements">remove_circle_outline</i></a>
+          id="acessible-elements">remove_circle_outline</i></a> -->
+      <a href="#" alt="Ajuda" title="Ajuda" onclick="showHelp()"> <i class="material-icons"
+          id="acessible-elements">help_outline</i></a>
     </div>
 
-    
+    <div id="help">
+      <div class="help__content">
+        <ul>
+          <li>Acompanhe as turmas disponíveis na plataforma Educação Permanente!</li>
+          <li><span class="list__title"> Gestores e Coordenadores:</span><br>Abram novas turmas.</li>
+          <li><span class="list__title">Propositores:</span><br>Organizem atividades de Educação Permanente! Definam carga-horária, emitam certificados, e mais.</li>
+          <li><span class="list__title">Alunos:</span><br>Se inscrevam em turmas e recebam um QRCode por email para confirmar presença nos dias das aulas. E também se tornem instrutores de turmas já cursadas!</li>
+          <li><span class="list__title">Instrutores:</span><br>Confirmem a presença de alunos em aulas.</li>
+        </ul>
+      </div>
+    </div>
+
     <header>
       <div class="logo"><a href="/">Educação Permanente</a></div>
-      
+
       <!-- navegation -->
       <nav class="myNav" id="myNav">
-        
+
         <!-- button for nav sliding -->
         <input type="checkbox" id="check">
         <label for="check" class="checkbtn">
@@ -79,8 +92,10 @@
 
     <footer>
       <div class="links">
-          <a href="https://prefeitura.rio/" target="_blanck" class="logo"><img src="../../static/img/logo-prefeitura.jpg" alt="Logo Prefeitura"></a>
-          <a href="https://saude.gov.br/" target="_blanck" class="logo"><img src="../../static/img/logo-ministerio-da-saude.png" alt="Logo Ministério da Saúde"></a>
+        <a href="https://prefeitura.rio/" target="_blanck" class="logo"><img src="../../static/img/logo-prefeitura.jpg"
+            alt="Logo Prefeitura"></a>
+        <a href="https://saude.gov.br/" target="_blanck" class="logo"><img
+            src="../../static/img/logo-ministerio-da-saude.png" alt="Logo Ministério da Saúde"></a>
       </div>
     </footer>
   </div>
