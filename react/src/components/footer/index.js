@@ -5,7 +5,14 @@ export function Footer(){
 
     return (
         <div>
-            <footer>&copy;2020 Prefeitura do Rio de Janeiro. All rights reserved.</footer>
+            <div className="links">
+                <a href="https://prefeitura.rio/" target="_blanck" class="logo">
+                    <img src="../../assets/logo-prefeitura.jpg" alt="Logo Prefeitura"/>
+                </a>
+                <a href="https://saude.gov.br/" target="_blanck" class="logo" >
+                    <img src="../../assets/logo-ministerio-da-saude.png" alt="Logo Ministério da Saúde"/>
+                </a>
+            </div>
         </div>
     );
 }
