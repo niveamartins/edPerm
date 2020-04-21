@@ -10,14 +10,6 @@
 
 
 {% block content %}
-    <div class="alert-container">
-        {% if not session['logged_in'] %}
-        <div class="alert">
-            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-            <strong>Bem vindo, aluno!</strong> Faça login para uma experiência personalizada!
-        </div>
-        {% endif %}
-    </div>
     
     {% if not eventos %}
     <div class="card">Nada por aqui</div>
@@ -31,7 +23,6 @@
         <div class="type"></div>
         <table class="card-list">
             <tr class="title">
-                <!-- <td class="name">Nome do curso</td>  -->
                 <td>{{evento[2]}}</td>
             </tr>
 

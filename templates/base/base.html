@@ -35,8 +35,8 @@
           id="acessible-elements">add_circle_outline</i></a>
       <a href="#" alt="Diminuir fonte" title="Diminuir fonte"><i class="material-icons"
           id="acessible-elements">remove_circle_outline</i></a> -->
-      <a href="#" alt="Ajuda" title="Ajuda" onclick="showHelp()"> <i class="material-icons"
-          id="acessible-elements">help_outline</i></a>
+      <div alt="Ajuda" title="Ajuda" onclick="showHelp()"> <i class="material-icons"
+          id="acessible-elements">help_outline</i></div>
     </div>
 
     <div id="help">
@@ -52,7 +52,7 @@
     </div>
 
     <header>
-      <div class="logo"><a href="/">Educação Permanente</a></div>
+      <div class="logo"><a href="/listaturma">Educação Permanente</a></div>
 
       <!-- navegation -->
       <nav class="myNav" id="myNav">
@@ -74,11 +74,7 @@
 
       </nav>
 
-      <!-- user buttons -->
-      {% if not session['logged_in'] %}
-      <a href="/" title="Login"><i class="material-icons" id="nav-elements">person</i></a>
-      {% endif %}
-
+      <!-- logout button -->
       {% if session['logged_in'] %}
       <a href="sair" title="Sair"> <i class="material-icons" id="nav-elements">power_settings_new</i> </a>
       {% endif %}

@@ -68,7 +68,7 @@ def logar():
     
     try:
         if session['logged_in']:
-            return redirect('/')
+            return redirect('/listaturma')
         else:
             return render_template('login.html', erro_log = True)
     except:
