@@ -1,5 +1,7 @@
 //página de esqueci a senha
-import React from '../../../node_modules/react';
+import React from 'react'
+
+import './esqueci.css'
 
 function Inicio() {
 

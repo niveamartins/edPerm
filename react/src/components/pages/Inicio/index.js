@@ -1,5 +1,7 @@
 //página de login 
-import React from '../../../node_modules/react';
+import React from 'react'
+
+import './inicio.css'
 
 function Inicio() {
 
@@ -22,8 +24,8 @@ function Inicio() {
                             <input type="text" name="usuario" class="form-input" placeholder="Usuário" required />
                             <input type="password" name="senha" class="form-input" placeholder="Senha" required></input>
                             <input type="submit" class="button login" value="Login" />
-                            <a href="esqueci_a_senha" class="forgot">Esqueceu a senha?</a>
-                            <a href="cadastro" class="signup">Não possui conta? <span class="form-highlight">Se cadastre</span></a>
+                            <a href="esqueciasenha" class="forgot">Esqueceu a senha?</a>
+                            <a href="cadusuario" class="signup">Não possui conta? <span class="form-highlight">Se cadastre</span></a>
                         </form>
                     </div>
                 </div>

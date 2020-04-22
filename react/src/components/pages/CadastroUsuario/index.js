@@ -1,5 +1,7 @@
 //página de login 
-import React from '../../../node_modules/react';
+import React from 'react'
+
+import './cadastroUsuario.css'
 
 function Inicio() {
 

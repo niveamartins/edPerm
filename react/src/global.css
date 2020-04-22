@@ -469,13 +469,12 @@ footer .links .logo img {
 
 .card-list {
   font-family: 'Montserrat', sans-serif;
-  height: 400px;
   width: 400px;
   padding: 20px;
 
-  display: flex;
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
 }
 
 /* icon for going to more detailed page */
@@ -485,10 +484,9 @@ footer .links .logo img {
   color: var(--elements-second-color);
   font-family: 'Montserrat', sans-serif;    
   font-weight: bold; 
-         
   position: absolute;
-  right: 15px;
-  top: 10px;
+  margin-left: 80%;
+  margin-top: -20px;
 
   display: flex;
   flex-direction: column;
@@ -500,19 +498,18 @@ footer .links .logo img {
 }
 
 /* more details icon */
-i#more-details.material-icons { 
+#more-details { 
   font-size: 40px;
 } 
 
 .card-list .title {
-  margin: 0 20px 0 20px;
   font-size: 1.6em;
   font-weight: bold;
 
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
 }
 
 .card-list tr.tutor {
@@ -534,6 +531,7 @@ i#more-details.material-icons {
   font-weight: 300;
   text-transform: uppercase;
 
+  /* atentar na hora de migrar */
   display: flex;
   justify-content: space-between;
 
