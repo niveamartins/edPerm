@@ -1,7 +1,9 @@
-import React from '../../../node_modules/react';
+import React from 'react'
+import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew'
 
+import './navbar.css'
 
-export function NavBar(){
+export function NavBar() {
     //Links
     /* <li><a href="cadastroturma" class="middle" title="Cadastrar Turma">Cadastrar Turma</a></li>
         <li><a href="listaturma" class="middle" title="Listar Turmas">Listar Turmas</a></li>
@@ -9,19 +11,24 @@ export function NavBar(){
         <li><a href="cadastrodadoscomplementares" class="middle" title="Dados complementares">Mais Dados</a></li>
     
     */
+
     return (
         <div>
             <header>
-                <div class="logo"><a href="/">Educação Permanente</a></div>
-        
-                <nav class="myNav" id="myNav">
 
-                    <ul class="nav__links">
-                    <li><a href="/cadalunos" class="middle" title="Cadastrar Alunos">Cadastrar Alunos</a></li>
-                    <li><a href="/cadturma" class="middle" title="Cadastrar Alunos">Cadastrar Turma</a></li>
+                <div className="logo"><a href="/turmas">Educação Permanente</a></div>
+
+                <nav className="myNav" id="myNav">
+                    <ul className="nav__links">
+                        <li><a href="/cadalunos" className="middle" title="Cadastrar Alunos">Cadastrar Alunos</a></li>
+                        <li><a href="/cadturma" className="middle" title="Cadastrar Turma">Cadastrar Turma</a></li>
+                        <li><a href="/turmas" className="middle" title="Listar Turmas">Turmas</a></li>
                     </ul>
-
                 </nav>
+
+                {/* logout button */}
+                <a href="/" title="Sair"> <PowerSettingsNewIcon id="nav-elements" /> </a>
+
             </header>
         </div>
     );

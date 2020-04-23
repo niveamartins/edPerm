@@ -1,9 +1,10 @@
 import React, { Fragment } from 'react'
 import AddIcon from '@material-ui/icons/Add';
-
 // import { Link } from './node_modules/react-router-dom';
+
 import { NavBar } from '../../navbar'
 import { Footer } from '../../footer'
+import { Accessibility } from '../../accessibility'
 
 import './listarTurmas.css'
 
@@ -13,8 +14,9 @@ function ListarTurmas() {
     //fazer navegação para pág da turma e preencher dados da turma com db
 
     return (
-        <div className="listarTurmas">
-            <NavBar></NavBar>
+        <Fragment>
+            <Accessibility />
+            <NavBar />
             <main className="main">
                 <div className="card-container">
                     <div className="card">
@@ -120,8 +122,9 @@ function ListarTurmas() {
 
                 </div>
             </main>
-            <Footer></Footer>
-        </div>
+            <Footer />
+        </Fragment>
+
     )
 }
 

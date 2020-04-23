@@ -1,18 +1,21 @@
-import React from '../../../node_modules/react';
+import React from 'react';
+
+import logoPrefeitura from '../../assets/logo-prefeitura.jpg'
+import logoSaude from '../../assets/logo-ministerio-da-saude.png'
 
 
 export function Footer(){
 
     return (
-        <div>
+        <footer>
             <div className="links">
                 <a href="https://prefeitura.rio/" target="_blanck" class="logo">
-                    <img src="../../assets/logo-prefeitura.jpg" alt="Logo Prefeitura"/>
+                    <img src={logoPrefeitura} alt="Logo Prefeitura"/>
                 </a>
                 <a href="https://saude.gov.br/" target="_blanck" class="logo" >
-                    <img src="../../assets/logo-ministerio-da-saude.png" alt="Logo Ministério da Saúde"/>
+                    <img src={logoSaude} alt="Logo Ministério da Saúde"/>
                 </a>
             </div>
-        </div>
-    );
+        </footer>
+    )
 }

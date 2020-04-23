@@ -33,99 +33,45 @@
   margin: 0;
 }
 
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
 .grid-container {
+  /* Whole screen */
+  width: 100vw;
+  height: 100vh;
+
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 30px 70px 1fr 150px;
-  grid-template-areas: "acessibility" "header" "main" "footer";
+  grid-template-areas: "accessibility" "header" "main" "footer";
   height: 100vh;
 }
 
-/* colocar modal com instruções para acessibilidade e para o site */
-
-.acessibility {
-  grid-area: acessibility;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--elements-third-color);
-  text-align: center;
-  color: #fff;
-  font-weight: bold;
-  font-size: 1.2em;
-  display: flex;
-  justify-content: center;
-}
-
-#acessible-elements {
-  color: #fff;
-  font-size: 30px;
-  padding-right: 1em;
-  cursor: pointer;
-}
-
-#help {
-  display: none;
-  position: absolute;
-  z-index: 1000;
-  background-color: #fff;
-  left: 50%;
-  top: 5%;
-  width: 40%;
-
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-}
-
-#help .help__content {
-  margin: 5% 5% 5% 10%;
-  font-family: 'Montserrat', sans-serif;
-
-  display: flex;
-  flex-wrap: wrap;
-}
-
-#help .help__content ul {
-  list-style-type: none;
-}
-
-#help .help__content ul li{
-  color: #000;
-  padding: 0.5em;
-  font-size: 1.2em;
-}
-
-#help .help__content ul li .list__title {
-  color: var(--elements-third-color);
-  font-weight: 700;
+.accessibility {
+  grid-area: accessibility;
 }
 
 header {
   grid-area: header;
-  align-items: center;
-  padding: 30px 10%;
-  z-index: 100;
-  -webkit-box-shadow: 0px 5px 5px 0px rgb(156, 156, 156);
-  -moz-box-shadow: 0px 5px 5px 0px rgba(156, 156, 156, 1);
-  box-shadow: 0px 5px 5px 0px rgba(156, 156, 156, 1);
-  
-  display: flex;
-  justify-content: space-between;
-
 }
 
-li, a {
-  font-weight: 500;
-  font-size: 16px;
-  color: #5d5d5d;
-  text-decoration: none;
+main {
+  grid-area: main;
+}
+
+
+header, footer {
+  background-color: #fff;
 }
 
 .main {
-  grid-area: main;
   background-color: var(--main-background-color);
   color: #464646;
   display: flex;
@@ -133,13 +79,10 @@ li, a {
   text-align: center;
 }
 
-header, footer {
-  background-color: #fff;
-}
-
-footer {
-  grid-area: footer;
-}
+/* FOOTER */
+  footer {
+    grid-area: footer;
+  }
 
 footer .links {
   width: 100%;
@@ -172,83 +115,7 @@ footer .links .logo img {
 }
 
 
-/* Header styles */
-.logo a {
-  font-family: 'Kaushan Script', cursive;
-  color: #000;
-  font-size: 30px;
-  margin-left: 0px;
-  cursor: pointer;
-}
 
-.logo a:hover {
-  text-decoration: none;
-}
-
-/* Desktop navegation */
-
-.nav__links {
-  list-style: none;
-}
-
-.nav__links li {
-  display: inline-block;
-  padding: 0px 20px;
-  font-family: 'Montserrat', sans-serif;
-  white-space: nowrap;
-}
-
-/* Lines underneath links */
-
-.nav__links li a.middle {
-  position: relative;
-  color: #000;
-  font-size: 1.2em;
-}
-
-.nav__links li a.middle:before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 4px;
-  bottom: -3px;
-  left: 0;
-  background-color: var(--elements-second-color);
-  visibility: hidden;
-  transform: scaleX(0);
-  transition: all 0.3s ease-in-out;
-}
-
-.nav__links li a.middle:hover:before {
-  visibility: visible;
-  transform: scaleX(1);
-}
-
-/* Button for navbar slider on mobile screens */
-
-.checkbtn {
-  position: absolute;
-  top: 50px;
-  left: 20px;
-  font-size: 1.7em;
-  color: #000;
-  cursor: pointer;
-  display: none;
-  
-}
-
-#check {
-  display: none;
-}
-
-#nav-elements {
-  color: var(--elements-second-color);
-  font-size: 3em;
-}
-
-#nav-elements:hover {
-  transform: translateY(-4px);
-}
 
 /* Login/SignUp Form */
 
@@ -631,53 +498,6 @@ footer .links .logo img {
 }
 
 
-/* mudar tamanho para padrão quando for decidido o menu oficial */
-
-/* Responsive layout */
-@media (max-width: 1300px) {
-
-  /* FOR NAVBAR */
-  /* .logo a {
-    font-size: 25px;
-  } */
-
-  .checkbtn {
-    display: block;
-  }
-  nav ul {
-    position: fixed;
-    width: 100%;
-    height: 100vh;
-    background: var(--slide-navbar-color);
-    top: 100px;
-    left: -100%;
-    transition: all .5s;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  nav ul li {
-    margin-top: var(--margin-mobile-navbar);
-    font-size: 1.4em;
-    transition: 0.5s;
-  }
-
-  nav ul li:hover {
-    font-size: 1.5em;
-  }
-  .nav__links>li>a.middle {
-    color: #fff;
-  }
-
-  #check:checked~ul {
-    left: 0;
-  }
-
-  
-  
-}
 /* FOR CARDS */
 @media (max-width: 950px) {
   .card-container {
