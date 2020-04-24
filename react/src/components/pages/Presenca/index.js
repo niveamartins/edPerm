@@ -64,7 +64,6 @@ function Presenca() {
                             </tr>
                         </table>
                     </div>
-                </div>
                 <div className="info-turmas">
                     <div class="card">
                         <AddIcon id="navigate_before"></AddIcon>
@@ -85,8 +84,9 @@ function Presenca() {
                             </tr>
 
                         </table>
-                 </div>
-            </div>
+                    </div>
+                </div>
+                </div>
             </main>
             <Footer />
         </Fragment>

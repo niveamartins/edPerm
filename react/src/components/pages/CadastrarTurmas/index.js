@@ -51,22 +51,22 @@ function CadastrarTurma() {
         <main className="main-content-forms">
           <div class="form-page-container">
             <div class="form-container">
-            <h1>Cadastre sua turma!</h1>
+              <h1>Cadastre sua turma!</h1>
+              <p>Cadastre aqui sua turma Educação Permanente.</p>
               <form>
-                <p>Cadastre aqui sua turma Educação Permanente.</p>
                 <input name="responsavel" class="form-input" placeholder="Responsável" required />
                 <input name="nome" class="form-input" placeholder="Nome do Curso" required />
-                <div class="form-line">
+                {/* <div class="form-line"> */}
                   <input name="dia" class="form-input" placeholder="Dia" required />
                   <input name="hora" class="form-input-second" placeholder="Hora" required />
-                </div>
-                <div class="form-line">
+                {/* </div> */}
+                {/* <div class="form-line"> */}
                   <input name="carga" class="form-input" placeholder="Carga Horária" required />
                   <input name="tolerancia" class="form-input-second" placeholder="Tolerância" required />
-                </div>
+                {/* </div> */}
                 <input name="modalidade" class="form-input" placeholder="Modalidade" required />
                 <input name="tag" class="form-input" placeholder="Tag" required />
-                <input type="submit" class="button login" value="cadastrar Turma" />
+                <input type="submit" class="button login" id="cad__class-button" value="cadastrar Turma" />
               </form>
             </div>
           </div>

@@ -61,26 +61,26 @@ function Turma() {
                                 <td className="value">Atividade Física</td>
                             </tr>
                         </table>
-                    </div>
+                    </div>    
                 </div>
                 <div className="nav-info-turmas">
                     <Link to="/presenca" className="link">
-                        <button size="large">
+                        <button size="large" class="button login">
                             <label>Lista de Presença</label>
                         </button>
                     </Link>
                     <Link to="/relatorios" className="link">
-                        <button size="large">
+                        <button size="large" class="button login">
                             <label>Relatórios</label>
                         </button>
                     </Link>
                     <Link to="/cadaula" className="link">
-                        <button size="large">
+                        <button size="large" class="button login">
                             <label>Criar Aula</label>
                         </button>
                     </Link>
                     <Link to="/cadapoiador" className="link">
-                        <button size="large">
+                        <button size="large" class="button login">
                             <label>Cadastrar Aluno Apoiador</label>
                         </button>
                     </Link>
