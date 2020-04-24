@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 // import AddIcon from '@material-ui/icons/Add';
 import { Link } from '../../../../node_modules/react-router-dom';
-import AddIcon from '@material-ui/icons/Add';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 import { NavBar } from '../../navbar'
 import { Footer } from '../../footer'
@@ -19,6 +19,9 @@ function Presenca() {
             <Accessibility />
             <NavBar />
             <main className="main">
+                <a href="/turma">
+                <ArrowBackIcon id="return-icon" />
+                </a>
                 <div className="card-container">
                     <div className="card">
                         <table className="card-list">
@@ -66,20 +69,18 @@ function Presenca() {
                     </div>
                 <div className="info-turmas">
                     <div class="card">
-                        <AddIcon id="navigate_before"></AddIcon>
                         <table class="presence-list">
-
                             <tr class="title">
                                 <td>Lista de presença</td>
                             </tr>
 
                             <tr class="header">
-                                <th>Alunos</th>
+                                <th class="header__first-presence">Alunos</th>
                                 <th>Presenças</th>
                             </tr>
 
                             <tr class="students">
-                                <td class="name">Feitosa</td>
+                                <td class="presence__name">Feitosa</td>
                                 <td class="value">2</td>
                             </tr>
 

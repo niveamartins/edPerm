@@ -116,7 +116,19 @@ footer .links .logo img {
   object-fit: contain;
 }
 
+/* Arrow-back for returning previous page */
+#return-icon  {
+  position: absolute;
+  left: 20px;
+  color: var(--elements-second-color);
+  font-size: 4em;
+  cursor: pointer;
+  z-index: 20;
+}
 
+#return-icon:hover {
+  transform: translateX(-10px);
+}
 
 
 /* Login/SignUp Form */
@@ -504,6 +516,7 @@ footer .links .logo img {
 @media (max-width: 950px) {
   .card-container {
     justify-content: center;
+    margin: 0;
   }
 }
 

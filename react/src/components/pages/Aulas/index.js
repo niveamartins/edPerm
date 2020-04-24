@@ -1,7 +1,9 @@
 import React, { Fragment } from 'react'
 // import AddIcon from '@material-ui/icons/Add';
 import { Link } from '../../../../node_modules/react-router-dom';
-import AddIcon from '@material-ui/icons/Add';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+
+import './aulas.css'
 
 import { NavBar } from '../../navbar'
 import { Footer } from '../../footer'
@@ -17,6 +19,9 @@ function Aulas() {
             <Accessibility />
             <NavBar />
             <main className="main">
+                <a href="/turma">
+                    <ArrowBackIcon id="return-icon" />
+                </a>
                 <div className="card-container">
                     <div className="card">
                         <table className="card-list">
@@ -62,35 +67,34 @@ function Aulas() {
                             </tr>
                         </table>
                     </div>
-                </div>
-                <div className="info-turmas">
-                    <div class="card">
-                        <AddIcon id="navigate_before"></AddIcon>
-                        <table class="presence-list">
+                    <div className="info-turmas">
+                        <div class="card">
+                            <table class="presence-list">
 
-                            <tr class="title">
-                                <td>Aulas Cadastradas</td>
-                            </tr>
-
-                            <tr class="header">
-                                <th>Aula</th>
-                                <th>Data</th>
-                            </tr>
-                            <Link to="/aula" className="link">
-                                <tr class="students">
-                                    <td class="name">Nado Sincronizado - Parte 1</td>
-                                    <td class="value">20/04/2020</td>
+                                <tr class="title">
+                                    <td>Aulas Cadastradas</td>
                                 </tr>
-                            </Link>
+
+                                <tr class="header">
+                                    <th class="header__first">Aula</th>
+                                    <th>Data</th>
+                                </tr>
+                                <Link to="/aula" className="link">
+                                    <tr class="students">
+                                        <td class="name">Nado Sincronizado - Parte 1</td>
+                                        <td class="value">20/04/2020</td>
+                                    </tr>
+                                </Link>
 
 
-                            <tr class="students">
-                                <td class="name">Nado Sincronizado - Parte Exemplo</td>
-                                <td class="value">22/04/2020</td>
-                            </tr>
-                        </table>
-                 </div>
-            </div>
+                                <tr class="students">
+                                    <td class="name">Nado Sincronizado - Parte Exemplo</td>
+                                    <td class="value">22/04/2020</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </main>
             <Footer />
         </Fragment>

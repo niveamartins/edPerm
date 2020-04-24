@@ -29,7 +29,7 @@ function ListarTurmas() {
                                 <td><span className="tutor__highlight">Fulaninho</span></td>
                                 
                                 {/* icone com link para pág da turma */}
-                                <a href="#" className="class-page" title="Página da Turma">
+                                <a href="/turma" className="class-page" title="Página da Turma">
                                 <AddIcon id="more-details"></AddIcon>info.
                                 </a>
 

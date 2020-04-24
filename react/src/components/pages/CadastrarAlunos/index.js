@@ -58,7 +58,6 @@ function CadastrarAlunos() {
                 <input name="codigo" class="form-input" placeholder="Código da Turma" required />
                 <input type="submit" class="button login" value="cadastrar aluno" />
               </form>
-
             </div>
           </div>
         </div>

@@ -1,4 +1,3 @@
-
 .accessibility {
   display: flex;
   align-items: center;
@@ -16,7 +15,6 @@ svg#accessible-elements {
   color: #fff;
   font-size: 1.6em;
   cursor: pointer;
-
   display: flex;
   align-items: center;
 }
@@ -29,14 +27,12 @@ svg#accessible-elements {
   left: 50%;
   top: 5%;
   width: 40%;
-  
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
 #help .help__content {
   margin: 5% 5% 5% 10%;
   font-family: 'Montserrat', sans-serif;
-  
   display: flex;
   flex-wrap: wrap;
 }
@@ -45,7 +41,7 @@ svg#accessible-elements {
   list-style-type: none;
 }
 
-#help .help__content ul li{
+#help .help__content ul li {
   color: #000;
   padding: 0.5em;
   font-size: 1.2em;
@@ -54,4 +50,12 @@ svg#accessible-elements {
 #help .help__content ul li .list__title {
   color: var(--elements-third-color);
   font-weight: 700;
+}
+
+/* smaller icon on mobile */
+
+@media (max-width: 950px) {
+  svg#accessible-elements {
+    font-size: 1.4em;
+  }
 }

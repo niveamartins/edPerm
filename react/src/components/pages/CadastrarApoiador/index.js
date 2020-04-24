@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
-// import AddIcon from '@material-ui/icons/Add';
 import { Link } from '../../../../node_modules/react-router-dom';
-import AddIcon from '@material-ui/icons/Add';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+
 
 import { NavBar } from '../../navbar'
 import { Footer } from '../../footer'
@@ -18,6 +18,9 @@ function CadastrarApoiador() {
             <Accessibility />
             <NavBar />
             <main className="main">
+                <a href="/turma">
+                    <ArrowBackIcon id="return-icon" />
+                </a>
                 <div className="card-container">
                     <div className="card">
                         <table className="card-list">
@@ -63,9 +66,7 @@ function CadastrarApoiador() {
                             </tr>
                         </table>
                     </div>
-                </div>
-                <div className="info-turmas">
-                        <AddIcon id="navigate_before"></AddIcon>
+                    <div className="info-turmas">
                         <div class="form-page-container">
                             <div class="form-container">
                                 <form>
@@ -77,7 +78,8 @@ function CadastrarApoiador() {
 
                             </div>
                         </div>
-            </div>
+                    </div>
+                </div>
             </main>
             <Footer />
         </Fragment>

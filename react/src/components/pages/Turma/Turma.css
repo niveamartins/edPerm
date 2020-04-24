@@ -9,10 +9,25 @@
 }
 
 .nav-info-turmas {
+    /* height: 400px; */
     margin-top: 2rem;
-    height: 400px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: center;
+}
+
+.nav-info-turmas button {
+  width: 350px;
+}
+
+@media (max-width: 950px) {
+  .nav-info-turmas {
+    margin-top: 0;
+    margin-bottom: 2rem;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  
+
 }
