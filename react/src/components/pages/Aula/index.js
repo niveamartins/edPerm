@@ -1,14 +1,16 @@
 import React, { Fragment } from 'react'
 // import AddIcon from '@material-ui/icons/Add';
 import { Link } from '../../../../node_modules/react-router-dom';
+import AddIcon from '@material-ui/icons/Add';
 
 import { NavBar } from '../../navbar'
 import { Footer } from '../../footer'
 import { Accessibility } from '../../accessibility'
 
-import './Turma.css'
+import './aula.css'
 
-function Turma() {
+
+function Aula() {
 
     //preencher dados da turma com db
 
@@ -63,33 +65,33 @@ function Turma() {
                         </table>
                     </div>
                 </div>
-                <div className="nav-info-turmas">
-                    <Link to="/presenca" className="link">
+                <div className="info-turmas">
+                    <div class="card">
+                        <AddIcon id="navigate_before"></AddIcon>
+                        <table className="card-list">
+                            <tr className="title">
+                                <td>Nado Sincronizado - Parte 1</td>
+                            </tr>
+                            <tr className="content">
+                                <td className="name">Hora de Início</td>
+                                <td className="value">13:00</td>
+                            </tr>
+                            <tr className="content">
+                                <td className="name">Hora de Término</td>
+                                <td className="value">15:00</td>
+                            </tr>
+                            <tr className="content">
+                                <td className="name">Apoiador</td>
+                                <td className="value">Feitosa</td>
+                            </tr>
+                        </table>
+                        <Link to="/leitor" className="link">
                         <button size="large">
-                            <label>Lista de Presença</label>
+                            <label>Dar Presença</label>
                         </button>
                     </Link>
-                    <Link to="/relatorios" className="link">
-                        <button size="large">
-                            <label>Relatórios</label>
-                        </button>
-                    </Link>
-                    <Link to="/cadaula" className="link">
-                        <button size="large">
-                            <label>Criar Aula</label>
-                        </button>
-                    </Link>
-                    <Link to="/cadapoiador" className="link">
-                        <button size="large">
-                            <label>Cadastrar Aluno Apoiador</label>
-                        </button>
-                    </Link>
-                    <Link to="/aulas" className="link">
-                        <button size="large">
-                            <label>Aulas</label>
-                        </button>
-                    </Link>
-                </div>
+                 </div>
+            </div>
             </main>
             <Footer />
         </Fragment>
@@ -97,4 +99,4 @@ function Turma() {
     )
 }
 
-export default Turma
+export default Aula

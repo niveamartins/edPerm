@@ -13,6 +13,10 @@ import ListarTurmas from './components/pages/ListarTurmas'
 import Turma from './components/pages/Turma'
 import Presenca from './components/pages/Presenca'
 import CriarAula from './components/pages/CriarAula'
+import CadastrarApoiador from './components/pages/CadastrarApoiador'
+import Aulas from './components/pages/Aulas'
+import Aula from './components/pages/Aula'
+import LerPresenca from './components/pages/LerPresenca'
 
 // Aqui definimos todas as rotas
 export default function Routes() {
@@ -28,6 +32,10 @@ export default function Routes() {
                 <Route path="/turma" component={Turma} />
                 <Route path="/presenca" component={Presenca}/>
                 <Route path="/cadaula" component={CriarAula}/>
+                <Route path="/cadapoiador" component={CadastrarApoiador} />
+                <Route path="/aulas" component= {Aulas} />
+                <Route path="/aula" component={Aula} />
+                <Route path="/leitor" component= {LerPresenca} />
             </Switch>
         </BrowserRouter>
     );

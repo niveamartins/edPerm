@@ -1,14 +1,15 @@
 import React, { Fragment } from 'react'
 // import AddIcon from '@material-ui/icons/Add';
 import { Link } from '../../../../node_modules/react-router-dom';
+import AddIcon from '@material-ui/icons/Add';
 
 import { NavBar } from '../../navbar'
 import { Footer } from '../../footer'
 import { Accessibility } from '../../accessibility'
 
-import './Turma.css'
 
-function Turma() {
+
+function CadastrarApoiador() {
 
     //preencher dados da turma com db
 
@@ -63,33 +64,20 @@ function Turma() {
                         </table>
                     </div>
                 </div>
-                <div className="nav-info-turmas">
-                    <Link to="/presenca" className="link">
-                        <button size="large">
-                            <label>Lista de Presença</label>
-                        </button>
-                    </Link>
-                    <Link to="/relatorios" className="link">
-                        <button size="large">
-                            <label>Relatórios</label>
-                        </button>
-                    </Link>
-                    <Link to="/cadaula" className="link">
-                        <button size="large">
-                            <label>Criar Aula</label>
-                        </button>
-                    </Link>
-                    <Link to="/cadapoiador" className="link">
-                        <button size="large">
-                            <label>Cadastrar Aluno Apoiador</label>
-                        </button>
-                    </Link>
-                    <Link to="/aulas" className="link">
-                        <button size="large">
-                            <label>Aulas</label>
-                        </button>
-                    </Link>
-                </div>
+                <div className="info-turmas">
+                        <AddIcon id="navigate_before"></AddIcon>
+                        <div class="form-page-container">
+                            <div class="form-container">
+                                <form>
+                                    <h1>Cadastre o apoiador!</h1>
+                                    <p>Insira abaixo o código do aluno escolhido.</p>
+                                    <input name="aluno" class="form-input" placeholder="Código do Aluno" required />
+                                    <input type="submit" class="button login" value="cadastrar apoiador" />
+                                </form>
+
+                            </div>
+                        </div>
+            </div>
             </main>
             <Footer />
         </Fragment>
@@ -97,4 +85,4 @@ function Turma() {
     )
 }
 
-export default Turma
+export default CadastrarApoiador
