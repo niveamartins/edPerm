@@ -1,14 +1,14 @@
 import React, { Fragment } from 'react'
 // import AddIcon from '@material-ui/icons/Add';
 import { Link } from '../../../../node_modules/react-router-dom';
+import AddIcon from '@material-ui/icons/Add';
 
 import { NavBar } from '../../navbar'
 import { Footer } from '../../footer'
 import { Accessibility } from '../../accessibility'
 
-import './Turma.css'
 
-function Turma() {
+function Aulas() {
 
     //preencher dados da turma com db
 
@@ -61,35 +61,36 @@ function Turma() {
                                 <td className="value">Atividade Física</td>
                             </tr>
                         </table>
-                    </div>    
+                    </div>
                 </div>
-                <div className="nav-info-turmas">
-                    <Link to="/presenca" className="link">
-                        <button size="large" class="button login">
-                            <label>Lista de Presença</label>
-                        </button>
-                    </Link>
-                    <Link to="/relatorios" className="link">
-                        <button size="large" class="button login">
-                            <label>Relatórios</label>
-                        </button>
-                    </Link>
-                    <Link to="/cadaula" className="link">
-                        <button size="large" class="button login">
-                            <label>Criar Aula</label>
-                        </button>
-                    </Link>
-                    <Link to="/cadapoiador" className="link">
-                        <button size="large" class="button login">
-                            <label>Cadastrar Aluno Apoiador</label>
-                        </button>
-                    </Link>
-                    <Link to="/aulas" className="link">
-                        <button size="large">
-                            <label>Aulas</label>
-                        </button>
-                    </Link>
-                </div>
+                <div className="info-turmas">
+                    <div class="card">
+                        <AddIcon id="navigate_before"></AddIcon>
+                        <table class="presence-list">
+
+                            <tr class="title">
+                                <td>Aulas Cadastradas</td>
+                            </tr>
+
+                            <tr class="header">
+                                <th>Aula</th>
+                                <th>Data</th>
+                            </tr>
+                            <Link to="/aula" className="link">
+                                <tr class="students">
+                                    <td class="name">Nado Sincronizado - Parte 1</td>
+                                    <td class="value">20/04/2020</td>
+                                </tr>
+                            </Link>
+
+
+                            <tr class="students">
+                                <td class="name">Nado Sincronizado - Parte Exemplo</td>
+                                <td class="value">22/04/2020</td>
+                            </tr>
+                        </table>
+                 </div>
+            </div>
             </main>
             <Footer />
         </Fragment>
@@ -97,4 +98,4 @@ function Turma() {
     )
 }
 
-export default Turma
+export default Aulas
