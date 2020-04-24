@@ -1,8 +1,9 @@
 .form-line {
     display: flex;
     flex-direction: row;
+    
 }
 
 .form-line .form-input-second {
-    margin-left: 3px !important;
+    margin-left: 0px !important;
 }

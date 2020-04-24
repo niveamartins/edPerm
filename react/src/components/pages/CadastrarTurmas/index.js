@@ -51,13 +51,8 @@ function CadastrarTurma() {
         <main className="main-content-forms">
           <div class="form-page-container">
             <div class="form-container">
+            <h1>Cadastre sua turma!</h1>
               <form>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <h1>Cadastre sua turma!</h1>
                 <p>Cadastre aqui sua turma Educação Permanente.</p>
                 <input name="responsavel" class="form-input" placeholder="Responsável" required />
                 <input name="nome" class="form-input" placeholder="Nome do Curso" required />
