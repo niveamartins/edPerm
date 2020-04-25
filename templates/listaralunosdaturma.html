@@ -10,111 +10,113 @@
 
 {% block content %}
 
-{% if not session['logged_in'] %}
-<!-- <div class="alert">
-    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-    <strong>Bem vindo, aluno!</strong> Faça login para uma experiência personalizada!
-</div> -->
+<!-- Necessário? -->
+<div class="alert-container">
+    {% if not session['logged_in'] %}
+    <div class="alert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        <strong>Bem vindo, aluno!</strong> Faça login para uma experiência personalizada!
+    </div>
+    {% endif %}
+</div>
 
-{% else %}
 
 {% if not eventos %}
 <p class="card">Nada por aqui</p>
 {% endif %}
 
 
-    <div class="card-container">
-        <!-- <div class="card"></div>
-        <div class="card"></div>
-        <div class="card"></div>
-        <div class="card"></div>
-        <div class="card"></div>
-        <div class="card"></div>
-        <div class="card"></div>
-        <div class="card"></div> -->
-        {% for evento in eventos %}
-        <div class="card">
-            <div class="type"></div>
-            <table class="card-list">
-                    
-                <tr>
-                    <th>Turma</th>
-                    <th>Informações</th>
-                    
-                </tr>
+<div class="card-container">
     
-                    <tr>
-                        <td class="name">Responsavel</td>
-                        <td class="value">{{evento[10]}}</td>
-                    </tr>
-    
-                    <tr>
-                        <td class="name">Nome do curso</td>
-                        <td class="value">{{evento[2]}}</td>
-                    </tr>
-                
-                    <tr>
-                        <td class="name">Dia</td>
-                        <td class="value">{{evento[3]}}</td>
-                    </tr>
+    {% for evento in eventos %}
+    <div class="card">
+        <div class="type"></div>
+        <table class="card-list">
 
-                    <tr>
-                        <td class="name">Hora</td>
-                        <td class="value">{{evento[4]}}</td>
-                    </tr>
- 
-                    <tr>
-                        <td class="name">Carga horaria total</td>
-                        <td class="value">{{evento[5]}}</td>
-                    </tr>
+            <tr class="title">
+                <!-- <td class="name">Nome do curso</td>  -->
+                <td>{{evento[2]}}</td>
+            </tr>
 
-                    <tr>
-                        <td class="name">Tolerancia</td>
-                        <td class="value">{{evento[6]}}</td>
-                    </tr>
+            <tr class="tutor">
+                <td>Responsável:</td>
+                <td><span class="tutor__highlight">{{evento[10]}}</span> </td>
+            </tr>
 
-                    <tr>
-                        <td class="name">Modalidade</td>
-                        <td class="value">{{evento[7]}}</td>
-                    </tr>
+            <tr class="header">
+                <th>Turma</th>
+                <th>Informações</th>
+            </tr>
 
-                    <tr>
-                        <td class="name">Tag</td>
-                        <td class="value">{{evento[8]}}</td>
-                    </tr>
-           
-                    {% if session['inscrito'] %}
-                        <p>Sou Inscrito</p>
-                    {% else %}
-                        <form action="/cadastraraluno" method="POST">
-                            <input type="submit" class="button" value="Inscrever">
-                        </form>
-                    {% endif %}
+            <tr>
+                <td class="name">Dia</td>
+                <td class="value">{{evento[3]}}</td>
+            </tr>
 
-                    {% for aluno in alunosdaturma %}
-                    <tr>
-                    <tr>
-                        <td class="name">Aluno</td>
-                        <td class="value">{{aluno[5]}}</td>
-                        <td class="name">Presenças</td>
-                        <td class="value">{{aluno[3]}}</td>
-                    </tr>
-                    </tr>
+            <tr>
+                <td class="name">Hora</td>
+                <td class="value">{{evento[4]}}</td>
+            </tr>
 
-                    {% endfor %}
+            <tr>
+                <td class="name">Carga horária total</td>
+                <td class="value">{{evento[5]}}</td>
+            </tr>
 
+            <tr>
+                <td class="name">Tolerância</td>
+                <td class="value">{{evento[6]}}</td>
+            </tr>
 
+            <tr>
+                <td class="name">Modalidade</td>
+                <td class="value">{{evento[7]}}</td>
+            </tr>
 
+            <tr>
+                <td class="name">Tag</td>
+                <td class="value">{{evento[8]}}</td>
+            </tr>
 
-                    </tr>             
-            </table>
-        </div>
-        {% endfor %}
+            <div class="student-state">
+                {% if session['inscrito'] %}
+                <p>Inscrito</p>
+                {% else %}
+                <form action="/cadastraraluno" method="POST">
+                    <input type="submit" class="button subscribe" value="Inscrever">
+                </form>
+                {% endif %}
+            </div>
+
+        </table>
+    </div>
+    <div class="card">
+    <table class="presence-list">
+
+        <tr class="title">
+            <td>Lista de presença</td>
+        </tr>
+
+        <tr class="header">
+            <th>Alunos</th>
+            <th>Presenças</th>
+        </tr>
+
+        {% for aluno in alunosdaturma %}
+
+        <tr class="students">
+            <!-- <li class="name">aluno</li> -->
+            <td class="name">{{aluno[5]}}</td>
+            <!-- <td class="name">Presenças</td> -->
+            <td class="value">{{aluno[3]}}</td>
+        </tr>
+
+        {% endfor %} <!--aluno in alunosdaturma-->
+    </table>
     </div>
 
+    
+    {% endfor %} <!--evento in eventos-->
+</div>
 
-{% endif %}
-
-
-
-{% endblock %}
+{% endblock %} <!--block content-->

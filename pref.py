@@ -2,7 +2,7 @@ from flask import Flask, request, render_template, redirect, url_for, session
 import os, smtplib
 from db_create import Banco
 from pessoas import Pessoa
-from geradordeqrcode import Gerador
+#from geradordeqrcode import Gerador
 
 app = Flask(__name__)
 
@@ -68,7 +68,7 @@ def logar():
     
     try:
         if session['logged_in']:
-            return redirect('/')
+            return redirect('/listaturma')
         else:
             return render_template('login.html', erro_log = True)
     except:

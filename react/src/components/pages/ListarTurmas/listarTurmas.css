@@ -1,0 +1,21 @@
+/* Ajustando posicionamento dos componentes */
+
+.card-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-list tr {
+    margin: 0;
+}
+
+.card-list .title {
+    align-self: center;
+}
+
+.card-list tr.content {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 1em 0 1em;
+}
+
