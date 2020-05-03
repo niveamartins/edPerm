@@ -13,3 +13,12 @@ class User(Base):
     telefone = Column(String(10), nullable=False)
     tipo     = Column(Enum(['adm','gestor','coordenador','propositor','cursista','apoiador']), nullable=False)
 
+    def format(self,dic):
+        aux = {}
+
+        aux[self.Id]= {
+          'nome' = self.nome
+          'email' = self.email 
+          'telefone' = self.telefone
+        } 
+        return dic.append(aux)

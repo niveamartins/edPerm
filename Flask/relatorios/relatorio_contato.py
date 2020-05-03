@@ -8,7 +8,6 @@ class RelatorioContatos():
     def __init__(self, usuarios):
         self.usuarios = usuarios # puxa all ids do banco
         self.createJson()
-        print(registerDateTime.registerDateTime())
         self.DataeHoraDeCriacao = registerDateTime.registerDateTime()
 
     def createJson(self):
