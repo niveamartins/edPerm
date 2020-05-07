@@ -17,6 +17,9 @@ import CadastrarApoiador from './components/pages/CadastrarApoiador'
 import Aulas from './components/pages/Aulas'
 import Aula from './components/pages/Aula'
 import LerPresenca from './components/pages/LerPresenca'
+import Perfil from './components/pages/Perfil'
+import EditarCadastro from './components/pages/editarCadastro'
+import DadosPessoais from './components/pages/dadosPessoais'
 
 // Aqui definimos todas as rotas
 export default function Routes() {
@@ -36,6 +39,10 @@ export default function Routes() {
                 <Route path="/aulas" component= {Aulas} />
                 <Route path="/aula" component={Aula} />
                 <Route path="/leitor" component= {LerPresenca} />
+                <Route path="/perfil" component={Perfil} />
+                <Route path="/editarDados" component={EditarCadastro}/>
+                <Route path="/dadosPessoais" component={DadosPessoais}/>
+
             </Switch>
         </BrowserRouter>
     );
