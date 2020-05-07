@@ -1,7 +1,7 @@
 from sqlalchemy import Column, String, Integer, Time, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
-from BD.model.Base.Base import Base
+from database.model.Base.Base import Base
 
 class Horario(Base):
     __tablename__ = 'Horario'

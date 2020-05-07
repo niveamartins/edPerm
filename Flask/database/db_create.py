@@ -2,7 +2,7 @@
 import sqlite3
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from send import Send
+from send import *
 import smtplib 
 
 class Banco():
@@ -487,15 +487,15 @@ class Banco():
         except:
             return False
 
-
+'''
 banco = Banco()
 x = "Crystian"
 send= Send()
-'''
+
 send.sendMessage("123", "Crystian.S.F@Gmail.Com")
-'''
+
 #print(banco.recuperarSenha(x))
-'''
+
 banco.ajeitarTabelas()
 banco.criarTabelas()
 '''
