@@ -1,7 +1,9 @@
-from flask import Flask, request, render_template, redirect, url_for, session
+from flask import Flask, request, render_template, redirect, url_for, session, jsonify
 import os, smtplib
-from db_create import Banco
-from pessoas import Pessoa
+from BD.db_create import Banco
+from BD.pessoas import Pessoa
+from BD.session import get_session 
+from BD.model.User import User
 #from geradordeqrcode import Gerador
 
 app = Flask(__name__)
@@ -410,6 +412,14 @@ def chamadapesquisar():
     else:
         return 'Turma não existe'
 
+
+@app.route('/testerelatoriocontato', methods = ['GET'])
+def get_relatorio(): 
+    session = get_session()
+    data = session.query(User).all()
+    data = [i.format() for i in data]
+    session.close()
+    return jsonify(data)
 
 app.secret_key = os.urandom(12)
 if __name__ == "__main__":
