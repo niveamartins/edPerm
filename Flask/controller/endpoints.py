@@ -2,9 +2,10 @@ from flask import Blueprint, request, jsonify, render_template, redirect, url_fo
 from database.db_create import Banco
 from database.pessoas import Pessoa
 from database.session import get_session 
-from database.model.User import User
+from database.model.Model import *
 
 blueprint = Blueprint('endpoints',__name__)
+
 
 @blueprint.route("/esqueci", methods = ['POST'])
 def esqueci_():
@@ -367,19 +368,17 @@ def chamadapesquisar():
 def get_relatoriocontato(): 
     session = get_session()
     data = session.query(User).all()
-    data = [i.format() for i in data]
+    data = [i.relatoriocontato() for i in data]
     session.close()
     return jsonify(data)
 
 @blueprint.route('/relatoriocpfnome', methods = ['GET'])
 def get_relatoriocpfnome():
     session = get_session()
-    alunos = session.query(User,Alunos).join()
-    turmas = session.query(Turma).all()
-    
-
+    data = session.query(Turma).all()
+    data = [i.relatoriocpfnome for i in data]
     session.close()
-    return jsonify(data2)
+    return jsonify(data)
 
 @blueprint.route('/relatoriofrequencia', methods = ['GET'])
 def get_relatoriofrequencia():

@@ -1,16 +1,16 @@
-from sqlalchemy import Column, String, Integer,Text, Enum, ForeignKey, Table
+from sqlalchemy import Column, String, Integer,Text, Enum, ForeignKey, Table, Time
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, backref
 from database.model.Base.Base import Base
 
 # ASSOCIATIONS TABLES
  
-alunoApoiadoXturma = Table('aaxt',
+alunoApoiadoXturma = Table('aaxt', Base.metadata,
     Column('alunoApoiador_id',Integer, ForeignKey('alunoApoiador.id_alunoApoiador')),
     Column('turma_id',Integer, ForeignKey('turma.id_turma'))
 )
 
-alunoXturma = Table('axt',
+alunoXturma = Table('axt', Base.metadata,
     Column('aluno_id',Integer, ForeignKey('aluno.id_aluno')),
     Column('turma_id',Integer, ForeignKey('turma.id_turma'))
 )
@@ -31,13 +31,13 @@ class User(Base):
 
     #ONE TO ONE
     UserComplemento = relationship('UserComplemento', uselist=False, backref="user")
-    Aluno = relationship('Aluno', uselist=False, backref='aluno')
+    Aluno = relationship('Aluno', uselist=False, backref='alunoUser')
     AlunoApoiador = relationship('AlunoApoiador', uselist=False, backref='alunoApoiador')
     
     #ONE TO MANY
-    Turma = relationship('Turma', backref='turma')
+    Turma = relationship('Turma', backref='propositor')
 
-    def format(self):
+    def relatoriocontato(self):
         return {
           "id": f'{self.Id}',
           "nome": f'{self.usuario}',
@@ -52,15 +52,23 @@ class Aluno(Base):
     alunos_id_user = Column(Integer, ForeignKey('user.Id'), nullable=False, unique=True)
     presenca = Column(Integer, nullable=False)
 
+    def relatoriocpfnome(self):
+        return {
+            "idAluno":self.alunos_id_turma,
+            "nomeDoAluno":self.alunoUser.usuario,
+            "cpfDoAluno":self.alunoUser.cpf
+
+        }
+
 class Turma(Base):
     __tablename__ = 'turma'
     id_turma = Column(Integer,primary_key=True)
     id_responsavel = Column(Integer, ForeignKey('user.Id'), nullable=False)
-    nome_do_curso = Column(String(50), nullable=False)
+    nome_do_curso = Column(String(30), nullable=False)
     carga_horaria_total = Column(Integer, nullable=False)
     tolerancia = Column(Integer, nullable=False)
-    modalidade = Column(String, nullable=False)
-    turma_tag = Column(String, nullable=False)
+    modalidade = Column(String(20), nullable=False)
+    turma_tag = Column(String(20), nullable=False)
 
     #ONE TO MANY
     Horarios = relationship('Horario', backref="Horarios")
@@ -68,6 +76,16 @@ class Turma(Base):
     #MANY TO MANY
     Alunos = relationship('Aluno',secondary=alunoXturma, backref=backref('MinhasTurmas', lazy='dynamic'))
     AlunosApoiadores = relationship('AlunoApoiador', secondary=alunoApoiadoXturma, backref=backref('turmasApoiadas', lazy='dynamic'))
+
+    def relatoriocpfnome(self):
+        return {
+            "id": self.id_turma,
+            "nomeDaTurma": self.nome_do_curso,
+            "propositor": self.propositor.usuario,
+            "alunos":{
+                [i.relatoriocpfnome for i in Alunos]
+            }
+        }
 
 class Horario(Base):
     __tablename__ = 'horario'
@@ -81,12 +99,12 @@ class UserComplemento(Base):
     __tablename__ = 'userComplemento'
     id_complemento = Column(Integer, primary_key=True)
     id_do_user = Column(Integer, ForeignKey('user.Id'), nullable=False, unique=True)
-    tag = Column(String, nullable=False)
-    profissao = Column(String, nullable=False)
-    funcao = Column(String, nullable=False)
-    superintendenciaDaSUBPAV = Column(String, nullable=False)
-    CAP = Column(String, nullable=False)
-    unidadeBasicaDeSaude = Column(String, nullable=False)
+    tag = Column(String(20), nullable=False)
+    profissao = Column(String(20), nullable=False)
+    funcao = Column(String(20), nullable=False)
+    superintendenciaDaSUBPAV = Column(String(30), nullable=False)
+    CAP = Column(String(20), nullable=False)
+    unidadeBasicaDeSaude = Column(String(30), nullable=False)
 
 class AlunoApoiador(Base):
     __tablename__ = 'alunoApoiador'
