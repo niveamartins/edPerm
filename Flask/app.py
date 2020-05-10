@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 app.config['JSON_AS_ASCII'] = False
 
-app.register_blueprint(blueprint)
+app.register_blueprint(blueprint, url_prefix="/api")
 
 app.secret_key = b'\xae\xf3\x8e\x03\xb8\x9c\x87&\xae\xc4\xf5+'
 
