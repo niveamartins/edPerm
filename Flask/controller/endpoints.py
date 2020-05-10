@@ -373,7 +373,7 @@ def chamadapesquisar():
 def get_relatoriocontato(): 
     session = get_session()
     data = session.query(User).all()
-    logger.debug(f'Query: {str(data)}')
+    logger.debug(f'Query: {str(session.query(User))}')
     data = [i.relatoriocontato() for i in data]
     session.close()
     return jsonify(data)
@@ -382,7 +382,7 @@ def get_relatoriocontato():
 def get_relatoriocpfnome():
     session = get_session()
     data = session.query(Turma).all()
-    logger.debug(f'Query: {str(data)}')
+    logger.debug(f'Query: {str(session.query(Turma))}')
     JSON = [Rcpfnome(i) for i in data]
     for (i, j) in zip(data, JSON):
         for z in i.Alunos:
