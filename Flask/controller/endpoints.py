@@ -363,10 +363,33 @@ def chamadapesquisar():
         return 'Turma não existe'
 
 
-@blueprint.route('/testerelatoriocontato', methods = ['GET'])
-def get_relatorio(): 
+@blueprint.route('/relatoriocontato', methods = ['GET'])
+def get_relatoriocontato(): 
     session = get_session()
     data = session.query(User).all()
     data = [i.format() for i in data]
     session.close()
     return jsonify(data)
+
+@blueprint.route('/relatoriocpfnome', methods = ['GET'])
+def get_relatoriocpfnome():
+    session = get_session()
+    alunos = session.query(User,Alunos).join()
+    turmas = session.query(Turma).all()
+    
+
+    session.close()
+    return jsonify(data2)
+
+@blueprint.route('/relatoriofrequencia', methods = ['GET'])
+def get_relatoriofrequencia():
+    session = get_session()
+    
+    session.close()
+    return jsonify()
+
+@blueprint.route('/relatorioatividades', methods = ['GET'])
+def get_relatorioatividades():
+    session = get_session()
+    session.close()
+    return jsonify()
