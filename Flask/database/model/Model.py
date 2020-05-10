@@ -34,8 +34,9 @@ class User(Base):
     Aluno = relationship('Aluno', uselist=False, backref='alunoUser')
     AlunoApoiador = relationship('AlunoApoiador', uselist=False, backref='alunoApoiador')
     
+    
     #ONE TO MANY
-    Turma = relationship('Turma', backref='propositor')
+    TurmaProposta = relationship('Turma', backref='propositor')
 
     def relatoriocontato(self):
         return {
@@ -48,17 +49,7 @@ class User(Base):
 class Aluno(Base):
     __tablename__ = 'aluno'
     id_aluno = Column(Integer,primary_key=True)
-    alunos_id_turma = Column(Integer, ForeignKey('turma.id_turma'), nullable=False)
     alunos_id_user = Column(Integer, ForeignKey('user.Id'), nullable=False, unique=True)
-    presenca = Column(Integer, nullable=False)
-
-    def relatoriocpfnome(self):
-        return {
-            "idAluno":self.alunos_id_turma,
-            "nomeDoAluno":self.alunoUser.usuario,
-            "cpfDoAluno":self.alunoUser.cpf
-
-        }
 
 class Turma(Base):
     __tablename__ = 'turma'
@@ -77,15 +68,6 @@ class Turma(Base):
     Alunos = relationship('Aluno',secondary=alunoXturma, backref=backref('MinhasTurmas', lazy='dynamic'))
     AlunosApoiadores = relationship('AlunoApoiador', secondary=alunoApoiadoXturma, backref=backref('turmasApoiadas', lazy='dynamic'))
 
-    def relatoriocpfnome(self):
-        return {
-            "id": self.id_turma,
-            "nomeDaTurma": self.nome_do_curso,
-            "propositor": self.propositor.usuario,
-            "alunos":{
-                [i.relatoriocpfnome for i in Alunos]
-            }
-        }
 
 class Horario(Base):
     __tablename__ = 'horario'
