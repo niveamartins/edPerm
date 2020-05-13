@@ -1,10 +1,16 @@
+import sys
+
 from flask import Blueprint, request, jsonify, render_template, redirect, url_for, session, jsonify
+from sqlalchemy.exc import InternalError
 from database.db_create import Banco
 from database.pessoas import Pessoa
 from database.session import get_session 
-from database.model.User import User
+from database.model.Model import *
+from utilities.montaJson import *
+from utilities.loggers import get_logger
 
 blueprint = Blueprint('endpoints',__name__)
+logger = get_logger(sys.argv[0])
 
 @blueprint.route("/esqueci", methods = ['POST'])
 def esqueci_():
@@ -363,10 +369,62 @@ def chamadapesquisar():
         return 'Turma não existe'
 
 
-@blueprint.route('/testerelatoriocontato', methods = ['GET'])
-def get_relatorio(): 
+@blueprint.route('/relatoriocontato', methods = ['GET'])
+def get_relatoriocontato(): 
     session = get_session()
     data = session.query(User).all()
-    data = [i.format() for i in data]
+    logger.debug(f'Query: {str(session.query(User))}')
+    data = [i.relatoriocontato() for i in data]
     session.close()
     return jsonify(data)
+
+@blueprint.route('/relatoriocpfnome', methods = ['GET'])
+def get_relatoriocpfnome():
+    session = get_session()
+    data = session.query(Turma).all()
+    logger.debug(f'Query: {str(session.query(Turma))}')
+    JSON = [Rcpfnome(i) for i in data]
+    for (i, j) in zip(data, JSON):
+        for z in i.Alunos:
+            j["alunos"].update(RcpfnomeAlunos(z))
+    session.close()
+    return jsonify(JSON)
+
+@blueprint.route('/relatoriofrequencia', methods = ['GET'])
+def get_relatoriofrequencia():
+    session = get_session()
+    
+    session.close()
+    return jsonify()
+
+@blueprint.route('/relatorioatividades', methods = ['GET'])
+def get_relatorioatividades():
+    session = get_session()
+    session.close()
+    return jsonify()
+
+@blueprint.route('/testdata', methods = ['GET'])
+def data():
+    try:
+        session = get_session()
+        User1 = User(usuario="aaaaa",email="aaaa@exemplo.br",senha="aaaasenha",cpf="aaaaaaaacpf",telefone="987654tel",tipo="cursista")
+        User2 = User(usuario="bbbbb",email="bbbb@exemplo.br",senha="bbbbsenha",cpf="bbbbbbbbcpf",telefone="187654tel",tipo="propositor")
+        User3 = User(usuario="ddddd",email="dddd@exemplo.br",senha="ddddsenha",cpf="ddddddddcpf",telefone="287654tel",tipo="cursista")
+        session.add_all([User1,User2,User3])
+        session.commit()
+        Aluno1 = Aluno(alunoUser=User1)
+        Aluno2 = Aluno(alunoUser=User3)
+        Turma1 = Turma(id_responsavel=User2.Id,nome_do_curso="calculo",carga_horaria_total=60,tolerancia=30,modalidade="n sei",turma_tag="tbm n sei")
+        Turma2 = Turma(id_responsavel=User2.Id,nome_do_curso="iot",carga_horaria_total=60,tolerancia=30,modalidade="n sei",turma_tag="tbm n sei")
+        session.add_all([Aluno1,Aluno2,Turma1,Turma2])
+        session.commit()
+        Turma1.Alunos.append(Aluno1)
+        Turma1.Alunos.append(Aluno2)
+        Turma2.Alunos.append(Aluno1)
+        session.commit()
+        logger.info("informações de teste inseridas no banco de dados")
+        return "200OK"
+    except InternalError:
+        logger.error("Banco de dados (EdPermanente) desconhecido")
+        return "502ERROR"
+    

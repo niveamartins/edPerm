@@ -7,6 +7,7 @@
 #}
 #       }
 #}
+import json
 class RelatorioCPFNome():
     def __init__(self,alunos,Turmas):
         self.alunos = alunos
@@ -26,7 +27,7 @@ class RelatorioCPFNome():
                         "nome": aluno.nome,
                         "cpf": aluno.cpf
                     }
-        return Relatorio
+        return json.dumps(Relatorio, indent=4)
 
 
 class Turma():
