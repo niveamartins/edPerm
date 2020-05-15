@@ -1,5 +1,6 @@
 import sys
 
+from pprint import pprint
 from flask import Blueprint, request, jsonify, render_template, redirect, url_for, session, jsonify
 from sqlalchemy.exc import InternalError
 from database.db_create import Banco
@@ -374,7 +375,7 @@ def get_relatoriocontato():
     session = get_session()
     data = session.query(User).all()
     logger.debug(f'Query: {str(session.query(User))}')
-    data = [i.relatoriocontato() for i in data]
+    data = [relatoriocontato(i) for i in data]
     session.close()
     return jsonify(data)
 
@@ -400,8 +401,25 @@ def get_relatoriofrequencia():
 @blueprint.route('/relatorioatividades', methods = ['GET'])
 def get_relatorioatividades():
     session = get_session()
+    data = session.query(Turma).all()
+    JSON = [atividade_turma(i) for i in data]
+    for (i,j) in zip(data,JSON):
+        for k in i.Alunos:
+            j['cursistas'].update(atividade_aluno(k))
     session.close()
-    return jsonify()
+    return jsonify(JSON)
+
+#Concluintes: relatório de cursos finalizados para emissão de certificados pelo propositor.
+@blueprint.route('/relatorioconcluintes', methods = ['GET'])
+def get_concluintes():
+    session = get_session()
+    data = session.query(Turma).filter_by(IsConcluido=1).all()
+    JSON = [concluintes(i) for i in data]
+    for (i,j) in zip(data,JSON):
+        for k in i.Alunos:
+            j['cursistas'].update(atividade_aluno(k)) 
+    session.close()
+    return jsonify(JSON)
 
 @blueprint.route('/testdata', methods = ['GET'])
 def data():
@@ -414,8 +432,8 @@ def data():
         session.commit()
         Aluno1 = Aluno(alunoUser=User1)
         Aluno2 = Aluno(alunoUser=User3)
-        Turma1 = Turma(id_responsavel=User2.Id,nome_do_curso="calculo",carga_horaria_total=60,tolerancia=30,modalidade="n sei",turma_tag="tbm n sei")
-        Turma2 = Turma(id_responsavel=User2.Id,nome_do_curso="iot",carga_horaria_total=60,tolerancia=30,modalidade="n sei",turma_tag="tbm n sei")
+        Turma1 = Turma(id_responsavel=User2.Id,nome_do_curso="calculo",IsConcluido=0,carga_horaria_total=60,tolerancia=30,modalidade="n sei",turma_tag="tbm n sei")
+        Turma2 = Turma(id_responsavel=User2.Id,nome_do_curso="iot",IsConcluido=1,carga_horaria_total=60,tolerancia=30,modalidade="n sei",turma_tag="tbm n sei")
         session.add_all([Aluno1,Aluno2,Turma1,Turma2])
         session.commit()
         Turma1.Alunos.append(Aluno1)

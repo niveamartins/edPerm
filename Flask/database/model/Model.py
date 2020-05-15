@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Integer,Text, Enum, ForeignKey, Table, Time
+from sqlalchemy import Column, String, Integer,Text, Enum, ForeignKey, Table, Time, Boolean
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, backref
 from database.model.Base.Base import Base
@@ -30,21 +30,13 @@ class User(Base):
     tipo     = Column(Enum('adm','gestor','coordenador','propositor','cursista','apoiador'), nullable=False)
 
     #ONE TO ONE
-    UserComplemento = relationship('UserComplemento', uselist=False, backref="user")
+    UserComplemento = relationship('UserComplemento', uselist=False, backref="alunoApoiadorUser")
     Aluno = relationship('Aluno', uselist=False, backref='alunoUser')
     AlunoApoiador = relationship('AlunoApoiador', uselist=False, backref='alunoApoiador')
     
     
     #ONE TO MANY
     TurmaProposta = relationship('Turma', backref='propositor')
-
-    def relatoriocontato(self):
-        return {
-          "id": f'{self.Id}',
-          "nome": f'{self.usuario}',
-          "email":f'{self.email}', 
-          "telefone":f'{self.telefone}'
-        }
 
 class Aluno(Base):
     __tablename__ = 'aluno'
@@ -55,6 +47,7 @@ class Turma(Base):
     __tablename__ = 'turma'
     id_turma = Column(Integer,primary_key=True)
     id_responsavel = Column(Integer, ForeignKey('user.Id'), nullable=False)
+    IsConcluido = Column(Boolean, nullable=False)
     nome_do_curso = Column(String(30), nullable=False)
     carga_horaria_total = Column(Integer, nullable=False)
     tolerancia = Column(Integer, nullable=False)
@@ -93,3 +86,11 @@ class AlunoApoiador(Base):
     id_alunoApoiador = Column(Integer, primary_key=True)
     apoiador_id_turma = Column(Integer, ForeignKey('turma.id_turma'), nullable=False)
     apoiador_id_user = Column(Integer, ForeignKey('user.Id'), nullable=False, unique=True)
+
+
+class Presenca(Base):
+    __tablename__ = 'presenca'
+    id_presenca = Column(Integer, primary_key=True)
+    presenca_id_aluno = Column(Integer, ForeignKey('aluno.id_aluno'), nullable=False)
+    presenca_id_turma = Column(Integer, ForeignKey('turma.id_turma'), nullable=False)
+    presencaNaTurma = Column(Integer, nullable=False)
