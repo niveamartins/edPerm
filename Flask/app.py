@@ -1,6 +1,7 @@
 from utilities.loggers import *
 from flask import Flask
 from controller.endpoints import blueprint
+from flask_jwt import JWT
 
 app = Flask(__name__)
 
