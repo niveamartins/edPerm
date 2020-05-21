@@ -2,7 +2,7 @@ import sys
 
 from database.session import get_session
 from sqlalchemy.exc import InternalError
-from database.model.Model import *
+from database.model.Model import User
 from utilities.loggers import get_logger
 from werkzeug.security import generate_password_hash
 

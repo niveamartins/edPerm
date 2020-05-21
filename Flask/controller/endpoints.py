@@ -2,6 +2,8 @@ import sys
 
 from flask import Blueprint, request, jsonify, render_template, redirect, url_for, session, jsonify
 from sqlalchemy.exc import InternalError
+from flask_jwt_extended import (jwt_required, get_jwt_identity)
+
 from database.db_create import Banco
 from database.pessoas import Pessoa
 from database.session import get_session
@@ -9,7 +11,7 @@ from database.model.Model import *
 from utilities.montaJson import *
 from utilities.loggers import get_logger
 from services.CreateUserService import CreateUserService
-
+from services.AutheticateUserService import AutheticateUserService
 blueprint = Blueprint('endpoints', __name__)
 logger = get_logger(sys.argv[0])
 
@@ -25,55 +27,27 @@ def esqueci_():
 
 @blueprint.route("/logar", methods=['POST'])
 def logar():
+    if not request.is_json:
+        return jsonify({"msg": "Missing JSON in request"}), 400
 
-    usr = str(request.form["usuario"]).title()
-    senha = str(request.form["senha"])
+    usuario = request.json.get('usuario', None)
+    senha = request.json.get('senha', None)
+    if not usuario:
+        return jsonify({"msg": "Missing usuario parameter"}), 400
+    if not senha:
+        return jsonify({"msg": "Missing senha parameter"}), 400
+    authenticateUser = AutheticateUserService()
+    access_token = authenticateUser.execute(usuario, senha)
 
-    banco = Banco()
-    busca = banco.buscar_pessoa(usr, senha)
-    visitante = Pessoa()
-    if len(busca) > 0:
-        x = busca[0]
-        id = x[0]
-        usuario = x[1]
-        email = x[2]
-        adm = x[4]
-        gestor = x[5]
-        coordenador = x[6]
-        propositor = x[7]
-        cursista = x[8]
-        apoiador = x[9]
-        visitante.iniciar(id, usuario, senha, email, adm,
-                          gestor, coordenador, propositor, cursista, apoiador)
+    return jsonify(access_token=access_token), 200
 
-        busca2 = banco.buscarDadosComplementares(session['user_id'])
-        if len(busca2) > 0:
-            y = busca2[0]
-            tag = y[2]
-            profissao = y[3]
-            funcao = y[4]
-            superentendencia = y[5]
-            cap = y[6]
-            unidade = y[7]
-            session['tag'] = tag
-            session['profissao'] = profissao
-            session['profissao'] = funcao
-            session['superentendencia'] = superentendencia
-            session['cap'] = cap
-            session['unidade'] = unidade
 
-        session['logged_in'] = True
-        visitante.validar()
-    else:
-        session['logged_in'] = False
-
-    try:
-        if session['logged_in']:
-            return redirect('/listaturma')
-        else:
-            return render_template('login.html', erro_log=True)
-    except:
-        return "Concerte isso"
+@blueprint.route('/authTest', methods=['GET'])
+@jwt_required
+def protected():
+    # Access the identity of the current user with get_jwt_identity
+    current_user = get_jwt_identity()
+    return jsonify(logged_in_as=current_user), 200
 
 
 @blueprint.route("/sair")
