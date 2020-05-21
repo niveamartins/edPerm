@@ -26,6 +26,13 @@ def logar():
     usr = str(request.form["usuario"]).title()
     senha = str(request.form["senha"])
 
+
+#try
+#session = get_session()
+#busca = session.query(User).filter_by(usuario=usr)
+#if (busca.usuario == usr and busca.senha = senha)
+#alterar o resto
+
     banco = Banco()
     busca =  banco.buscar_pessoa(usr, senha)
     visitante = Pessoa()
@@ -85,6 +92,18 @@ def cadastrar():
     email = str(request.form["email"]).title()
     senha = str(request.form["senha"])
     
+
+#try
+#session = get_session()
+#busca = session.query(User).filter_by(usuario=variavel_turma_id_user)
+#if (busca.usuario == '')
+#cadastrar = User(usuario=variavel_turma_id_user, email= email ,senha= senha ,cpf= CpfDoUsuario,telefone=TelefoneDoUsuario,tipo= TipoDoUsuario)
+#session.add_all([cadastrar])
+#session.commit()
+#busca = session.query(User).filter_by(usuario=variavel_turma_id_user)
+#if (busca.usuario == variavel_turma_id_user)
+#alterar o resto
+
     banco = Banco()
     if (banco.buscar_pessoa(variavel_turma_id_user, senha) == []):
         cadastrado =  banco.cadastrar_pessoa(variavel_turma_id_user, senha, email)
@@ -112,7 +131,16 @@ def cadastrarDadosComplementares():
     superentendencia = str(request.form["superentendencia"]).title()
     cap = str(request.form["cap"]).title()
     unidade = str(request.form["unidade"])
-    
+
+#try
+#session = get_session()
+#busca = session.query(UserComplemento).filter_by(id_do_user=session['user_id'])
+#if (busca.tag == '')
+#cadastrar = UserComplemento(id_do_user=session['user_id'], tag= tag ,profissao= profissao ,funcao= funcao,superintendenciaDaSUBPAV=superentendencia,CAP= cap, unidadeBasicaDeSaude = unidade)
+#session.add_all([cadastrar])
+#session.commit()
+#alterar o resto
+
     banco = Banco()
     print(session['user_id'])
     if (banco.buscarDadosComplementares(session['user_id']) == []):
@@ -138,6 +166,7 @@ def cadastrarDadosComplementares():
 
 @blueprint.route("/cadastrardadospessoais", methods = ['POST'])
 def cadastrarDadosPessoais():
+#Vai morrer
     nome = str(request.form["nome"]).title()
     cpf = str(request.form["cpf"]).title()
     telefone = str(request.form["telefone"])
@@ -167,6 +196,16 @@ def cadastrarturma():
     variavelModalidade = str(request.form["modalidade"])
     variavelTag =  str(request.form["tag"])
     
+    
+#try
+#session = get_session()
+#busca = session.query(User).filter_by(usuario=variavelResponsavel)
+#if (busca.usuario != '')
+#cadastrar = Turma(id_responsavel=busca.Id, nome_do_curso= variavelNome ,carga_horaria_total= variavelCarga ,tolerancia= variavelTolerancia, modalidade=variavelModalidade, turma_tag= variavelTag)
+#session.add_all([cadastrar])
+#session.commit()
+#alterar o resto
+
     banco = Banco()
     if (banco.buscarProfessor(variavelResponsavel) != []):
         variavelResponsavel = banco.buscarProfessor(variavelResponsavel)
@@ -183,6 +222,29 @@ def cadastraralunonaturma():
     variavelAluno = str(request.form["aluno"])
     variavelTurma = str(request.form["codigo"])
     
+#session = get_session()
+#busca = session.query(User).filter_by(usuario='Matheus Feitosa')
+#busca = session.query(User).filter_by(usuario= usuario)
+#busca.email =
+#session.commit()
+
+#try
+#session = get_session()
+#busca1 = session.query(Turma).filter_by(nome_do_curso=variavelTurma)
+#if (busca1.nome_do_curso != '')
+#busca2 = session.query(User).filter_by(usuario=variavelAluno)
+#if (busca2.usuario != '')
+#busca3 = NAO SEI FAZER AINDA MAS TALVEZ FUNCIONE ASSIM
+#busca3 = session.query(axt).filter(
+#    axt.aluno_id.like(busca2.Id),
+#    axt.turma_id.like(busca1.id_turma)
+#    )
+#if (busca3.aluno_id == '')
+#cadastrar = Fazer isso
+#session.add_all([cadastrar])
+#session.commit()
+#alterar o resto
+
     banco = Banco()
     if (banco.buscarTurma(variavelTurma) != []):
             variavelTurma = banco.buscarTurma(variavelTurma)
@@ -204,6 +266,18 @@ def cadastraralunonaturma():
 
 @blueprint.route("/listaturma")
 def listarturma():
+
+#session = get_session()
+#busca = session.query(User).filter_by(usuario='Matheus Feitosa')
+#busca = session.query(User).filter_by(usuario= usuario)
+#busca.email =
+#session.commit()
+
+#try
+#session = get_session()
+#busca = session.query(Turma)
+#alterar o resto
+
     banco = Banco()
     return render_template('listaturma.html', eventos = banco.listarTurma())
 
@@ -427,4 +501,18 @@ def data():
     except InternalError:
         logger.error("Banco de dados (EdPermanente) desconhecido")
         return "502ERROR"
+
+#cadastrado =  banco.cadastrar_pessoa(NomeDoUsuario, SenhaDoUsuario, EmailDoUsuario)
+
+#cadastrar = User(usuario=NomeDoUsuario, email= SenhaDoUsuario ,senha= SenhaDoUsuario ,cpf= CpfDoUsuario,telefone=TelefoneDoUsuario,tipo= TipoDoUsuario)
+#session = get_session()
+#session.add_all([cadastrar])
+#session.commit()
+
+#busca = session.query(User).filter_by(usuario='Matheus Feitosa')
+#busca = session.query(User).filter_by(usuario= usuario)
+#busca.email =
+#session.commit()
+
+
     
