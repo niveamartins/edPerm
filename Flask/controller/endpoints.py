@@ -25,6 +25,7 @@ def esqueci_():
     return redirect('/esqueci_a_senha')
 
 
+# da acesso a rotas protegidas por @jwt_required
 @blueprint.route("/logar", methods=['POST'])
 def logar():
     if not request.is_json:
@@ -43,7 +44,7 @@ def logar():
 
 
 @blueprint.route('/authTest', methods=['GET'])
-@jwt_required
+@jwt_required  # unico requerimento para criar rotas protegidas é adicionar esse decorator
 def protected():
     # Access the identity of the current user with get_jwt_identity
     current_user = get_jwt_identity()
