@@ -387,7 +387,7 @@ def get_relatoriocpfnome():
     JSON = [Rcpfnome(i) for i in data]
     for (i, j) in zip(data, JSON):
         for z in i.Alunos:
-            j["alunos"].update(RcpfnomeAlunos(z))
+            j["alunos"].append(RcpfnomeAlunos(z))
     session.close()
     return jsonify(JSON)
 
@@ -405,7 +405,7 @@ def get_relatorioatividades():
     JSON = [atividade_turma(i) for i in data]
     for (i,j) in zip(data,JSON):
         for k in i.Alunos:
-            j['cursistas'].update(atividade_aluno(k))
+            j['cursistas'].append(atividade_aluno(k))
     session.close()
     return jsonify(JSON)
 
@@ -417,7 +417,7 @@ def get_concluintes():
     JSON = [concluintes(i) for i in data]
     for (i,j) in zip(data,JSON):
         for k in i.Alunos:
-            j['cursistas'].update(atividade_aluno(k)) 
+            j['cursistas'].append(atividade_aluno(k)) 
     session.close()
     return jsonify(JSON)
 

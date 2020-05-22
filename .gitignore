@@ -7,6 +7,9 @@
 #*.pdb
 #*.sqlite3
 
+### Logs ###
+*.log
+
 ### Flask ###
 instance/*
 !instance/.gitignore
