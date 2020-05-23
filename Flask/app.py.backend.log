@@ -40,3 +40,127 @@
 [2020-05-21 03:27:36,620 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
 [2020-05-21 03:27:38,159 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
 [2020-05-21 03:27:38,221 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-21 23:25:18,360 - Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-21 23:28:49,597 - Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-21 23:29:13,409 - Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-21 23:29:15,019 - Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-21 23:29:15,675 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-21 23:29:15,750 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-22 00:04:40,180 - Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-22 00:04:40,935 - Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-22 00:04:41,500 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-22 00:04:41,569 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-22 00:07:27,670 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: informações de teste inseridas no banco de dados
+[2020-05-22 00:07:27,670 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: informações de teste inseridas no banco de dados
+[2020-05-22 00:07:42,551 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: informações de teste inseridas no banco de dados
+[2020-05-22 00:07:42,551 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: informações de teste inseridas no banco de dados
+[2020-05-22 00:32:13,097 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-22 00:32:13,187 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:03:04,928 - Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:03:06,435 - Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:03:07,121 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:03:07,202 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:03:56,763 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: informações de teste inseridas no banco de dados
+[2020-05-23 02:03:56,763 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: informações de teste inseridas no banco de dados
+[2020-05-23 02:10:17,983 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:10:18,057 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:10:21,371 - Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:10:21,436 - Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:10:21,899 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:10:21,995 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:10:34,861 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:10:34,925 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:11:42,841 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:11:42,910 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:11:56,695 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:11:56,760 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:12:10,568 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:12:10,649 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:12:13,243 - Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:12:13,315 - Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:12:13,754 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:12:13,824 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:12:42,098 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:12:42,178 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:12:43,915 - Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:12:43,981 - Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:12:44,411 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:12:44,473 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:14:46,972 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:14:47,036 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:14:53,683 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:14:53,753 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:14:55,470 - Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:14:55,540 - Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:14:56,042 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:14:56,117 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:18:15,787 - Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:18:15,851 - Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:18:16,298 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:18:16,373 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:19:00,961 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:19:01,025 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:19:02,168 - Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:19:02,233 - Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:19:02,673 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:19:02,788 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:19:42,219 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:19:42,285 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:19:44,225 - Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:19:44,290 - Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:19:44,776 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:19:44,847 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:20:01,759 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:20:01,860 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:20:03,779 - Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:20:03,849 - Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:20:04,303 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:20:04,376 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:27:07,632 - Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:27:07,696 - Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:27:08,169 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:27:08,241 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:27:18,315 - Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:27:18,381 - Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:27:18,837 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:27:18,912 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:27:42,131 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:27:42,198 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:27:43,501 - Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:27:43,578 - Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:27:44,023 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:27:44,101 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:28:22,482 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:28:22,546 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:28:23,819 - Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:28:23,891 - Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:28:24,349 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:28:24,422 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:32:06,738 - Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:32:06,808 - Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:32:07,227 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:32:07,292 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:33:08,051 - Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:33:08,123 - Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:33:08,582 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:33:08,654 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:33:39,966 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:33:40,035 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:34:13,272 - Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:34:13,341 - Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:34:13,760 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:34:13,833 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:34:34,276 - Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:34:34,345 - Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:34:34,811 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:34:34,886 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:35:04,053 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:35:04,124 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:37:23,237 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:37:23,302 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:37:28,967 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:37:29,038 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:59:27,044 - Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:59:27,109 - Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-05-23 02:59:27,511 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-05-23 02:59:27,574 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões

@@ -24,60 +24,79 @@ def esqueci_():
 def logar():
     
     usr = str(request.form["usuario"]).title()
-    senha = str(request.form["senha"])
+    senha = str(request.form["senha"]).title()
 
+    try:
+        session = get_session()
+        busca = session.query(User).filter_by(usuario=usr).first()
+        if (busca != None):
+            if(busca.senha == senha):
+                return 'Logou'
+            else:
+                return 'Senha Incorreta'
+        else:
+            return 'Usuario Nao Existe'
+    except InternalError:
+        logger.error("Banco de dados (EdPermanente) desconhecido")
+        return "502ERROR"
+
+
+#Busca Usuario
+#aa = Busca.Aluno.Id_aluno
+#Busca2 Aluno -> aa
+#turmas = Busca2.Minhasturmas
 
 #try
 #session = get_session()
-#busca = session.query(User).filter_by(usuario=usr)
-#if (busca.usuario == usr and busca.senha = senha)
+#busca = session.query(User).filter_by(usuario=usr).one()
+#if (busca.usuario == usr and busca.senha == senha)
 #alterar o resto
 
-    banco = Banco()
-    busca =  banco.buscar_pessoa(usr, senha)
-    visitante = Pessoa()
-    if len(busca) > 0:    
-        x = busca[0]
-        id = x[0]
-        usuario = x[1]
-        email = x[2]
-        adm = x[4]
-        gestor = x[5]
-        coordenador = x[6]
-        propositor = x[7]
-        cursista = x[8]
-        apoiador = x[9]
-        visitante.iniciar(id, usuario, senha, email, adm, gestor, coordenador, propositor, cursista, apoiador)
+#    banco = Banco()
+#    busca =  banco.buscar_pessoa(usr, senha)
+#    visitante = Pessoa()
+#    if len(busca) > 0:    
+#        x = busca[0]
+#        id = x[0]
+#        usuario = x[1]
+#        email = x[2]
+#        adm = x[4]
+#        gestor = x[5]
+#        coordenador = x[6]
+#        propositor = x[7]
+#        cursista = x[8]
+#        apoiador = x[9]
+#        visitante.iniciar(id, usuario, senha, email, adm, gestor, coordenador, propositor, cursista, apoiador)
 
-        busca2 =  banco.buscarDadosComplementares(session['user_id'])
-        if len(busca2) > 0:
-            y = busca2[0]
-            tag = y[2]
-            profissao = y[3]
-            funcao = y[4]
-            superentendencia = y[5]
-            cap = y[6]
-            unidade = y[7]
-            session['tag'] = tag
-            session['profissao'] = profissao
-            session['profissao'] = funcao
-            session['superentendencia'] = superentendencia
-            session['cap'] = cap
-            session['unidade'] = unidade
+#        busca2 =  banco.buscarDadosComplementares(session['user_id'])
+#        if len(busca2) > 0:
+#            y = busca2[0]
+#            tag = y[2]
+#            profissao = y[3]
+#            funcao = y[4]
+#            superentendencia = y[5]
+#            cap = y[6]
+#           unidade = y[7]
+#           session['tag'] = tag
+#            session['profissao'] = profissao
+#            session['funcao'] = funcao
+#            session['superentendencia'] = superentendencia
+#            session['cap'] = cap
+#           session['unidade'] = unidade
 
 
-        session['logged_in'] = True
-        visitante.validar()
-    else:
-        session['logged_in'] = False
-    
-    try:
-        if session['logged_in']:
-            return redirect('/listaturma')
-        else:
-            return render_template('login.html', erro_log = True)
-    except:
-        return "Concerte isso"
+#        session['logged_in'] = True
+#       visitante.validar()
+#   else:
+#        session['logged_in'] = False
+#    
+#    try:
+#        if session['logged_in']:
+#            return redirect('/listaturma')
+#        else:
+#            return render_template('login.html', erro_log = True)
+#   except:
+#        return "Concerte isso"
 
 @blueprint.route("/sair")
 def sair():
@@ -88,40 +107,36 @@ def sair():
 
 @blueprint.route("/cadastrar", methods = ['POST'])
 def cadastrar():
-    variavel_turma_id_user = str(request.form["usuario"]).title()
-    email = str(request.form["email"]).title()
-    senha = str(request.form["senha"])
+    usuarioDoUser = str(request.form["usuario"]).title()
+    emailDoUser = str(request.form["email"]).title()
+    senhaDoUser = str(request.form["senha"]).title()
+    CpfDoUser = str(request.form["cpf"]).title()
+    TelefoneDoUser = str(request.form["telefone"]).title()
+    TipoDoUser = str(request.form["tipo"]).title()
     
 
-#try
-#session = get_session()
-#busca = session.query(User).filter_by(usuario=variavel_turma_id_user)
-#if (busca.usuario == '')
-#cadastrar = User(usuario=variavel_turma_id_user, email= email ,senha= senha ,cpf= CpfDoUsuario,telefone=TelefoneDoUsuario,tipo= TipoDoUsuario)
-#session.add_all([cadastrar])
-#session.commit()
-#busca = session.query(User).filter_by(usuario=variavel_turma_id_user)
-#if (busca.usuario == variavel_turma_id_user)
-#alterar o resto
+    try:
+        session = get_session()
+        busca = session.query(User).filter_by(usuario=usuarioDoUser).first()
+        if (busca == None):
+            cadastrar = User(usuario=usuarioDoUser, email= emailDoUser ,senha= senhaDoUser ,cpf= CpfDoUser,telefone=TelefoneDoUser,tipo= TipoDoUser)
+            session.add_all([cadastrar])
+            session.commit()
+            busca = session.query(User).filter_by(usuario=usuarioDoUser).first()
+            if (busca.usuario == usuarioDoUser):
+                return "funcionou"
+            return "nao cadastrou"
+        return "nao funfou"
+    except InternalError:
+        logger.error("Banco de dados (EdPermanente) desconhecido")
+        return "502ERROR"
 
-    banco = Banco()
-    if (banco.buscar_pessoa(variavel_turma_id_user, senha) == []):
-        cadastrado =  banco.cadastrar_pessoa(variavel_turma_id_user, senha, email)
-    else:
-        return 'usuário já existente'
-    if cadastrado:
-        busca =  banco.buscar_pessoa(variavel_turma_id_user, senha)
-        if len(busca) > 0:  
-            x = busca[0]  
-            id = x[0]
-            usuario = x[1]
-        print(id)
-        print(usuario)
-        qr = Gerador()
-        qr.gerarQrcode(id,usuario)
-        return redirect('/')
-    else:
-        return render_template('cadastro.html', erro_cad = True)
+
+#        qr = Gerador()
+#        qr.gerarQrcode(id,usuario)
+#        return redirect('/')
+#    else:
+#        return render_template('cadastro.html', erro_cad = True)
 
 @blueprint.route("/cadastrardadoscomplementares", methods = ['POST'])
 def cadastrarDadosComplementares():
@@ -205,6 +220,8 @@ def cadastrarturma():
 #session.add_all([cadastrar])
 #session.commit()
 #alterar o resto
+
+
 
     banco = Banco()
     if (banco.buscarProfessor(variavelResponsavel) != []):
@@ -501,6 +518,17 @@ def data():
     except InternalError:
         logger.error("Banco de dados (EdPermanente) desconhecido")
         return "502ERROR"
+
+
+#session = get_session()
+#busca = session.query(User).filter_by(usuario=variavel_turma_id_user)
+#if (busca.usuario == '')
+#cadastrar = User(usuario=variavel_turma_id_user, email= email ,senha= senha ,cpf= CpfDoUsuario,telefone=TelefoneDoUsuario,tipo= TipoDoUsuario)
+#session.add_all([cadastrar])
+#session.commit()
+#busca = session.query(User).filter_by(usuario=variavel_turma_id_user)
+#if (busca.usuario == variavel_turma_id_user)
+#alterar o resto
 
 #cadastrado =  banco.cadastrar_pessoa(NomeDoUsuario, SenhaDoUsuario, EmailDoUsuario)
 
