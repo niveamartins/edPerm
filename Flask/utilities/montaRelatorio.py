@@ -1,4 +1,27 @@
+from database.session import get_session 
 from database.model.Model import *
+
+
+def relatorioatividades(TipoDeFiltro,Valor):
+    session = get_session()
+    data = session.query(Turma).all()
+    JSON = [atividade_turma(i,TipoDeFiltro) for i in data]
+    for (i,j) in zip(data,JSON):
+        for k in i.Alunos:
+            aux = atividade_aluno(k)
+            print(i.nome_do_curso,aux[TipoDeFiltro],Valor)
+            if aux[TipoDeFiltro] != Valor:
+                continue
+            j['cursistas'].append(aux)
+        if j['cursistas'] == []:
+            index = JSON.index(j)
+            del JSON[index]
+    if JSON == []:
+        err = -1
+    else:
+        err = 0
+    session.close()
+    return JSON, err
 
 
 def relatoriocontato(User):
@@ -25,11 +48,12 @@ def RcpfnomeAlunos(Aluno):
                 "id_aluno":f'{Aluno.id_aluno}',
                 "nomeDoAluno":f'{Aluno.alunoUser.usuario}',
                 "cpfDoAluno":f'{Aluno.alunoUser.cpf}'
-            }
         }
+        
 
-def atividade_turma(Turma):
+def atividade_turma(Turma,tipoDeRelatorio):
     return {
+        'TipoDeRelatorio': f'{tipoDeRelatorio}',
         'id_turma': f'{Turma.id_turma}',
         'nome_do_curso':f'{Turma.nome_do_curso}',
         'id_responsavel':f'{Turma.id_responsavel}',
@@ -41,6 +65,11 @@ def atividade_turma(Turma):
 def atividade_aluno(Aluno):
     return {
             'id_aluno':f'{Aluno.id_aluno}',
+            'profissao':f'{Aluno.complementoUser.profissao}',
+            'funcao':f'{Aluno.complementoUser.funcao}',
+            'superintendenciadaSUBPAV':f'{Aluno.complementoUser.superintendenciaDaSUBPAV}',
+            'CAP':f'{Aluno.complementoUser.CAP}',
+            'unidade':f'{Aluno.complementoUser.unidadeBasicaDeSaude}',
             'id_user':f'{Aluno.alunoUser.Id}',
             'aluno_nome':f'{Aluno.alunoUser.usuario}'
         

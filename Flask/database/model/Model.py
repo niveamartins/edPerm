@@ -30,9 +30,9 @@ class User(Base):
     tipo     = Column(Enum('adm','gestor','coordenador','propositor','cursista','apoiador'), nullable=False)
 
     #ONE TO ONE
-    UserComplemento = relationship('UserComplemento', uselist=False, backref="alunoApoiadorUser")
+    
     Aluno = relationship('Aluno', uselist=False, backref='alunoUser')
-    AlunoApoiador = relationship('AlunoApoiador', uselist=False, backref='alunoApoiador')
+    AlunoApoiador = relationship('AlunoApoiador', uselist=False, backref='alunoApoiadorUser')
     
     
     #ONE TO MANY
@@ -42,6 +42,10 @@ class Aluno(Base):
     __tablename__ = 'aluno'
     id_aluno = Column(Integer,primary_key=True)
     alunos_id_user = Column(Integer, ForeignKey('user.Id'), nullable=False, unique=True)
+    alunos_id_complemento = Column(Integer, ForeignKey('userComplemento.id_complemento'), nullable=False, unique=True)
+
+    #ONE TO ONE
+    complementoUser = relationship('UserComplemento', uselist=False, backref="AlunocomplementoUser")
 
 class Turma(Base):
     __tablename__ = 'turma'
@@ -80,6 +84,8 @@ class UserComplemento(Base):
     superintendenciaDaSUBPAV = Column(String(30), nullable=False)
     CAP = Column(String(20), nullable=False)
     unidadeBasicaDeSaude = Column(String(30), nullable=False)
+
+    user = relationship('User', uselist=False, backref="complementoUser",foreign_keys=id_do_user)
 
 class AlunoApoiador(Base):
     __tablename__ = 'alunoApoiador'
