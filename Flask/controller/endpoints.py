@@ -6,7 +6,7 @@ from database.db_create import Banco
 from database.pessoas import Pessoa
 from database.session import get_session 
 from database.model.Model import *
-from utilities.montaJson import *
+from utilities.montaRelatorio import *
 from utilities.loggers import get_logger
 
 blueprint = Blueprint('endpoints',__name__)
@@ -368,16 +368,19 @@ def chamadapesquisar():
     else:
         return 'Turma não existe'
 
+### RELATORIOS ###
 
+#RELATORIO CONTATO
 @blueprint.route('/relatoriocontato', methods = ['GET'])
 def get_relatoriocontato(): 
     session = get_session()
     data = session.query(User).all()
     logger.debug(f'Query: {str(session.query(User))}')
-    data = [i.relatoriocontato() for i in data]
+    data = [relatoriocontato(i) for i in data]
     session.close()
     return jsonify(data)
 
+#RELATORIO CPF/NOME
 @blueprint.route('/relatoriocpfnome', methods = ['GET'])
 def get_relatoriocpfnome():
     session = get_session()
@@ -386,10 +389,11 @@ def get_relatoriocpfnome():
     JSON = [Rcpfnome(i) for i in data]
     for (i, j) in zip(data, JSON):
         for z in i.Alunos:
-            j["alunos"].update(RcpfnomeAlunos(z))
+            j["alunos"].append(RcpfnomeAlunos(z))
     session.close()
     return jsonify(JSON)
 
+#RELATORIO FREQUENCIA
 @blueprint.route('/relatoriofrequencia', methods = ['GET'])
 def get_relatoriofrequencia():
     session = get_session()
@@ -397,11 +401,63 @@ def get_relatoriofrequencia():
     session.close()
     return jsonify()
 
-@blueprint.route('/relatorioatividades', methods = ['GET'])
-def get_relatorioatividades():
+#RELATORIO PROFISSAO 
+@blueprint.route('/relatorioprofissao/<string:NomeDaProfissao>', methods = ['GET','POST'])
+def get_relatorioprofissao(NomeDaProfissao):
+    JSON, err = relatorioatividades('profissao',NomeDaProfissao)
+    if err == -1:
+        return "Sem dados para compor o relatório"
+    else:
+        return jsonify(JSON)
+
+#RELATORIO CAP
+@blueprint.route('/relatorioCAP/<string:NomeDoCAP>', methods = ['GET'])
+def get_relatorioCAP(NomeDoCAP):
+    JSON, err = relatorioatividades('CAP',NomeDoCAP)
+    if err == -1:
+        return "Sem dados para compor o relatório"
+    else:
+        return jsonify(JSON)
+
+#RELATORIO FUNÇÃO
+@blueprint.route('/relatoriofuncao/<string:NomeDaFuncao>', methods = ['GET'])
+def get_relatoriofuncao(NomeDaFuncao):
+    JSON, err = relatorioatividades('funcao',NomeDaFuncao)
+    if err == -1:
+        return "Sem dados para compor o relatório"
+    else:
+        return jsonify(JSON)
+
+#RELATORIO SUPERINTENDENCIA
+@blueprint.route('/relatoriosuperintendencia/<string:NomeDaSuperintendencia>', methods = ['GET'])
+def get_relatoriosuperentendencia(NomeDaSuperintendencia):
+    JSON, err = relatorioatividades("superintendencia",NomeDaSuperintendencia)
+    if err == -1:
+        return "Sem dados para compor o relatório"
+    else:
+        return jsonify(JSON)
+
+#RELATORIO UNIDADE
+@blueprint.route('/relatoriounidade/<string:NomeDaUnidade>', methods = ['GET'])
+def get_relatoriounidade(NomeDaUnidade):
+    JSON, err = relatorioatividades("unidade",NomeDaUnidade)
+    if err == -1:
+        return "Sem dados para compor o relatório"
+    else:
+        return jsonify(JSON)
+
+
+#Concluintes: relatório de cursos finalizados para emissão de certificados pelo propositor.
+@blueprint.route('/relatorioconcluintes', methods = ['GET'])
+def get_concluintes():
     session = get_session()
+    data = session.query(Turma).filter_by(IsConcluido=1).all()
+    JSON = [concluintes(i) for i in data]
+    for (i,j) in zip(data,JSON):
+        for k in i.Alunos:
+            j['cursistas'].append(atividade_aluno(k)) 
     session.close()
-    return jsonify()
+    return jsonify(JSON)
 
 @blueprint.route('/testdata', methods = ['GET'])
 def data():
@@ -412,11 +468,14 @@ def data():
         User3 = User(usuario="ddddd",email="dddd@exemplo.br",senha="ddddsenha",cpf="ddddddddcpf",telefone="287654tel",tipo="cursista")
         session.add_all([User1,User2,User3])
         session.commit()
-        Aluno1 = Aluno(alunoUser=User1)
-        Aluno2 = Aluno(alunoUser=User3)
-        Turma1 = Turma(id_responsavel=User2.Id,nome_do_curso="calculo",carga_horaria_total=60,tolerancia=30,modalidade="n sei",turma_tag="tbm n sei")
-        Turma2 = Turma(id_responsavel=User2.Id,nome_do_curso="iot",carga_horaria_total=60,tolerancia=30,modalidade="n sei",turma_tag="tbm n sei")
-        session.add_all([Aluno1,Aluno2,Turma1,Turma2])
+        Turma1 = Turma(id_responsavel=User2.Id,nome_do_curso="calculo",IsConcluido=0,carga_horaria_total=60,tolerancia=30,modalidade="n sei",turma_tag="tbm n sei")
+        Turma2 = Turma(id_responsavel=User2.Id,nome_do_curso="iot",IsConcluido=1,carga_horaria_total=60,tolerancia=30,modalidade="n sei",turma_tag="tbm n sei")
+        UserComplemento1 = UserComplemento(user=User1,tag="naosei1",profissao="coach",funcao="direcao",superintendenciaDaSUBPAV="ZAP",CAP="1.0",unidadeBasicaDeSaude="1")
+        UserComplemento2 = UserComplemento(user=User2,tag="naosei1",profissao="bundao",funcao="direcao",superintendenciaDaSUBPAV="SAP",CAP="1.0",unidadeBasicaDeSaude="1")
+        UserComplemento3 = UserComplemento(user=User3,tag="naosei1",profissao="coach",funcao="gerencia",superintendenciaDaSUBPAV="SAP",CAP="1.0",unidadeBasicaDeSaude="1")
+        Aluno1 = Aluno(alunoUser=User1, complementoUser=UserComplemento1)
+        Aluno2 = Aluno(alunoUser=User3, complementoUser=UserComplemento3)
+        session.add_all([Aluno1,Aluno2,UserComplemento1,UserComplemento2,UserComplemento3,Turma1,Turma2])
         session.commit()
         Turma1.Alunos.append(Aluno1)
         Turma1.Alunos.append(Aluno2)

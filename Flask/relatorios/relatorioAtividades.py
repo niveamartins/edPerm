@@ -1,26 +1,24 @@
 # Dado um determinado filtro, o relatorio de atividades vai conter:
-# 
-# Nome e contato do usuario
-# Turmas inseridas
-#   Nome, Horarios,ids
-#   Cargo na Turma (Aluno, professor, etc)
-# Cargo no sistema (adm, gestor, coordenador)
-#
-# TODO: fala com o matheus para ver se é possivel por um campo de concluido na tabela de turma
-#
-#   {
-#       -fulano_id:{
-#           -nome: fulano
-#           turmas:{
-#               turma_id:{
-#                   nomedaturma: calculo
-#                   horario: 3
-#                   cargonaTurma: professor
-#               }
+
+
+
+#{
+#    -turma_id:{
+#        nome_do_curso: "tal",
+#        IsRealizado: 0,
+#        id_do_Propositor:2142,
+#        nome_do_propositor:"candango"
+#        cargaHoraria:3,
+#        cursistas:{
+#            id_do_aluno:{
+#                nomeUsuario:"fulano",
+#                cpf:"32454325"
 #            }
-#            CargonoSistema: gestor  
-#       }
+#        }
+#    }
 #}
+
+
 
 
 # Seriam níveis e combinações de acesso sobre os cursos criados, realizados, os cursistas, carga horária, etc.
