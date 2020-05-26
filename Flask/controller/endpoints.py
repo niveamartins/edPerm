@@ -1,6 +1,5 @@
 import sys
 
-from pprint import pprint
 from flask import Blueprint, request, jsonify, render_template, redirect, url_for, session, jsonify
 from sqlalchemy.exc import InternalError
 from database.db_create import Banco
