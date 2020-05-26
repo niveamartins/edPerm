@@ -2,17 +2,21 @@ import sys
 
 from flask import Blueprint, request, jsonify, render_template, redirect, url_for, session, jsonify
 from sqlalchemy.exc import InternalError
+from flask_jwt_extended import (jwt_required, get_jwt_identity)
+
 from database.db_create import Banco
 from database.pessoas import Pessoa
-from database.session import get_session 
+from database.session import get_session
 from database.model.Model import *
 from utilities.montaRelatorio import *
 from utilities.loggers import get_logger
-
-blueprint = Blueprint('endpoints',__name__)
+from services.CreateUserService import CreateUserService
+from services.AutheticateUserService import AutheticateUserService
+blueprint = Blueprint('endpoints', __name__)
 logger = get_logger(sys.argv[0])
 
-@blueprint.route("/esqueci", methods = ['POST'])
+
+@blueprint.route("/esqueci", methods=['POST'])
 def esqueci_():
     email = request.form['email']
     banco = Banco()
@@ -20,83 +24,32 @@ def esqueci_():
     banco.recuperarSenha(email)
     return redirect('/esqueci_a_senha')
 
-@blueprint.route("/logar", methods = ['POST'])
+
+# da acesso a rotas protegidas por @jwt_required
+@blueprint.route("/logar", methods=['POST'])
 def logar():
-    
-    usr = str(request.form["usuario"]).title()
-    senha = str(request.form["senha"]).title()
+    if not request.is_json:
+        return jsonify({"msg": "Missing JSON in request"}), 400
 
-    try:
-        session = get_session()
-        busca = session.query(User).filter_by(usuario=usr).first()
-        if (busca != None):
-            if(busca.senha == senha):
-                return 'Logou'
-            else:
-                return 'Senha Incorreta'
-        else:
-            return 'Usuario Nao Existe'
-    except InternalError:
-        logger.error("Banco de dados (EdPermanente) desconhecido")
-        return "502ERROR"
+    usuario = request.json.get('usuario', None)
+    senha = request.json.get('senha', None)
+    if not usuario:
+        return jsonify({"msg": "Missing usuario parameter"}), 400
+    if not senha:
+        return jsonify({"msg": "Missing senha parameter"}), 400
+    authenticateUser = AutheticateUserService()
+    access_token = authenticateUser.execute(usuario, senha)
+
+    return jsonify(access_token=access_token), 200
 
 
-#Busca Usuario
-#aa = Busca.Aluno.Id_aluno
-#Busca2 Aluno -> aa
-#turmas = Busca2.Minhasturmas
+@blueprint.route('/authTest', methods=['GET'])
+@jwt_required  # unico requerimento para criar rotas protegidas é adicionar esse decorator
+def protected():
+    # Access the identity of the current user with get_jwt_identity
+    current_user = get_jwt_identity()
+    return jsonify(logged_in_as=current_user), 200
 
-#try
-#session = get_session()
-#busca = session.query(User).filter_by(usuario=usr).one()
-#if (busca.usuario == usr and busca.senha == senha)
-#alterar o resto
-
-#    banco = Banco()
-#    busca =  banco.buscar_pessoa(usr, senha)
-#    visitante = Pessoa()
-#    if len(busca) > 0:    
-#        x = busca[0]
-#        id = x[0]
-#        usuario = x[1]
-#        email = x[2]
-#        adm = x[4]
-#        gestor = x[5]
-#        coordenador = x[6]
-#        propositor = x[7]
-#        cursista = x[8]
-#        apoiador = x[9]
-#        visitante.iniciar(id, usuario, senha, email, adm, gestor, coordenador, propositor, cursista, apoiador)
-
-#        busca2 =  banco.buscarDadosComplementares(session['user_id'])
-#        if len(busca2) > 0:
-#            y = busca2[0]
-#            tag = y[2]
-#            profissao = y[3]
-#            funcao = y[4]
-#            superentendencia = y[5]
-#            cap = y[6]
-#           unidade = y[7]
-#           session['tag'] = tag
-#            session['profissao'] = profissao
-#            session['funcao'] = funcao
-#            session['superentendencia'] = superentendencia
-#            session['cap'] = cap
-#           session['unidade'] = unidade
-
-
-#        session['logged_in'] = True
-#       visitante.validar()
-#   else:
-#        session['logged_in'] = False
-#    
-#    try:
-#        if session['logged_in']:
-#            return redirect('/listaturma')
-#        else:
-#            return render_template('login.html', erro_log = True)
-#   except:
-#        return "Concerte isso"
 
 @blueprint.route("/sair")
 def sair():
@@ -105,40 +58,23 @@ def sair():
     session['user_id'] = ""
     return redirect('/')
 
-@blueprint.route("/cadastrar", methods = ['POST'])
+
+@blueprint.route("/cadastrar", methods=['POST'])
 def cadastrar():
-    usuarioDoUser = str(request.form["usuario"]).title()
-    emailDoUser = str(request.form["email"]).title()
-    senhaDoUser = str(request.form["senha"]).title()
-    CpfDoUser = str(request.form["cpf"]).title()
-    TelefoneDoUser = str(request.form["telefone"]).title()
-    TipoDoUser = str(request.form["tipo"]).title()
-    
+    userData = request.get_json()
+    userDataFields = ["usuario", "email", "senha", "cpf", "telefone", "tipo"]
 
-    try:
-        session = get_session()
-        busca = session.query(User).filter_by(usuario=usuarioDoUser).first()
-        if (busca == None):
-            cadastrar = User(usuario=usuarioDoUser, email= emailDoUser ,senha= senhaDoUser ,cpf= CpfDoUser,telefone=TelefoneDoUser,tipo= TipoDoUser)
-            session.add_all([cadastrar])
-            session.commit()
-            busca = session.query(User).filter_by(usuario=usuarioDoUser).first()
-            if (busca.usuario == usuarioDoUser):
-                return "funcionou"
-            return "nao cadastrou"
-        return "nao funfou"
-    except InternalError:
-        logger.error("Banco de dados (EdPermanente) desconhecido")
-        return "502ERROR"
+    if not all(field in userData for field in userDataFields):
+        return "Missing information", 400
+
+    createUser = CreateUserService()
+
+    user = createUser.execute(userData)
+
+    return jsonify(user)
 
 
-#        qr = Gerador()
-#        qr.gerarQrcode(id,usuario)
-#        return redirect('/')
-#    else:
-#        return render_template('cadastro.html', erro_cad = True)
-
-@blueprint.route("/cadastrardadoscomplementares", methods = ['POST'])
+@blueprint.route("/cadastrardadoscomplementares", methods=['POST'])
 def cadastrarDadosComplementares():
     tag = str(request.form["tag"]).title()
     profissao = str(request.form["profissao"]).title()
@@ -147,19 +83,11 @@ def cadastrarDadosComplementares():
     cap = str(request.form["cap"]).title()
     unidade = str(request.form["unidade"])
 
-#try
-#session = get_session()
-#busca = session.query(UserComplemento).filter_by(id_do_user=session['user_id'])
-#if (busca.tag == '')
-#cadastrar = UserComplemento(id_do_user=session['user_id'], tag= tag ,profissao= profissao ,funcao= funcao,superintendenciaDaSUBPAV=superentendencia,CAP= cap, unidadeBasicaDeSaude = unidade)
-#session.add_all([cadastrar])
-#session.commit()
-#alterar o resto
-
     banco = Banco()
     print(session['user_id'])
     if (banco.buscarDadosComplementares(session['user_id']) == []):
-        cadastrado =  banco.cadastrar_complemento(session['user_id'], tag, profissao, funcao, superentendencia, cap, unidade)
+        cadastrado = banco.cadastrar_complemento(
+            session['user_id'], tag, profissao, funcao, superentendencia, cap, unidade)
     else:
         banco.atualizarTag(session['user_id'], tag)
         banco.atualizarProfissao(session['user_id'], profissao)
@@ -177,19 +105,21 @@ def cadastrarDadosComplementares():
         session['unidade'] = unidade
         return redirect('/')
     else:
-        return render_template('cadastro.html', erro_cad = True)
+        return render_template('cadastro.html', erro_cad=True)
 
-@blueprint.route("/cadastrardadospessoais", methods = ['POST'])
+
+@blueprint.route("/cadastrardadospessoais", methods=['POST'])
 def cadastrarDadosPessoais():
 #Vai morrer
     nome = str(request.form["nome"]).title()
     cpf = str(request.form["cpf"]).title()
     telefone = str(request.form["telefone"])
-    
+
     banco = Banco()
 
     if (banco.buscarDadosPessoais(session['user_id']) == []):
-        cadastrado =  banco.cadastrar_dados_pessoais(session['user_id'], nome, cpf, telefone)
+        cadastrado = banco.cadastrar_dados_pessoais(
+            session['user_id'], nome, cpf, telefone)
     else:
         banco.atualizarNome(session['user_id'], tag)
         banco.atualizarCpf(session['user_id'], profissao)
@@ -198,87 +128,56 @@ def cadastrarDadosPessoais():
     if cadastrado:
         return redirect('/')
     else:
-        return render_template('cadastro.html', erro_cad = True)
+        return render_template('cadastro.html', erro_cad=True)
 
-@blueprint.route("/cadastrarturma", methods = ['POST'])
+
+@blueprint.route("/cadastrarturma", methods=['POST'])
 def cadastrarturma():
     variavelResponsavel = str(request.form["responsavel"])
     variavelNome = str(request.form["nome"])
-    variavelDia =  str(request.form["dia"])
+    variavelDia = str(request.form["dia"])
     variavelHora = str(request.form["hora"])
     variavelCarga = str(request.form["carga"])
-    variavelTolerancia =  str(request.form["tolerancia"])
+    variavelTolerancia = str(request.form["tolerancia"])
     variavelModalidade = str(request.form["modalidade"])
-    variavelTag =  str(request.form["tag"])
-    
-    
-#try
-#session = get_session()
-#busca = session.query(User).filter_by(usuario=variavelResponsavel)
-#if (busca.usuario != '')
-#cadastrar = Turma(id_responsavel=busca.Id, nome_do_curso= variavelNome ,carga_horaria_total= variavelCarga ,tolerancia= variavelTolerancia, modalidade=variavelModalidade, turma_tag= variavelTag)
-#session.add_all([cadastrar])
-#session.commit()
-#alterar o resto
-
-
+    variavelTag = str(request.form["tag"])
 
     banco = Banco()
     if (banco.buscarProfessor(variavelResponsavel) != []):
         variavelResponsavel = banco.buscarProfessor(variavelResponsavel)
-        cadastrado = banco.cadastrarTurma(variavelResponsavel[0], variavelNome, variavelDia, variavelHora, variavelCarga, variavelTolerancia, variavelModalidade, variavelTag)
+        cadastrado = banco.cadastrarTurma(
+            variavelResponsavel[0], variavelNome, variavelDia, variavelHora, variavelCarga, variavelTolerancia, variavelModalidade, variavelTag)
     else:
         return 'Responsavel não cadastrado'
     if cadastrado:
-        return render_template('CadastroTurma.html', erro_cad = False)
+        return render_template('CadastroTurma.html', erro_cad=False)
     else:
-        return render_template('CadastroTurma.html', erro_cad = True)
+        return render_template('CadastroTurma.html', erro_cad=True)
 
-@blueprint.route("/cadastraralunonaturma", methods = ['POST'])
+
+@blueprint.route("/cadastraralunonaturma", methods=['POST'])
 def cadastraralunonaturma():
     variavelAluno = str(request.form["aluno"])
     variavelTurma = str(request.form["codigo"])
-    
-#session = get_session()
-#busca = session.query(User).filter_by(usuario='Matheus Feitosa')
-#busca = session.query(User).filter_by(usuario= usuario)
-#busca.email =
-#session.commit()
-
-#try
-#session = get_session()
-#busca1 = session.query(Turma).filter_by(nome_do_curso=variavelTurma)
-#if (busca1.nome_do_curso != '')
-#busca2 = session.query(User).filter_by(usuario=variavelAluno)
-#if (busca2.usuario != '')
-#busca3 = NAO SEI FAZER AINDA MAS TALVEZ FUNCIONE ASSIM
-#busca3 = session.query(axt).filter(
-#    axt.aluno_id.like(busca2.Id),
-#    axt.turma_id.like(busca1.id_turma)
-#    )
-#if (busca3.aluno_id == '')
-#cadastrar = Fazer isso
-#session.add_all([cadastrar])
-#session.commit()
-#alterar o resto
 
     banco = Banco()
     if (banco.buscarTurma(variavelTurma) != []):
-            variavelTurma = banco.buscarTurma(variavelTurma)
-            if(banco.buscarAluno(variavelAluno) !=[]):
-                 variavelAluno = banco.buscarAluno(variavelAluno)
-                 if(banco.buscarAlunoPorUsuarioECodigo(str(request.form["aluno"]), str(request.form["codigo"])) == []):
-                     cadastrado = banco.cadastrarAlunos(variavelTurma[0], variavelAluno[0])
-                 else:
-                     return 'Aluno ja cadastrado na turma'
+        variavelTurma = banco.buscarTurma(variavelTurma)
+        if(banco.buscarAluno(variavelAluno) != []):
+            variavelAluno = banco.buscarAluno(variavelAluno)
+            if(banco.buscarAlunoPorUsuarioECodigo(str(request.form["aluno"]), str(request.form["codigo"])) == []):
+                cadastrado = banco.cadastrarAlunos(
+                    variavelTurma[0], variavelAluno[0])
             else:
-                return 'Aluno não existe'
+                return 'Aluno ja cadastrado na turma'
+        else:
+            return 'Aluno não existe'
     else:
         return 'Turma não existe'
     if cadastrado:
-        return render_template('cadastroalunonaturma.html', erro_cad = False)
+        return render_template('cadastroalunonaturma.html', erro_cad=False)
     else:
-        return render_template('cadastroalunonaturma.html', erro_cad = True)
+        return render_template('cadastroalunonaturma.html', erro_cad=True)
 
 
 @blueprint.route("/listaturma")
@@ -296,13 +195,15 @@ def listarturma():
 #alterar o resto
 
     banco = Banco()
-    return render_template('listaturma.html', eventos = banco.listarTurma())
+    return render_template('listaturma.html', eventos=banco.listarTurma())
+
 
 @blueprint.route('/listaturma/<string:codigo_turma>')
 def turma(codigo_turma):
     session['nome_da_turma'] = codigo_turma
     banco = Banco()
-    soualuno = banco.buscarAlunoPorUsuarioECodigo(session['user'], session['nome_da_turma'])
+    soualuno = banco.buscarAlunoPorUsuarioECodigo(
+        session['user'], session['nome_da_turma'])
     if(soualuno != []):
         session['inscrito'] = True
     else:
@@ -311,105 +212,118 @@ def turma(codigo_turma):
     variavel = eventos[0][0]
     alunodaturma = banco.listarAlunos(variavel)
     evento = banco.buscarTurmaComProfessor(codigo_turma)
-    return render_template('listaralunosdaturma.html', eventos = evento, alunosdaturma = alunodaturma )
+    return render_template('listaralunosdaturma.html', eventos=evento, alunosdaturma=alunodaturma)
 
-@blueprint.route("/atualizarpresenca", methods = ['POST'])
+
+@blueprint.route("/atualizarpresenca", methods=['POST'])
 def atualizarpresenca():
     variavelAluno = str(request.form["alunopre"])
-    
+
     banco = Banco()
 
     if (banco.buscarTurma(session['nome_da_turma']) != []):
-            if(banco.buscarApoiadorPorUsuarioECodigo(session['user'], session['nome_da_turma']) != []):
-                if(banco.buscarAulaPorTurmaENome(session['nome_da_turma'], session['aula']) != []):
-                    if(banco.buscarAlunoPorUsuarioECodigo(variavelAluno, session['nome_da_turma']) != []):
-                        if(banco.buscarPresencaPorUsuarioEAula(variavelAluno, session['aula']) == []):
-                            variavelAluno = banco.buscarAlunoPorUsuarioECodigo(variavelAluno, session['nome_da_turma'])
-                            variavelUsuario = banco.buscarAluno(str(request.form["alunopre"]))
-                            variavelAula = banco.buscarAulaPorTurmaENome(session['nome_da_turma'], session['aula'])
-                            inicio = int(variavelAula[0][2])
-                            fim = int(variavelAula[0][3])
-                            horarioDaPresenca = banco.retornaHorarioNow()
-                            horarioDaPresenca = int(horarioDaPresenca[0][0])
-                            cadastrado = banco.cadastrarPresenca(variavelUsuario[0], variavelAula[0], horarioDaPresenca)
-                            if cadastrado:
-                                if(horarioDaPresenca<inicio):
-                                    presenca = int(variavelAluno[0][3]) + fim - inicio
+        if(banco.buscarApoiadorPorUsuarioECodigo(session['user'], session['nome_da_turma']) != []):
+            if(banco.buscarAulaPorTurmaENome(session['nome_da_turma'], session['aula']) != []):
+                if(banco.buscarAlunoPorUsuarioECodigo(variavelAluno, session['nome_da_turma']) != []):
+                    if(banco.buscarPresencaPorUsuarioEAula(variavelAluno, session['aula']) == []):
+                        variavelAluno = banco.buscarAlunoPorUsuarioECodigo(
+                            variavelAluno, session['nome_da_turma'])
+                        variavelUsuario = banco.buscarAluno(
+                            str(request.form["alunopre"]))
+                        variavelAula = banco.buscarAulaPorTurmaENome(
+                            session['nome_da_turma'], session['aula'])
+                        inicio = int(variavelAula[0][2])
+                        fim = int(variavelAula[0][3])
+                        horarioDaPresenca = banco.retornaHorarioNow()
+                        horarioDaPresenca = int(horarioDaPresenca[0][0])
+                        cadastrado = banco.cadastrarPresenca(
+                            variavelUsuario[0], variavelAula[0], horarioDaPresenca)
+                        if cadastrado:
+                            if(horarioDaPresenca < inicio):
+                                presenca = int(
+                                    variavelAluno[0][3]) + fim - inicio
+                            else:
+                                if(horarioDaPresenca > fim):
+                                    presenca = int(variavelAluno[0][3])
                                 else:
-                                    if(horarioDaPresenca>fim):
-                                        presenca = int(variavelAluno[0][3])
-                                    else:
-                                        presenca = int(variavelAluno[0][3]) + fim - horarioDaPresenca
-                                cadastrado = banco.atualizarAlunos(variavelAluno[0][0], presenca)
-                        else:
-                            return 'Aluno já possui presença nessa aula'
+                                    presenca = int(
+                                        variavelAluno[0][3]) + fim - horarioDaPresenca
+                            cadastrado = banco.atualizarAlunos(
+                                variavelAluno[0][0], presenca)
                     else:
-                        return 'Aluno não existe'
+                        return 'Aluno já possui presença nessa aula'
                 else:
-                    return 'Aula não existe'
+                    return 'Aluno não existe'
             else:
-                return 'Você não é apoiador dessa turma'
+                return 'Aula não existe'
+        else:
+            return 'Você não é apoiador dessa turma'
     else:
         return 'Turma não existe'
 
     if cadastrado:
-        return render_template('atualizarpresencaaluno.html', erro_cad = False)
+        return render_template('atualizarpresencaaluno.html', erro_cad=False)
     else:
         banco.apagarPresenca(variavelUsuario[0], variavelAula[0])
-        return render_template('atualizarpresencaaluno.html', erro_cad = True)
+        return render_template('atualizarpresencaaluno.html', erro_cad=True)
 
-@blueprint.route("/cadastraraluno", methods = ['POST'])
+
+@blueprint.route("/cadastraraluno", methods=['POST'])
 def cadastraraluno():
     variavelAluno = session['user']
     variavelTurma = session['nome_da_turma']
-    
+
     banco = Banco()
     if (banco.buscarTurma(variavelTurma) != []):
-            variavelTurma = banco.buscarTurma(variavelTurma)
-            if(banco.buscarAluno(variavelAluno) !=[]):
-                 variavelAluno = banco.buscarAluno(variavelAluno)
-                 if(banco.buscarAlunoPorUsuarioECodigo(session['user'], session['nome_da_turma']) == []):
-                     cadastrado = banco.cadastrarAlunos(variavelTurma[0], variavelAluno[0])
-                 else:
-                     session['nome_da_turma'] = ''
-                     return 'Aluno ja cadastrado na turma'
+        variavelTurma = banco.buscarTurma(variavelTurma)
+        if(banco.buscarAluno(variavelAluno) != []):
+            variavelAluno = banco.buscarAluno(variavelAluno)
+            if(banco.buscarAlunoPorUsuarioECodigo(session['user'], session['nome_da_turma']) == []):
+                cadastrado = banco.cadastrarAlunos(
+                    variavelTurma[0], variavelAluno[0])
             else:
                 session['nome_da_turma'] = ''
-                return 'Aluno não existe'
+                return 'Aluno ja cadastrado na turma'
+        else:
+            session['nome_da_turma'] = ''
+            return 'Aluno não existe'
     else:
         session['nome_da_turma'] = ''
         return 'Turma não existe'
     if cadastrado:
         session['nome_da_turma'] = ''
-        return render_template('inicio.html', erro_cad = False)
+        return render_template('inicio.html', erro_cad=False)
     else:
         session['nome_da_turma'] = ''
-        return render_template('inicio.html', erro_cad = True)
+        return render_template('inicio.html', erro_cad=True)
 
-@blueprint.route("/cadastrarapoiador", methods = ['POST'])
+
+@blueprint.route("/cadastrarapoiador", methods=['POST'])
 def cadastrarapoiador():
     variavelAluno = str(request.form["aluno"])
     variavelTurma = str(request.form["turma"])
-    
+
     banco = Banco()
     if (banco.buscarTurma(variavelTurma) != []):
-            variavelTurma = banco.buscarTurma(variavelTurma)
-            if(banco.buscarAluno(variavelAluno) !=[]):
-                 variavelAluno = banco.buscarAluno(variavelAluno)
-                 if(banco.buscarApoiadorPorUsuarioECodigo(str(request.form["aluno"]), str(request.form["turma"])) == []):
-                     cadastrado = banco.cadastrarAlunoApoiador(variavelTurma[0], variavelAluno[0])
-                 else:
-                     return 'Aluno ja cadastrado como apoiador da turma'
+        variavelTurma = banco.buscarTurma(variavelTurma)
+        if(banco.buscarAluno(variavelAluno) != []):
+            variavelAluno = banco.buscarAluno(variavelAluno)
+            if(banco.buscarApoiadorPorUsuarioECodigo(str(request.form["aluno"]), str(request.form["turma"])) == []):
+                cadastrado = banco.cadastrarAlunoApoiador(
+                    variavelTurma[0], variavelAluno[0])
             else:
-                return 'Aluno não existe'
+                return 'Aluno ja cadastrado como apoiador da turma'
+        else:
+            return 'Aluno não existe'
     else:
         return 'Turma não existe'
     if cadastrado:
-        return render_template('cadastroapoiador.html', erro_cad = False)
+        return render_template('cadastroapoiador.html', erro_cad=False)
     else:
-        return render_template('cadastroapoiador.html', erro_cad = True)
+        return render_template('cadastroapoiador.html', erro_cad=True)
 
-@blueprint.route("/cadastraraula", methods = ['POST'])
+
+@blueprint.route("/cadastraraula", methods=['POST'])
 def cadastraraula():
     banco = Banco()
     variavelturma = str(request.form["turma"])
@@ -428,42 +342,44 @@ def cadastraraula():
         return 'Horario invalido'
 
     if (banco.buscarTurma(variavelturma) != []):
-            variavelTurma = banco.buscarTurma(variavelturma)
-            if(banco.buscarAulaPorTurmaENome(variavelturma, variavelaula) ==[]):
-                 cadastrado = banco.cadastrarAula(variavelTurma[0], teste1, teste2, variavelaula)
-            else:
-                return 'Aula Ja cadastrada'
+        variavelTurma = banco.buscarTurma(variavelturma)
+        if(banco.buscarAulaPorTurmaENome(variavelturma, variavelaula) == []):
+            cadastrado = banco.cadastrarAula(
+                variavelTurma[0], teste1, teste2, variavelaula)
+        else:
+            return 'Aula Ja cadastrada'
     else:
         return 'Turma não existe'
     if cadastrado:
-        return render_template('cadastroapoiador.html', erro_cad = False)
+        return render_template('cadastroapoiador.html', erro_cad=False)
     else:
-        return render_template('cadastroapoiador.html', erro_cad = True)
+        return render_template('cadastroapoiador.html', erro_cad=True)
 
-@blueprint.route("/chamadapesquisar", methods = ['POST'])
+
+@blueprint.route("/chamadapesquisar", methods=['POST'])
 def chamadapesquisar():
     variavelTurma = str(request.form["turma"])
     variavelAula = str(request.form["aula"])
-    
+
     banco = Banco()
     if (banco.buscarTurma(variavelTurma) != []):
-            if(banco.buscarApoiadorPorUsuarioECodigo(session['user'], variavelTurma) != []):
-                if(banco.buscarAulaPorTurmaENome(variavelTurma, variavelAula) != []):
-                     session['aula'] = variavelAula
-                     session['nome_da_turma'] = variavelTurma
-                     return render_template('atualizarpresencaaluno.html', erro_cad = False)
-                else:
-                    return 'Aula não existe'
+        if(banco.buscarApoiadorPorUsuarioECodigo(session['user'], variavelTurma) != []):
+            if(banco.buscarAulaPorTurmaENome(variavelTurma, variavelAula) != []):
+                session['aula'] = variavelAula
+                session['nome_da_turma'] = variavelTurma
+                return render_template('atualizarpresencaaluno.html', erro_cad=False)
             else:
-                return 'Você não é apoiador dessa turma'
+                return 'Aula não existe'
+        else:
+            return 'Você não é apoiador dessa turma'
     else:
         return 'Turma não existe'
 
 ### RELATORIOS ###
 
 #RELATORIO CONTATO
-@blueprint.route('/relatoriocontato', methods = ['GET'])
-def get_relatoriocontato(): 
+@blueprint.route('/relatoriocontato', methods=['GET'])
+def get_relatoriocontato():
     session = get_session()
     data = session.query(User).all()
     logger.debug(f'Query: {str(session.query(User))}')
@@ -488,7 +404,7 @@ def get_relatoriocpfnome():
 @blueprint.route('/relatoriofrequencia', methods = ['GET'])
 def get_relatoriofrequencia():
     session = get_session()
-    
+
     session.close()
     return jsonify()
 
@@ -550,14 +466,18 @@ def get_concluintes():
     session.close()
     return jsonify(JSON)
 
-@blueprint.route('/testdata', methods = ['GET'])
+
+@blueprint.route('/testdata', methods=['GET'])
 def data():
     try:
         session = get_session()
-        User1 = User(usuario="aaaaa",email="aaaa@exemplo.br",senha="aaaasenha",cpf="aaaaaaaacpf",telefone="987654tel",tipo="cursista")
-        User2 = User(usuario="bbbbb",email="bbbb@exemplo.br",senha="bbbbsenha",cpf="bbbbbbbbcpf",telefone="187654tel",tipo="propositor")
-        User3 = User(usuario="ddddd",email="dddd@exemplo.br",senha="ddddsenha",cpf="ddddddddcpf",telefone="287654tel",tipo="cursista")
-        session.add_all([User1,User2,User3])
+        User1 = User(usuario="aaaaa", email="aaaa@exemplo.br", senha="aaaasenha",
+                     cpf="aaaaaaaacpf", telefone="987654tel", tipo="cursista")
+        User2 = User(usuario="bbbbb", email="bbbb@exemplo.br", senha="bbbbsenha",
+                     cpf="bbbbbbbbcpf", telefone="187654tel", tipo="propositor")
+        User3 = User(usuario="ddddd", email="dddd@exemplo.br", senha="ddddsenha",
+                     cpf="ddddddddcpf", telefone="287654tel", tipo="cursista")
+        session.add_all([User1, User2, User3])
         session.commit()
         Turma1 = Turma(id_responsavel=User2.Id,nome_do_curso="calculo",IsConcluido=0,carga_horaria_total=60,tolerancia=30,modalidade="n sei",turma_tag="tbm n sei")
         Turma2 = Turma(id_responsavel=User2.Id,nome_do_curso="iot",IsConcluido=1,carga_horaria_total=60,tolerancia=30,modalidade="n sei",turma_tag="tbm n sei")
@@ -577,29 +497,3 @@ def data():
     except InternalError:
         logger.error("Banco de dados (EdPermanente) desconhecido")
         return "502ERROR"
-
-
-#session = get_session()
-#busca = session.query(User).filter_by(usuario=variavel_turma_id_user)
-#if (busca.usuario == '')
-#cadastrar = User(usuario=variavel_turma_id_user, email= email ,senha= senha ,cpf= CpfDoUsuario,telefone=TelefoneDoUsuario,tipo= TipoDoUsuario)
-#session.add_all([cadastrar])
-#session.commit()
-#busca = session.query(User).filter_by(usuario=variavel_turma_id_user)
-#if (busca.usuario == variavel_turma_id_user)
-#alterar o resto
-
-#cadastrado =  banco.cadastrar_pessoa(NomeDoUsuario, SenhaDoUsuario, EmailDoUsuario)
-
-#cadastrar = User(usuario=NomeDoUsuario, email= SenhaDoUsuario ,senha= SenhaDoUsuario ,cpf= CpfDoUsuario,telefone=TelefoneDoUsuario,tipo= TipoDoUsuario)
-#session = get_session()
-#session.add_all([cadastrar])
-#session.commit()
-
-#busca = session.query(User).filter_by(usuario='Matheus Feitosa')
-#busca = session.query(User).filter_by(usuario= usuario)
-#busca.email =
-#session.commit()
-
-
-    
