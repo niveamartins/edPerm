@@ -24,53 +24,79 @@ def esqueci_():
 def logar():
     
     usr = str(request.form["usuario"]).title()
-    senha = str(request.form["senha"])
+    senha = str(request.form["senha"]).title()
 
-    banco = Banco()
-    busca =  banco.buscar_pessoa(usr, senha)
-    visitante = Pessoa()
-    if len(busca) > 0:    
-        x = busca[0]
-        id = x[0]
-        usuario = x[1]
-        email = x[2]
-        adm = x[4]
-        gestor = x[5]
-        coordenador = x[6]
-        propositor = x[7]
-        cursista = x[8]
-        apoiador = x[9]
-        visitante.iniciar(id, usuario, senha, email, adm, gestor, coordenador, propositor, cursista, apoiador)
-
-        busca2 =  banco.buscarDadosComplementares(session['user_id'])
-        if len(busca2) > 0:
-            y = busca2[0]
-            tag = y[2]
-            profissao = y[3]
-            funcao = y[4]
-            superentendencia = y[5]
-            cap = y[6]
-            unidade = y[7]
-            session['tag'] = tag
-            session['profissao'] = profissao
-            session['profissao'] = funcao
-            session['superentendencia'] = superentendencia
-            session['cap'] = cap
-            session['unidade'] = unidade
-
-
-        session['logged_in'] = True
-        visitante.validar()
-    else:
-        session['logged_in'] = False
-    
     try:
-        if session['logged_in']:
-            return redirect('/listaturma')
+        session = get_session()
+        busca = session.query(User).filter_by(usuario=usr).first()
+        if (busca != None):
+            if(busca.senha == senha):
+                return 'Logou'
+            else:
+                return 'Senha Incorreta'
         else:
-            return render_template('login.html', erro_log = True)
-    except:
-        return "Concerte isso"
+            return 'Usuario Nao Existe'
+    except InternalError:
+        logger.error("Banco de dados (EdPermanente) desconhecido")
+        return "502ERROR"
+
+
+#Busca Usuario
+#aa = Busca.Aluno.Id_aluno
+#Busca2 Aluno -> aa
+#turmas = Busca2.Minhasturmas
+
+#try
+#session = get_session()
+#busca = session.query(User).filter_by(usuario=usr).one()
+#if (busca.usuario == usr and busca.senha == senha)
+#alterar o resto
+
+#    banco = Banco()
+#    busca =  banco.buscar_pessoa(usr, senha)
+#    visitante = Pessoa()
+#    if len(busca) > 0:    
+#        x = busca[0]
+#        id = x[0]
+#        usuario = x[1]
+#        email = x[2]
+#        adm = x[4]
+#        gestor = x[5]
+#        coordenador = x[6]
+#        propositor = x[7]
+#        cursista = x[8]
+#        apoiador = x[9]
+#        visitante.iniciar(id, usuario, senha, email, adm, gestor, coordenador, propositor, cursista, apoiador)
+
+#        busca2 =  banco.buscarDadosComplementares(session['user_id'])
+#        if len(busca2) > 0:
+#            y = busca2[0]
+#            tag = y[2]
+#            profissao = y[3]
+#            funcao = y[4]
+#            superentendencia = y[5]
+#            cap = y[6]
+#           unidade = y[7]
+#           session['tag'] = tag
+#            session['profissao'] = profissao
+#            session['funcao'] = funcao
+#            session['superentendencia'] = superentendencia
+#            session['cap'] = cap
+#           session['unidade'] = unidade
+
+
+#        session['logged_in'] = True
+#       visitante.validar()
+#   else:
+#        session['logged_in'] = False
+#    
+#    try:
+#        if session['logged_in']:
+#            return redirect('/listaturma')
+#        else:
+#            return render_template('login.html', erro_log = True)
+#   except:
+#        return "Concerte isso"
 
 @blueprint.route("/sair")
 def sair():
@@ -81,28 +107,36 @@ def sair():
 
 @blueprint.route("/cadastrar", methods = ['POST'])
 def cadastrar():
-    variavel_turma_id_user = str(request.form["usuario"]).title()
-    email = str(request.form["email"]).title()
-    senha = str(request.form["senha"])
+    usuarioDoUser = str(request.form["usuario"]).title()
+    emailDoUser = str(request.form["email"]).title()
+    senhaDoUser = str(request.form["senha"]).title()
+    CpfDoUser = str(request.form["cpf"]).title()
+    TelefoneDoUser = str(request.form["telefone"]).title()
+    TipoDoUser = str(request.form["tipo"]).title()
     
-    banco = Banco()
-    if (banco.buscar_pessoa(variavel_turma_id_user, senha) == []):
-        cadastrado =  banco.cadastrar_pessoa(variavel_turma_id_user, senha, email)
-    else:
-        return 'usuário já existente'
-    if cadastrado:
-        busca =  banco.buscar_pessoa(variavel_turma_id_user, senha)
-        if len(busca) > 0:  
-            x = busca[0]  
-            id = x[0]
-            usuario = x[1]
-        print(id)
-        print(usuario)
-        qr = Gerador()
-        qr.gerarQrcode(id,usuario)
-        return redirect('/')
-    else:
-        return render_template('cadastro.html', erro_cad = True)
+
+    try:
+        session = get_session()
+        busca = session.query(User).filter_by(usuario=usuarioDoUser).first()
+        if (busca == None):
+            cadastrar = User(usuario=usuarioDoUser, email= emailDoUser ,senha= senhaDoUser ,cpf= CpfDoUser,telefone=TelefoneDoUser,tipo= TipoDoUser)
+            session.add_all([cadastrar])
+            session.commit()
+            busca = session.query(User).filter_by(usuario=usuarioDoUser).first()
+            if (busca.usuario == usuarioDoUser):
+                return "funcionou"
+            return "nao cadastrou"
+        return "nao funfou"
+    except InternalError:
+        logger.error("Banco de dados (EdPermanente) desconhecido")
+        return "502ERROR"
+
+
+#        qr = Gerador()
+#        qr.gerarQrcode(id,usuario)
+#        return redirect('/')
+#    else:
+#        return render_template('cadastro.html', erro_cad = True)
 
 @blueprint.route("/cadastrardadoscomplementares", methods = ['POST'])
 def cadastrarDadosComplementares():
@@ -112,7 +146,16 @@ def cadastrarDadosComplementares():
     superentendencia = str(request.form["superentendencia"]).title()
     cap = str(request.form["cap"]).title()
     unidade = str(request.form["unidade"])
-    
+
+#try
+#session = get_session()
+#busca = session.query(UserComplemento).filter_by(id_do_user=session['user_id'])
+#if (busca.tag == '')
+#cadastrar = UserComplemento(id_do_user=session['user_id'], tag= tag ,profissao= profissao ,funcao= funcao,superintendenciaDaSUBPAV=superentendencia,CAP= cap, unidadeBasicaDeSaude = unidade)
+#session.add_all([cadastrar])
+#session.commit()
+#alterar o resto
+
     banco = Banco()
     print(session['user_id'])
     if (banco.buscarDadosComplementares(session['user_id']) == []):
@@ -138,6 +181,7 @@ def cadastrarDadosComplementares():
 
 @blueprint.route("/cadastrardadospessoais", methods = ['POST'])
 def cadastrarDadosPessoais():
+#Vai morrer
     nome = str(request.form["nome"]).title()
     cpf = str(request.form["cpf"]).title()
     telefone = str(request.form["telefone"])
@@ -167,6 +211,18 @@ def cadastrarturma():
     variavelModalidade = str(request.form["modalidade"])
     variavelTag =  str(request.form["tag"])
     
+    
+#try
+#session = get_session()
+#busca = session.query(User).filter_by(usuario=variavelResponsavel)
+#if (busca.usuario != '')
+#cadastrar = Turma(id_responsavel=busca.Id, nome_do_curso= variavelNome ,carga_horaria_total= variavelCarga ,tolerancia= variavelTolerancia, modalidade=variavelModalidade, turma_tag= variavelTag)
+#session.add_all([cadastrar])
+#session.commit()
+#alterar o resto
+
+
+
     banco = Banco()
     if (banco.buscarProfessor(variavelResponsavel) != []):
         variavelResponsavel = banco.buscarProfessor(variavelResponsavel)
@@ -183,6 +239,29 @@ def cadastraralunonaturma():
     variavelAluno = str(request.form["aluno"])
     variavelTurma = str(request.form["codigo"])
     
+#session = get_session()
+#busca = session.query(User).filter_by(usuario='Matheus Feitosa')
+#busca = session.query(User).filter_by(usuario= usuario)
+#busca.email =
+#session.commit()
+
+#try
+#session = get_session()
+#busca1 = session.query(Turma).filter_by(nome_do_curso=variavelTurma)
+#if (busca1.nome_do_curso != '')
+#busca2 = session.query(User).filter_by(usuario=variavelAluno)
+#if (busca2.usuario != '')
+#busca3 = NAO SEI FAZER AINDA MAS TALVEZ FUNCIONE ASSIM
+#busca3 = session.query(axt).filter(
+#    axt.aluno_id.like(busca2.Id),
+#    axt.turma_id.like(busca1.id_turma)
+#    )
+#if (busca3.aluno_id == '')
+#cadastrar = Fazer isso
+#session.add_all([cadastrar])
+#session.commit()
+#alterar o resto
+
     banco = Banco()
     if (banco.buscarTurma(variavelTurma) != []):
             variavelTurma = banco.buscarTurma(variavelTurma)
@@ -204,6 +283,18 @@ def cadastraralunonaturma():
 
 @blueprint.route("/listaturma")
 def listarturma():
+
+#session = get_session()
+#busca = session.query(User).filter_by(usuario='Matheus Feitosa')
+#busca = session.query(User).filter_by(usuario= usuario)
+#busca.email =
+#session.commit()
+
+#try
+#session = get_session()
+#busca = session.query(Turma)
+#alterar o resto
+
     banco = Banco()
     return render_template('listaturma.html', eventos = banco.listarTurma())
 
@@ -486,4 +577,29 @@ def data():
     except InternalError:
         logger.error("Banco de dados (EdPermanente) desconhecido")
         return "502ERROR"
+
+
+#session = get_session()
+#busca = session.query(User).filter_by(usuario=variavel_turma_id_user)
+#if (busca.usuario == '')
+#cadastrar = User(usuario=variavel_turma_id_user, email= email ,senha= senha ,cpf= CpfDoUsuario,telefone=TelefoneDoUsuario,tipo= TipoDoUsuario)
+#session.add_all([cadastrar])
+#session.commit()
+#busca = session.query(User).filter_by(usuario=variavel_turma_id_user)
+#if (busca.usuario == variavel_turma_id_user)
+#alterar o resto
+
+#cadastrado =  banco.cadastrar_pessoa(NomeDoUsuario, SenhaDoUsuario, EmailDoUsuario)
+
+#cadastrar = User(usuario=NomeDoUsuario, email= SenhaDoUsuario ,senha= SenhaDoUsuario ,cpf= CpfDoUsuario,telefone=TelefoneDoUsuario,tipo= TipoDoUsuario)
+#session = get_session()
+#session.add_all([cadastrar])
+#session.commit()
+
+#busca = session.query(User).filter_by(usuario='Matheus Feitosa')
+#busca = session.query(User).filter_by(usuario= usuario)
+#busca.email =
+#session.commit()
+
+
     

@@ -34,7 +34,7 @@ class User(Base):
     Aluno = relationship('Aluno', uselist=False, backref='alunoUser')
     AlunoApoiador = relationship('AlunoApoiador', uselist=False, backref='alunoApoiadorUser')
     
-    
+
     #ONE TO MANY
     TurmaProposta = relationship('Turma', backref='propositor')
 
