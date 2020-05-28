@@ -9,7 +9,7 @@ from werkzeug.security import generate_password_hash
 
 class CreateUserService:
     def execute(self, userData):
-        logger = get_logger(sys.argv[0])
+        #logger = get_logger(sys.argv[0])
         try:
             session = get_session()
             userAlreadyExists = session.query(User).filter(
@@ -24,7 +24,8 @@ class CreateUserService:
                         cpf=userData["cpf"], telefone=userData["telefone"], tipo=userData["tipo"])
             session.add(user)
             session.commit()
-            return user.as_dict()
+            return "foi"
+            #return user.as_dict()
         except InternalError:
             logger.error("Banco de dados (EdPermanente) desconhecido")
             return "502ERROR"

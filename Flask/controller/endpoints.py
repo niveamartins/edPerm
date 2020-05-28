@@ -11,6 +11,8 @@ from database.model.Model import *
 from utilities.montaRelatorio import *
 from utilities.loggers import get_logger
 from services.CreateUserService import CreateUserService
+from services.CreateTurmaService import CreateTurmaService
+from services.CreateComplementoService import CreateComplementoService
 from services.AutheticateUserService import AutheticateUserService
 blueprint = Blueprint('endpoints', __name__)
 logger = get_logger(sys.argv[0])
@@ -61,7 +63,18 @@ def sair():
 
 @blueprint.route("/cadastrar", methods=['POST'])
 def cadastrar():
-    userData = request.get_json()
+
+    usuarioDoUser = str(request.form["usuario"]).title()
+    emailDoUser = str(request.form["email"]).title()
+    senhaDoUser = str(request.form["senha"]).title()
+    CpfDoUser = str(request.form["cpf"]).title()
+    TelefoneDoUser = str(request.form["telefone"]).title()
+    TipoDoUser = str(request.form["tipo"]).title()
+
+    userData = {"usuario":usuarioDoUser, "email":emailDoUser, "senha":senhaDoUser, "cpf":CpfDoUser, "telefone":TelefoneDoUser, "tipo":TipoDoUser}
+    
+#na versão final descomentar os comentarios abaixo e trocar o return e apagar tudo acima desse comentario
+#    userData = request.get_json()
     userDataFields = ["usuario", "email", "senha", "cpf", "telefone", "tipo"]
 
     if not all(field in userData for field in userDataFields):
@@ -71,41 +84,48 @@ def cadastrar():
 
     user = createUser.execute(userData)
 
-    return jsonify(user)
+    return "Cadastrou o usuario"
+#    return jsonify(user)
 
 
 @blueprint.route("/cadastrardadoscomplementares", methods=['POST'])
 def cadastrarDadosComplementares():
-    tag = str(request.form["tag"]).title()
-    profissao = str(request.form["profissao"]).title()
-    funcao = str(request.form["funcao"])
-    superentendencia = str(request.form["superentendencia"]).title()
-    cap = str(request.form["cap"]).title()
-    unidade = str(request.form["unidade"])
+    usuarioDoUser = str(request.form["usuario"]).title()
+    tagDoComplemento = str(request.form["tag"]).title()
+    profissaoDoComplemento = str(request.form["profissao"]).title()
+    funcaoDoComplemento = str(request.form["funcao"])
+    superentendenciaDoComplemento = str(request.form["superentendencia"]).title()
+    capDoComplemento = str(request.form["cap"]).title()
+    unidadeDoComplemento = str(request.form["unidade"])
 
-    banco = Banco()
-    print(session['user_id'])
-    if (banco.buscarDadosComplementares(session['user_id']) == []):
-        cadastrado = banco.cadastrar_complemento(
-            session['user_id'], tag, profissao, funcao, superentendencia, cap, unidade)
-    else:
-        banco.atualizarTag(session['user_id'], tag)
-        banco.atualizarProfissao(session['user_id'], profissao)
-        banco.atualizarFuncao(session['user_id'], funcao)
-        banco.atualizarSuperentendencia(session['user_id'], superentendencia)
-        banco.atualizarCap(session['user_id'], cap)
-        banco.atualizarUnidade(session['user_id'], unidade)
-        return 'Complemento atualizado'
-    if cadastrado:
-        session['tag'] = tag
-        session['profissao'] = profissao
-        session['profissao'] = funcao
-        session['superentendencia'] = superentendencia
-        session['cap'] = cap
-        session['unidade'] = unidade
-        return redirect('/')
-    else:
-        return render_template('cadastro.html', erro_cad=True)
+    complementoData = {"usuario":usuarioDoUser, "tag":tagDoComplemento, "profissao":profissaoDoComplemento, "funcao":funcaoDoComplemento, "superintendenciaDaSUBPAV":superentendenciaDoComplemento, "CAP":capDoComplemento, "unidadeBasicaDeSaude":unidadeDoComplemento}
+    
+#na versão final descomentar os comentarios abaixo e trocar o return e apagar tudo acima desse comentario
+#    complementoData = request.get_json()
+
+    complementoDataFields = ["usuario", "tag", "profissao", "funcao", "superintendenciaDaSUBPAV", "CAP", "unidadeBasicaDeSaude"]
+
+    if not all(field in complementoData for field in complementoDataFields):
+        return "Missing information", 400
+
+    createComplemento = CreateComplementoService()
+
+    Complemento = createComplemento.execute(complementoData)
+
+    return "Atualização dos dados do usuario completa"
+#    return jsonify(user)
+
+ 
+
+#    if cadastrado:
+#        session['tag'] = tag
+#        session['profissao'] = profissao
+#        session['superentendencia'] = superentendencia
+#        session['cap'] = cap
+#        session['unidade'] = unidade
+#        return redirect('/')
+#    else:
+#        return render_template('cadastro.html', erro_cad=True)
 
 
 @blueprint.route("/cadastrardadospessoais", methods=['POST'])
@@ -133,26 +153,29 @@ def cadastrarDadosPessoais():
 
 @blueprint.route("/cadastrarturma", methods=['POST'])
 def cadastrarturma():
-    variavelResponsavel = str(request.form["responsavel"])
-    variavelNome = str(request.form["nome"])
-    variavelDia = str(request.form["dia"])
-    variavelHora = str(request.form["hora"])
-    variavelCarga = str(request.form["carga"])
-    variavelTolerancia = str(request.form["tolerancia"])
-    variavelModalidade = str(request.form["modalidade"])
-    variavelTag = str(request.form["tag"])
+    variavelResponsavel = str(request.form["responsavel"]).title()
+    variavelNome = str(request.form["nome"]).title()
+    variavelCarga = str(request.form["carga"]).title()
+    variavelTolerancia = str(request.form["tolerancia"]).title()
+    variavelModalidade = str(request.form["modalidade"]).title()
+    variavelTag = str(request.form["tag"]).title()
+    
+    turmaData = {"responsavel":variavelResponsavel, "nome_do_curso":variavelNome, "carga_horaria_total":variavelCarga, "tolerancia":variavelTolerancia, "modalidade":variavelModalidade, "turma_tag":variavelTag}
+    
+#na versão final descomentar os comentarios abaixo e trocar o return e apagar tudo acima desse comentario
+#    turmaData = request.get_json()
+    turmaDataFields = ["responsavel", "nome_do_curso", "carga_horaria_total", "tolerancia", "modalidade", "turma_tag"]
 
-    banco = Banco()
-    if (banco.buscarProfessor(variavelResponsavel) != []):
-        variavelResponsavel = banco.buscarProfessor(variavelResponsavel)
-        cadastrado = banco.cadastrarTurma(
-            variavelResponsavel[0], variavelNome, variavelDia, variavelHora, variavelCarga, variavelTolerancia, variavelModalidade, variavelTag)
-    else:
-        return 'Responsavel não cadastrado'
-    if cadastrado:
-        return render_template('CadastroTurma.html', erro_cad=False)
-    else:
-        return render_template('CadastroTurma.html', erro_cad=True)
+    if not all(field in turmaData for field in turmaDataFields):
+        return "Missing information", 400
+
+    createTurma = CreateTurmaService()
+
+    turma = createTurma.execute(turmaData)
+
+    return "Cadastrou a turma"
+#    return jsonify(turma)    
+
 
 
 @blueprint.route("/cadastraralunonaturma", methods=['POST'])
