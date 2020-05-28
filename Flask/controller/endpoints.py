@@ -382,7 +382,6 @@ def chamadapesquisar():
 def get_relatoriocontato():
     session = get_session()
     data = session.query(User).all()
-    logger.debug(f'Query: {str(session.query(User))}')
     data = [relatoriocontato(i) for i in data]
     session.close()
     return jsonify(data)
@@ -392,7 +391,6 @@ def get_relatoriocontato():
 def get_relatoriocpfnome():
     session = get_session()
     data = session.query(Turma).all()
-    logger.debug(f'Query: {str(session.query(Turma))}')
     JSON = [Rcpfnome(i) for i in data]
     for (i, j) in zip(data, JSON):
         for z in i.Alunos:
@@ -403,7 +401,15 @@ def get_relatoriocpfnome():
 #RELATORIO FREQUENCIA
 @blueprint.route('/relatoriofrequencia', methods = ['GET'])
 def get_relatoriofrequencia():
+    '''
+    Frequência: frequência computada em dias, horas e minutos com base no horário de check-in do cursista. 
+    Ele poderá acompanhar a própria carga-horária com base na tolerância informada pelo propositor da atividade.
+    '''
     session = get_session()
+    data = session.query(Aluno).all()
+    logger.debug(f'query':{str(session.query(Aluno))})
+    JSON = [frequencia(i) for i in data]
+    
 
     session.close()
     return jsonify()

@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Integer,Text, Enum, ForeignKey, Table, Time, Boolean
+from sqlalchemy import Column, String, Integer,Text, Enum, ForeignKey, Table, Time, Boolean, 
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, backref
 from database.model.Base.Base import Base
@@ -61,7 +61,7 @@ class Turma(Base):
     turma_tag = Column(String(20), nullable=False)
 
     # ONE TO MANY
-    Horarios = relationship('Horario', backref="Horarios")
+    Horarios = relationship('Horario', backref="Turma")
 
     # MANY TO MANY
     Alunos = relationship('Aluno', secondary=alunoXturma,
@@ -106,4 +106,8 @@ class Presenca(Base):
     id_presenca = Column(Integer, primary_key=True)
     presenca_id_aluno = Column(Integer, ForeignKey('aluno.id_aluno'), nullable=False)
     presenca_id_turma = Column(Integer, ForeignKey('turma.id_turma'), nullable=False)
-    presencaNaTurma = Column(Integer, nullable=False)
+    ultimoCheckInHora = Column(Time, nullable=True)
+    ultimoCheckInDia = Column(Integer(3), nullable=True)
+    presencaTotal = Column(Integer, nullable=False)
+
+#TODO: ESTUDAR DATETIME NA HORA DE IMPLEMENTAR A FUNÇÃO DE CHECKIN

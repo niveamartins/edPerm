@@ -85,4 +85,11 @@ def concluintes(Turma):
         'cursistas':[]
     }        
 
-    
+def frequencia(Aluno):
+    return {
+        'Nome': f'{Aluno.complementoUser.usuario}',
+        'cpf': f'{Aluno.complementoUser.cpf}',
+        'id_aluno' : f'{Aluno.id_aluno}',
+        'id_user_aluno' : f'{Aluno.alunos_id_user}',
+        'Turma' : []
+     }
