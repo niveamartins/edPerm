@@ -399,6 +399,7 @@ def get_relatoriocpfnome():
     return jsonify(JSON)
 
 #RELATORIO FREQUENCIA
+#AINDA NÃO SERÁ IMPLEMENTADO, PRECISA DA FUNÇÃO DE CHECKIN
 @blueprint.route('/relatoriofrequencia', methods = ['GET'])
 def get_relatoriofrequencia():
     '''
