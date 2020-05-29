@@ -73,7 +73,7 @@ def cadastrar():
 
     return jsonify(user)
 
-
+#refatorado
 @blueprint.route("/cadastrardadoscomplementares", methods=['POST'])
 def cadastrarDadosComplementares():
     tag = str(request.form["tag"]).title()
@@ -108,29 +108,7 @@ def cadastrarDadosComplementares():
         return render_template('cadastro.html', erro_cad=True)
 
 
-@blueprint.route("/cadastrardadospessoais", methods=['POST'])
-def cadastrarDadosPessoais():
-#Vai morrer
-    nome = str(request.form["nome"]).title()
-    cpf = str(request.form["cpf"]).title()
-    telefone = str(request.form["telefone"])
-
-    banco = Banco()
-
-    if (banco.buscarDadosPessoais(session['user_id']) == []):
-        cadastrado = banco.cadastrar_dados_pessoais(
-            session['user_id'], nome, cpf, telefone)
-    else:
-        banco.atualizarNome(session['user_id'], tag)
-        banco.atualizarCpf(session['user_id'], profissao)
-        banco.atualizarTelefone(session['user_id'], funcao)
-        return 'Dados Pessoais atualizado'
-    if cadastrado:
-        return redirect('/')
-    else:
-        return render_template('cadastro.html', erro_cad=True)
-
-
+#refatorado
 @blueprint.route("/cadastrarturma", methods=['POST'])
 def cadastrarturma():
     variavelResponsavel = str(request.form["responsavel"])
@@ -183,16 +161,16 @@ def cadastraralunonaturma():
 @blueprint.route("/listaturma")
 def listarturma():
 
-#session = get_session()
-#busca = session.query(User).filter_by(usuario='Matheus Feitosa')
-#busca = session.query(User).filter_by(usuario= usuario)
-#busca.email =
-#session.commit()
+    #session = get_session()
+    #busca = session.query(User).filter_by(usuario='Matheus Feitosa')
+    #busca = session.query(User).filter_by(usuario= usuario)
+    #busca.email =
+    #session.commit()
 
-#try
-#session = get_session()
-#busca = session.query(Turma)
-#alterar o resto
+    #try
+    #session = get_session()
+    #busca = session.query(Turma)
+    #alterar o resto
 
     banco = Banco()
     return render_template('listaturma.html', eventos=banco.listarTurma())
