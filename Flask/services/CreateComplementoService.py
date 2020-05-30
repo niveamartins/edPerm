@@ -21,8 +21,8 @@ class CreateComplementoService:
                 busca2 = session.query(UserComplemento).filter_by(id_do_user=busca.Id).first()
                 if (busca2 == None):
                     #Criar
-                    cadastrar = UserComplemento(id_do_user = busca.Id, tag = complementoData['tag'], profissao = complementoData['profissao'], funcao = complementoData['funcao'], superintendenciaDaSUBPAV = complementoData['superintendenciaDaSUBPAV'], CAP = complementoData['CAP'], unidadeBasicaDeSaude = complementoData['unidadeBasicaDeSaude'])
-                    session.add_all([cadastrar])
+                    complementoDoUsuario = UserComplemento(id_do_user = busca.Id, tag = complementoData['tag'], profissao = complementoData['profissao'], funcao = complementoData['funcao'], superintendenciaDaSUBPAV = complementoData['superintendenciaDaSUBPAV'], CAP = complementoData['CAP'], unidadeBasicaDeSaude = complementoData['unidadeBasicaDeSaude'])
+                    session.add_all([complementoDoUsuario])
                     session.commit()
                     #return cadastrar.as_dict()
                     return "Dados complementares adicionados"

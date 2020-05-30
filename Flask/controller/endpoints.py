@@ -13,6 +13,7 @@ from utilities.loggers import get_logger
 from services.CreateUserService import CreateUserService
 from services.CreateTurmaService import CreateTurmaService
 from services.CreateComplementoService import CreateComplementoService
+from services.CadastrarAlunoService import CadastrarAlunoService
 from services.AutheticateUserService import AutheticateUserService
 blueprint = Blueprint('endpoints', __name__)
 logger = get_logger(sys.argv[0])
@@ -112,7 +113,7 @@ def cadastrarDadosComplementares():
 
     Complemento = createComplemento.execute(complementoData)
 
-    return "Atualização dos dados do usuario completa"
+    return "Atualização dos dados do usuario completo"
 #    return jsonify(user)
 
  
@@ -175,32 +176,6 @@ def cadastrarturma():
 
     return "Cadastrou a turma"
 #    return jsonify(turma)    
-
-
-
-@blueprint.route("/cadastraralunonaturma", methods=['POST'])
-def cadastraralunonaturma():
-    variavelAluno = str(request.form["aluno"])
-    variavelTurma = str(request.form["codigo"])
-
-    banco = Banco()
-    if (banco.buscarTurma(variavelTurma) != []):
-        variavelTurma = banco.buscarTurma(variavelTurma)
-        if(banco.buscarAluno(variavelAluno) != []):
-            variavelAluno = banco.buscarAluno(variavelAluno)
-            if(banco.buscarAlunoPorUsuarioECodigo(str(request.form["aluno"]), str(request.form["codigo"])) == []):
-                cadastrado = banco.cadastrarAlunos(
-                    variavelTurma[0], variavelAluno[0])
-            else:
-                return 'Aluno ja cadastrado na turma'
-        else:
-            return 'Aluno não existe'
-    else:
-        return 'Turma não existe'
-    if cadastrado:
-        return render_template('cadastroalunonaturma.html', erro_cad=False)
-    else:
-        return render_template('cadastroalunonaturma.html', erro_cad=True)
 
 
 @blueprint.route("/listaturma")
@@ -293,33 +268,24 @@ def atualizarpresenca():
 
 @blueprint.route("/cadastraraluno", methods=['POST'])
 def cadastraraluno():
-    variavelAluno = session['user']
-    variavelTurma = session['nome_da_turma']
+    variavelAluno = str(request.form["Usuario"])
+    variavelTurma = str(request.form["Turma"])
 
-    banco = Banco()
-    if (banco.buscarTurma(variavelTurma) != []):
-        variavelTurma = banco.buscarTurma(variavelTurma)
-        if(banco.buscarAluno(variavelAluno) != []):
-            variavelAluno = banco.buscarAluno(variavelAluno)
-            if(banco.buscarAlunoPorUsuarioECodigo(session['user'], session['nome_da_turma']) == []):
-                cadastrado = banco.cadastrarAlunos(
-                    variavelTurma[0], variavelAluno[0])
-            else:
-                session['nome_da_turma'] = ''
-                return 'Aluno ja cadastrado na turma'
-        else:
-            session['nome_da_turma'] = ''
-            return 'Aluno não existe'
-    else:
-        session['nome_da_turma'] = ''
-        return 'Turma não existe'
-    if cadastrado:
-        session['nome_da_turma'] = ''
-        return render_template('inicio.html', erro_cad=False)
-    else:
-        session['nome_da_turma'] = ''
-        return render_template('inicio.html', erro_cad=True)
+    cadastroData = {"usuario":variavelAluno, "nome_do_curso":variavelTurma}
+    
+#na versão final descomentar os comentarios abaixo e trocar o return e apagar tudo acima desse comentario
+#    cadastroData = request.get_json()
+    cadastroDataFields = ["usuario", "nome_do_curso"]
 
+    if not all(field in cadastroData for field in cadastroDataFields):
+        return "Missing information", 400
+
+    cadastrarAluno = CadastrarAlunoService()
+
+    Aluno = cadastrarAluno.execute(cadastroData)
+
+    return Aluno
+#    return jsonify(Aluno)    
 
 @blueprint.route("/cadastrarapoiador", methods=['POST'])
 def cadastrarapoiador():
@@ -500,21 +466,37 @@ def data():
                      cpf="bbbbbbbbcpf", telefone="187654tel", tipo="propositor")
         User3 = User(usuario="ddddd", email="dddd@exemplo.br", senha="ddddsenha",
                      cpf="ddddddddcpf", telefone="287654tel", tipo="cursista")
-        session.add_all([User1, User2, User3])
+        User4 = User(usuario="eeeeee", email="eeeeee@exemplo.br", senha="eeeeeasdasfa",
+                     cpf="ddddddddcpf", telefone="287654tel", tipo="cursista")
+        User5 = User(usuario="eeeeee", email="eeeeee@exemplo.br", senha="eeeeeasdasfa",
+                     cpf="ddddddddcpf", telefone="287654tel", tipo="cursista")
+        session.add_all([User1, User2, User3, User4,User5])
         session.commit()
         Turma1 = Turma(id_responsavel=User2.Id,nome_do_curso="calculo",IsConcluido=0,carga_horaria_total=60,tolerancia=30,modalidade="n sei",turma_tag="tbm n sei")
         Turma2 = Turma(id_responsavel=User2.Id,nome_do_curso="iot",IsConcluido=1,carga_horaria_total=60,tolerancia=30,modalidade="n sei",turma_tag="tbm n sei")
         UserComplemento1 = UserComplemento(user=User1,tag="naosei1",profissao="coach",funcao="direcao",superintendenciaDaSUBPAV="ZAP",CAP="1.0",unidadeBasicaDeSaude="1")
         UserComplemento2 = UserComplemento(user=User2,tag="naosei1",profissao="bundao",funcao="direcao",superintendenciaDaSUBPAV="SAP",CAP="1.0",unidadeBasicaDeSaude="1")
         UserComplemento3 = UserComplemento(user=User3,tag="naosei1",profissao="coach",funcao="gerencia",superintendenciaDaSUBPAV="SAP",CAP="1.0",unidadeBasicaDeSaude="1")
+        UserComplemento4 = UserComplemento(user=User4,tag="naosei1",profissao="coach",funcao="gerencia",superintendenciaDaSUBPAV="SAP",CAP="1.0",unidadeBasicaDeSaude="1")
         Aluno1 = Aluno(alunoUser=User1, complementoUser=UserComplemento1)
         Aluno2 = Aluno(alunoUser=User3, complementoUser=UserComplemento3)
-        session.add_all([Aluno1,Aluno2,UserComplemento1,UserComplemento2,UserComplemento3,Turma1,Turma2])
+        Aluno3 = Aluno(alunoUser=User2, complementoUser=UserComplemento2)
+        Aluno4 = Aluno(alunoUser=User4, complementoUser=UserComplemento4)
+        session.add_all([Aluno1,Aluno2,Aluno3,Aluno4,UserComplemento1,UserComplemento2,UserComplemento3, UserComplemento4,Turma1,Turma2])
         session.commit()
         Turma1.Alunos.append(Aluno1)
         Turma1.Alunos.append(Aluno2)
         Turma2.Alunos.append(Aluno1)
+        aba = session.query(User).filter_by(usuario = "eeeeee").first()
+        Turma1.Alunos.append(aba.Aluno)
         session.commit()
+        if (User5.Aluno != None):
+            print("aaa")
+        if (User4.Aluno != None):
+            print("fasfasga")
+        for x in Turma1.Alunos:
+            a = session.query(User).filter_by(Id = x.alunos_id_user).first()
+            print(a.usuario)
         logger.info("informações de teste inseridas no banco de dados")
         return "200OK"
     except InternalError:
