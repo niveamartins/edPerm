@@ -194,7 +194,7 @@ def turma(codigo_turma):
     evento = banco.buscarTurmaComProfessor(codigo_turma)
     return render_template('listaralunosdaturma.html', eventos=evento, alunosdaturma=alunodaturma)
 
-#um aluno apoiador vai acessar a essa rota com dados de um aluno pra atualizar
+#precisa ser testado
 @blueprint.route("/atualizarpresenca", methods=['POST'])
 def atualizarpresenca():
     if not request.is_json:
@@ -300,24 +300,17 @@ def cadastraraula():
         return render_template('cadastroapoiador.html', erro_cad=True)
 
 
-@blueprint.route("/chamadapesquisar", methods=['POST'])
+@blueprint.route("/chamadavalidar", methods=['POST'])
 def chamadapesquisar():
-    variavelTurma = str(request.form["turma"])
-    variavelAula = str(request.form["aula"])
+    if not request.is_json:
+        return jsonify({"msg": "Missing JSON in request"}), 400
+    
+    propositor = get_jwt_identity()
+    session = get_session()
+    
 
-    banco = Banco()
-    if (banco.buscarTurma(variavelTurma) != []):
-        if(banco.buscarApoiadorPorUsuarioECodigo(session['user'], variavelTurma) != []):
-            if(banco.buscarAulaPorTurmaENome(variavelTurma, variavelAula) != []):
-                session['aula'] = variavelAula
-                session['nome_da_turma'] = variavelTurma
-                return render_template('atualizarpresencaaluno.html', erro_cad=False)
-            else:
-                return 'Aula não existe'
-        else:
-            return 'Você não é apoiador dessa turma'
-    else:
-        return 'Turma não existe'
+
+    
 
 ### RELATORIOS ###
 
