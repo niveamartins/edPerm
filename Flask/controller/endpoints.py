@@ -1,4 +1,5 @@
 import sys
+from datetime import datetime, timezone
 
 from flask import Blueprint, request, jsonify, render_template, redirect, url_for, session, jsonify
 from sqlalchemy.exc import InternalError
@@ -12,6 +13,7 @@ from utilities.montaRelatorio import *
 from utilities.loggers import get_logger
 from services.CreateUserService import CreateUserService
 from services.AutheticateUserService import AutheticateUserService
+
 blueprint = Blueprint('endpoints', __name__)
 logger = get_logger(sys.argv[0])
 
@@ -192,59 +194,23 @@ def turma(codigo_turma):
     evento = banco.buscarTurmaComProfessor(codigo_turma)
     return render_template('listaralunosdaturma.html', eventos=evento, alunosdaturma=alunodaturma)
 
-
+#um aluno apoiador vai acessar a essa rota com dados de um aluno pra atualizar
 @blueprint.route("/atualizarpresenca", methods=['POST'])
 def atualizarpresenca():
-    variavelAluno = str(request.form["alunopre"])
+    if not request.is_json:
+        return jsonify({"msg": "Missing JSON in request"}), 400
+    
+    apoiador = get_jwt_identity()
+    aluno = request.get_json()
+    session = get_session()
+    alunoApoiadordata = session.query(alunoApoiador).filter_by(apoiador_id_user=apoiador.id).one()
+    data = session.query(Presenca).filter_by(presenca_id_aluno=aluno["id_aluno"],presenca_id_turma=alunoApoiadordata.apoiador_id_turma)
+    data.ultimoCheckIn = datetime.now().replace(tzinfo=timezone.utc)
+    data.presencaAtualizada = False
+    session.commit()
+    session.close()
 
-    banco = Banco()
-
-    if (banco.buscarTurma(session['nome_da_turma']) != []):
-        if(banco.buscarApoiadorPorUsuarioECodigo(session['user'], session['nome_da_turma']) != []):
-            if(banco.buscarAulaPorTurmaENome(session['nome_da_turma'], session['aula']) != []):
-                if(banco.buscarAlunoPorUsuarioECodigo(variavelAluno, session['nome_da_turma']) != []):
-                    if(banco.buscarPresencaPorUsuarioEAula(variavelAluno, session['aula']) == []):
-                        variavelAluno = banco.buscarAlunoPorUsuarioECodigo(
-                            variavelAluno, session['nome_da_turma'])
-                        variavelUsuario = banco.buscarAluno(
-                            str(request.form["alunopre"]))
-                        variavelAula = banco.buscarAulaPorTurmaENome(
-                            session['nome_da_turma'], session['aula'])
-                        inicio = int(variavelAula[0][2])
-                        fim = int(variavelAula[0][3])
-                        horarioDaPresenca = banco.retornaHorarioNow()
-                        horarioDaPresenca = int(horarioDaPresenca[0][0])
-                        cadastrado = banco.cadastrarPresenca(
-                            variavelUsuario[0], variavelAula[0], horarioDaPresenca)
-                        if cadastrado:
-                            if(horarioDaPresenca < inicio):
-                                presenca = int(
-                                    variavelAluno[0][3]) + fim - inicio
-                            else:
-                                if(horarioDaPresenca > fim):
-                                    presenca = int(variavelAluno[0][3])
-                                else:
-                                    presenca = int(
-                                        variavelAluno[0][3]) + fim - horarioDaPresenca
-                            cadastrado = banco.atualizarAlunos(
-                                variavelAluno[0][0], presenca)
-                    else:
-                        return 'Aluno já possui presença nessa aula'
-                else:
-                    return 'Aluno não existe'
-            else:
-                return 'Aula não existe'
-        else:
-            return 'Você não é apoiador dessa turma'
-    else:
-        return 'Turma não existe'
-
-    if cadastrado:
-        return render_template('atualizarpresencaaluno.html', erro_cad=False)
-    else:
-        banco.apagarPresenca(variavelUsuario[0], variavelAula[0])
-        return render_template('atualizarpresencaaluno.html', erro_cad=True)
-
+    return jsonify("msg": "Presença do aluno contabilizada"), 200
 
 @blueprint.route("/cadastraraluno", methods=['POST'])
 def cadastraraluno():
@@ -386,7 +352,6 @@ def get_relatoriofrequencia():
     '''
     session = get_session()
     data = session.query(Aluno).all()
-    logger.debug(f'query':{str(session.query(Aluno))})
     JSON = [frequencia(i) for i in data]
     
 

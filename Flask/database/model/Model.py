@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Integer,Text, Enum, ForeignKey, Table, Time, Boolean, 
+from sqlalchemy import (Column, String, Integer,Text, Enum, ForeignKey, Table, Time, Boolean, DateTime)
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, backref
 from database.model.Base.Base import Base
@@ -40,6 +40,9 @@ class User(Base):
     #ONE TO MANY
     TurmaProposta = relationship('Turma', backref='propositor')
 
+    def as_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
 class Aluno(Base):
     __tablename__ = 'aluno'
     id_aluno = Column(Integer,primary_key=True)
@@ -48,6 +51,9 @@ class Aluno(Base):
 
     #ONE TO ONE
     complementoUser = relationship('UserComplemento', uselist=False, backref="AlunocomplementoUser")
+
+    #ONE TO MANY
+    presencas = relationship('Presenca', backref='alunoDono')
 
 class Turma(Base):
     __tablename__ = 'turma'
@@ -106,8 +112,8 @@ class Presenca(Base):
     id_presenca = Column(Integer, primary_key=True)
     presenca_id_aluno = Column(Integer, ForeignKey('aluno.id_aluno'), nullable=False)
     presenca_id_turma = Column(Integer, ForeignKey('turma.id_turma'), nullable=False)
-    ultimoCheckInHora = Column(Time, nullable=True)
-    ultimoCheckInDia = Column(Integer(3), nullable=True)
+    ultimoCheckIn = Column(DateTime, nullable=True)
+    presencaAtualizada = Column(Boolean, nullable=True, default=True)
     presencaTotal = Column(Integer, nullable=False)
 
 #TODO: ESTUDAR DATETIME NA HORA DE IMPLEMENTAR A FUNÇÃO DE CHECKIN

@@ -19,12 +19,14 @@ class AutheticateUserService:
 
             if not user or not check_password_hash(user["senha"], senha):
                 return "Usuario ou senha incorretos.", 400
-
-            access_token = create_access_token(identity=user["Id"])
+            user = {
+                "id": user["Id"],
+                "usuario": user["usuario"]
+            }
+            access_token = create_access_token(identity=user)
 
             return access_token
 
-            return
         except InternalError:
             logger.error("Banco de dados (EdPermanente) desconhecido")
             return "502ERROR"
