@@ -67,17 +67,7 @@ def sair():
 @blueprint.route("/cadastrar", methods=['POST'])
 def cadastrar():
 
-    usuarioDoUser = str(request.form["usuario"]).title()
-    emailDoUser = str(request.form["email"]).title()
-    senhaDoUser = str(request.form["senha"]).title()
-    CpfDoUser = str(request.form["cpf"]).title()
-    TelefoneDoUser = str(request.form["telefone"]).title()
-    TipoDoUser = str(request.form["tipo"]).title()
-
-    userData = {"usuario":usuarioDoUser, "email":emailDoUser, "senha":senhaDoUser, "cpf":CpfDoUser, "telefone":TelefoneDoUser, "tipo":TipoDoUser}
-    
-#na versão final descomentar os comentarios abaixo e trocar o return e apagar tudo acima desse comentario
-#    userData = request.get_json()
+    userData = request.get_json()
     userDataFields = ["usuario", "email", "senha", "cpf", "telefone", "tipo"]
 
     if not all(field in userData for field in userDataFields):
@@ -87,24 +77,15 @@ def cadastrar():
 
     user = createUser.execute(userData)
 
-    return "Cadastrou o usuario"
-#    return jsonify(user)
+    return jsonify(user)
 
 
 @blueprint.route("/cadastrardadoscomplementares", methods=['POST'])
 def cadastrarDadosComplementares():
-    usuarioDoUser = str(request.form["usuario"]).title()
-    tagDoComplemento = str(request.form["tag"]).title()
-    profissaoDoComplemento = str(request.form["profissao"]).title()
-    funcaoDoComplemento = str(request.form["funcao"])
-    superentendenciaDoComplemento = str(request.form["superentendencia"]).title()
-    capDoComplemento = str(request.form["cap"]).title()
-    unidadeDoComplemento = str(request.form["unidade"])
 
-    complementoData = {"usuario":usuarioDoUser, "tag":tagDoComplemento, "profissao":profissaoDoComplemento, "funcao":funcaoDoComplemento, "superintendenciaDaSUBPAV":superentendenciaDoComplemento, "CAP":capDoComplemento, "unidadeBasicaDeSaude":unidadeDoComplemento}
-    
-#na versão final descomentar os comentarios abaixo e trocar o return e apagar tudo acima desse comentario
-#    complementoData = request.get_json()
+#Não testado a parte dos Json
+
+    complementoData = request.get_json()
 
     complementoDataFields = ["usuario", "tag", "profissao", "funcao", "superintendenciaDaSUBPAV", "CAP", "unidadeBasicaDeSaude"]
 
@@ -115,20 +96,7 @@ def cadastrarDadosComplementares():
 
     Complemento = createComplemento.execute(complementoData)
 
-    return "Atualização dos dados do usuario completo"
-#    return jsonify(user)
-
- 
-
-#    if cadastrado:
-#        session['tag'] = tag
-#        session['profissao'] = profissao
-#        session['superentendencia'] = superentendencia
-#        session['cap'] = cap
-#        session['unidade'] = unidade
-#        return redirect('/')
-#    else:
-#        return render_template('cadastro.html', erro_cad=True)
+    return jsonify(Complemento)
 
 
 @blueprint.route("/cadastrardadospessoais", methods=['POST'])
@@ -156,17 +124,10 @@ def cadastrarDadosPessoais():
 
 @blueprint.route("/cadastrarturma", methods=['POST'])
 def cadastrarturma():
-    variavelResponsavel = str(request.form["responsavel"]).title()
-    variavelNome = str(request.form["nome"]).title()
-    variavelCarga = str(request.form["carga"]).title()
-    variavelTolerancia = str(request.form["tolerancia"]).title()
-    variavelModalidade = str(request.form["modalidade"]).title()
-    variavelTag = str(request.form["tag"]).title()
-    
-    turmaData = {"responsavel":variavelResponsavel, "nome_do_curso":variavelNome, "carga_horaria_total":variavelCarga, "tolerancia":variavelTolerancia, "modalidade":variavelModalidade, "turma_tag":variavelTag}
-    
-#na versão final descomentar os comentarios abaixo e trocar o return e apagar tudo acima desse comentario
-#    turmaData = request.get_json()
+
+#Não testado a parte dos Json
+
+    turmaData = request.get_json()
     turmaDataFields = ["responsavel", "nome_do_curso", "carga_horaria_total", "tolerancia", "modalidade", "turma_tag"]
 
     if not all(field in turmaData for field in turmaDataFields):
@@ -176,8 +137,7 @@ def cadastrarturma():
 
     turma = createTurma.execute(turmaData)
 
-    return "Cadastrou a turma"
-#    return jsonify(turma)    
+    return jsonify(turma)    
 
 
 @blueprint.route("/listaturma")
@@ -270,13 +230,10 @@ def atualizarpresenca():
 
 @blueprint.route("/cadastraraluno", methods=['POST'])
 def cadastraraluno():
-    variavelAluno = str(request.form["Usuario"])
-    variavelTurma = str(request.form["Turma"])
 
-    cadastroData = {"usuario":variavelAluno, "nome_do_curso":variavelTurma}
-    
-#na versão final descomentar os comentarios abaixo e trocar o return e apagar tudo acima desse comentario
-#    cadastroData = request.get_json()
+#Não testado a parte dos Json
+
+    cadastroData = request.get_json()
     cadastroDataFields = ["usuario", "nome_do_curso"]
 
     if not all(field in cadastroData for field in cadastroDataFields):
@@ -286,18 +243,14 @@ def cadastraraluno():
 
     Aluno = cadastrarAluno.execute(cadastroData)
 
-    return Aluno
-#    return jsonify(Aluno)    
+    return jsonify(Aluno)    
 
 @blueprint.route("/cadastrarapoiador", methods=['POST'])
 def cadastrarapoiador():
-    variavelAluno = str(request.form["Usuario"])
-    variavelTurma = str(request.form["Turma"])
 
-    apoiadorData = {"usuario":variavelAluno, "nome_do_curso":variavelTurma}
-    
-#na versão final descomentar os comentarios abaixo e trocar o return e apagar tudo acima desse comentario
-#    cadastroData = request.get_json()
+#Não testado a parte dos Json
+
+    apoiadorData = request.get_json()
     apoiadorDataFields = ["usuario", "nome_do_curso"]
 
     if not all(field in apoiadorData for field in apoiadorDataFields):
@@ -306,22 +259,15 @@ def cadastrarapoiador():
     cadastrarApoiador = CreateApoiadorService()
 
     Apoiador = cadastrarApoiador.execute(apoiadorData)
-    return Apoiador
-#    return jsonify(Aluno)    
+    return jsonify(Apoiador)    
 
 @blueprint.route("/cadastrarhorario", methods=['POST'])
 def cadastrarhorario():
 
-    variavelTurma = str(request.form["Turma"])
-    variavelDia = str(request.form["Dia"])
-    variavelInicio = str(request.form["Inicio"])
-    variavelTermino = str(request.form["Termino"])
-    variavelPropositor = str(request.form["Propositor"])
- 
-    horarioData = {"Turma":variavelTurma, "DiaDaSemana":variavelDia, "Inicio":variavelInicio, "Termino":variavelTermino, "Propositor":variavelPropositor}
-    
-#na versão final descomentar os comentarios abaixo e trocar o return e apagar tudo acima desse comentario
-#    horarioData = request.get_json()
+
+#Não testado a parte dos Json
+
+    horarioData = request.get_json()
     horarioDataFields = ["Turma", "DiaDaSemana", "Inicio", "Termino", "Propositor"]
 
     if not all(field in horarioData for field in horarioDataFields):
@@ -330,8 +276,7 @@ def cadastrarhorario():
     cadastrarHorario = CreateHorarioService()
 
     Horario = cadastrarHorario.execute(horarioData)
-    return Horario
-#    return jsonify(Horario)
+    return jsonify(Horario)
 
 
 @blueprint.route("/chamadapesquisar", methods=['POST'])

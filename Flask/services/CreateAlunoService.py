@@ -5,12 +5,11 @@ from sqlalchemy.exc import InternalError
 from database.model.Model import *
 from utilities.loggers import get_logger
 
-
+#Não testado a parte dos Json
 
 class CreateAlunoService:
     def execute(self, cadastroData):
-        #logger = get_logger(sys.argv[0])
-        #cadastroDataFields = ["usuario", "nome_do_curso"]
+        logger = get_logger(sys.argv[0])
         try:
             session = get_session()
             QueryUsuario = session.query(User).filter_by(usuario=cadastroData['usuario']).first()
@@ -27,15 +26,14 @@ class CreateAlunoService:
                             if (QueryUsuario.Aluno != None):
                                 QueryTurma.Alunos.append(QueryUsuario.Aluno)
                                 session.commit()
-                                #return cadastrar.as_dict()
-                                return "Aluno cadastrado na turma"
+                                return QueryUsuario.Aluno.as_dict()
                             else: 
                                 aluno = Aluno(alunos_id_user=QueryUsuario.Id, alunos_id_complemento=QueryComplemento.id_complemento)
                                 session.add_all([aluno])
                                 session.commit()
                                 QueryTurma.Alunos.append(QueryUsuario.Aluno)
                                 session.commit()
-                                return "Aluno criado e cadastrado na turma"
+                                return QueryUsuario.Aluno.as_dict()
                         else:
                             return "Usuario não é um cursista", 400
                     else:

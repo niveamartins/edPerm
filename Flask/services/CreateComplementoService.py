@@ -5,13 +5,11 @@ from sqlalchemy.exc import InternalError
 from database.model.Model import *
 from utilities.loggers import get_logger
 
-
+#Não testado a parte dos Json
 
 class CreateComplementoService:
     def execute(self, complementoData):
-        #logger = get_logger(sys.argv[0])
-        #Pois a mesma turma pode ser lançada em momentos diferentes
-        #complementoData = {"usuario":usuarioDoUser, "tag":tagDoComplemento, "profissao":profissaoDoComplemento, "funcao":funcaoDoComplemento, "superintendenciaDaSUBPAV":superentendenciaDoComplemento, "CAP":capDoComplemento, "unidadeBasicaDeSaude":unidadeDoComplemento}
+        logger = get_logger(sys.argv[0])
 
 
         try:
@@ -24,8 +22,7 @@ class CreateComplementoService:
                     complementoDoUsuario = UserComplemento(id_do_user = busca.Id, tag = complementoData['tag'], profissao = complementoData['profissao'], funcao = complementoData['funcao'], superintendenciaDaSUBPAV = complementoData['superintendenciaDaSUBPAV'], CAP = complementoData['CAP'], unidadeBasicaDeSaude = complementoData['unidadeBasicaDeSaude'])
                     session.add_all([complementoDoUsuario])
                     session.commit()
-                    #return cadastrar.as_dict()
-                    return "Dados complementares adicionados"
+                    return complementoDoUsuario.as_dict()
 
                 else:
                     #Atualizar
@@ -36,8 +33,7 @@ class CreateComplementoService:
                     busca2.CAP = complementoData['CAP']
                     busca2.unidadeBasicaDeSaude = complementoData['unidadeBasicaDeSaude']
                     session.commit()
-                    #return cadastrar.as_dict()
-                    return "Dados atualizados"
+                    return busca2.as_dict()
 
             else:
                 #Não existe o usuario
