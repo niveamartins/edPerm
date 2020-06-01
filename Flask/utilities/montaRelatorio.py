@@ -26,6 +26,7 @@ def relatorioatividades(TipoDeFiltro,Valor):
 
 def relatoriocontato(User):
     return {
+          "tipoDeRelatorio":"Contato",
           "id": f'{self.Id}',
           "nome": f'{self.usuario}',
           "email":f'{self.email}', 
@@ -35,6 +36,7 @@ def relatoriocontato(User):
 
 def Rcpfnome(Turma):
         return {
+            "tipoDeRelatorio":"CPF",
             "id_turma": f'{Turma.id_turma}',
             "nomeDoCurso": f'{Turma.nome_do_curso}',
             "idPropositor": f'{Turma.propositor.Id}',
@@ -53,7 +55,7 @@ def RcpfnomeAlunos(Aluno):
 
 def atividade_turma(Turma,tipoDeRelatorio):
     return {
-        'TipoDeRelatorio': f'{tipoDeRelatorio}',
+        'tipoDeRelatorio': f'{tipoDeRelatorio}',
         'id_turma': f'{Turma.id_turma}',
         'nome_do_curso':f'{Turma.nome_do_curso}',
         'id_responsavel':f'{Turma.id_responsavel}',
@@ -77,6 +79,7 @@ def atividade_aluno(Aluno):
 
 def concluintes(Turma):
     return {
+        "tipoDeRelatorio":"concluintes",
         'id_turma' : f'{Turma.id_turma}',
         'nome_do_curso' : f'{Turma.nome_do_curso}', 
         'id_do_responsavel' : f'{Turma.id_responsavel}',
@@ -87,6 +90,7 @@ def concluintes(Turma):
 
 def frequencia(Aluno):
     return {
+        "tipoDeRelatorio":"frequencia",
         'Nome': f'{Aluno.complementoUser.usuario}',
         'cpf': f'{Aluno.complementoUser.cpf}',
         'id_aluno' : f'{Aluno.id_aluno}',
