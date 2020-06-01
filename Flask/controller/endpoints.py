@@ -12,6 +12,11 @@ from database.model.Model import *
 from utilities.montaRelatorio import *
 from utilities.loggers import get_logger
 from services.CreateUserService import CreateUserService
+from services.CreateTurmaService import CreateTurmaService
+from services.CreateComplementoService import CreateComplementoService
+from services.CreateAlunoService import CreateAlunoService
+from services.CreateApoiadorService import CreateApoiadorService
+from services.CreateHorarioService import CreateHorarioService
 from services.AutheticateUserService import AutheticateUserService
 
 blueprint = Blueprint('endpoints', __name__)
@@ -63,6 +68,7 @@ def sair():
 
 @blueprint.route("/cadastrar", methods=['POST'])
 def cadastrar():
+
     userData = request.get_json()
     userDataFields = ["usuario", "email", "senha", "cpf", "telefone", "tipo"]
 
@@ -78,86 +84,40 @@ def cadastrar():
 #refatorado
 @blueprint.route("/cadastrardadoscomplementares", methods=['POST'])
 def cadastrarDadosComplementares():
-    tag = str(request.form["tag"]).title()
-    profissao = str(request.form["profissao"]).title()
-    funcao = str(request.form["funcao"])
-    superentendencia = str(request.form["superentendencia"]).title()
-    cap = str(request.form["cap"]).title()
-    unidade = str(request.form["unidade"])
 
-    banco = Banco()
-    print(session['user_id'])
-    if (banco.buscarDadosComplementares(session['user_id']) == []):
-        cadastrado = banco.cadastrar_complemento(
-            session['user_id'], tag, profissao, funcao, superentendencia, cap, unidade)
-    else:
-        banco.atualizarTag(session['user_id'], tag)
-        banco.atualizarProfissao(session['user_id'], profissao)
-        banco.atualizarFuncao(session['user_id'], funcao)
-        banco.atualizarSuperentendencia(session['user_id'], superentendencia)
-        banco.atualizarCap(session['user_id'], cap)
-        banco.atualizarUnidade(session['user_id'], unidade)
-        return 'Complemento atualizado'
-    if cadastrado:
-        session['tag'] = tag
-        session['profissao'] = profissao
-        session['profissao'] = funcao
-        session['superentendencia'] = superentendencia
-        session['cap'] = cap
-        session['unidade'] = unidade
-        return redirect('/')
-    else:
-        return render_template('cadastro.html', erro_cad=True)
+#Não testado a parte dos Json
+
+    complementoData = request.get_json()
+
+    complementoDataFields = ["usuario", "tag", "profissao", "funcao", "superintendenciaDaSUBPAV", "CAP", "unidadeBasicaDeSaude"]
+
+    if not all(field in complementoData for field in complementoDataFields):
+        return "Missing information", 400
+
+    createComplemento = CreateComplementoService()
+
+    Complemento = createComplemento.execute(complementoData)
+
+    return jsonify(Complemento)
 
 
 #refatorado
 @blueprint.route("/cadastrarturma", methods=['POST'])
 def cadastrarturma():
-    variavelResponsavel = str(request.form["responsavel"])
-    variavelNome = str(request.form["nome"])
-    variavelDia = str(request.form["dia"])
-    variavelHora = str(request.form["hora"])
-    variavelCarga = str(request.form["carga"])
-    variavelTolerancia = str(request.form["tolerancia"])
-    variavelModalidade = str(request.form["modalidade"])
-    variavelTag = str(request.form["tag"])
 
-    banco = Banco()
-    if (banco.buscarProfessor(variavelResponsavel) != []):
-        variavelResponsavel = banco.buscarProfessor(variavelResponsavel)
-        cadastrado = banco.cadastrarTurma(
-            variavelResponsavel[0], variavelNome, variavelDia, variavelHora, variavelCarga, variavelTolerancia, variavelModalidade, variavelTag)
-    else:
-        return 'Responsavel não cadastrado'
-    if cadastrado:
-        return render_template('CadastroTurma.html', erro_cad=False)
-    else:
-        return render_template('CadastroTurma.html', erro_cad=True)
+#Não testado a parte dos Json
 
+    turmaData = request.get_json()
+    turmaDataFields = ["responsavel", "nome_do_curso", "carga_horaria_total", "tolerancia", "modalidade", "turma_tag"]
 
-@blueprint.route("/cadastraralunonaturma", methods=['POST'])
-def cadastraralunonaturma():
-    variavelAluno = str(request.form["aluno"])
-    variavelTurma = str(request.form["codigo"])
+    if not all(field in turmaData for field in turmaDataFields):
+        return "Missing information", 400
 
-    banco = Banco()
-    if (banco.buscarTurma(variavelTurma) != []):
-        variavelTurma = banco.buscarTurma(variavelTurma)
-        if(banco.buscarAluno(variavelAluno) != []):
-            variavelAluno = banco.buscarAluno(variavelAluno)
-            if(banco.buscarAlunoPorUsuarioECodigo(str(request.form["aluno"]), str(request.form["codigo"])) == []):
-                cadastrado = banco.cadastrarAlunos(
-                    variavelTurma[0], variavelAluno[0])
-            else:
-                return 'Aluno ja cadastrado na turma'
-        else:
-            return 'Aluno não existe'
-    else:
-        return 'Turma não existe'
-    if cadastrado:
-        return render_template('cadastroalunonaturma.html', erro_cad=False)
-    else:
-        return render_template('cadastroalunonaturma.html', erro_cad=True)
+    createTurma = CreateTurmaService()
+
+    turma = createTurma.execute(turmaData)
+
+    return jsonify(turma)    
 
 
 @blueprint.route("/listaturma")
@@ -214,90 +174,53 @@ def atualizarpresenca():
 
 @blueprint.route("/cadastraraluno", methods=['POST'])
 def cadastraraluno():
-    variavelAluno = session['user']
-    variavelTurma = session['nome_da_turma']
 
-    banco = Banco()
-    if (banco.buscarTurma(variavelTurma) != []):
-        variavelTurma = banco.buscarTurma(variavelTurma)
-        if(banco.buscarAluno(variavelAluno) != []):
-            variavelAluno = banco.buscarAluno(variavelAluno)
-            if(banco.buscarAlunoPorUsuarioECodigo(session['user'], session['nome_da_turma']) == []):
-                cadastrado = banco.cadastrarAlunos(
-                    variavelTurma[0], variavelAluno[0])
-            else:
-                session['nome_da_turma'] = ''
-                return 'Aluno ja cadastrado na turma'
-        else:
-            session['nome_da_turma'] = ''
-            return 'Aluno não existe'
-    else:
-        session['nome_da_turma'] = ''
-        return 'Turma não existe'
-    if cadastrado:
-        session['nome_da_turma'] = ''
-        return render_template('inicio.html', erro_cad=False)
-    else:
-        session['nome_da_turma'] = ''
-        return render_template('inicio.html', erro_cad=True)
+#Não testado a parte dos Json
 
+    cadastroData = request.get_json()
+    cadastroDataFields = ["usuario", "nome_do_curso"]
+
+    if not all(field in cadastroData for field in cadastroDataFields):
+        return "Missing information", 400
+
+    cadastrarAluno = CreateAlunoService()
+
+    Aluno = cadastrarAluno.execute(cadastroData)
+
+    return jsonify(Aluno)    
 
 @blueprint.route("/cadastrarapoiador", methods=['POST'])
 def cadastrarapoiador():
-    variavelAluno = str(request.form["aluno"])
-    variavelTurma = str(request.form["turma"])
 
-    banco = Banco()
-    if (banco.buscarTurma(variavelTurma) != []):
-        variavelTurma = banco.buscarTurma(variavelTurma)
-        if(banco.buscarAluno(variavelAluno) != []):
-            variavelAluno = banco.buscarAluno(variavelAluno)
-            if(banco.buscarApoiadorPorUsuarioECodigo(str(request.form["aluno"]), str(request.form["turma"])) == []):
-                cadastrado = banco.cadastrarAlunoApoiador(
-                    variavelTurma[0], variavelAluno[0])
-            else:
-                return 'Aluno ja cadastrado como apoiador da turma'
-        else:
-            return 'Aluno não existe'
-    else:
-        return 'Turma não existe'
-    if cadastrado:
-        return render_template('cadastroapoiador.html', erro_cad=False)
-    else:
-        return render_template('cadastroapoiador.html', erro_cad=True)
+#Não testado a parte dos Json
+
+    apoiadorData = request.get_json()
+    apoiadorDataFields = ["usuario", "nome_do_curso"]
+
+    if not all(field in apoiadorData for field in apoiadorDataFields):
+        return "Missing information", 400
+
+    cadastrarApoiador = CreateApoiadorService()
+
+    Apoiador = cadastrarApoiador.execute(apoiadorData)
+    return jsonify(Apoiador)    
+
+@blueprint.route("/cadastrarhorario", methods=['POST'])
+def cadastrarhorario():
 
 
-@blueprint.route("/cadastraraula", methods=['POST'])
-def cadastraraula():
-    banco = Banco()
-    variavelturma = str(request.form["turma"])
-    variavelaula = str(request.form["aula"])
-    horario = str(request.form["horario"])
-    termino = str(request.form["termino"])
-    horario = horario[:10] + ' ' + horario[11:] + ':00'
-    termino = termino[:10] + ' ' + termino[11:] + ':00'
-    teste1 = banco.retornaHorario(horario)
-    teste2 = banco.retornaHorario(termino)
-    teste3 = banco.retornaHorarioNow()
-    teste1 = int(teste1[0][0])
-    teste2 = int(teste2[0][0])
-    teste3 = int(teste3[0][0])
-    if(teste1 >= teste2 or teste3 >= teste2):
-        return 'Horario invalido'
+#Não testado a parte dos Json
 
-    if (banco.buscarTurma(variavelturma) != []):
-        variavelTurma = banco.buscarTurma(variavelturma)
-        if(banco.buscarAulaPorTurmaENome(variavelturma, variavelaula) == []):
-            cadastrado = banco.cadastrarAula(
-                variavelTurma[0], teste1, teste2, variavelaula)
-        else:
-            return 'Aula Ja cadastrada'
-    else:
-        return 'Turma não existe'
-    if cadastrado:
-        return render_template('cadastroapoiador.html', erro_cad=False)
-    else:
-        return render_template('cadastroapoiador.html', erro_cad=True)
+    horarioData = request.get_json()
+    horarioDataFields = ["Turma", "DiaDaSemana", "Inicio", "Termino", "Propositor"]
+
+    if not all(field in horarioData for field in horarioDataFields):
+        return "Missing information", 400
+
+    cadastrarHorario = CreateHorarioService()
+
+    Horario = cadastrarHorario.execute(horarioData)
+    return jsonify(Horario)
 
 #AINDA NÃO TERMINADA
 @blueprint.route("/chamadavalidar", methods=['POST'])
@@ -424,21 +347,37 @@ def data():
                      cpf="bbbbbbbbcpf", telefone="187654tel", tipo="propositor")
         User3 = User(usuario="ddddd", email="dddd@exemplo.br", senha="ddddsenha",
                      cpf="ddddddddcpf", telefone="287654tel", tipo="cursista")
-        session.add_all([User1, User2, User3])
+        User4 = User(usuario="eeeeee", email="eeeeee@exemplo.br", senha="eeeeeasdasfa",
+                     cpf="ddddddddcpf", telefone="287654tel", tipo="cursista")
+        User5 = User(usuario="eeeeee", email="eeeeee@exemplo.br", senha="eeeeeasdasfa",
+                     cpf="ddddddddcpf", telefone="287654tel", tipo="cursista")
+        session.add_all([User1, User2, User3, User4,User5])
         session.commit()
         Turma1 = Turma(id_responsavel=User2.Id,nome_do_curso="calculo",IsConcluido=0,carga_horaria_total=60,tolerancia=30,modalidade="n sei",turma_tag="tbm n sei")
         Turma2 = Turma(id_responsavel=User2.Id,nome_do_curso="iot",IsConcluido=1,carga_horaria_total=60,tolerancia=30,modalidade="n sei",turma_tag="tbm n sei")
         UserComplemento1 = UserComplemento(user=User1,tag="naosei1",profissao="coach",funcao="direcao",superintendenciaDaSUBPAV="ZAP",CAP="1.0",unidadeBasicaDeSaude="1")
         UserComplemento2 = UserComplemento(user=User2,tag="naosei1",profissao="bundao",funcao="direcao",superintendenciaDaSUBPAV="SAP",CAP="1.0",unidadeBasicaDeSaude="1")
         UserComplemento3 = UserComplemento(user=User3,tag="naosei1",profissao="coach",funcao="gerencia",superintendenciaDaSUBPAV="SAP",CAP="1.0",unidadeBasicaDeSaude="1")
+        UserComplemento4 = UserComplemento(user=User4,tag="naosei1",profissao="coach",funcao="gerencia",superintendenciaDaSUBPAV="SAP",CAP="1.0",unidadeBasicaDeSaude="1")
         Aluno1 = Aluno(alunoUser=User1, complementoUser=UserComplemento1)
         Aluno2 = Aluno(alunoUser=User3, complementoUser=UserComplemento3)
-        session.add_all([Aluno1,Aluno2,UserComplemento1,UserComplemento2,UserComplemento3,Turma1,Turma2])
+        Aluno3 = Aluno(alunoUser=User2, complementoUser=UserComplemento2)
+        Aluno4 = Aluno(alunoUser=User4, complementoUser=UserComplemento4)
+        session.add_all([Aluno1,Aluno2,Aluno3,Aluno4,UserComplemento1,UserComplemento2,UserComplemento3, UserComplemento4,Turma1,Turma2])
         session.commit()
         Turma1.Alunos.append(Aluno1)
         Turma1.Alunos.append(Aluno2)
         Turma2.Alunos.append(Aluno1)
+        aba = session.query(User).filter_by(usuario = "eeeeee").first()
+        Turma1.Alunos.append(aba.Aluno)
         session.commit()
+        if (User5.Aluno != None):
+            print("aaa")
+        if (User4.Aluno != None):
+            print("fasfasga")
+        for x in Turma1.Alunos:
+            a = session.query(User).filter_by(Id = x.alunos_id_user).first()
+            print(a.usuario)
         logger.info("informações de teste inseridas no banco de dados")
         return "200OK"
     except InternalError:
