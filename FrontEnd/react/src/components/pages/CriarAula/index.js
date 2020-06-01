@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 // import AddIcon from '@material-ui/icons/Add';
 import { Link } from '../../../../node_modules/react-router-dom';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
@@ -13,7 +13,35 @@ import { Accessibility } from '../../accessibility'
 
 function CriarAula() {
 
-    //preencher dados da turma com db
+    const [turma, setTurma] = useState("");  
+    const [dia, setDia] = useState("");
+    const [horaInicio, setInicio] = useState("");
+    const [horaTermino, setTermino] = useState("");
+    const [propositor, setPropositor] = useState("");
+
+    async function handleCreate(e) {
+                
+        e.preventDefault();
+    
+        const data = {
+          turma, 
+          dia, 
+          horaInicio,
+          horaTermino,
+          propositor
+
+        };
+    
+        try {
+          api.post("/cadastrarhorario", data);
+    
+          alert(`A aula foi cadastrada com sucesso!`);
+
+        } catch (err) {
+          console.log(err);
+          alert("Erro no cadastro, tente novamente");
+        }
+      }
 
     return (
         <Fragment>
@@ -71,12 +99,12 @@ function CriarAula() {
                     <div className="info-turmas">
                         <div class="form-page-container">
                             <div class="form-container">
-                                <form>
+                                <form onSubmit={handleCreate}>
                                     <h1>Cadastre sua aula!</h1>
                                     <input type="date" name="data" class="form-input" placeholder="Data" required />
-                                    <input name="turma" class="form-input" placeholder="Nome da Aula" required />
-                                    <input type="time" name="inicio" class="form-input" placeholder="Hora de Início" required />
-                                    <input type="time" name="inicio" class="form-input" placeholder="Hora de Término" required />
+                                    <input name="turma" class="form-input" placeholder="Nome da Aula" required  />
+                                    <input type="time" name="inicio" class="form-input" placeholder="Hora de Início" value={horaInicio} onChange={e => setInicio(e.target.value)} required />
+                                    <input type="time" name="inicio" class="form-input" placeholder="Hora de Término" value={horaTermino} onChange={e => setTermino(e.target.value)} required />
                                     <input type="submit" class="button" value="cadastrar aula" />
                                 </form>
                             </div>

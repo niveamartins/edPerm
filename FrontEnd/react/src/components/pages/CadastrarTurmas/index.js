@@ -1,9 +1,7 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 
 import './cadastroTurma.css'
-
-// {useState}
-// import api from '../../services/api';
+import api from '../../../services/api';
 
 // import { Link } from './node_modules/react-router-dom';
 import { NavBar } from '../../navbar'
@@ -13,7 +11,7 @@ import { Accessibility } from '../../accessibility'
 
 function CadastrarTurma() {
 
-  /*    const [name, setName] = useState("");
+/*      const [name, setName] = useState("");
       const [turma, setTurma] = useState("");  
   
       async function handleCreate(e) {
@@ -27,9 +25,9 @@ function CadastrarTurma() {
           };
       
           try {
-            api.post("/", data);
+            api.post("/cadastrarturma", data);
       
-            alert(`O aluno foi cadastrado com sucesso!`);
+            alert(`A turma foi cadastrada com sucesso!`);
   
           } catch (err) {
             console.log(err);
