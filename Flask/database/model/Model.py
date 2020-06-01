@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Integer,Text, Enum, ForeignKey, Table, Time, Boolean
+from sqlalchemy import (Column, String, Integer,Text, Enum, ForeignKey, Table, Time, Boolean, DateTime)
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, backref
 from database.model.Base.Base import Base
@@ -107,3 +107,13 @@ class Presenca(Base):
     presenca_id_aluno = Column(Integer, ForeignKey('aluno.id_aluno'), nullable=False)
     presenca_id_turma = Column(Integer, ForeignKey('turma.id_turma'), nullable=False)
     presencaNaTurma = Column(Integer, nullable=False)
+
+class Aula(Base):
+    __tablename__ = 'aula'
+    id_aula = Column(Integer, primary_key=True)
+    aula_id_turma = Column(Integer, ForeignKey('turma.id_turma'), nullable=False)
+    aula_inicio = Column(DateTime, nullable=False)
+    aula_termino = Column(DateTime, nullable=False)
+
+
+

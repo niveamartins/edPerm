@@ -13,7 +13,9 @@ from utilities.loggers import get_logger
 from services.CreateUserService import CreateUserService
 from services.CreateTurmaService import CreateTurmaService
 from services.CreateComplementoService import CreateComplementoService
-from services.CadastrarAlunoService import CadastrarAlunoService
+from services.CreateAlunoService import CreateAlunoService
+from services.CreateApoiadorService import CreateApoiadorService
+from services.CreateAulaService import CreateAulaService
 from services.AutheticateUserService import AutheticateUserService
 blueprint = Blueprint('endpoints', __name__)
 logger = get_logger(sys.argv[0])
@@ -280,7 +282,7 @@ def cadastraraluno():
     if not all(field in cadastroData for field in cadastroDataFields):
         return "Missing information", 400
 
-    cadastrarAluno = CadastrarAlunoService()
+    cadastrarAluno = CreateAlunoService()
 
     Aluno = cadastrarAluno.execute(cadastroData)
 
@@ -289,60 +291,45 @@ def cadastraraluno():
 
 @blueprint.route("/cadastrarapoiador", methods=['POST'])
 def cadastrarapoiador():
-    variavelAluno = str(request.form["aluno"])
-    variavelTurma = str(request.form["turma"])
+    variavelAluno = str(request.form["Usuario"])
+    variavelTurma = str(request.form["Turma"])
 
-    banco = Banco()
-    if (banco.buscarTurma(variavelTurma) != []):
-        variavelTurma = banco.buscarTurma(variavelTurma)
-        if(banco.buscarAluno(variavelAluno) != []):
-            variavelAluno = banco.buscarAluno(variavelAluno)
-            if(banco.buscarApoiadorPorUsuarioECodigo(str(request.form["aluno"]), str(request.form["turma"])) == []):
-                cadastrado = banco.cadastrarAlunoApoiador(
-                    variavelTurma[0], variavelAluno[0])
-            else:
-                return 'Aluno ja cadastrado como apoiador da turma'
-        else:
-            return 'Aluno não existe'
-    else:
-        return 'Turma não existe'
-    if cadastrado:
-        return render_template('cadastroapoiador.html', erro_cad=False)
-    else:
-        return render_template('cadastroapoiador.html', erro_cad=True)
+    apoiadorData = {"usuario":variavelAluno, "nome_do_curso":variavelTurma}
+    
+#na versão final descomentar os comentarios abaixo e trocar o return e apagar tudo acima desse comentario
+#    cadastroData = request.get_json()
+    apoiadorDataFields = ["usuario", "nome_do_curso"]
 
+    if not all(field in apoiadorData for field in apoiadorDataFields):
+        return "Missing information", 400
+
+    cadastrarApoiador = CreateApoiadorService()
+
+    Apoiador = cadastrarApoiador.execute(apoiadorData)
+    return Apoiador
+#    return jsonify(Aluno)    
 
 @blueprint.route("/cadastraraula", methods=['POST'])
 def cadastraraula():
-    banco = Banco()
-    variavelturma = str(request.form["turma"])
-    variavelaula = str(request.form["aula"])
-    horario = str(request.form["horario"])
-    termino = str(request.form["termino"])
-    horario = horario[:10] + ' ' + horario[11:] + ':00'
-    termino = termino[:10] + ' ' + termino[11:] + ':00'
-    teste1 = banco.retornaHorario(horario)
-    teste2 = banco.retornaHorario(termino)
-    teste3 = banco.retornaHorarioNow()
-    teste1 = int(teste1[0][0])
-    teste2 = int(teste2[0][0])
-    teste3 = int(teste3[0][0])
-    if(teste1 >= teste2 or teste3 >= teste2):
-        return 'Horario invalido'
 
-    if (banco.buscarTurma(variavelturma) != []):
-        variavelTurma = banco.buscarTurma(variavelturma)
-        if(banco.buscarAulaPorTurmaENome(variavelturma, variavelaula) == []):
-            cadastrado = banco.cadastrarAula(
-                variavelTurma[0], teste1, teste2, variavelaula)
-        else:
-            return 'Aula Ja cadastrada'
-    else:
-        return 'Turma não existe'
-    if cadastrado:
-        return render_template('cadastroapoiador.html', erro_cad=False)
-    else:
-        return render_template('cadastroapoiador.html', erro_cad=True)
+    variavelTurma = str(request.form["Turma"])
+    variavelInicio = str(request.form["Inicio"])
+    variavelTermino = str(request.form["Termino"])
+
+    aulaData = {"Turma":variavelTurma, "Inicio":variavelInicio, "Termino":variavelTermino}
+    
+#na versão final descomentar os comentarios abaixo e trocar o return e apagar tudo acima desse comentario
+#    cadastroData = request.get_json()
+    aulaDataFields = ["Turma", "Inicio", "Termino"]
+
+    if not all(field in aulaData for field in aulaDataFields):
+        return "Missing information", 400
+
+    cadastrarAula = CreateAulaService()
+
+    Aula = cadastrarAula.execute(aulaData)
+    return Aula
+#    return jsonify(Aluno)
 
 
 @blueprint.route("/chamadapesquisar", methods=['POST'])

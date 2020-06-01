@@ -7,7 +7,7 @@ from utilities.loggers import get_logger
 
 
 
-class CadastrarAlunoService:
+class CreateAlunoService:
     def execute(self, cadastroData):
         #logger = get_logger(sys.argv[0])
         #cadastroDataFields = ["usuario", "nome_do_curso"]
