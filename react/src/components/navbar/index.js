@@ -3,6 +3,7 @@ import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew'
 import MenuIcon from '@material-ui/icons/Menu'
 
 import './navbar.css'
+import { NavLink } from 'react-router-dom'
 
 export function NavBar() {
     //Links
@@ -28,9 +29,9 @@ export function NavBar() {
                         </label>
 
                         <ul className="nav__links">
-                            <li><a href="/cadalunos" className="middle" title="Cadastrar Alunos">Cadastrar Alunos</a></li>
-                            <li><a href="/cadturma" className="middle" title="Cadastrar Turma">Cadastrar Turma</a></li>
-                            <li><a href="/turmas" className="middle" title="Listar Turmas">Turmas</a></li>
+                            <li><NavLink to="/cadalunos" className="middle" title="Cadastrar Alunos" activeClassName="active__link">Cadastrar Alunos</NavLink></li>
+                            <li><NavLink to="/cadturma" className="middle" title="Cadastrar Turma" activeClassName="active__link">Cadastrar Turma</NavLink></li>
+                            <li><NavLink to="/turmas" className="middle" title="Listar Turmas" activeClassName="active__link">Turmas</NavLink></li>
                         </ul>
                 </nav>
 
