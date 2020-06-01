@@ -1,4 +1,5 @@
 import sys
+from datetime import datetime, timezone
 
 from flask import Blueprint, request, jsonify, render_template, redirect, url_for, session, jsonify
 from sqlalchemy.exc import InternalError
@@ -12,6 +13,7 @@ from utilities.montaRelatorio import *
 from utilities.loggers import get_logger
 from services.CreateUserService import CreateUserService
 from services.AutheticateUserService import AutheticateUserService
+
 blueprint = Blueprint('endpoints', __name__)
 logger = get_logger(sys.argv[0])
 
@@ -73,7 +75,7 @@ def cadastrar():
 
     return jsonify(user)
 
-
+#refatorado
 @blueprint.route("/cadastrardadoscomplementares", methods=['POST'])
 def cadastrarDadosComplementares():
     tag = str(request.form["tag"]).title()
@@ -108,29 +110,7 @@ def cadastrarDadosComplementares():
         return render_template('cadastro.html', erro_cad=True)
 
 
-@blueprint.route("/cadastrardadospessoais", methods=['POST'])
-def cadastrarDadosPessoais():
-#Vai morrer
-    nome = str(request.form["nome"]).title()
-    cpf = str(request.form["cpf"]).title()
-    telefone = str(request.form["telefone"])
-
-    banco = Banco()
-
-    if (banco.buscarDadosPessoais(session['user_id']) == []):
-        cadastrado = banco.cadastrar_dados_pessoais(
-            session['user_id'], nome, cpf, telefone)
-    else:
-        banco.atualizarNome(session['user_id'], tag)
-        banco.atualizarCpf(session['user_id'], profissao)
-        banco.atualizarTelefone(session['user_id'], funcao)
-        return 'Dados Pessoais atualizado'
-    if cadastrado:
-        return redirect('/')
-    else:
-        return render_template('cadastro.html', erro_cad=True)
-
-
+#refatorado
 @blueprint.route("/cadastrarturma", methods=['POST'])
 def cadastrarturma():
     variavelResponsavel = str(request.form["responsavel"])
@@ -183,16 +163,16 @@ def cadastraralunonaturma():
 @blueprint.route("/listaturma")
 def listarturma():
 
-#session = get_session()
-#busca = session.query(User).filter_by(usuario='Matheus Feitosa')
-#busca = session.query(User).filter_by(usuario= usuario)
-#busca.email =
-#session.commit()
+    #session = get_session()
+    #busca = session.query(User).filter_by(usuario='Matheus Feitosa')
+    #busca = session.query(User).filter_by(usuario= usuario)
+    #busca.email =
+    #session.commit()
 
-#try
-#session = get_session()
-#busca = session.query(Turma)
-#alterar o resto
+    #try
+    #session = get_session()
+    #busca = session.query(Turma)
+    #alterar o resto
 
     banco = Banco()
     return render_template('listaturma.html', eventos=banco.listarTurma())
@@ -214,59 +194,23 @@ def turma(codigo_turma):
     evento = banco.buscarTurmaComProfessor(codigo_turma)
     return render_template('listaralunosdaturma.html', eventos=evento, alunosdaturma=alunodaturma)
 
-
+#precisa ser testado
 @blueprint.route("/atualizarpresenca", methods=['POST'])
 def atualizarpresenca():
-    variavelAluno = str(request.form["alunopre"])
+    if not request.is_json:
+        return jsonify({"msg": "Missing JSON in request"}), 400
+    
+    apoiador = get_jwt_identity()
+    aluno = request.get_json()
+    session = get_session()
+    alunoApoiadordata = session.query(alunoApoiador).filter_by(apoiador_id_user=apoiador.id).one()
+    data = session.query(Presenca).filter_by(presenca_id_aluno=aluno["id_aluno"],presenca_id_turma=alunoApoiadordata.apoiador_id_turma)
+    data.ultimoCheckIn = datetime.now().time().replace(tzinfo=timezone.utc)
+    data.presencaAtualizada = False
+    session.commit()
+    session.close()
 
-    banco = Banco()
-
-    if (banco.buscarTurma(session['nome_da_turma']) != []):
-        if(banco.buscarApoiadorPorUsuarioECodigo(session['user'], session['nome_da_turma']) != []):
-            if(banco.buscarAulaPorTurmaENome(session['nome_da_turma'], session['aula']) != []):
-                if(banco.buscarAlunoPorUsuarioECodigo(variavelAluno, session['nome_da_turma']) != []):
-                    if(banco.buscarPresencaPorUsuarioEAula(variavelAluno, session['aula']) == []):
-                        variavelAluno = banco.buscarAlunoPorUsuarioECodigo(
-                            variavelAluno, session['nome_da_turma'])
-                        variavelUsuario = banco.buscarAluno(
-                            str(request.form["alunopre"]))
-                        variavelAula = banco.buscarAulaPorTurmaENome(
-                            session['nome_da_turma'], session['aula'])
-                        inicio = int(variavelAula[0][2])
-                        fim = int(variavelAula[0][3])
-                        horarioDaPresenca = banco.retornaHorarioNow()
-                        horarioDaPresenca = int(horarioDaPresenca[0][0])
-                        cadastrado = banco.cadastrarPresenca(
-                            variavelUsuario[0], variavelAula[0], horarioDaPresenca)
-                        if cadastrado:
-                            if(horarioDaPresenca < inicio):
-                                presenca = int(
-                                    variavelAluno[0][3]) + fim - inicio
-                            else:
-                                if(horarioDaPresenca > fim):
-                                    presenca = int(variavelAluno[0][3])
-                                else:
-                                    presenca = int(
-                                        variavelAluno[0][3]) + fim - horarioDaPresenca
-                            cadastrado = banco.atualizarAlunos(
-                                variavelAluno[0][0], presenca)
-                    else:
-                        return 'Aluno já possui presença nessa aula'
-                else:
-                    return 'Aluno não existe'
-            else:
-                return 'Aula não existe'
-        else:
-            return 'Você não é apoiador dessa turma'
-    else:
-        return 'Turma não existe'
-
-    if cadastrado:
-        return render_template('atualizarpresencaaluno.html', erro_cad=False)
-    else:
-        banco.apagarPresenca(variavelUsuario[0], variavelAula[0])
-        return render_template('atualizarpresencaaluno.html', erro_cad=True)
-
+    return jsonify("msg": "Presença do aluno contabilizada"), 200
 
 @blueprint.route("/cadastraraluno", methods=['POST'])
 def cadastraraluno():
@@ -355,25 +299,22 @@ def cadastraraula():
     else:
         return render_template('cadastroapoiador.html', erro_cad=True)
 
-
-@blueprint.route("/chamadapesquisar", methods=['POST'])
+#AINDA NÃO TERMINADA
+@blueprint.route("/chamadavalidar", methods=['POST'])
 def chamadapesquisar():
-    variavelTurma = str(request.form["turma"])
-    variavelAula = str(request.form["aula"])
+    if not request.is_json:
+        return jsonify({"msg": "Missing JSON in request"}), 400
+    
+    propositor = get_jwt_identity()
+    turma = request.get_json()
+    session = get_session()
+    data = session.query(Presenca).filter_by(presenca_id_turma=turma["id"],presencaAtualizada=False).all()
+    for i in data:
 
-    banco = Banco()
-    if (banco.buscarTurma(variavelTurma) != []):
-        if(banco.buscarApoiadorPorUsuarioECodigo(session['user'], variavelTurma) != []):
-            if(banco.buscarAulaPorTurmaENome(variavelTurma, variavelAula) != []):
-                session['aula'] = variavelAula
-                session['nome_da_turma'] = variavelTurma
-                return render_template('atualizarpresencaaluno.html', erro_cad=False)
-            else:
-                return 'Aula não existe'
-        else:
-            return 'Você não é apoiador dessa turma'
-    else:
-        return 'Turma não existe'
+    
+
+
+    
 
 ### RELATORIOS ###
 
@@ -382,7 +323,6 @@ def chamadapesquisar():
 def get_relatoriocontato():
     session = get_session()
     data = session.query(User).all()
-    logger.debug(f'Query: {str(session.query(User))}')
     data = [relatoriocontato(i) for i in data]
     session.close()
     return jsonify(data)
@@ -392,7 +332,6 @@ def get_relatoriocontato():
 def get_relatoriocpfnome():
     session = get_session()
     data = session.query(Turma).all()
-    logger.debug(f'Query: {str(session.query(Turma))}')
     JSON = [Rcpfnome(i) for i in data]
     for (i, j) in zip(data, JSON):
         for z in i.Alunos:
@@ -401,9 +340,17 @@ def get_relatoriocpfnome():
     return jsonify(JSON)
 
 #RELATORIO FREQUENCIA
+#AINDA NÃO SERÁ IMPLEMENTADO, PRECISA DA FUNÇÃO DE CHECKIN
 @blueprint.route('/relatoriofrequencia', methods = ['GET'])
 def get_relatoriofrequencia():
+    '''
+    Frequência: frequência computada em dias, horas e minutos com base no horário de check-in do cursista. 
+    Ele poderá acompanhar a própria carga-horária com base na tolerância informada pelo propositor da atividade.
+    '''
     session = get_session()
+    data = session.query(Aluno).all()
+    JSON = [frequencia(i) for i in data]
+    
 
     session.close()
     return jsonify()
