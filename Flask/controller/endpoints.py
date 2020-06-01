@@ -15,7 +15,7 @@ from services.CreateTurmaService import CreateTurmaService
 from services.CreateComplementoService import CreateComplementoService
 from services.CreateAlunoService import CreateAlunoService
 from services.CreateApoiadorService import CreateApoiadorService
-from services.CreateAulaService import CreateAulaService
+from services.CreateHorarioService import CreateHorarioService
 from services.AutheticateUserService import AutheticateUserService
 blueprint = Blueprint('endpoints', __name__)
 logger = get_logger(sys.argv[0])
@@ -309,27 +309,29 @@ def cadastrarapoiador():
     return Apoiador
 #    return jsonify(Aluno)    
 
-@blueprint.route("/cadastraraula", methods=['POST'])
-def cadastraraula():
+@blueprint.route("/cadastrarhorario", methods=['POST'])
+def cadastrarhorario():
 
     variavelTurma = str(request.form["Turma"])
+    variavelDia = str(request.form["Dia"])
     variavelInicio = str(request.form["Inicio"])
     variavelTermino = str(request.form["Termino"])
-
-    aulaData = {"Turma":variavelTurma, "Inicio":variavelInicio, "Termino":variavelTermino}
+    variavelPropositor = str(request.form["Propositor"])
+ 
+    horarioData = {"Turma":variavelTurma, "DiaDaSemana":variavelDia, "Inicio":variavelInicio, "Termino":variavelTermino, "Propositor":variavelPropositor}
     
 #na versão final descomentar os comentarios abaixo e trocar o return e apagar tudo acima desse comentario
-#    cadastroData = request.get_json()
-    aulaDataFields = ["Turma", "Inicio", "Termino"]
+#    horarioData = request.get_json()
+    horarioDataFields = ["Turma", "DiaDaSemana", "Inicio", "Termino", "Propositor"]
 
-    if not all(field in aulaData for field in aulaDataFields):
+    if not all(field in horarioData for field in horarioDataFields):
         return "Missing information", 400
 
-    cadastrarAula = CreateAulaService()
+    cadastrarHorario = CreateHorarioService()
 
-    Aula = cadastrarAula.execute(aulaData)
-    return Aula
-#    return jsonify(Aluno)
+    Horario = cadastrarHorario.execute(horarioData)
+    return Horario
+#    return jsonify(Horario)
 
 
 @blueprint.route("/chamadapesquisar", methods=['POST'])

@@ -320,3 +320,7 @@
 [2020-06-01 02:33:21,981 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
 [2020-06-01 02:33:33,826 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
 [2020-06-01 02:33:33,884 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-01 05:22:59,386 - Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-01 05:23:00,603 - Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-01 05:23:01,415 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-01 05:23:01,482 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões

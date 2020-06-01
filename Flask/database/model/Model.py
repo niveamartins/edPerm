@@ -108,12 +108,5 @@ class Presenca(Base):
     presenca_id_turma = Column(Integer, ForeignKey('turma.id_turma'), nullable=False)
     presencaNaTurma = Column(Integer, nullable=False)
 
-class Aula(Base):
-    __tablename__ = 'aula'
-    id_aula = Column(Integer, primary_key=True)
-    aula_id_turma = Column(Integer, ForeignKey('turma.id_turma'), nullable=False)
-    aula_inicio = Column(DateTime, nullable=False)
-    aula_termino = Column(DateTime, nullable=False)
-
 
 
