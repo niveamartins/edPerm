@@ -61,7 +61,7 @@ function Inicio() {
                             <input type="password" name="confirme_senha" id="confirm_password" class="form-input" placeholder="Confirme a Senha" value={confirm_password} onChange={e => setConfPass(e.target.value)} required />
                             <input type="text" maxLength="11" name="cpf" class="form-input" placeholder="CPF" value={cpf} onChange={e => setCpf(e.target.value)} required/>
                             <input type="tel" name="tel" class="form-input" placeholder="Telefone" value={telephone} onChange={e => setTelephone(e.target.value)} required/>
-                            <input type="submit" class="button login" value="cadastrar" />
+                            <input type="submit" class="button" value="cadastrar" />
                             <a href="/">Já possui uma conta? <span class="form-highlight">Faça login</span></a>
                         </form>
                     </div>

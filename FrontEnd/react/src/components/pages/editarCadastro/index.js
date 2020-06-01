@@ -28,7 +28,7 @@ function EditarCadastro() {
                             <input type="password" name="senha" class="form-input" placeholder="Senha" required />
                             <input type="password" name="confirme_senha" id="confirm_password" class="form-input"
                                 placeholder="Confirme a Senha" required />
-                            <input type="submit" class="button login" value="Editar" />
+                            <input type="submit" class="button" value="Editar" />
                     
                         </form>
                     </div>

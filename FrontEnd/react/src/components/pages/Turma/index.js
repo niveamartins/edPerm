@@ -65,27 +65,27 @@ function Turma() {
 
                     <div className="nav-info-turmas">
                     <Link to="/presenca" className="link">
-                        <button size="large" class="button login">
+                        <button size="large" class="button">
                             <label>Lista de Presença</label>
                         </button>
                     </Link>
                     <Link to="/relatorios" className="link">
-                        <button size="large" class="button login">
+                        <button size="large" class="button">
                             <label>Relatórios</label>
                         </button>
                     </Link>
                     <Link to="/cadaula" className="link">
-                        <button size="large" class="button login">
+                        <button size="large" class="button">
                             <label>Criar Aula</label>
                         </button>
                     </Link>
                     <Link to="/cadapoiador" className="link">
-                        <button size="large" class="button login">
+                        <button size="large" class="button">
                             <label>Cadastrar Aluno Apoiador</label>
                         </button>
                     </Link>
                     <Link to="/aulas" className="link">
-                        <button size="large" class="button login">
+                        <button size="large" class="button">
                             <label>Aulas</label>
                         </button>
                     </Link>

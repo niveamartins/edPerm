@@ -73,7 +73,7 @@ function CadastrarApoiador() {
                                     <h1>Cadastre o apoiador!</h1>
                                     <p>Insira abaixo o código do aluno escolhido.</p>
                                     <input name="aluno" class="form-input" placeholder="Código do Aluno" required />
-                                    <input type="submit" class="button login" value="cadastrar apoiador" />
+                                    <input type="submit" class="button" value="cadastrar apoiador" />
                                 </form>
 
                             </div>

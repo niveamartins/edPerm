@@ -32,7 +32,7 @@ export function NavBar() {
                             <li><NavLink to="/cadalunos" className="middle" title="Cadastrar Alunos" activeClassName="active__link">Cadastrar Alunos</NavLink></li>
                             <li><NavLink to="/cadturma" className="middle" title="Cadastrar Turma" activeClassName="active__link">Cadastrar Turma</NavLink></li>
                             <li><NavLink to="/turmas" className="middle" title="Listar Turmas" activeClassName="active__link">Turmas</NavLink></li>
-                            <li><NavLink to="/dadosPessoais" className="middle" title="Perfil" activeClassName="active__link">Perfil</NavLink></li>
+                            <li><NavLink to="/Perfil" className="middle" title="Perfil" activeClassName="active__link">Perfil</NavLink></li>
                         </ul>
                 </nav>
 

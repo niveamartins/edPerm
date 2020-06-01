@@ -51,13 +51,13 @@ function Perfil() {
                 <div className="nav-info-pessoais">
                     
                         <Link to="/turmasinscritas" className="link">
-                            <button size="large" class="button login">
+                            <button size="large" class="button">
                                 <Class id="icons"></Class>
                                 <label>Turmas Inscritas</label>
                             </button>
                         </Link>
                         <Link to="/presencaspessoais" className="link">
-                            <button size="large" class="button login">
+                            <button size="large" class="button">
                                 <Done id="icons"></Done>
                                 <label>Presenças</label>
                             </button>
