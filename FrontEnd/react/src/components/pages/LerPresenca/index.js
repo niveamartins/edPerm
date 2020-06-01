@@ -39,7 +39,7 @@ class LerPresenca extends Component {
             facingMode="enviroment"
             style={{ height:'100%' }}
             />
-            <button>Confirmar</button>
+            <button className="button">Confirmar</button>
           </div>
       )
     }
