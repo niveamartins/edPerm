@@ -32,15 +32,15 @@ function CriarAula() {
 
         };
     
-        try {
-          api.post("/cadastrarhorario", data);
+        // try {
+        //   api.post("/cadastrarhorario", data);
     
-          alert(`A aula foi cadastrada com sucesso!`);
+        //   alert(`A aula foi cadastrada com sucesso!`);
 
-        } catch (err) {
-          console.log(err);
-          alert("Erro no cadastro, tente novamente");
-        }
+        // } catch (err) {
+        //   console.log(err);
+        //   alert("Erro no cadastro, tente novamente");
+        // }
       }
 
     return (

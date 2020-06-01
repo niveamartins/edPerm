@@ -3,10 +3,11 @@ import React, { Fragment } from "react"
 import { NavBar } from "../../navbar"
 import { Footer } from "../../footer"
 import { Accessibility } from "../../accessibility"
+import CardRelatorio from "./CardRelatorio"
+
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 import "./relatorios.css"
-
-import CardRelatorio from "./CardRelatorio"
 
 const relatorios = () => {
 	return (
@@ -14,6 +15,9 @@ const relatorios = () => {
 			<Accessibility />
 			<NavBar />
 			<main>
+				<a href="/turma">
+					<ArrowBackIcon id="return-icon" />
+				</a>
 				<div className="document__links">
 					<a href="#relatorio">
 						<CardRelatorio title="CPF/Nome" />

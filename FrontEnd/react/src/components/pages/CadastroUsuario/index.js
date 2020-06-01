@@ -1,7 +1,6 @@
 //página de login 
 import React, { useState } from 'react'
 import api from '../../../services/api'
-import './cadastroUsuario.css'
 
 function Inicio() {
 
@@ -42,6 +41,10 @@ function Inicio() {
         }
       }
 
+      const title = {
+        marginTop: '4.5em'
+    }
+
 
     return (
         <div className="login-index">
@@ -53,7 +56,7 @@ function Inicio() {
                 <div className="form-page-container">
                     <div className="form-container">
                         <form onSubmit={handleCreate}>
-                            <h1>Bem vindo(a)!</h1>
+                            <h1 style={title}>Bem vindo(a)!</h1>
                             <p>Efetue cadastro para utilização de nossas funcionalidades.</p>
                             <input type="text" name="usuario" class="form-input" placeholder="Usuário" value={user} onChange={e => setUser(e.target.value)} required />
                             <input type="text" name="email" class="form-input" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} required></input>
