@@ -205,7 +205,7 @@ def atualizarpresenca():
     session = get_session()
     alunoApoiadordata = session.query(alunoApoiador).filter_by(apoiador_id_user=apoiador.id).one()
     data = session.query(Presenca).filter_by(presenca_id_aluno=aluno["id_aluno"],presenca_id_turma=alunoApoiadordata.apoiador_id_turma)
-    data.ultimoCheckIn = datetime.now().replace(tzinfo=timezone.utc)
+    data.ultimoCheckIn = datetime.now().time().replace(tzinfo=timezone.utc)
     data.presencaAtualizada = False
     session.commit()
     session.close()
@@ -299,14 +299,18 @@ def cadastraraula():
     else:
         return render_template('cadastroapoiador.html', erro_cad=True)
 
-
+#AINDA NÃO TERMINADA
 @blueprint.route("/chamadavalidar", methods=['POST'])
 def chamadapesquisar():
     if not request.is_json:
         return jsonify({"msg": "Missing JSON in request"}), 400
     
     propositor = get_jwt_identity()
+    turma = request.get_json()
     session = get_session()
+    data = session.query(Presenca).filter_by(presenca_id_turma=turma["id"],presencaAtualizada=False).all()
+    for i in data:
+
     
 
 
