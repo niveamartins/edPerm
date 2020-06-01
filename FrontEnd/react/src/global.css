@@ -120,6 +120,7 @@ footer .links .logo img {
 #return-icon  {
   position: absolute;
   left: 20px;
+  top: 150px;
   color: var(--elements-second-color);
   font-size: 4em;
   cursor: pointer;
@@ -246,7 +247,7 @@ footer .links .logo img {
   width: 100%;
 }
 
-.button.login {
+.button {
   text-decoration: none;
   text-transform: uppercase;
   font-weight: bold;
@@ -260,7 +261,7 @@ footer .links .logo img {
   transition: all 0.3s ease 0s;
 }
 
-.button.login:hover {
+.button:hover {
   color: #404040;
   font-weight: 700;
   letter-spacing: 2px;

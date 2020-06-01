@@ -77,7 +77,7 @@ function CriarAula() {
                                     <input name="turma" class="form-input" placeholder="Nome da Aula" required />
                                     <input type="time" name="inicio" class="form-input" placeholder="Hora de Início" required />
                                     <input type="time" name="inicio" class="form-input" placeholder="Hora de Término" required />
-                                    <input type="submit" class="button login" value="cadastrar aula" />
+                                    <input type="submit" class="button" value="cadastrar aula" />
                                 </form>
                             </div>
                         </div>

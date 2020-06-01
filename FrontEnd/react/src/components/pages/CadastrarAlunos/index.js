@@ -56,7 +56,7 @@ function CadastrarAlunos() {
                 <p>Cadastre seus alunos em sua turma.</p>
                 <input name="aluno" class="form-input" placeholder="Nome do aluno" required />
                 <input name="codigo" class="form-input" placeholder="Código da Turma" required />
-                <input type="submit" class="button login" value="cadastrar aluno" />
+                <input type="submit" class="button" value="cadastrar aluno" />
               </form>
             </div>
           </div>

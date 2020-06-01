@@ -66,7 +66,7 @@ function CadastrarTurma() {
                 {/* </div> */}
                 <input name="modalidade" class="form-input" placeholder="Modalidade" required />
                 <input name="tag" class="form-input" placeholder="Tag" required />
-                <input type="submit" class="button login" id="cad__class-button" value="cadastrar Turma" />
+                <input type="submit" className="button" id="cad__class-button" value="cadastrar Turma" />
               </form>
             </div>
           </div>

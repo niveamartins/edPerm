@@ -29,7 +29,7 @@ function Inicio() {
                             <input type="password" name="senha" class="form-input" placeholder="Senha" required />
                             <input type="password" name="confirme_senha" id="confirm_password" class="form-input"
                                 placeholder="Confirme a Senha" required />
-                            <input type="submit" class="button login" value="cadastrar" />
+                            <input type="submit" class="button" value="cadastrar" />
                             <a href="/">Já possui uma conta? <span class="form-highlight">Faça login</span></a>
                         </form>
                     </div>
