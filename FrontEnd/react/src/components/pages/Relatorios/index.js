@@ -1,4 +1,5 @@
 import React, { Fragment } from "react"
+import { Link } from '../../../../node_modules/react-router-dom'
 
 import { NavBar } from "../../navbar"
 import { Footer } from "../../footer"
@@ -19,15 +20,30 @@ const relatorios = () => {
 					<ArrowBackIcon id="return-icon" />
 				</a>
 				<div className="document__links">
-					<a href="#relatorio">
+
+					<Link to= {{
+					pathname: "/relatorio",
+					state: "relatoriocpfnome"
+					}} className="link"> 
 						<CardRelatorio title="CPF/Nome" />
-					</a>
-					<a href="#relatorio">
+					</Link>
+
+					
+					<Link to= {{
+					pathname: "/relatorio",
+					state: "relatoriocontato"
+					}} className="link"> 
 						<CardRelatorio title="Contato" />
-					</a>
-					<a href="#relatorio">
+					</Link>
+
+
+					<Link to= {{
+					pathname: "/relatorio",
+					state: "relatoriofuncao"
+					}} className="link">
 						<CardRelatorio title="Função/Cargo" />
-					</a>
+					</Link>
+
 					<a href="#relatorio">
 						<CardRelatorio title="Profissão" />
 					</a>
@@ -40,12 +56,22 @@ const relatorios = () => {
 					<a href="#relatorio">
 						<CardRelatorio title="Unidade" />
 					</a>
-					<a href="#relatorio">
+
+
+					<Link to= {{
+					pathname: "/relatorio",
+					state: "relatoriofrequencia"
+					}} className="link">
 						<CardRelatorio title="Frequência" />
-					</a>
-					<a href="#relatorio">
+					</Link>
+
+
+					<Link to= {{
+					pathname: "/relatorio",
+					state: "relatorioconcluintes"
+					}} className="link">
 						<CardRelatorio title="Concluintes" />
-					</a>
+					</Link>
 				</div>
 			</main>
 			<Footer />

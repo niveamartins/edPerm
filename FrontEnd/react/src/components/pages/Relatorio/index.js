@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react'
-// import { Link } from './node_modules/react-router-dom';
+
 
 import { NavBar } from '../../navbar'
 import { Footer } from '../../footer'
@@ -9,8 +9,9 @@ import api from '../../../services/api'
 
 function Relatorio(props) { 
     const [relatorio, setRelatorio] = useState([]); 
-    const id = props.location.state;
-    const url = '/machine/' + id;
+    
+    const url = props.location.state;
+
     useEffect(() => {
       try {
         api
