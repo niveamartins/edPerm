@@ -34,13 +34,13 @@ function Perfil() {
                         <img src={qrcodeimg}/>
                         <div className="buttons">
                             <Link to="/editarDados" className="link">
-                            <button size="large" class="personal-buttons">
+                            <button size="large" class="personal-buttons" disabled>
                                 <Create id="icons"></Create>
                                 <label>Editar Dados</label>
                             </button>
                             </Link>
                             <Link to="/dadosPessoais" className="link">
-                                <button size="large" class="personal-buttons">
+                                <button size="large" class="personal-buttons" disabled>
                                     <AccountCircle id="icons"></AccountCircle>
                                     <label>Dados Pessoais</label>
                                 </button>
@@ -51,13 +51,13 @@ function Perfil() {
                 <div className="nav-info-pessoais">
                     
                         <Link to="/turmasinscritas" className="link">
-                            <button size="large" class="button">
+                            <button size="large" class="button" disabled>
                                 <Class id="icons"></Class>
                                 <label>Turmas Inscritas</label>
                             </button>
                         </Link>
                         <Link to="/presencaspessoais" className="link">
-                            <button size="large" class="button">
+                            <button size="large" class="button" disabled>
                                 <Done id="icons"></Done>
                                 <label>Presenças</label>
                             </button>

@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react'
 // import AddIcon from '@material-ui/icons/Add';
 import { Link } from '../../../../node_modules/react-router-dom';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-
+import api from '../../../services/api';
 import './criarAula.css'
 
 import { NavBar } from '../../navbar'
@@ -101,8 +101,7 @@ function CriarAula() {
                             <div class="form-container">
                                 <form onSubmit={handleCreate}>
                                     <h1>Cadastre sua aula!</h1>
-                                    <input type="date" name="data" class="form-input" placeholder="Data" required />
-                                    <input name="turma" class="form-input" placeholder="Nome da Aula" required  />
+                                    <input type="date" name="data" class="form-input" placeholder="Dia da Semana" value={dia} onChange={e => setDia(e.target.value)} required />
                                     <input type="time" name="inicio" class="form-input" placeholder="Hora de Início" value={horaInicio} onChange={e => setInicio(e.target.value)} required />
                                     <input type="time" name="inicio" class="form-input" placeholder="Hora de Término" value={horaTermino} onChange={e => setTermino(e.target.value)} required />
                                     <input type="submit" class="button" value="cadastrar aula" />

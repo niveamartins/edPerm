@@ -11,7 +11,7 @@ import { Accessibility } from '../../accessibility'
 
 function CadastrarTurma() {
 
-/*      const [name, setName] = useState("");
+     const [name, setName] = useState("");
       const [turma, setTurma] = useState("");  
   
       async function handleCreate(e) {
@@ -34,7 +34,7 @@ function CadastrarTurma() {
             alert("Erro no cadastro, tente novamente");
           }
         }
-        */
+  
 
   // mudar quando for integrar:
   // <input placeholder="Nome do Aluno" value={name} onChange={e => setName(e.target.value)}></input>
