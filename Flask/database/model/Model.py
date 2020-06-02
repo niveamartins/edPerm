@@ -64,7 +64,7 @@ class Turma(Base):
     carga_horaria_total = Column(Integer, nullable=False)
     tolerancia = Column(Integer, nullable=False)
     modalidade = Column(String(20), nullable=False)
-    turma_tag = Column(String(20), nullable=False)
+    turma_tag = Column(String(20), nullable=True)
 
     # ONE TO MANY
     Horarios = relationship('Horario', backref="Turma")
@@ -114,6 +114,6 @@ class Presenca(Base):
     presenca_id_turma = Column(Integer, ForeignKey('turma.id_turma'), nullable=False)
     ultimoCheckIn = Column(DateTime, nullable=True)
     presencaAtualizada = Column(Boolean, nullable=True, default=True)
-    presencaTotal = Column(Integer, nullable=False)
+    presencaTotal = Column(DateTime, nullable=False)
 
 #TODO: ESTUDAR DATETIME NA HORA DE IMPLEMENTAR A FUNÇÃO DE CHECKIN

@@ -1,4 +1,3 @@
-from utilities.loggers import *
 from flask import Flask
 from controller.endpoints import blueprint
 from extensions import jwt

@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from database.session import get_session 
 from database.model.Model import *
 
@@ -53,7 +55,7 @@ def RcpfnomeAlunos(Aluno):
         }
         
 
-def atividade_turma(Turma,tipoDeRelatorio):
+def listar_turmas(Turma,tipoDeRelatorio):
     return {
         'tipoDeRelatorio': f'{tipoDeRelatorio}',
         'id_turma': f'{Turma.id_turma}',
@@ -62,6 +64,22 @@ def atividade_turma(Turma,tipoDeRelatorio):
         'Carga_Horaria_Total':f'{Turma.carga_horaria_total}',
         'cursistas':[]
     }
+
+
+def listaturma(Turma):
+
+    return {
+        'id_turma': f'{Turma.id_turma}', 
+        'nome_do_curso':f'{Turma.nome_do_curso}',
+        'id_responsavel':f'{Turma.id_responsavel}',
+        'nome_responsavel':f'{Turma.propositor.usuario}'
+        'Carga_Horaria_Total':f'{Turma.carga_horaria_total}',
+        'tag_turma':f'{Turma.tag_turma}',
+        'tolerancia':f'{Turma.tolerancia}',
+        'modalidade':f'{Turma.modalidade}'
+    }
+
+
 
 
 def atividade_aluno(Aluno):
@@ -97,3 +115,9 @@ def frequencia(Aluno):
         'id_user_aluno' : f'{Aluno.alunos_id_user}',
         'Turma' : []
      }
+
+
+def atualizapresenca(Presenca, Horario):
+    DeltaTime = Horario.HorarioTermino - Presenca.ultimoCheckIn.time()
+    
+    
