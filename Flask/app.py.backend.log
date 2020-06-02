@@ -62,3 +62,37 @@
 [2020-06-02 15:39:07,842 - /home/nivea/Documentos/projetos/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
 [2020-06-02 15:40:25,278 - /home/nivea/Documentos/projetos/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
 [2020-06-02 15:40:25,332 - /home/nivea/Documentos/projetos/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 16:14:56,628 - Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 16:14:56,682 - Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 16:14:57,232 - /home/nivea/Documentos/projetos/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 16:14:57,282 - /home/nivea/Documentos/projetos/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 17:37:41,648 - /home/nivea/Documentos/projetos/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 17:37:41,693 - /home/nivea/Documentos/projetos/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 17:39:38,552 - /home/nivea/Documentos/projetos/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 17:39:38,610 - /home/nivea/Documentos/projetos/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 17:50:43,612 - /home/nivea/Documentos/projetos/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 17:50:43,678 - /home/nivea/Documentos/projetos/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 17:56:00,392 - /home/nivea/Documentos/projetos/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 17:56:00,443 - /home/nivea/Documentos/projetos/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 17:56:17,447 - /home/nivea/Documentos/projetos/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 17:56:17,509 - /home/nivea/Documentos/projetos/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 17:59:31,100 - /home/nivea/Documentos/projetos/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 17:59:31,157 - /home/nivea/Documentos/projetos/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 17:59:34,975 - /home/nivea/Documentos/projetos/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 17:59:35,035 - /home/nivea/Documentos/projetos/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 18:06:40,592 - Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 18:06:40,644 - Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 18:06:41,238 - /home/nivea/Documentos/projetos/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 18:06:41,293 - /home/nivea/Documentos/projetos/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 18:13:05,445 - /home/nivea/Documentos/projetos/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 18:13:05,504 - /home/nivea/Documentos/projetos/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 18:13:13,237 - /home/nivea/Documentos/projetos/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 18:13:13,313 - /home/nivea/Documentos/projetos/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 18:39:10,354 - /home/nivea/Documentos/projetos/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 18:39:10,424 - /home/nivea/Documentos/projetos/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 20:33:11,806 - /home/nivea/Documentos/projetos/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 20:33:11,932 - /home/nivea/Documentos/projetos/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 20:36:51,060 - /home/nivea/Documentos/projetos/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 20:36:51,105 - /home/nivea/Documentos/projetos/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 20:37:04,846 - /home/nivea/Documentos/projetos/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 20:37:04,899 - /home/nivea/Documentos/projetos/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões

@@ -146,22 +146,23 @@ def cadastrarturma():
 @blueprint.route('/listaturma/<int:codigo_turma>') 
 def turma(codigo_turma):
     session=get_session()
-    data = session.query(Turma).filter_by(id_turma=codigo_turma).one()  
-    JSON = listar_turmas(data,'listarturmas') 
-    for i in data.alunos: 
-        JSON['cursistas'].append(RcpfnomeAlunos(i))
+    data = session.query(Turma).filter_by(id_turma=codigo_turma).one()
+    JSON = [data.as_dict()]
+    JSON[0]['NomeDoPropositor'] = data.propositor.usuario
+
     session.close()
+
     return jsonify(JSON)
 
 
 
-@blueprint.route("/listaturma", methods=['POST'])
+@blueprint.route("/listaturma", methods=['GET'])
 def listarturma():
     #user_id = request.json.get('user_id', None)
 
     listTurma = ListTurmaService()
     turmas = listTurma.execute()
-
+    print(turmas)
     return jsonify(turmas)
 
 
@@ -378,30 +379,30 @@ def get_concluintes():
 def data():
     try:
         session = get_session()
-        User1 = User(usuario="aaaaa", email="aaaa@exemplo.br", senha="aaaasenha",
-                     cpf="aaaaaaaacpf", telefone="987654tel", tipo="cursista")
-        User2 = User(usuario="bbbbb", email="bbbb@exemplo.br", senha="bbbbsenha",
-                     cpf="bbbbbbbbcpf", telefone="187654tel", tipo="propositor")
-        User3 = User(usuario="ddddd", email="dddd@exemplo.br", senha="ddddsenha",
-                     cpf="ddddddddcpf", telefone="287654tel", tipo="cursista")
-        User4 = User(usuario="eeeeee", email="eeeeee@exemplo.br", senha="eeeeeasdasfa",
-                     cpf="ddddddddcpf", telefone="287654tel", tipo="cursista")
-        User5 = User(usuario="eeeeee", email="eeeeee@exemplo.br", senha="eeeeeasdasfa",
-                     cpf="ddddddddcpf", telefone="287654tel", tipo="cursista")
+        User1 = User(usuario="Tiffany", email="aufderhar.elwin@example.com", senha="aaaasenha",
+                     cpf="5586424623", telefone="987654653", tipo="cursista")
+        User2 = User(usuario="Wilton", email="zulauf.bertha@example.com", senha="bbbbsenha",
+                     cpf="9887048243", telefone="187654635", tipo="propositor")
+        User3 = User(usuario="Gino", email="meaghan.zieme@example.org", senha="ddddsenha",
+                     cpf="9843298432", telefone="287654432", tipo="cursista")
+        User4 = User(usuario="Domenica", email="irice@example.org", senha="eeeeeasdasfa",
+                     cpf="9874321121", telefone="187439298", tipo="cursista")
+        User5 = User(usuario="Beau", email="horace.beer@example.org", senha="eeeeeasdasfa",
+                     cpf="0987432187", telefone="098743119", tipo="cursista")
         session.add_all([User1, User2, User3, User4, User5])
         session.commit()
         Turma1 = Turma(id_responsavel=User2.Id, nome_do_curso="calculo", IsConcluido=0,
                        carga_horaria_total=60, tolerancia=30, modalidade="n sei", turma_tag="tbm n sei")
         Turma2 = Turma(id_responsavel=User2.Id, nome_do_curso="iot", IsConcluido=1,
                        carga_horaria_total=60, tolerancia=30, modalidade="n sei", turma_tag="tbm n sei")
-        UserComplemento1 = UserComplemento(user=User1, tag="naosei1", profissao="coach",
-                                           funcao="direcao", superintendenciaDaSUBPAV="ZAP", CAP="1.0", unidadeBasicaDeSaude="1")
-        UserComplemento2 = UserComplemento(user=User2, tag="naosei1", profissao="bundao",
+        UserComplemento1 = UserComplemento(user=User1, tag="naosei1", profissao="advogado",
+                                           funcao="direcao", superintendenciaDaSUBPAV="SIAP", CAP="1.0", unidadeBasicaDeSaude="1")
+        UserComplemento2 = UserComplemento(user=User2, tag="naosei2", profissao="medico",
                                            funcao="direcao", superintendenciaDaSUBPAV="SAP", CAP="1.0", unidadeBasicaDeSaude="1")
-        UserComplemento3 = UserComplemento(user=User3, tag="naosei1", profissao="coach",
-                                           funcao="gerencia", superintendenciaDaSUBPAV="SAP", CAP="1.0", unidadeBasicaDeSaude="1")
-        UserComplemento4 = UserComplemento(user=User4, tag="naosei1", profissao="coach",
-                                           funcao="gerencia", superintendenciaDaSUBPAV="SAP", CAP="1.0", unidadeBasicaDeSaude="1")
+        UserComplemento3 = UserComplemento(user=User3, tag="naosei3", profissao="engenheiro",
+                                           funcao="gerencia", superintendenciaDaSUBPAV="SVS", CAP="1.0", unidadeBasicaDeSaude="1")
+        UserComplemento4 = UserComplemento(user=User4, tag="naosei4", profissao="pedreiro",
+                                           funcao="gerencia", superintendenciaDaSUBPAV="SPS", CAP="1.0", unidadeBasicaDeSaude="1")
         Aluno1 = Aluno(alunoUser=User1, complementoUser=UserComplemento1)
         Aluno2 = Aluno(alunoUser=User3, complementoUser=UserComplemento3)
         Aluno3 = Aluno(alunoUser=User2, complementoUser=UserComplemento2)

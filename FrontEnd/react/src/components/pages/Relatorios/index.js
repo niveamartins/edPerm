@@ -35,9 +35,15 @@ const relatorios = () => {
 					}} className="link"> 
 						<CardRelatorio title="Contato" />
 					</Link>
+				</div>
+			</main>
+			<Footer />
+		</Fragment>
+	)
+}
 
-
-					<Link to= {{
+/*
+<Link to= {{
 					pathname: "/relatorio",
 					state: "relatoriofuncao"
 					}} className="link">
@@ -72,11 +78,7 @@ const relatorios = () => {
 					}} className="link">
 						<CardRelatorio title="Concluintes" />
 					</Link>
-				</div>
-			</main>
-			<Footer />
-		</Fragment>
-	)
-}
+
+*/
 
 export default relatorios
