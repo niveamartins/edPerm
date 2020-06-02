@@ -1,6 +1,6 @@
 from os import path
 from flask import Flask
-from flask-cors import CORS
+from flask_cors import CORS
 from controller.endpoints import blueprint
 from extensions import jwt
 
