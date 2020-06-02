@@ -1,6 +1,8 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 import { Link } from '../../../../node_modules/react-router-dom';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+
+import api from '../../../services/api';
 
 
 import { NavBar } from '../../navbar'
@@ -11,7 +13,30 @@ import { Accessibility } from '../../accessibility'
 
 function CadastrarApoiador() {
 
-    //preencher dados da turma com db
+    const [turma, setTurma] = useState("");  
+    const [aluno, setAluno] = useState("");
+
+    async function handleCreate(e) {
+                
+        e.preventDefault();
+    
+        const data = {
+          turma, 
+          aluno
+
+        };
+    
+        try {
+          api.post("/cadastrarhorario", data);
+    
+          alert(`O aluno foi cadastrado como apoiador da turma com sucesso!`);
+
+        } catch (err) {
+          console.log(err);
+          alert("Erro no cadastro, tente novamente");
+        }
+      }
+
 
     return (
         <Fragment>
@@ -72,7 +97,7 @@ function CadastrarApoiador() {
                                 <form>
                                     <h1>Cadastre o apoiador!</h1>
                                     <p>Insira abaixo o código do aluno escolhido.</p>
-                                    <input name="aluno" class="form-input" placeholder="Código do Aluno" required />
+                                    <input name="aluno" class="form-input" placeholder="Código do Aluno" value={aluno} onChange={e => setAluno(e.target.value)} required />
                                     <input type="submit" class="button" value="cadastrar apoiador" />
                                 </form>
 
