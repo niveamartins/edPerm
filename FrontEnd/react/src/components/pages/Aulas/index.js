@@ -86,7 +86,6 @@ function Aulas() {
                                     </tr>
                                 </Link>
 
-
                                 <tr class="students">
                                     <td class="name">Nado Sincronizado - Parte Exemplo</td>
                                     <td class="value">22/04/2020</td>
