@@ -6,8 +6,10 @@ from database.model.Base import Base
 from database.model.Model import *
 
 logger = get_logger(sys.argv[0])
-logger.info("Estabelecendo conexão com o banco de dados") #Nao comitta isso com root ali!!!!!
-engine = create_engine('mysql+pymysql://bd:L4bn3t@localhost:3306/EdPermanente')
+# Nao comitta isso com root ali!!!!!
+logger.info("Estabelecendo conexão com o banco de dados")
+engine = create_engine(
+    'mysql+pymysql://root:L4bn3t@localhost:3306/EdPermanente')
 Base.metadata.create_all(engine)
 logger.info("Inicializando a poll de conexões")
 Session = sessionmaker(bind=engine)

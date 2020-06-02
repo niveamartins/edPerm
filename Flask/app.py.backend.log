@@ -321,3 +321,205 @@
 [2020-06-01 05:23:00,603 - Flask/app.py - INFO]: Inicializando a poll de conexões
 [2020-06-01 05:23:01,415 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
 [2020-06-01 05:23:01,482 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-01 18:30:12,253 - ./Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-01 18:30:36,632 - ./Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-01 18:30:36,829 - ./Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-01 18:31:02,990 - ./Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-01 18:31:03,042 - ./Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-01 18:31:15,840 - ./Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-01 18:31:15,887 - ./Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-01 18:31:34,064 - ./Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-01 18:31:34,115 - ./Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-01 18:31:34,589 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-01 18:31:34,639 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-01 18:31:40,026 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - ERROR]: Banco de dados (EdPermanente) desconhecido
+[2020-06-01 18:31:40,026 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - ERROR]: Banco de dados (EdPermanente) desconhecido
+[2020-06-01 18:48:19,737 - ./Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-01 18:48:19,798 - ./Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-01 18:48:20,112 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-01 18:48:20,164 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-01 18:50:58,407 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-01 18:50:58,490 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-01 18:52:10,080 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-01 18:52:10,151 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-01 18:52:29,887 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-01 18:52:29,951 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-01 18:52:53,788 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-01 18:52:53,872 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-01 19:00:29,562 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-01 19:00:29,620 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-01 19:01:04,525 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-01 19:01:04,605 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-01 19:12:03,684 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-01 19:12:03,750 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-01 19:12:33,623 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-01 19:12:33,678 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-01 19:15:30,236 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-01 19:15:30,288 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-01 19:17:20,978 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-01 19:17:21,039 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-01 19:20:16,536 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-01 19:20:16,590 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-01 19:22:40,717 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-01 19:22:40,775 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-01 19:32:02,914 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-01 19:32:02,971 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-01 19:37:52,575 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-01 19:37:52,626 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-01 19:41:23,558 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-01 19:41:23,621 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-01 19:44:01,926 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-01 19:44:01,973 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-01 19:44:05,653 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - ERROR]: Banco de dados (EdPermanente) desconhecido
+[2020-06-01 19:44:05,653 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - ERROR]: Banco de dados (EdPermanente) desconhecido
+[2020-06-01 19:44:05,653 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - ERROR]: Banco de dados (EdPermanente) desconhecido
+[2020-06-01 19:44:29,865 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-01 19:44:29,936 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-01 19:44:35,891 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - ERROR]: Banco de dados (EdPermanente) desconhecido
+[2020-06-01 19:44:35,891 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - ERROR]: Banco de dados (EdPermanente) desconhecido
+[2020-06-01 19:44:35,891 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - ERROR]: Banco de dados (EdPermanente) desconhecido
+[2020-06-01 19:44:55,749 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-01 19:44:55,804 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-01 19:44:59,523 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - ERROR]: Banco de dados (EdPermanente) desconhecido
+[2020-06-01 19:44:59,523 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - ERROR]: Banco de dados (EdPermanente) desconhecido
+[2020-06-01 19:44:59,523 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - ERROR]: Banco de dados (EdPermanente) desconhecido
+[2020-06-01 19:45:45,914 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-01 19:45:45,983 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-01 19:45:48,773 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - ERROR]: Banco de dados (EdPermanente) desconhecido
+[2020-06-01 19:45:48,773 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - ERROR]: Banco de dados (EdPermanente) desconhecido
+[2020-06-01 19:45:48,773 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - ERROR]: Banco de dados (EdPermanente) desconhecido
+[2020-06-01 19:49:05,762 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-01 19:49:05,824 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-01 19:49:08,806 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - ERROR]: Banco de dados (EdPermanente) desconhecido
+[2020-06-01 19:49:08,806 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - ERROR]: Banco de dados (EdPermanente) desconhecido
+[2020-06-01 19:49:08,806 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - ERROR]: Banco de dados (EdPermanente) desconhecido
+[2020-06-01 19:50:20,103 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-01 19:50:20,152 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 11:43:41,029 - ./Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 11:43:41,082 - ./Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 11:43:41,594 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 11:43:41,650 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 11:44:19,632 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 11:44:19,704 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 11:45:04,741 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 11:45:04,842 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 11:45:07,711 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - ERROR]: Banco de dados (EdPermanente) desconhecido
+[2020-06-02 11:45:07,711 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - ERROR]: Banco de dados (EdPermanente) desconhecido
+[2020-06-02 11:45:07,711 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - ERROR]: Banco de dados (EdPermanente) desconhecido
+[2020-06-02 11:45:17,497 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 11:45:17,568 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 11:45:19,896 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - ERROR]: Banco de dados (EdPermanente) desconhecido
+[2020-06-02 11:45:19,896 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - ERROR]: Banco de dados (EdPermanente) desconhecido
+[2020-06-02 11:45:19,896 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - ERROR]: Banco de dados (EdPermanente) desconhecido
+[2020-06-02 11:46:48,115 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 11:46:48,166 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 11:47:46,497 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 11:47:46,575 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 11:51:03,431 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 11:51:03,507 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 11:51:48,615 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 11:51:48,679 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 11:52:45,835 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 11:52:45,890 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 11:53:22,977 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 11:53:23,052 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 11:54:56,629 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 11:54:56,695 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 11:55:30,590 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 11:55:30,655 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 11:56:20,822 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 11:56:20,885 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 12:01:29,062 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 12:01:29,143 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 12:05:01,074 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 12:05:01,141 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 12:06:00,451 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 12:06:00,523 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 12:06:49,710 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 12:06:49,800 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 12:07:30,714 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 12:07:30,789 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 12:14:02,249 - ./Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 12:14:02,659 - ./Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 12:14:02,979 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 12:14:03,045 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 12:14:26,998 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: informações de teste inseridas no banco de dados
+[2020-06-02 12:14:26,998 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: informações de teste inseridas no banco de dados
+[2020-06-02 12:17:42,173 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 12:17:42,257 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 12:17:56,070 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 12:17:56,144 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 12:19:51,073 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 12:19:51,135 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 12:20:16,416 - ./Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 12:20:16,481 - ./Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 12:20:16,795 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 12:20:16,851 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 12:20:35,506 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 12:20:35,575 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 12:21:02,569 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 12:21:02,667 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 12:21:27,734 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 12:21:27,837 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 12:23:05,418 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 12:23:05,490 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 12:24:01,579 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 12:24:01,639 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 12:25:16,063 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 12:25:16,137 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 12:25:41,930 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 12:25:41,998 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 12:26:03,798 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 12:26:03,882 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 12:26:17,952 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 12:26:18,041 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 12:27:37,587 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 12:27:37,655 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 12:29:16,209 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 12:29:16,255 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 12:29:37,008 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 12:29:37,065 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 12:30:19,085 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 12:30:19,215 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 12:31:27,557 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 12:31:27,620 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 12:32:13,678 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 12:32:13,757 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 12:33:15,024 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 12:33:15,091 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 12:35:03,903 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 12:35:03,974 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 12:35:15,854 - ./Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 12:35:15,914 - ./Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 12:35:16,232 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 12:35:16,291 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 12:36:27,634 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 12:36:27,706 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 12:37:28,982 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 12:37:29,049 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 12:37:35,670 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 12:37:35,729 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 12:38:00,582 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 12:38:00,669 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 12:38:14,325 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 12:38:14,387 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 12:40:24,449 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 12:40:24,519 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 12:40:38,687 - ./Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 12:40:38,748 - ./Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 12:40:39,064 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 12:40:39,113 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 12:42:16,686 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 12:42:16,744 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 12:44:04,600 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 12:44:04,664 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 12:45:26,148 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 12:45:26,211 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 12:46:50,731 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 12:46:50,804 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 12:49:03,783 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 12:49:03,874 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 12:50:06,152 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 12:50:06,242 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 12:50:40,587 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 12:50:40,674 - /home/rapha/programing/LabNet/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
