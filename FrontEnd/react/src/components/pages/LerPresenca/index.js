@@ -15,7 +15,8 @@ class LerPresenca extends Component {
         this.handleScan = this.handleScan.bind(this);
 
       }
-
+    
+    
   
     handleScan = data => {
       if (data) {
@@ -28,6 +29,7 @@ class LerPresenca extends Component {
     handleError = err => {
       console.error(err)
     }
+
     render() {
       return ( 
           <div>

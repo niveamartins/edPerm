@@ -42,13 +42,7 @@ function CadastrarTurma() {
             alert("Erro no cadastro, tente novamente");
           }
         }
-  
-
-  // mudar quando for integrar:
-  // <input placeholder="Nome do Aluno" ></input>
-  // onSubmit={handleCreate}
-  // <input placeholder="Código da Turma" value={turma} onChange={e => setTurma(e.target.value)}></input>
-
+        
   return (
     <Fragment>
       <Accessibility />
