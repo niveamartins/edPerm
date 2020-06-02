@@ -47,7 +47,7 @@ function ListarTurmas() {
                                 <Link to= {{
 					            pathname: "/turma",
 					            state: [item.id_turma]
-					            }} className="class-page">
+					            }} className="link">
                                     <AddIcon id="more-details"></AddIcon>info.
                                 </Link>
                             </tr>
@@ -62,7 +62,7 @@ function ListarTurmas() {
 
                         <tbody>
                             <tr className="content">
-                                <td className="name">Carga horária totat</td>
+                                <td className="name">Carga horária total</td>
                                 <td className="value">{item.Carga_Horaria_Total}</td>
                             </tr>
                         </tbody>
@@ -98,7 +98,9 @@ function ListarTurmas() {
             <Accessibility />
             <NavBar />
             <main className="main">
-                {getTurmasContent(turmas)}
+                <div className="teste">
+                    {getTurmasContent(turmas)}
+                </div>
             </main>
             <Footer />
         </Fragment>

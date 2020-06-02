@@ -19,3 +19,28 @@
     margin: 0 1em 0 1em;
 }
 
+.card-container {
+    flex-wrap: wrap !important;
+}
+
+.link {
+text-decoration: none;
+  color: var(--elements-second-color);
+  font-family: 'Montserrat', sans-serif;    
+  font-weight: bold; 
+  position: absolute;
+  margin-left: 60%;
+  margin-top: -10px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.link:hover{
+    transform: translateY(-4px);
+}
+
+.teste {
+    display: inline-block;
+}

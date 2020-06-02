@@ -23,7 +23,7 @@ function Inicio() {
                             <p>Realize login para ter acesso a funcionalidades exclusivas.</p>
                             <input type="text" name="usuario" class="form-input" placeholder="Usuário"/>
                             <input type="password" name="senha" class="form-input" placeholder="Senha"></input>
-                            <a href="cadusuario" class="signup">Não possui conta? <span class="form-highlight">Se cadastre</span></a>
+.                            <a href="cadusuario" class="signup">Não possui conta? <span class="form-highlight">Se cadastre</span></a>
                         </form>
                         <a href="/turmas">
                             <button class="button" value="Login">Login</button>
