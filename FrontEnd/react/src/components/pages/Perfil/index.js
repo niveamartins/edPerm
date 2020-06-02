@@ -1,21 +1,19 @@
-import React, { Fragment } from 'react'
-import { Link } from '../../../../node_modules/react-router-dom';
+import React, { Fragment } from "react"
+import { Link } from "../../../../node_modules/react-router-dom"
 
 // icons
-import Create from '@material-ui/icons/Create';
-import Class from '@material-ui/icons/Class';
-import Done from '@material-ui/icons/Done';
-import AccountCircle from '@material-ui/icons/AccountCircle'
+import Create from "@material-ui/icons/Create"
+import Class from "@material-ui/icons/Class"
+import Done from "@material-ui/icons/Done"
+import AccountCircle from "@material-ui/icons/AccountCircle"
 
+import { NavBar } from "../../navbar"
+import { Footer } from "../../footer"
+import { Accessibility } from "../../accessibility"
 
+import "./perfil.css"
 
-import { NavBar } from '../../navbar'
-import { Footer } from '../../footer'
-import { Accessibility } from '../../accessibility'
-
-import './perfil.css'
-
-const qrcodeimg = require('../../../assets/qr-code-teste.png')
+const qrcodeimg = require("../../../assets/qr-code-teste.png")
 
 function Perfil() {
 
@@ -67,7 +65,7 @@ function Perfil() {
             <Footer />
         </Fragment>
 
-    )
-}
+	)
+	}
 
 export default Perfil

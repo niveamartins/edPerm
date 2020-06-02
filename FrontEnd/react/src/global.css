@@ -160,9 +160,6 @@ footer .links .logo img {
   display: flex;
   align-items: center;
   text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
   font-family: 'Montserrat', sans-serif;
   margin: -20px 0 50px;
