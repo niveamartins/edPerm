@@ -15,7 +15,6 @@ class LerPresenca extends Component {
         this.handleScan = this.handleScan.bind(this);
 
       }
-
   
     handleScan = data => {
       if (data) {
@@ -28,6 +27,7 @@ class LerPresenca extends Component {
     handleError = err => {
       console.error(err)
     }
+
     render() {
       return ( 
           <div>
@@ -39,7 +39,7 @@ class LerPresenca extends Component {
             facingMode="enviroment"
             style={{ height:'100%' }}
             />
-            <button>Confirmar</button>
+            <button className="button">Confirmar</button>
           </div>
       )
     }

@@ -23,7 +23,7 @@ function Inicio() {
                             <p>Realize login para ter acesso a funcionalidades exclusivas.</p>
                             <input type="text" name="usuario" class="form-input" placeholder="Usuário" required />
                             <input type="password" name="senha" class="form-input" placeholder="Senha" required></input>
-                            <input type="submit" class="button login" value="Login" />
+                            <input type="submit" class="button" value="Login" />
                             <a href="esqueciasenha" class="forgot">Esqueceu a senha?</a>
                             <a href="cadusuario" class="signup">Não possui conta? <span class="form-highlight">Se cadastre</span></a>
                         </form>

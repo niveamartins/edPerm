@@ -120,6 +120,7 @@ footer .links .logo img {
 #return-icon  {
   position: absolute;
   left: 20px;
+  top: 100px;
   color: var(--elements-second-color);
   font-size: 4em;
   cursor: pointer;
@@ -159,9 +160,6 @@ footer .links .logo img {
   display: flex;
   align-items: center;
   text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
   font-family: 'Montserrat', sans-serif;
   margin: -20px 0 50px;
@@ -246,7 +244,7 @@ footer .links .logo img {
   width: 100%;
 }
 
-.button.login {
+.button {
   text-decoration: none;
   text-transform: uppercase;
   font-weight: bold;
@@ -257,10 +255,10 @@ footer .links .logo img {
   color: #fff;
   background-color: var(--elements-color);
   border-radius: var(--border-button);
-  transition: all 0.3s ease 0s;
+  transition: all 0.4s ease 0s;
 }
 
-.button.login:hover {
+.button:hover:not(:disabled) {
   color: #404040;
   font-weight: 700;
   letter-spacing: 2px;
@@ -268,8 +266,13 @@ footer .links .logo img {
   box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
   -webkit-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
   -moz-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
-  transition: all 0.3s ease 0s;
+  transition: all 0.4s ease 0s;
   cursor: pointer;
+}
+
+button:disabled, button:disabled label {
+  cursor: not-allowed;
+  background-color: #ccc;
 }
 
 .form-container .signup {

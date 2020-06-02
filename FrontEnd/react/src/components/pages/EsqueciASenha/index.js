@@ -22,7 +22,7 @@ function Inicio() {
                             <h1>Esqueceu a senha?</h1>
                             <p>Preencha o formulário para receber a senha por e-mail!</p>
                             <input type="text" name = "email" class="form-input" placeholder="E-mail" required />
-                            <input type="submit" class="button login" value = "Enviar" />
+                            <input type="submit" class="button" value = "Enviar" />
                         </form>
                     </div>
                 </div>

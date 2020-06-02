@@ -1,86 +1,85 @@
 .main {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 }
 
 .card-container-local {
-    display: flex;
-    align-items: center;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    font-family: 'Montserrat', sans-serif;
-  }
+	font-family: "Montserrat", sans-serif;
+	text-align: center;
+	
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
 
-  .card-container-local .subtitle {
-    font-size: 14px;
-    font-weight: 100;
-    line-height: 20px;
-    letter-spacing: 0.5px;
-    margin: 20px 0 30px;
-  }
-  
-  .card-container-local h1 {
-    padding-top: 30px;
-    font-weight: bolder;
-    margin: 0;
-  }
+.card-container-local .subtitle {
+	font-size: 14px;
+	font-weight: 100;
+	line-height: 20px;
+	letter-spacing: 0.5px;
+	margin: 20px 0 30px;
+}
+
+.card-container-local h1 {
+	padding-top: 30px;
+	font-weight: bolder;
+	margin: 0;
+}
 
 .card-container-local .subtitle-qr {
-    font-weight: bold;
-    margin: 0 !important;
-
+	font-weight: bold;
+	margin: 0 !important;
 }
 
 label {
-    margin-left: 10px;
+	margin-left: 10px;
+	cursor: pointer;
 }
 
 button {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 }
 
-    .personal-buttons {
-            text-decoration: none;
-            text-transform: uppercase;
-            font-weight: bold;
-            font-size: 1.1em;
-            border: none;
-            margin: 10px;
-            padding: 10px;
-            color: #fff;
-            background-color: var(--elements-second-color);
-            border-radius: var(--border-button);
-            transition: all 0.3s ease 0s;
-    }
+.personal-buttons {
+	text-decoration: none;
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 1.1em;
+	border: none;
+	margin: 10px;
+	padding: 10px;
+	color: #fff;
+	background-color: var(--elements-second-color);
+	border-radius: var(--border-button);
+   transition: all 0.3s ease 0s;
+}
 
-    .buttons {
-        display: flex;
-        flex-direction: row-reverse;
-    }
+.buttons {
+	display: flex;
+    flex-direction: row-reverse;
+    margin-bottom: 2em;
+}
 
 .nav-info-pessoais {
-    /* height: 400px; */
-    margin-top: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+	/* height: 400px; */
+	margin-top: 2rem;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
 }
-    
-    .nav-info-pessoais button {
-      width: 350px;
-    }
-    
+
+.nav-info-pessoais button {
+	width: 350px;
+}
+
 @media (max-width: 950px) {
-    .nav-info-pessoais {
-        margin-top: 0;
-        margin-bottom: 2rem;
-        align-items: stretch;
-        width: 100%;
-      }
-    
+	.nav-info-pessoais {
+		margin-top: 0;
+		margin-bottom: 2rem;
+		align-items: stretch;
+		width: 100%;
+	}
 }

@@ -1,9 +1,7 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 
 import './cadastroTurma.css'
-
-// {useState}
-// import api from '../../services/api';
+import api from '../../../services/api';
 
 // import { Link } from './node_modules/react-router-dom';
 import { NavBar } from '../../navbar'
@@ -13,36 +11,38 @@ import { Accessibility } from '../../accessibility'
 
 function CadastrarTurma() {
 
-  /*    const [name, setName] = useState("");
-      const [turma, setTurma] = useState("");  
+    const [responsavel, setResponsavel] = useState("");
+    const [turma, setTurma] = useState("");  
+    const [carga_horaria, setCarga] = useState("");
+    const [tolerancia, setTolerancia] = useState("");
+    const [modalidade, setModalidade] = useState("");
+    const [tag, setTag] = useState("");
   
       async function handleCreate(e) {
                   
           e.preventDefault();
       
           const data = {
-            name,
-            turma
+            responsavel,
+            turma,
+            carga_horaria,
+            tolerancia,
+            modalidade,
+            tag
   
           };
       
           try {
-            api.post("/", data);
+            api.post("/cadastrarturma", data);
       
-            alert(`O aluno foi cadastrado com sucesso!`);
+            alert(`A turma foi cadastrada com sucesso!`);
   
           } catch (err) {
             console.log(err);
             alert("Erro no cadastro, tente novamente");
           }
         }
-        */
-
-  // mudar quando for integrar:
-  // <input placeholder="Nome do Aluno" value={name} onChange={e => setName(e.target.value)}></input>
-  // onSubmit={handleCreate}
-  // <input placeholder="Código da Turma" value={turma} onChange={e => setTurma(e.target.value)}></input>
-
+        
   return (
     <Fragment>
       <Accessibility />
@@ -53,20 +53,17 @@ function CadastrarTurma() {
             <div class="form-container">
               <h1>Cadastre sua turma!</h1>
               <p>Cadastre aqui sua turma Educação Permanente.</p>
-              <form>
-                <input name="responsavel" class="form-input" placeholder="Responsável" required />
-                <input name="nome" class="form-input" placeholder="Nome do Curso" required />
+              <form onSubmit={handleCreate}>
+                <input name="nome" class="form-input" placeholder="Nome do Curso" value={turma} onChange={e => setTurma(e.target.value)} required />
                 {/* <div class="form-line"> */}
-                  <input name="dia" class="form-input" placeholder="Dia" required />
-                  <input name="hora" class="form-input-second" placeholder="Hora" required />
                 {/* </div> */}
                 {/* <div class="form-line"> */}
                   <input name="carga" class="form-input" placeholder="Carga Horária" required />
                   <input name="tolerancia" class="form-input-second" placeholder="Tolerância" required />
                 {/* </div> */}
-                <input name="modalidade" class="form-input" placeholder="Modalidade" required />
-                <input name="tag" class="form-input" placeholder="Tag" required />
-                <input type="submit" class="button login" id="cad__class-button" value="cadastrar Turma" />
+                <input name="modalidade" class="form-input" placeholder="Modalidade" value={modalidade} onChange={e => setModalidade(e.target.value)} required />
+                <input name="tag" class="form-input" placeholder="Tag" value={tag} onChange={e => setTag(e.target.value)} required />
+                <input type="submit" className="button" id="cad__class-button" value="cadastrar Turma" />
               </form>
             </div>
           </div>

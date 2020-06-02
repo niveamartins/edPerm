@@ -228,10 +228,10 @@ def cadastrarhorario():
     return jsonify(Horario)
 
 #AINDA NÃO TERMINADA
-@blueprint.route("/chamadavalidar", methods=['POST'])
-def chamadapesquisar():
-    if not request.is_json:
-        return jsonify({"msg": "Missing JSON in request"}), 400
+# @blueprint.route("/chamadavalidar", methods=['POST'])
+# def chamadapesquisar():
+#     if not request.is_json:
+#         return jsonify({"msg": "Missing JSON in request"}), 400
     
     propositor = get_jwt_identity()
     turma = request.get_json()
