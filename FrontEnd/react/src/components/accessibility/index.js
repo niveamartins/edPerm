@@ -30,8 +30,8 @@ export class Accessibility extends Component {
 	}
 
 	handleOutsideClick(e) {
-		// ignora clicks no popup
-		if (this.node.contains(e.target)) {
+		// ignora clicks no popup (this.node === null para corrigir bug ao clicar link nav)
+		if ( this.node === null || this.node.contains(e.target)) {
 			return
 		}
 
