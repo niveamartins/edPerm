@@ -8,6 +8,7 @@ from flask import Blueprint, request, jsonify, render_template, redirect, url_fo
 from sqlalchemy.exc import InternalError
 from flask_jwt_extended import (jwt_required, get_jwt_identity)
 from sqlalchemy import func
+from flask_cors import CORS, cross_origin
 
 from database.db_create import Banco
 from database.pessoas import Pessoa
@@ -25,7 +26,8 @@ from services.CreateHorarioService import CreateHorarioService
 from services.AutheticateUserService import AutheticateUserService
 from services.ListTurmaService import ListTurmaService
 
-blueprint = Blueprint('endpoints', __name__)
+blueprint = Blueprint('endpoints', __name__) 
+CORS(blueprint)
 logger = get_logger(sys.argv[0])
 
 #AINDA NÃO SERÁ IMPLEMENTADA
@@ -130,13 +132,13 @@ def cadastrarturma():
     turmaDataFields = ["responsavel", "nome_do_curso",
                        "carga_horaria_total", "tolerancia", "modalidade", "turma_tag"]
 
-    if not all(field in turmaData for field in turmaDataFields):
-        return "Missing information", 400
+    # if not all(field in turmaData for field in turmaDataFields):
+    #     return "Missing information", 400
 
     createTurma = CreateTurmaService()
-
+    print(turmaData)
     turma = createTurma.execute(turmaData)
-
+    print(turma)
     return jsonify(turma)
 
 
@@ -145,7 +147,7 @@ def cadastrarturma():
 def turma(codigo_turma):
     session=get_session()
     data = session.query(Turma).filter_by(id_turma=codigo_turma).one()  
-    JSON = listar_turmas(i,'listarturmas') 
+    JSON = listar_turmas(data,'listarturmas') 
     for i in data.alunos: 
         JSON['cursistas'].append(RcpfnomeAlunos(i))
     session.close()
@@ -174,7 +176,7 @@ def atualizarpresenca():
     apoiador = get_jwt_identity()
     aluno = request.get_json()
     session = get_session()
-    alunoApoiadordata = session.query(alunoApoiador).filter_by(
+    alunoApoiadordata = session.query(AlunoApoiador).filter_by(
         apoiador_id_user=apoiador.id).one()
     data = session.query(Presenca).filter_by(
         presenca_id_aluno=aluno["id_aluno"], presenca_id_turma=alunoApoiadordata.apoiador_id_turma)
@@ -193,8 +195,8 @@ def cadastraraluno():
     cadastroData = request.get_json()
     cadastroDataFields = ["usuario", "nome_do_curso"]
 
-    if not all(field in cadastroData for field in cadastroDataFields):
-        return "Missing information", 400
+    # if not all(field in cadastroData for field in cadastroDataFields):
+    #     return "Missing information", 400
 
     cadastrarAluno = CreateAlunoService()
 
@@ -263,7 +265,8 @@ def chamadapesquisar():
     # RELATORIO CONTATO
 
 
-@ blueprint.route('/relatoriocontato', methods=['GET'])
+@blueprint.route('/relatoriocontato', methods=['GET'])
+@cross_origin(origin="localhost")
 def get_relatoriocontato():
     session = get_session()
     data = session.query(User).all()

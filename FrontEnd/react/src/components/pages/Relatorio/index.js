@@ -29,8 +29,10 @@ function Relatorio(props) {
         case "relatoriocontato":
             const getContatoContent = contato => {
                 let content = [];
+                console.log(relatorio)
                 for (let idx in contato) {
                   const item = contato[idx];
+                  console.log(item)
                   content.push( 
                     <li>
                         <div>
@@ -43,8 +45,9 @@ function Relatorio(props) {
                     )
 
                   // Aqui dentro do push devemos colocar o html da parte de cada um dos contatos
-                }
-                return content;
+                  }
+                
+                return content
               };
 
             return (

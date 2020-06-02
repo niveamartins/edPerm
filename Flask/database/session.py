@@ -9,7 +9,7 @@ logger = get_logger(sys.argv[0])
 # Nao comitta isso com root ali!!!!!
 logger.info("Estabelecendo conexão com o banco de dados")
 engine = create_engine(
-    'mysql+pymysql://root:L4bn3t@localhost:3306/EdPermanente')
+    'mysql+pymysql://bd:L4bn3t@localhost:3306/EdPermanente')
 Base.metadata.create_all(engine)
 logger.info("Inicializando a poll de conexões")
 Session = sessionmaker(bind=engine)

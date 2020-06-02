@@ -11,12 +11,13 @@ import { Accessibility } from '../../accessibility'
 
 function CadastrarTurma() {
 
-    const [responsavel, setResponsavel] = useState("");
-    const [turma, setTurma] = useState("");  
-    const [carga_horaria, setCarga] = useState("");
+    const responsavel = "aaaaa"
+    // const [responsavel, setResponsavel] = useState("");
+    const [nome_do_curso, setTurma] = useState("");  
+    const [carga_horaria_total, setCarga] = useState("");
     const [tolerancia, setTolerancia] = useState("");
     const [modalidade, setModalidade] = useState("");
-    const [tag, setTag] = useState("");
+    const [turma_tag, setTag] = useState("");
   
       async function handleCreate(e) {
                   
@@ -24,11 +25,11 @@ function CadastrarTurma() {
       
           const data = {
             responsavel,
-            turma,
-            carga_horaria,
+            nome_do_curso,
+            carga_horaria_total,
             tolerancia,
             modalidade,
-            tag
+            turma_tag
   
           };
       
@@ -54,15 +55,15 @@ function CadastrarTurma() {
               <h1>Cadastre sua turma!</h1>
               <p>Cadastre aqui sua turma Educação Permanente.</p>
               <form onSubmit={handleCreate}>
-                <input name="nome" class="form-input" placeholder="Nome do Curso" value={turma} onChange={e => setTurma(e.target.value)} required />
+                <input name="nome" class="form-input" placeholder="Nome do Curso" value={nome_do_curso} onChange={e => setTurma(e.target.value)} required />
                 {/* <div class="form-line"> */}
                 {/* </div> */}
                 {/* <div class="form-line"> */}
-                  <input name="carga" class="form-input" placeholder="Carga Horária" required />
-                  <input name="tolerancia" class="form-input-second" placeholder="Tolerância" required />
+                  <input name="carga" class="form-input" placeholder="Carga Horária" value={carga_horaria_total} onChange={e => setCarga(e.target.value)} required />
+                  <input name="tolerancia" class="form-input-second" placeholder="Tolerância" value={tolerancia} onChange={e => setTolerancia(e.target.value)} required />
                 {/* </div> */}
                 <input name="modalidade" class="form-input" placeholder="Modalidade" value={modalidade} onChange={e => setModalidade(e.target.value)} required />
-                <input name="tag" class="form-input" placeholder="Tag" value={tag} onChange={e => setTag(e.target.value)} required />
+                <input name="tag" class="form-input" placeholder="Tag" value={turma_tag} onChange={e => setTag(e.target.value)} required />
                 <input type="submit" className="button" id="cad__class-button" value="cadastrar Turma" />
               </form>
             </div>
