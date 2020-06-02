@@ -1,4 +1,5 @@
-from sqlalchemy import (Column, String, Integer,Text, Enum, ForeignKey, Table, Time, Boolean, DateTime)
+from sqlalchemy import (Column, String, Integer, Text,
+                        Enum, ForeignKey, Table, Time, Boolean, DateTime)
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, backref
 from database.model.Base.Base import Base
@@ -31,29 +32,34 @@ class User(Base):
     tipo = Column(Enum('adm', 'gestor', 'coordenador',
                        'propositor', 'cursista', 'apoiador'), nullable=False)
 
-    #ONE TO ONE
-    
-    Aluno = relationship('Aluno', uselist=False, backref='alunoUser')
-    AlunoApoiador = relationship('AlunoApoiador', uselist=False, backref='alunoApoiadorUser')
-    
+    # ONE TO ONE
 
-    #ONE TO MANY
+    Aluno = relationship('Aluno', uselist=False, backref='alunoUser')
+    AlunoApoiador = relationship(
+        'AlunoApoiador', uselist=False, backref='alunoApoiadorUser')
+
+    # ONE TO MANY
     TurmaProposta = relationship('Turma', backref='propositor')
 
     def as_dict(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
+
 class Aluno(Base):
     __tablename__ = 'aluno'
-    id_aluno = Column(Integer,primary_key=True)
-    alunos_id_user = Column(Integer, ForeignKey('user.Id'), nullable=False, unique=True)
-    alunos_id_complemento = Column(Integer, ForeignKey('userComplemento.id_complemento'), nullable=False, unique=True)
+    id_aluno = Column(Integer, primary_key=True)
+    alunos_id_user = Column(Integer, ForeignKey(
+        'user.Id'), nullable=False, unique=True)
+    alunos_id_complemento = Column(Integer, ForeignKey(
+        'userComplemento.id_complemento'), nullable=False, unique=True)
 
-    #ONE TO ONE
-    complementoUser = relationship('UserComplemento', uselist=False, backref="AlunocomplementoUser")
+    # ONE TO ONE
+    complementoUser = relationship(
+        'UserComplemento', uselist=False, backref="AlunocomplementoUser")
 
-    #ONE TO MANY
+    # ONE TO MANY
     presencas = relationship('Presenca', backref='alunoDono')
+
 
 class Turma(Base):
     __tablename__ = 'turma'
@@ -98,22 +104,28 @@ class UserComplemento(Base):
     CAP = Column(String(20), nullable=False)
     unidadeBasicaDeSaude = Column(String(30), nullable=False)
 
-    user = relationship('User', uselist=False, backref="complementoUser",foreign_keys=id_do_user)
+    user = relationship('User', uselist=False,
+                        backref="complementoUser", foreign_keys=id_do_user)
+
 
 class AlunoApoiador(Base):
     __tablename__ = 'alunoApoiador'
     id_alunoApoiador = Column(Integer, primary_key=True)
-    apoiador_id_turma = Column(Integer, ForeignKey('turma.id_turma'), nullable=False)
-    apoiador_id_user = Column(Integer, ForeignKey('user.Id'), nullable=False, unique=True)
+    apoiador_id_turma = Column(Integer, ForeignKey(
+        'turma.id_turma'), nullable=False)
+    apoiador_id_user = Column(Integer, ForeignKey(
+        'user.Id'), nullable=False, unique=True)
 
 
 class Presenca(Base):
     __tablename__ = 'presenca'
     id_presenca = Column(Integer, primary_key=True)
-    presenca_id_aluno = Column(Integer, ForeignKey('aluno.id_aluno'), nullable=False)
-    presenca_id_turma = Column(Integer, ForeignKey('turma.id_turma'), nullable=False)
+    presenca_id_aluno = Column(Integer, ForeignKey(
+        'aluno.id_aluno'), nullable=False)
+    presenca_id_turma = Column(Integer, ForeignKey(
+        'turma.id_turma'), nullable=False)
     ultimoCheckIn = Column(DateTime, nullable=True)
     presencaAtualizada = Column(Boolean, nullable=True, default=True)
     presencaTotal = Column(DateTime, nullable=False)
 
-#TODO: ESTUDAR DATETIME NA HORA DE IMPLEMENTAR A FUNÇÃO DE CHECKIN
+# TODO: ESTUDAR DATETIME NA HORA DE IMPLEMENTAR A FUNÇÃO DE CHECKIN
