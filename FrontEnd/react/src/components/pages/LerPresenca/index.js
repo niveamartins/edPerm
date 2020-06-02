@@ -15,8 +15,6 @@ class LerPresenca extends Component {
         this.handleScan = this.handleScan.bind(this);
 
       }
-    
-    
   
     handleScan = data => {
       if (data) {

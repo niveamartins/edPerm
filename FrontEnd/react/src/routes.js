@@ -21,6 +21,7 @@ import Perfil from './components/pages/Perfil'
 import EditarCadastro from './components/pages/editarCadastro'
 import DadosPessoais from './components/pages/dadosPessoais'
 import Relatorios from './components/pages/Relatorios'
+import Relatorio from './components/pages/Relatorio'
 
 // Aqui definimos todas as rotas
 export default function Routes() {
@@ -44,6 +45,7 @@ export default function Routes() {
                 <Route path="/editarDados" component={EditarCadastro}/>
                 <Route path="/dadosPessoais" component={DadosPessoais}/>
                 <Route path="/relatorios" component={Relatorios}/>
+                <Route path="/relatorio" component={Relatorio}/>
             </Switch>
         </BrowserRouter>
     );
