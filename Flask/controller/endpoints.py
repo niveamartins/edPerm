@@ -1,9 +1,13 @@
 import sys
+from os import path
 from datetime import datetime, timezone
+import qrcode
 
-from flask import Blueprint, request, jsonify, render_template, redirect, url_for, session, jsonify
+
+from flask import Blueprint, request, jsonify, render_template, redirect, url_for, session, jsonify, send_file
 from sqlalchemy.exc import InternalError
 from flask_jwt_extended import (jwt_required, get_jwt_identity)
+from sqlalchemy import func
 
 from database.db_create import Banco
 from database.pessoas import Pessoa
@@ -11,6 +15,7 @@ from database.session import get_session
 from database.model.Model import *
 from utilities.montaRelatorio import *
 from utilities.loggers import get_logger
+from utilities.DateTimes import tradutor
 from services.CreateUserService import CreateUserService
 from services.CreateTurmaService import CreateTurmaService
 from services.CreateComplementoService import CreateComplementoService
@@ -22,7 +27,7 @@ from services.AutheticateUserService import AutheticateUserService
 blueprint = Blueprint('endpoints', __name__)
 logger = get_logger(sys.argv[0])
 
-
+#AINDA NÃO SERÁ IMPLEMENTADA
 @blueprint.route("/esqueci", methods=['POST'])
 def esqueci_():
     email = request.form['email']
@@ -57,14 +62,24 @@ def protected():
     current_user = get_jwt_identity()
     return jsonify(logged_in_as=current_user), 200
 
+@blueprint.route('/qrcode/<int:codigo_aluno>', methods=['GET'])
+def gerarqrcode(codigo_aluno):
+    qr = qrcode.QRCode(
+        version=1,
+        error_correction=qrcode.constants.ERROR_CORRECT_L,
+        box_size=10,
+        border=4,
+    )
+    session = get_session()
+    data = session.query(Aluno).filter_by(id_aluno=codigo_aluno).one()
+    JSON = data.alunoUser.as_dict()
+    qr.add_data(JSON)
+    qr.make(fit=True)
+    img = qr.make_image()
+    url = path.abspath(__file__).split('controller')[0]
+    img.save(url+f'{codigo_aluno}.png')
 
-@blueprint.route("/sair")
-def sair():
-    session['logged_in'] = False
-    session['user'] = ""
-    session['user_id'] = ""
-    return redirect('/')
-
+    return send_file(url+f'{codigo_aluno}.png', mimetype='image/png')
 
 @blueprint.route("/cadastrar", methods=['POST'])
 def cadastrar():
@@ -85,7 +100,7 @@ def cadastrar():
 @blueprint.route("/cadastrardadoscomplementares", methods=['POST'])
 def cadastrarDadosComplementares():
 
-#Não testado a parte dos Json
+    #Não testado a parte dos Json
 
     complementoData = request.get_json()
 
@@ -105,10 +120,10 @@ def cadastrarDadosComplementares():
 @blueprint.route("/cadastrarturma", methods=['POST'])
 def cadastrarturma():
 
-#Não testado a parte dos Json
+    #Não testado a parte dos Json
 
     turmaData = request.get_json()
-    turmaDataFields = ["responsavel", "nome_do_curso", "carga_horaria_total", "tolerancia", "modalidade", "turma_tag"]
+    turmaDataFields = ["responsavel", "nome_do_curso", "carga_horaria_total", "tolerancia", "modalidade"]
 
     if not all(field in turmaData for field in turmaDataFields):
         return "Missing information", 400
@@ -119,42 +134,32 @@ def cadastrarturma():
 
     return jsonify(turma)    
 
-
+#Mussalam - retornar dados de todas as turmas
 @blueprint.route("/listaturma")
 def listarturma():
+    session= get_session()
+    data = session.query(Turma).all()
+    JSON = [listaturmas(i) for i in data]
+    session.close()
+    return jsonify(JSON)
 
-    #session = get_session()
-    #busca = session.query(User).filter_by(usuario='Matheus Feitosa')
-    #busca = session.query(User).filter_by(usuario= usuario)
-    #busca.email =
-    #session.commit()
+@blueprint.route("/", methods=['POST'])
 
-    #try
-    #session = get_session()
-    #busca = session.query(Turma)
-    #alterar o resto
-
-    banco = Banco()
-    return render_template('listaturma.html', eventos=banco.listarTurma())
-
-
-@blueprint.route('/listaturma/<string:codigo_turma>')
+@blueprint.route('/listaturma/<int:codigo_turma>') 
 def turma(codigo_turma):
-    session['nome_da_turma'] = codigo_turma
-    banco = Banco()
-    soualuno = banco.buscarAlunoPorUsuarioECodigo(
-        session['user'], session['nome_da_turma'])
-    if(soualuno != []):
-        session['inscrito'] = True
-    else:
-        session['inscrito'] = False
-    eventos = banco.buscarTurmaComProfessor(codigo_turma)
-    variavel = eventos[0][0]
-    alunodaturma = banco.listarAlunos(variavel)
-    evento = banco.buscarTurmaComProfessor(codigo_turma)
-    return render_template('listaralunosdaturma.html', eventos=evento, alunosdaturma=alunodaturma)
+    session=get_session()
+    data = session.query(Turma).filter_by(id_turma=codigo_turma).one()  
+    JSON = listar_turmas(i,'listarturmas') 
+    for i in data.alunos: 
+        JSON['cursistas'].append(RcpfnomeAlunos(i))
+    session.close()
+    return jsonify(JSON)
 
-#precisa ser testado
+
+#entao eu tenho uma rota pra terminar, mas estou falando com outras duas pessoas sobre o edpermanente. Vc terminará ela
+#/chamadavalidar (entenda a atualizar presenca primeiro) basicamente. att presenca vai ser acessada por um aluno apoiador
+# e o professor vai dar o "OK" na chamada validar ai vai somar a presença que o apoiador pegou ao total do aluno, suave? 
+#precisa ser testado 
 @blueprint.route("/atualizarpresenca", methods=['POST'])
 def atualizarpresenca():
     if not request.is_json:
@@ -170,12 +175,12 @@ def atualizarpresenca():
     session.commit()
     session.close()
 
-    return jsonify("msg": "Presença do aluno contabilizada"), 200
+    return jsonify({"msg": "Presença do aluno contabilizada"}), 200
 
 @blueprint.route("/cadastraraluno", methods=['POST'])
-def cadastraraluno():
+def cadastraraluno(): 
 
-#Não testado a parte dos Json
+    #Não testado a parte dos Json
 
     cadastroData = request.get_json()
     cadastroDataFields = ["usuario", "nome_do_curso"]
@@ -192,7 +197,7 @@ def cadastraraluno():
 @blueprint.route("/cadastrarapoiador", methods=['POST'])
 def cadastrarapoiador():
 
-#Não testado a parte dos Json
+    #Não testado a parte dos Json
 
     apoiadorData = request.get_json()
     apoiadorDataFields = ["usuario", "nome_do_curso"]
@@ -209,7 +214,7 @@ def cadastrarapoiador():
 def cadastrarhorario():
 
 
-#Não testado a parte dos Json
+    #Não testado a parte dos Json
 
     horarioData = request.get_json()
     horarioDataFields = ["Turma", "DiaDaSemana", "Inicio", "Termino", "Propositor"]
@@ -231,10 +236,18 @@ def chamadapesquisar():
     propositor = get_jwt_identity()
     turma = request.get_json()
     session = get_session()
-    data = session.query(Presenca).filter_by(presenca_id_turma=turma["id"],presencaAtualizada=False).all()
-    for i in data:
+    turma = session.query(Turma).filter_by(id_turma=turma["id"]).one()
+    presencas = session.query(Presenca).filter_by(presenca_id_turma=turma["id"],presencaAtualizada=False).all()
+    DiaDaSemanaCheckIn = func.extract(data[0].ultimoCheckIn,'dow')
+    for i in turma.Horarios:
+        if (tradutor[DiaDaSemanaCheckIn] == i.DiaDaSemana):
+            horario = i
 
-    
+    for i in presencas:
+        atualizapresenca(i,horario)
+    session.commit()
+    session.close()
+    return jsonify({"msg": "Presenças Atualizadas"}), 200   
 
 
     
