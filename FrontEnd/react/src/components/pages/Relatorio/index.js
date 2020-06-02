@@ -24,8 +24,9 @@ function Relatorio(props) {
       }  
     }, [])
 
-    switch (relatorio[0].tipoDeRelatorio) {
-        case "Contato":
+
+    switch (props.location.state) {
+        case "relatoriocontato":
             const getContatoContent = contato => {
                 let content = [];
                 for (let idx in contato) {

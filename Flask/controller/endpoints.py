@@ -170,7 +170,7 @@ def atualizarpresenca():
     session.commit()
     session.close()
 
-    return jsonify("msg": "Presença do aluno contabilizada"), 200
+    return jsonify({"msg": "Presença do aluno contabilizada"}), 200
 
 @blueprint.route("/cadastraraluno", methods=['POST'])
 def cadastraraluno():
@@ -223,16 +223,16 @@ def cadastrarhorario():
     return jsonify(Horario)
 
 #AINDA NÃO TERMINADA
-@blueprint.route("/chamadavalidar", methods=['POST'])
-def chamadapesquisar():
-    if not request.is_json:
-        return jsonify({"msg": "Missing JSON in request"}), 400
+# @blueprint.route("/chamadavalidar", methods=['POST'])
+# def chamadapesquisar():
+#     if not request.is_json:
+#         return jsonify({"msg": "Missing JSON in request"}), 400
     
-    propositor = get_jwt_identity()
-    turma = request.get_json()
-    session = get_session()
-    data = session.query(Presenca).filter_by(presenca_id_turma=turma["id"],presencaAtualizada=False).all()
-    for i in data:
+#     propositor = get_jwt_identity()
+#     turma = request.get_json()
+#     session = get_session()
+#     data = session.query(Presenca).filter_by(presenca_id_turma=turma["id"],presencaAtualizada=False).all()
+#     for i in data:
 
     
 
