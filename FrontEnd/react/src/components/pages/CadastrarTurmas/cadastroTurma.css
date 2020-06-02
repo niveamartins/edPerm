@@ -7,7 +7,7 @@
 }
 
 .form-container p {
-    padding: 0 15px 0 15px;
+    padding: 0 15px;
 }
 
 form {
@@ -22,14 +22,10 @@ form {
     width: 100%;
 }
 
-.form-container form input.form-input:nth-child(1) {
-    margin-top: 200px;
-}
-
 #cad__class-button {
     margin-bottom: 20px;
+    margin-top: 0;
 }
-
 
 .form-page-container {
     /* enable scroll */

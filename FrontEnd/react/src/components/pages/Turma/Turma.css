@@ -27,7 +27,10 @@
     align-items: stretch;
     width: 100%;
   }
+}
 
-  
-
+@media(max-width: 1024px) {
+  .nav-info-turmas {
+    align-items: center;
+  }
 }

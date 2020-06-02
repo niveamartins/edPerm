@@ -16,56 +16,55 @@ import "./perfil.css"
 const qrcodeimg = require("../../../assets/qr-code-teste.png")
 
 function Perfil() {
+	//preencher dados da turma com db
 
-    //preencher dados da turma com db
-
-    return (
-        <Fragment>
-            <Accessibility />
-            <NavBar />
-            <main className="main">
-                <div className="card-container-local">
-                    <h1>Olá, Usuário</h1>
-                    <p className="subtitle">Visualize suas informações pessoais nesta página!</p>
-                    <p className="subtitle-qr">Seu QR Code de acesso</p>
-                    <div className="card">
-                        <img src={qrcodeimg}/>
-                        <div className="buttons">
-                            <Link to="/editarDados" className="link">
-                            <button size="large" class="personal-buttons" disabled>
-                                <Create id="icons"></Create>
-                                <label>Editar Dados</label>
-                            </button>
-                            </Link>
-                            <Link to="/dadosPessoais" className="link">
-                                <button size="large" class="personal-buttons" disabled>
-                                    <AccountCircle id="icons"></AccountCircle>
-                                    <label>Dados Pessoais</label>
-                                </button>
-                            </Link>
-                        </div>
-                    </div>
-                </div>
-                <div className="nav-info-pessoais">
-                    
-                        <Link to="/turmasinscritas" className="link">
-                            <button size="large" class="button" disabled>
-                                <Class id="icons"></Class>
-                                <label>Turmas Inscritas</label>
-                            </button>
-                        </Link>
-                        <Link to="/presencaspessoais" className="link">
-                            <button size="large" class="button" disabled>
-                                <Done id="icons"></Done>
-                                <label>Presenças</label>
-                            </button>
-                        </Link>
-                </div>
-            </main>
-            <Footer />
-        </Fragment>
-
+	return (
+		<Fragment>
+			<Accessibility />
+			<NavBar />
+			<main className="main">
+				<div className="card-container-local">
+					<h1>Olá, Usuário</h1>
+					<p className="subtitle">
+						Visualize suas informações pessoais nesta página!
+					</p>
+					<p className="subtitle-qr">Seu QR Code de acesso</p>
+					<div className="card">
+						<img src={qrcodeimg} />
+					</div>
+					<div className="buttons">
+						<Link to="/editarDados" className="link">
+							<button size="large" class="personal-buttons" disabled>
+								<Create id="icons"></Create>
+								<label>Editar Dados</label>
+							</button>
+						</Link>
+						<Link to="/dadosPessoais" className="link">
+							<button size="large" class="personal-buttons" disabled>
+								<AccountCircle id="icons"></AccountCircle>
+								<label>Dados Pessoais</label>
+							</button>
+						</Link>
+					</div>
+				</div>
+				<div className="nav-info-pessoais">
+					<Link to="/turmasinscritas" className="link">
+						<button size="large" class="button" disabled>
+							<Class id="icons"></Class>
+							<label>Turmas Inscritas</label>
+						</button>
+					</Link>
+					<Link to="/presencaspessoais" className="link">
+						<button size="large" class="button" disabled>
+							<Done id="icons"></Done>
+							<label>Presenças</label>
+						</button>
+					</Link>
+				</div>
+			</main>
+			<Footer />
+		</Fragment>
 	)
-	}
+}
 
 export default Perfil

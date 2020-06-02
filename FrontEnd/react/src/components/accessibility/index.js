@@ -16,7 +16,6 @@ export class Accessibility extends Component {
 	}
 
 	handleClick() {
-        console.log(!this.state.helpVisible)
 		if (!this.state.helpVisible) {
             //se visível adiciona eventListener
 			document.addEventListener("click", this.handleOutsideClick, false)
