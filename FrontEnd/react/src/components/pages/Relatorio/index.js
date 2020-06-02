@@ -1,5 +1,5 @@
-import React, { Fragment } from 'react'
-import { Link } from './node_modules/react-router-dom';
+import React, { Fragment, useState, useEffect } from 'react'
+// import { Link } from './node_modules/react-router-dom';
 
 import { NavBar } from '../../navbar'
 import { Footer } from '../../footer'
@@ -7,10 +7,10 @@ import { Accessibility } from '../../accessibility'
 
 import api from '../../../services/api'
 
-function Relatorio() { 
+function Relatorio(props) { 
     const [relatorio, setRelatorio] = useState([]); 
-    // const id = props.location.state;
-    // const url = '/machine/' + id;
+    const id = props.location.state;
+    const url = '/machine/' + id;
     useEffect(() => {
       try {
         api
