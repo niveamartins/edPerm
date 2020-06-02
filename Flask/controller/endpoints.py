@@ -157,10 +157,10 @@ def turma(codigo_turma):
 
 @blueprint.route("/listaturma", methods=['POST'])
 def listarturma():
-    user_id = request.json.get('user_id', None)
+    #user_id = request.json.get('user_id', None)
 
     listTurma = ListTurmaService()
-    turmas = listTurma.execute(user_id)
+    turmas = listTurma.execute()
 
     return jsonify(turmas)
 

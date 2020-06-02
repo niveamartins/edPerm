@@ -19,16 +19,18 @@ def turma_info(turma):
 
 
 class ListTurmaService:
-    def execute(self, user_id):
+    def execute(self):
         logger = get_logger(sys.argv[0])
         try:
             session = get_session()
-            data = session.query(Aluno).filter(
-                Aluno.alunos_id_user == user_id)
-            turmas = []
-            for row in data:
-                for turma in row.MinhasTurmas:
-                    turmas.append(turma_info(turma))
+            data = session.query(Turma).all()
+            turmas = [turma_info(i) for i in data]
+            #data = session.query(Aluno).filter(
+             #   Aluno.alunos_id_user == user_id)
+            #turmas = []
+            #for row in data:
+            #    for turma in row.MinhasTurmas:
+            #        turmas.append(turma_info(turma))
             session.close()
             return turmas
         except InternalError:
