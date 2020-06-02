@@ -72,7 +72,7 @@ def listaturma(Turma):
         'id_turma': f'{Turma.id_turma}', 
         'nome_do_curso':f'{Turma.nome_do_curso}',
         'id_responsavel':f'{Turma.id_responsavel}',
-        'nome_responsavel':f'{Turma.propositor.usuario}'
+        'nome_responsavel':f'{Turma.propositor.usuario}',
         'Carga_Horaria_Total':f'{Turma.carga_horaria_total}',
         'tag_turma':f'{Turma.tag_turma}',
         'tolerancia':f'{Turma.tolerancia}',

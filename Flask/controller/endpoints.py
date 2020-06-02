@@ -1,6 +1,8 @@
 import sys
+from os import path
 from datetime import datetime, timezone
 import qrcode
+
 
 from flask import Blueprint, request, jsonify, render_template, redirect, url_for, session, jsonify, send_file
 from sqlalchemy.exc import InternalError
@@ -61,7 +63,7 @@ def protected():
     return jsonify(logged_in_as=current_user), 200
 
 @blueprint.route('/qrcode/<int:codigo_aluno>', methods=['GET'])
-def qrcode(codigo_aluno):
+def gerarqrcode(codigo_aluno):
     qr = qrcode.QRCode(
         version=1,
         error_correction=qrcode.constants.ERROR_CORRECT_L,
@@ -70,10 +72,14 @@ def qrcode(codigo_aluno):
     )
     session = get_session()
     data = session.query(Aluno).filter_by(id_aluno=codigo_aluno).one()
-    json = data.alunoUser.as_dict()
-    qr.add_data(json)
+    JSON = data.alunoUser.as_dict()
+    qr.add_data(JSON)
+    qr.make(fit=True)
+    img = qr.make_image()
+    url = path.abspath(__file__).split('controller')[0]
+    img.save(url+f'{codigo_aluno}.png')
 
-    return send_file(qr, mimetype='image/gif')
+    return send_file(url+f'{codigo_aluno}.png', mimetype='image/png')
 
 @blueprint.route("/cadastrar", methods=['POST'])
 def cadastrar():
@@ -169,7 +175,7 @@ def atualizarpresenca():
     session.commit()
     session.close()
 
-    return jsonify("msg": "Presença do aluno contabilizada"), 200
+    return jsonify({"msg": "Presença do aluno contabilizada"}), 200
 
 @blueprint.route("/cadastraraluno", methods=['POST'])
 def cadastraraluno(): 

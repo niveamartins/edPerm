@@ -321,3 +321,118 @@
 [2020-06-01 05:23:00,603 - Flask/app.py - INFO]: Inicializando a poll de conexões
 [2020-06-01 05:23:01,415 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
 [2020-06-01 05:23:01,482 - /home/ubuntu/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 00:27:12,384 - Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 00:27:28,113 - Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 00:27:28,172 - Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 00:27:44,557 - Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 00:27:44,597 - Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 00:27:45,164 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 00:27:45,208 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 00:30:18,288 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 00:30:18,340 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 00:33:12,897 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 00:33:12,955 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 00:34:14,438 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 00:34:14,476 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 00:34:31,315 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 00:34:31,369 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 00:37:37,916 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 00:37:37,957 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 00:54:49,633 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 00:54:49,675 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 00:55:21,815 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 00:55:21,862 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 00:55:45,975 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 00:55:46,018 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 00:56:05,920 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 00:56:05,959 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 00:56:23,791 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 00:56:23,843 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 00:58:42,325 - Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 00:58:42,368 - Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 00:58:42,801 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 00:58:42,841 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 00:59:08,945 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 00:59:08,995 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 00:59:31,101 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 00:59:31,178 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 00:59:49,194 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 00:59:49,238 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 01:00:38,659 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 01:00:38,714 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 01:01:04,751 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 01:01:04,808 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 01:01:29,730 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 01:01:29,773 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 01:01:52,758 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 01:01:52,809 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 01:08:07,426 - Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 01:08:07,468 - Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 01:08:07,923 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 01:08:07,968 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 01:08:35,969 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 01:08:36,020 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 01:08:54,997 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 01:08:55,043 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 01:17:26,892 - Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 01:17:26,932 - Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 01:17:27,308 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 01:17:27,348 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 01:19:12,816 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 01:19:12,877 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 01:19:31,790 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 01:19:31,836 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 01:20:25,288 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 01:20:25,330 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 01:20:36,129 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 01:20:36,176 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 01:20:54,185 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 01:20:54,235 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 01:21:10,011 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 01:21:10,053 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 01:22:55,419 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 01:22:55,469 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 01:23:02,258 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 01:23:02,302 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 01:23:29,444 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 01:23:29,498 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 01:26:00,541 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 01:26:00,592 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 01:26:20,435 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 01:26:20,487 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 01:37:33,697 - Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 01:37:33,739 - Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 01:37:52,623 - Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 01:37:52,661 - Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 01:37:53,054 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 01:37:53,096 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 01:42:50,544 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 01:42:50,583 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 01:42:53,287 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 01:42:53,336 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 01:43:22,624 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 01:43:22,684 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 01:44:18,774 - Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 01:44:18,818 - Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 01:44:19,204 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 01:44:19,244 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 01:46:34,205 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 01:46:34,264 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 01:47:50,139 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 01:47:50,201 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 01:48:27,590 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 01:48:27,648 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 01:48:47,655 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 01:48:47,698 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 01:49:03,495 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 01:49:03,540 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 01:49:31,558 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 01:49:31,608 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 01:49:46,658 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 01:49:46,703 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 01:56:29,291 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 01:56:29,343 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 01:56:46,217 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 01:56:46,258 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-02 01:56:49,984 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-02 01:56:50,036 - /run/media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
