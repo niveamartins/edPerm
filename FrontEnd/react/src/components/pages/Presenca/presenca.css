@@ -1,0 +1,12 @@
+.presence-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.header__first-presence {
+    padding-right: 10em;
+}
+
+tr.students td.presence__name {
+    padding-right: 13em;
+}

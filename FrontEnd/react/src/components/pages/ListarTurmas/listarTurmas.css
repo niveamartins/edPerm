@@ -1,0 +1,46 @@
+/* Ajustando posicionamento dos componentes */
+
+.card-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-list tr {
+    margin: 0;
+}
+
+.card-list .title {
+    align-self: center;
+}
+
+.card-list tr.content {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 1em 0 1em;
+}
+
+.card-container {
+    flex-wrap: wrap !important;
+}
+
+.link {
+text-decoration: none;
+  color: var(--elements-second-color);
+  font-family: 'Montserrat', sans-serif;    
+  font-weight: bold; 
+  position: absolute;
+  margin-left: 60%;
+  margin-top: -10px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.link:hover{
+    transform: translateY(-4px);
+}
+
+.teste {
+    display: inline-block;
+}

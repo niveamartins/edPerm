@@ -7,6 +7,14 @@
 #*.pdb
 #*.sqlite3
 
+### images ###
+*.png
+*.jpeg
+*.jpg
+
+### Logs ###
+*.log
+
 ### Flask ###
 instance/*
 !instance/.gitignore
