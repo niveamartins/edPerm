@@ -31,7 +31,6 @@ function Turma(props) {
         let content = [];
         for (let idx in turma) {
 		  const item = turma[idx];
-          console.log(item)
 		  content.push(
 			<div className="card-container">
 			<div className="card">
@@ -68,35 +67,6 @@ function Turma(props) {
 				</table>
 			</div>
 
-			<div className="nav-info-turmas">
-				<Link to="/presenca" className="link">
-					<button size="large" class="button" disabled>
-						<label>Lista de Presença</label>
-					</button>
-				</Link>
-				<Link to="/relatorios" className="link">
-					<button size="large" class="button">
-						<label>Relatórios</label>
-					</button>
-				</Link>
-				<Link 
-					to="/cadaula"
-					 className="link">
-					<button size="large" class="button" disabled>
-						<label>Criar Aula</label>
-					</button>
-				</Link>
-				<Link to="/cadapoiador" className="link">
-					<button size="large" class="button" disabled>
-						<label>Cadastrar Aluno Apoiador</label>
-					</button>
-				</Link>
-				<Link to="/aulas" className="link">
-					<button size="large" class="button" disabled>
-						<label>Aulas</label>
-					</button>
-				</Link>
-			</div>
 		</div>
 		  )
 		}
@@ -110,7 +80,38 @@ function Turma(props) {
 			<NavBar />
 			<main className="main">
 				{getTurmaContent(turma)}
+
+				<div className="nav-info-turmas">
+					<Link to="/presenca" className="link">
+						<button size="large" class="button" disabled>
+							<label>Lista de Presença</label>
+						</button>
+					</Link>
+					<Link to="/relatorios" className="link">
+						<button size="large" class="button">
+							<label>Relatórios</label>
+						</button>
+					</Link>
+					<Link 
+						to="/cadaula"
+						className="link">
+						<button size="large" class="button" disabled>
+							<label>Criar Aula</label>
+						</button>
+					</Link>
+					<Link to="/cadapoiador" className="link">
+						<button size="large" class="button" disabled>
+							<label>Cadastrar Aluno Apoiador</label>
+						</button>
+					</Link>
+					<Link to="/aulas" className="link">
+						<button size="large" class="button" disabled>
+							<label>Aulas</label>
+						</button>
+					</Link>
+			</div>
 			</main>
+
 			<Footer />
 		</Fragment>
 	)

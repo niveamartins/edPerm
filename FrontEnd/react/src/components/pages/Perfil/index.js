@@ -33,7 +33,7 @@ function Perfil() {
 						<img src={qrcodeimg} />
 					</div>
 					<div className="buttons">
-						<Link to="/editarDados" className="link">
+						<Link to="/editarDados" className="class-page">
 							<button size="large" class="personal-buttons" disabled>
 								<Create id="icons"></Create>
 								<label>Editar Dados</label>

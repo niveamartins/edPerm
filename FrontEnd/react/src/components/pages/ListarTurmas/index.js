@@ -47,7 +47,7 @@ function ListarTurmas() {
                                 <Link to= {{
 					            pathname: "/turma",
 					            state: [item.id_turma]
-					            }} className="link">
+					            }} className="link-info">
                                     <AddIcon id="more-details"></AddIcon>info.
                                 </Link>
                             </tr>
