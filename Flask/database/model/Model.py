@@ -60,6 +60,10 @@ class Aluno(Base):
     # ONE TO MANY
     presencas = relationship('Presenca', backref='alunoDono')
 
+    def as_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
+
 
 class Turma(Base):
     __tablename__ = 'turma'
@@ -80,6 +84,9 @@ class Turma(Base):
                           backref=backref('MinhasTurmas', lazy='dynamic'))
     AlunosApoiadores = relationship(
         'AlunoApoiador', secondary=alunoApoiadoXturma, backref=backref('turmasApoiadas', lazy='dynamic'))
+    
+    def as_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
 
 class Horario(Base):

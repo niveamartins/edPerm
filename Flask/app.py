@@ -6,6 +6,7 @@ from extensions import jwt
 
 app = Flask(__name__)
 CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['JSON_AS_ASCII'] = False
 app.secret_key = b'\xae\xf3\x8e\x03\xb8\x9c\x87&\xae\xc4\xf5+'
 

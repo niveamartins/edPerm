@@ -11,6 +11,7 @@ class CreateAlunoService:
     def execute(self, cadastroData):
         logger = get_logger(sys.argv[0])
         try:
+            print(cadastroData)
             session = get_session()
             QueryUsuario = session.query(User).filter_by(usuario=cadastroData['usuario']).first()
             if (QueryUsuario != None):

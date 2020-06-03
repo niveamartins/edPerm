@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react'
-import { Link } from '../../../../node_modules/react-router-dom';
+// import { Link } from '../../../../node_modules/react-router-dom';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 import api from '../../../services/api';
@@ -94,7 +94,7 @@ function CadastrarApoiador() {
                     <div className="info-turmas">
                         <div class="form-page-container">
                             <div class="form-container">
-                                <form>
+                                <form onSubmit={handleCreate}>
                                     <h1>Cadastre o apoiador!</h1>
                                     <p>Insira abaixo o código do aluno escolhido.</p>
                                     <input name="aluno" class="form-input" placeholder="Código do Aluno" value={aluno} onChange={e => setAluno(e.target.value)} required />

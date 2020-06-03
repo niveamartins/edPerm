@@ -8,7 +8,7 @@ function Inicio() {
     //adaptar login para js
     //fazer mudanças para usar useState
     //mudar links esqueci a senha e cadastro
-
+    // <a href="esqueciasenha" class="forgot">Esqueceu a senha?</a>
     return (
         <div className="login-index">
             <div className="index-header">
@@ -21,12 +21,13 @@ function Inicio() {
                         <form>
                             <h1>Olá!</h1>
                             <p>Realize login para ter acesso a funcionalidades exclusivas.</p>
-                            <input type="text" name="usuario" class="form-input" placeholder="Usuário" required />
-                            <input type="password" name="senha" class="form-input" placeholder="Senha" required></input>
-                            <input type="submit" class="button" value="Login" />
-                            <a href="esqueciasenha" class="forgot">Esqueceu a senha?</a>
-                            <a href="cadusuario" class="signup">Não possui conta? <span class="form-highlight">Se cadastre</span></a>
+                            <input type="text" name="usuario" class="form-input" placeholder="Usuário"/>
+                            <input type="password" name="senha" class="form-input" placeholder="Senha"></input>
+.                            <a href="cadusuario" class="signup">Não possui conta? <span class="form-highlight">Se cadastre</span></a>
                         </form>
+                        <a href="/turmas">
+                            <button class="button" value="Login">Login</button>
+                        </a>
                     </div>
                 </div>
             </main>

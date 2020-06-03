@@ -7,7 +7,7 @@ from database.model.Model import *
 def relatorioatividades(TipoDeFiltro,Valor):
     session = get_session()
     data = session.query(Turma).all()
-    JSON = [atividade_turma(i,TipoDeFiltro) for i in data]
+    JSON = [listar_turmas(i,TipoDeFiltro) for i in data]
     for (i,j) in zip(data,JSON):
         for k in i.Alunos:
             aux = atividade_aluno(k)
@@ -29,10 +29,10 @@ def relatorioatividades(TipoDeFiltro,Valor):
 def relatoriocontato(User):
     return {
           "tipoDeRelatorio":"Contato",
-          "id": f'{self.Id}',
-          "nome": f'{self.usuario}',
-          "email":f'{self.email}', 
-          "telefone":f'{self.telefone}'
+          "id": f'{User.Id}',
+          "nome": f'{User.usuario}',
+          "email":f'{User.email}', 
+          "telefone":f'{User.telefone}'
         }
 
 

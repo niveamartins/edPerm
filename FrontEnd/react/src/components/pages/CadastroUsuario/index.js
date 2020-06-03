@@ -3,27 +3,27 @@ import React, { useState } from "react"
 import api from "../../../services/api"
 
 function Inicio() {
-	const [user, setUser] = useState("")
+	const [usuario, setUsuario] = useState("")
 	const [email, setEmail] = useState("")
-	const [password, setPassword] = useState("")
+	const [senha, setSenha] = useState("")
 	const [cpf, setCpf] = useState("")
-	const [telephone, setTelephone] = useState("")
-	const [type, setType] = useState("")
+	const [telefone, setTelefone] = useState("")
+	const tipo = "adm"
 	const [confirm_password, setConfPass] = useState("")
 
 	async function handleCreate(e) {
 		e.preventDefault()
 
 		const data = {
-			user,
+			usuario,
 			email,
-			password,
+			senha,
 			cpf,
-			telephone,
-			type,
+			telefone,
+			tipo,
 		}
 
-		if (password == confirm_password) {
+		if (senha == confirm_password) {
 			try {
 				api.post("/cadastrar", data)
 
@@ -58,8 +58,8 @@ function Inicio() {
 								name="usuario"
 								class="form-input"
 								placeholder="Usuário"
-								value={user}
-								onChange={(e) => setUser(e.target.value)}
+								value={usuario}
+								onChange={(e) => setUsuario(e.target.value)}
 								required
 							/>
 							<input
@@ -76,8 +76,8 @@ function Inicio() {
 								name="senha"
 								class="form-input"
 								placeholder="Senha"
-								value={password}
-								onChange={(e) => setPassword(e.target.value)}
+								value={senha}
+								onChange={(e) => setSenha(e.target.value)}
 								required
 							/>
 							<input
@@ -105,8 +105,8 @@ function Inicio() {
 								name="tel"
 								class="form-input"
 								placeholder="Telefone"
-								value={telephone}
-								onChange={(e) => setTelephone(e.target.value)}
+								value={telefone}
+								onChange={(e) => setTelefone(e.target.value)}
 								required
 							/>
 							<input type="submit" class="button" value="cadastrar" />

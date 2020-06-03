@@ -5,6 +5,8 @@ import { NavBar } from '../../navbar'
 import { Footer } from '../../footer'
 import { Accessibility } from '../../accessibility'
 
+import './relatorio.css'
+
 import api from '../../../services/api'
 
 function Relatorio(props) { 
@@ -24,27 +26,33 @@ function Relatorio(props) {
       }  
     }, [])
 
-
     switch (props.location.state) {
         case "relatoriocontato":
             const getContatoContent = contato => {
                 let content = [];
+                console.log(relatorio)
                 for (let idx in contato) {
                   const item = contato[idx];
+                  console.log(item)
                   content.push( 
-                    <li>
-                        <div>
-                            <p>{item.id}</p>
-                            <p>{item.nome}</p>
-                            <p>{item.email}</p>
-                            <p>{item.telefone}</p>
-                        </div>
-                    </li>
+                    <table className="card-relatorio contato">
+                            <thead>
+                                <tr className="topo">
+                                    <td className="id">{item.id}</td>
+                                    <td className="title">{item.nome}</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>{item.email}</tr>
+                                <tr>{item.telefone}</tr>
+                            </tbody>
+                    </table>
                     )
 
                   // Aqui dentro do push devemos colocar o html da parte de cada um dos contatos
-                }
-                return content;
+                  }
+                
+                return content
               };
 
             return (
@@ -52,30 +60,55 @@ function Relatorio(props) {
                     <Accessibility />
                     <NavBar />
                     <main className="main">
-                        <ul>
-                            {getContatoContent(relatorio)}
-                        </ul>
+                        <div className="container-relatorios">
+                            <ul>
+                                {getContatoContent(relatorio)}
+                            </ul>
+                        </div>
                     </main>
                     <Footer />
                 </Fragment>
             )
         
-        case "CPF":
+        case "relatoriocpfnome":
+            const getAlunoContent = alunos => {
+                let content = [];
+                for (let idx in alunos) {
+                  const item = alunos[idx];
+                  content.push(
+                      <tr className="info-alunos">
+                        <td>{item.nomeDoAluno}</td>
+                        <td className="cpf">{item.cpfDoAluno}</td>
+                      </tr>)
+                }
+                return content;
+            }
+
             const getCPFContent = cpf => {
                 let content = [];
                 for (let idx in cpf) {
                   const item = cpf[idx];
+                  console.log(item)
                   content.push( 
-                    <li>
-                        <div>
-                            <p>{item.id_turma}</p>
-                            <p>{item.nomeDoCurso}</p>
-                            <p>{item.idPropositor}</p>
-                            <p>{item.propositor}</p>
-                            <p>{//Um item.alunos é uma lista, tem que percorrer 
-                            }</p>
-                        </div>
-                    </li>
+                    <table className="card-relatorio cpf">
+                        <thead>
+                            <tr>
+                                <td className="campo">Turma: </td>
+                                <td><strong>{item.id_turma}</strong> <span className="info">{item.nomeDoCurso}</span></td>
+                            </tr>
+                            <tr>
+                                <td className="campo">Propositor: </td>
+                                <td><strong>{item.idPropositor}</strong> <span className="info">{item.propositor}</span></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td className="campo">Alunos: </td>
+                            </tr>
+                            {getAlunoContent(item.alunos)}
+                        </tbody>
+                            
+                    </table>
                     )
 
                   // Dentro do push devemos colocar o html da parte de cada um dos cpfs
@@ -88,25 +121,29 @@ function Relatorio(props) {
                     <Accessibility />
                     <NavBar />
                     <main className="main">
-                        <ul>
-                            {getCPFContent(relatorio)}
-                        </ul>
+                        <div className="container-relatorios">
+                            <ul>
+                                {getCPFContent(relatorio)}
+                            </ul>
+                        </div> 
                     </main>
                     <Footer />
                 </Fragment>
             )
         
-        case "frequencia":
+        case "relatoriofrequencia":
             const getFrequenciaContent = frequencia => {
                 let content = [];
                 for (let idx in frequencia) {
                   const item = frequencia[idx];
                   content.push(  
-                    <li>
+                    <li className="card-relatorio frequencia">
                         <div>
-                            <p>{item.Nome}</p>
+                            <div>
+                                <p className="title">{item.Nome}</p>
+                                <p>{item.id_aluno}</p>
+                            </div>
                             <p>{item.cpf}</p>
-                            <p>{item.id_aluno}</p>
                             <p>{item.id_user_aluno}</p>
                             <p>{//Um item.Turma é uma lista, tem que percorrer 
                             }</p>
@@ -124,9 +161,11 @@ function Relatorio(props) {
                     <Accessibility />
                     <NavBar />
                     <main className="main">
-                        <ul>
-                            {getFrequenciaContent(relatorio)}
-                        </ul>
+                        <div className="container-relatorios"> 
+                            <ul>
+                                {getFrequenciaContent(relatorio)}
+                            </ul>
+                        </div>
                     </main>
                     <Footer />
                 </Fragment>
@@ -149,9 +188,11 @@ function Relatorio(props) {
                     <Accessibility />
                     <NavBar />
                     <main className="main">
-                        <ul>
-                            {getProfissaoContent(relatorio)}
-                        </ul>
+                        <div className="container-relatorios">
+                            <ul>
+                                {getProfissaoContent(relatorio)}
+                            </ul>
+                        </div>
                     </main>
                     <Footer />
                 </Fragment>
@@ -174,9 +215,11 @@ function Relatorio(props) {
                     <Accessibility />
                     <NavBar />
                     <main className="main">
-                        <ul>
-                            {getCAPContent(relatorio)}
-                        </ul>
+                        <div className="container-relatorios">
+                            <ul>
+                                {getCAPContent(relatorio)}
+                            </ul>
+                        </div>
                     </main>
                     <Footer />
                 </Fragment>
@@ -199,9 +242,11 @@ function Relatorio(props) {
                     <Accessibility />
                     <NavBar />
                     <main className="main">
-                        <ul>
-                            {getSIContent(relatorio)}
-                        </ul>
+                        <div className="container-relatorios">
+                            <ul>
+                                {getSIContent(relatorio)}
+                            </ul>
+                        </div>
                     </main>
                     <Footer />
                 </Fragment>
@@ -224,28 +269,50 @@ function Relatorio(props) {
                     <Accessibility />
                     <NavBar />
                     <main className="main">
-                        <ul>
-                            {getUnidadeContent(relatorio)}
-                        </ul>
+                        <div className="container-relatorios">
+                            <ul>
+                                {getUnidadeContent(relatorio)}
+                            </ul>
+                        </div>
                     </main>
                     <Footer />
                 </Fragment>
             )
         
-        case "concluintes":
+        case "relatorioconcluintes":
+            const getCursistaContent = cursistas => {
+                let content = [];
+                for (let idx in cursistas) {
+                  const item = cursistas[idx];
+                  console.log(item)
+                  content.push(
+                      <li>
+                        <p>{item.CAP}</p>
+                        <p>{item.aluno_nome}</p>
+                        <p>{item.funcao}</p>
+                        <p>{item.profissao}</p>
+                        <p>{item.unidade}</p>
+                        <p>{item.id_aluno}</p>
+                        <p>{item.id_user}</p>
+                        <p>{item.superintendenciadaSUBPAV}</p>
+                      </li>)
+                }
+                return content;
+            }
+
             const getConcluintesContent = concluintes => {
                 let content = [];
                 for (let idx in concluintes) {
                   const item = concluintes[idx];
                   content.push( 
-                    <li>
+                    <li className="card-relatorio">
                         <div>
                             <p>{item.id_turma}</p>
                             <p>{item.nome_do_curso}</p>
                             <p>{item.id_do_responsavel}</p>
                             <p>{item.nomeDoPropositor}</p>
                             <p>{item.Carga_Horaria_Total}</p>
-                            <p>{//Um item.cursistas é uma lista, tem que percorrer 
+                            <p>{getCursistaContent(item.cursistas) 
                             }</p>
                         </div>
                     </li>
@@ -261,9 +328,11 @@ function Relatorio(props) {
                     <Accessibility />
                     <NavBar />
                     <main className="main">
-                        <ul>
-                            {getConcluintesContent(relatorio)}
-                        </ul>
+                        <div className="container-relatorios">
+                            <ul>
+                                {getConcluintesContent(relatorio)}
+                            </ul>
+                        </div>
                     </main>
                     <Footer />
                 </Fragment>
