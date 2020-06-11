@@ -96,16 +96,16 @@ function Turma(props) {
 							  state: [turma]
 							}}	 
 							  className="link">
-							<button class="button" disabled>
+							<button class="button">
 								<label>Criar Aula</label>
 							</button>
 						</Link>
 						<Link to= {{ 
 							  pathname: "/cadapoiador", 
-							  state: [turma]
+							  state: turma
 							}}
 							 className="link">
-							<button class="button" disabled>
+							<button class="button">
 								<label>Cadastrar Aluno Apoiador</label>
 							</button>
 						</Link>
