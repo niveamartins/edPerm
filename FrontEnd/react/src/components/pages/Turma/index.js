@@ -13,8 +13,7 @@ function Turma(props) {
 	const [turma, setTurmas] = useState([])
 
 	const id = props.location.state
-	const url = "listaturma/" + id.toString()
-
+	const url = "listaturma/" + id
 	useEffect(() => {
 		try {
 			api.get(url).then((response) => {
@@ -85,11 +84,14 @@ function Turma(props) {
 								<label>Lista de Presença</label>
 							</button>
 						</Link>
+
 						<Link to="/relatorios" className="link">
 							<button class="button">
 								<label>Relatórios</label>
 							</button>
 						</Link>
+
+						
 						<Link to="/cadaula" className="link">
 							<button class="button" disabled>
 								<label>Criar Aula</label>

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from "react-router-dom"
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew'
 import MenuIcon from '@material-ui/icons/Menu'
 
@@ -37,7 +38,7 @@ export function NavBar() {
                 </nav>
 
                     {/* logout button */}
-                    <a href="/" title="Sair"> <PowerSettingsNewIcon id="nav-elements" /> </a>
+                    <Link to="/" title="Sair"> <PowerSettingsNewIcon id="nav-elements" /> </Link>
 
             </header>
         </div>

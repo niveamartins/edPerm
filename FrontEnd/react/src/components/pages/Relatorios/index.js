@@ -16,9 +16,9 @@ const relatorios = () => {
 			<Accessibility />
 			<NavBar />
 			<main>
-				<a href="/turma">
+				<Link to="/turma">
 					<ArrowBackIcon id="return-icon" />
-				</a>
+				</Link>
 				<div className="document__links">
 
 					<Link to= {{

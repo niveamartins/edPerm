@@ -99,9 +99,7 @@ function ListarTurmas() {
 			<Accessibility />
 			<NavBar />
 			<main>
-				<div className="card-container">
-                    {getTurmasContent(turmas)}
-                </div>
+				<div className="card-container">{getTurmasContent(turmas)}</div>
 			</main>
 			<Footer />
 		</Fragment>
