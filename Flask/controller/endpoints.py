@@ -71,7 +71,8 @@ def dados_pessoais():
     user = get_jwt_identity()
     session = get_session()
     data = session.query(User).filter_by(Id=user['id']).one().as_dict()
-    return ""
+    session.close()
+    return jsonify(data)
 
 @blueprint.route('/qrcode/<int:codigo_aluno>', methods=['GET'])
 def gerarqrcode(codigo_aluno):
