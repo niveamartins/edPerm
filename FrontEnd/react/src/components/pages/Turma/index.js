@@ -80,7 +80,8 @@ function Turma(props) {
 			<main className="main turma">
 					{getTurmaContent(turma)}
 					<div className="nav-info-turmas">
-						<Link to="/presenca" className="link">
+						<Link to="/presenca"
+							className="link">
 							<button class="button" disabled>
 								<label>Lista de Presença</label>
 							</button>
@@ -90,12 +91,20 @@ function Turma(props) {
 								<label>Relatórios</label>
 							</button>
 						</Link>
-						<Link to="/cadaula" className="link">
+						<Link to= {{ 
+							  pathname: "/cadaula", 
+							  state: [turma]
+							}}	 
+							  className="link">
 							<button class="button" disabled>
 								<label>Criar Aula</label>
 							</button>
 						</Link>
-						<Link to="/cadapoiador" className="link">
+						<Link to= {{ 
+							  pathname: "/cadapoiador", 
+							  state: [turma]
+							}}
+							 className="link">
 							<button class="button" disabled>
 								<label>Cadastrar Aluno Apoiador</label>
 							</button>
