@@ -72,6 +72,7 @@ def dados_pessoais():
     session = get_session()
     data = session.query(User).filter_by(Id=user['id']).one().as_dict()
     session.close()
+    del data["senha"]
     return jsonify(data)
 
 @blueprint.route('/qrcode/<int:codigo_aluno>', methods=['GET'])
@@ -422,8 +423,6 @@ def data():
         Turma1.Alunos.append(Aluno1)
         Turma1.Alunos.append(Aluno2)
         Turma2.Alunos.append(Aluno1)
-        aba = session.query(User).filter_by(usuario="eeeeee").first()
-        Turma1.Alunos.append(aba.Aluno)
         session.commit()
         if (User5.Aluno != None):
             print("aaa")
