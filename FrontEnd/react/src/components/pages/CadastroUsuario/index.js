@@ -11,6 +11,9 @@ function Inicio() {
 	const [telefone, setTelefone] = useState("")
 	const tipo = "adm"
 	const [confirm_password, setConfPass] = useState("")
+	const [cap, setCap] = useState("")
+	const [funcao, setFuncao] = useState("")
+	const [profissao, setProfissao] = useState("")
 
 	async function handleCreate(e) {
 		e.preventDefault()
@@ -22,6 +25,9 @@ function Inicio() {
 			cpf,
 			telefone,
 			tipo,
+			cap,
+			funcao,
+			profissao
 		}
 
 		if (senha == confirm_password) {
@@ -39,7 +45,7 @@ function Inicio() {
 	}
 
 	const title = {
-		marginTop: "4.5em",
+		marginTop: "300px",
     }
     
 	return (
@@ -108,6 +114,33 @@ function Inicio() {
 								placeholder="Telefone"
 								value={telefone}
 								onChange={(e) => setTelefone(e.target.value)}
+								required
+							/>
+							<input
+								type="text"
+								name="cap"
+								class="form-input"
+								placeholder="CAP"
+								value={cap}
+								onChange={(e) => setCap(e.target.value)}
+								required
+							/>
+							<input
+								type="text"
+								name="funcao"
+								class="form-input"
+								placeholder="Função"
+								value={funcao}
+								onChange={(e) => setFuncao(e.target.value)}
+								required
+							/>
+							<input
+								type="text"
+								name="profissao"
+								class="form-input"
+								placeholder="Profissão"
+								value={profissao}
+								onChange={(e) => setProfissao(e.target.value)}
 								required
 							/>
 							<input type="submit" class="button" value="cadastrar" />
