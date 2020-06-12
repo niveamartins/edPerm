@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from "react-router-dom"
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew'
 import MenuIcon from '@material-ui/icons/Menu'
 
@@ -24,20 +25,20 @@ export function NavBar() {
 
                         {/* button for nav sliding */}
                         <input type="checkbox" id="check" />
-                        <label for="check" class="checkbtn">
+                        <label htmlFor="check" className="checkbtn">
                             <MenuIcon id="toggle-button" />
                         </label>
 
                         <ul className="nav__links">
-                            <li><NavLink to="/cadalunos" className="middle" title="Cadastrar Alunos" activeClassName="active__link">Cadastrar Alunos</NavLink></li>
                             <li><NavLink to="/cadturma" className="middle" title="Cadastrar Turma" activeClassName="active__link">Cadastrar Turma</NavLink></li>
+                            <li><NavLink to="/cadalunos" className="middle" title="Cadastrar Alunos" activeClassName="active__link">Cadastrar Alunos</NavLink></li>
                             <li><NavLink to="/turmas" className="middle" title="Listar Turmas" activeClassName="active__link">Turmas</NavLink></li>
                             <li><NavLink to="/Perfil" className="middle" title="Perfil" activeClassName="active__link">Perfil</NavLink></li>
                         </ul>
                 </nav>
 
                     {/* logout button */}
-                    <a href="/" title="Sair"> <PowerSettingsNewIcon id="nav-elements" /> </a>
+                    <Link to="/" title="Sair"> <PowerSettingsNewIcon id="nav-elements" /> </Link>
 
             </header>
         </div>

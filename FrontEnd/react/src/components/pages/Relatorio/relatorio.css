@@ -1,8 +1,6 @@
-.container-relatorios {
+.card-container ul {
    margin-top: 2em;
-   display: flex;
-   justify-content: center;   
-   flex-wrap: wrap;
+   margin-bottom: 2em;
 }
 
 table.card-relatorio {
@@ -10,7 +8,7 @@ table.card-relatorio {
    font-family: 'Montserrat', sans-serif;
    background-color: #fff;
    margin: 1em;
-   padding: 10px;
+   padding: 20px;
 
    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
    -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
@@ -67,8 +65,8 @@ tbody {
    flex-direction: column;
    align-items: center;
 }
-
-td.campo {
+.campo {
+   padding-top: 10px;
    font-size: 0.9em;
    text-transform: uppercase;
    font-weight: bold;
@@ -77,4 +75,13 @@ td.campo {
 span.info {
    text-transform: capitalize;
    margin-left: 5px;
+}
+
+.topo__contato {
+   font-size: 1.1em;
+   padding-bottom: 5px;
+}
+
+td.topo__contato .campo{
+   padding-left: 1em;
 }

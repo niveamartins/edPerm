@@ -65,6 +65,16 @@ def protected():
     current_user = get_jwt_identity()
     return jsonify(logged_in_as=current_user), 200
 
+@blueprint.route('/dadosPessoais', methods=['GET'])
+@jwt_required
+def dados_pessoais():
+    user = get_jwt_identity()
+    session = get_session()
+    data = session.query(User).filter_by(Id=user['id']).one().as_dict()
+    session.close()
+    del data["senha"]
+    return jsonify(data)
+
 @blueprint.route('/qrcode/<int:codigo_aluno>', methods=['GET'])
 def gerarqrcode(codigo_aluno):
     qr = qrcode.QRCode(
@@ -88,7 +98,7 @@ def gerarqrcode(codigo_aluno):
 def cadastrar():
 
     userData = request.get_json()
-    userDataFields = ["usuario", "email", "senha", "cpf", "telefone", "tipo"]
+    userDataFields = ["usuario", "email", "senha", "cpf", "telefone", "tipo", "cap", "funcao", "profissao"]
 
     if not all(field in userData for field in userDataFields):
         return "Missing information", 400
@@ -413,8 +423,6 @@ def data():
         Turma1.Alunos.append(Aluno1)
         Turma1.Alunos.append(Aluno2)
         Turma2.Alunos.append(Aluno1)
-        aba = session.query(User).filter_by(usuario="eeeeee").first()
-        Turma1.Alunos.append(aba.Aluno)
         session.commit()
         if (User5.Aluno != None):
             print("aaa")

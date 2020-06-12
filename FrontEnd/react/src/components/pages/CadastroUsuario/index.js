@@ -1,5 +1,6 @@
 //página de login
 import React, { useState } from "react"
+import { Link } from 'react-router-dom'
 import api from "../../../services/api"
 
 function Inicio() {
@@ -10,6 +11,9 @@ function Inicio() {
 	const [telefone, setTelefone] = useState("")
 	const tipo = "adm"
 	const [confirm_password, setConfPass] = useState("")
+	const [cap, setCap] = useState("")
+	const [funcao, setFuncao] = useState("")
+	const [profissao, setProfissao] = useState("")
 
 	async function handleCreate(e) {
 		e.preventDefault()
@@ -21,6 +25,9 @@ function Inicio() {
 			cpf,
 			telefone,
 			tipo,
+			cap,
+			funcao,
+			profissao
 		}
 
 		if (senha == confirm_password) {
@@ -38,13 +45,13 @@ function Inicio() {
 	}
 
 	const title = {
-		marginTop: "4.5em",
+		marginTop: "300px",
     }
     
 	return (
 		<div className="login-index">
 			<div className="index-header">
-				<a href="/">Educação Permanente</a>
+				<Link to="/">Educação Permanente</Link>
 			</div>
 
 			<main className="main-content-forms">
@@ -109,11 +116,38 @@ function Inicio() {
 								onChange={(e) => setTelefone(e.target.value)}
 								required
 							/>
+							<input
+								type="text"
+								name="cap"
+								class="form-input"
+								placeholder="CAP"
+								value={cap}
+								onChange={(e) => setCap(e.target.value)}
+								required
+							/>
+							<input
+								type="text"
+								name="funcao"
+								class="form-input"
+								placeholder="Função"
+								value={funcao}
+								onChange={(e) => setFuncao(e.target.value)}
+								required
+							/>
+							<input
+								type="text"
+								name="profissao"
+								class="form-input"
+								placeholder="Profissão"
+								value={profissao}
+								onChange={(e) => setProfissao(e.target.value)}
+								required
+							/>
 							<input type="submit" class="button" value="cadastrar" />
-							<a href="/">
+							<Link to="/">
 								Já possui uma conta?{" "}
 								<span class="form-highlight">Faça login</span>
-							</a>
+							</Link>
 						</form>
 					</div>
 				</div>
