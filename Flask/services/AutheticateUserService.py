@@ -14,8 +14,8 @@ class AutheticateUserService:
         try:
             session = get_session()
 
-            user = session.query(User).filter(
-                User.usuario == usuario).first().as_dict()
+            user = session.query(User).filter_by(
+                usuario = usuario).first().as_dict()
 
             if not user or not check_password_hash(user["senha"], senha):
                 return "Usuario ou senha incorretos.", 400
