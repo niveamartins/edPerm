@@ -1,10 +1,14 @@
 //página de login 
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 import api from "../../../services/api"
 
 import './inicio.css'
+
+const jwt = require("jsonwebtoken");
+const history = useHistory();
+
 
 function Inicio() {
     const [usuario, setUsuario] = useState("")
@@ -23,7 +27,15 @@ function Inicio() {
 		try {
 		    api.post("/logar", data).then((response) => {
                 localStorage.setItem("token", response.data.access_token)
+                var token = response.data.access_token; 
+                token = token.toString();
+                token = token.split('.');
+                token = token[1]  
+                var decoded = jwt.decode(token); 
+                console.log(decoded);
                 console.log(localStorage.getItem("token"))
+
+                history.push("/turmas");
 			})
 
 
@@ -49,10 +61,10 @@ function Inicio() {
                         <form onSubmit={handleCreate}>
                             <h1>Olá!</h1>
                             <p>Realize login para ter acesso a funcionalidades exclusivas.</p>
-                            <input type="text" name="usuario" class="form-input" placeholder="Usuário" value={usuario} onChange={e => setUsuario(e.target.value)} required/>
-                            <input type="password" name="senha" class="form-input" placeholder="Senha" value={senha} onChange={e => setSenha(e.target.value)} required/>
-                            <input type="submit" class="button" value="Login" />
-.                           <Link to="cadusuario" class="signup">Não possui conta? <span class="form-highlight">Se cadastre</span></Link>
+                            <input type="text" name="usuario" className="form-input" placeholder="Usuário" value={usuario} onChange={e => setUsuario(e.target.value)} required/>
+                            <input type="password" name="senha" className="form-input" placeholder="Senha" value={senha} onChange={e => setSenha(e.target.value)} required/>
+                            <input type="submit" className="button" value="Login" />
+.                           <Link to="cadusuario" className="signup">Não possui conta? <span className="form-highlight">Se cadastre</span></Link>
                         </form>
                     </div>
                 </div>
