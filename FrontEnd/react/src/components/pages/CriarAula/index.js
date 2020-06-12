@@ -11,8 +11,6 @@ import { Accessibility } from "../../accessibility"
 
 const CriarAula = props => {
 
-    useEffect(() => {
-    }, [])
     const [turma, setTurma] = useState("")
     const [dia, setDia] = useState("")
     const [horaInicio, setInicio] = useState("")
