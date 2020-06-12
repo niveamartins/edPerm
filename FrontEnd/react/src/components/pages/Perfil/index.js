@@ -23,43 +23,45 @@ function Perfil() {
 			<Accessibility />
 			<NavBar />
 			<main className="main">
-				<div className="card-container-local">
-					<h1>Olá, Usuário</h1>
-					<p className="subtitle">
-						Visualize suas informações pessoais nesta página!
-					</p>
-					<p className="subtitle-qr">Seu QR Code de acesso</p>
-					<div className="card">
-						<img src={qrcodeimg} />
+				<div className="profile__container">
+					<div className="profile__container-info">
+						<h1>Olá, usuário!</h1>
+						<p className="subtitle">
+							Visualize suas informações pessoais nesta página!
+						</p>
+						<p className="subtitle-qr">Seu QR Code de acesso</p>
+						<div className="card">
+							<img src={qrcodeimg} alt="QRCode de acesso" />
+						</div>
+						<div className="profile__container-buttons">
+							<Link to="/editarDados">
+								<button size="large" class="personal-buttons" disabled>
+									<Create id="icons"></Create>
+									<label>Editar Dados</label>
+								</button>
+							</Link>
+							<Link to="/dadosPessoais">
+								<button size="large" class="personal-buttons" disabled>
+									<AccountCircle id="icons"></AccountCircle>
+									<label>Dados Pessoais</label>
+								</button>
+							</Link>
+						</div>
 					</div>
-					<div className="buttons">
-						<Link to="/editarDados" className="link">
-							<button size="large" class="personal-buttons" disabled>
-								<Create id="icons"></Create>
-								<label>Editar Dados</label>
+					<div className="profile__container-options">
+						<Link to="/turmasinscritas" className="link">
+							<button size="large" class="button" disabled>
+								<Class id="icons"></Class>
+								<label>Turmas Inscritas</label>
 							</button>
 						</Link>
-						<Link to="/dadosPessoais" className="link">
-							<button size="large" class="personal-buttons" disabled>
-								<AccountCircle id="icons"></AccountCircle>
-								<label>Dados Pessoais</label>
+						<Link to="/presencaspessoais" className="link">
+							<button size="large" class="button" disabled>
+								<Done id="icons"></Done>
+								<label>Presenças</label>
 							</button>
 						</Link>
 					</div>
-				</div>
-				<div className="nav-info-pessoais">
-					<Link to="/turmasinscritas" className="link">
-						<button size="large" class="button" disabled>
-							<Class id="icons"></Class>
-							<label>Turmas Inscritas</label>
-						</button>
-					</Link>
-					<Link to="/presencaspessoais" className="link">
-						<button size="large" class="button" disabled>
-							<Done id="icons"></Done>
-							<label>Presenças</label>
-						</button>
-					</Link>
 				</div>
 			</main>
 			<Footer />
@@ -68,3 +70,4 @@ function Perfil() {
 }
 
 export default Perfil
+

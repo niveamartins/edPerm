@@ -2,7 +2,6 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 
 /* 
--> Colocar classe active para manter borda nas rotas atuais
 -> Adaptar responsividade componentes para diversos dispositivos
 -> Arrumar navegação para mobile para diversos dispositivos
 -> Adaptar tamanho cards e fontes
@@ -68,6 +67,10 @@ main {
   grid-area: main;
 }
 
+main.main {
+  display: flex;
+  align-items: center;
+}
 
 header, footer {
   background-color: #fff;
@@ -321,12 +324,12 @@ button:disabled, button:disabled label {
 
 /* Cards */
 
-.card-container {
+.card-container,
+.card-container ul {
   margin-top: var(--margin-cards);
 
   display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
+  justify-content:center;
   /* break line */
   flex-wrap: wrap;
 
@@ -335,10 +338,10 @@ button:disabled, button:disabled label {
 .card {
   position: relative;
   background: #fff;
-  border-radius: 10px;
+  border-radius: 6px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   transition: all 0.6s cubic-bezier(.25, .8, .25, 1);
-  margin: 2rem;
+  margin: 1.5em;
 
   display: flex;
   justify-content: flex-start;
