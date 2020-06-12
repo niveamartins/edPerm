@@ -6,13 +6,14 @@ import api from "../../../services/api"
 
 import './inicio.css'
 
-const jwt = require("jsonwebtoken");
-const history = useHistory();
+import jwt from 'jwt-decode'
+
 
 
 function Inicio() {
     const [usuario, setUsuario] = useState("")
     const [senha, setSenha] = useState("")
+    const history = useHistory();
 
 	async function handleCreate(e) {
 		e.preventDefault()
@@ -27,13 +28,11 @@ function Inicio() {
 		try {
 		    api.post("/logar", data).then((response) => {
                 localStorage.setItem("token", response.data.access_token)
-                var token = response.data.access_token; 
-                token = token.toString();
-                token = token.split('.');
-                token = token[1]  
-                var decoded = jwt.decode(token); 
-                console.log(decoded);
-                console.log(localStorage.getItem("token"))
+                const token = response.data.access_token; 
+                let user = jwt(token)
+                user = user.identity
+
+                localStorage.setItem("user", user)
 
                 history.push("/turmas");
 			})
