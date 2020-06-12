@@ -13,7 +13,7 @@
 *.jpg
 
 ### Logs ###
-*.log
+Flask/app.py.backend.log
 
 ### Flask ###
 instance/*
