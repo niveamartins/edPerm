@@ -14,7 +14,7 @@ class AutheticateUserService:
         try:
             session = get_session()
 
-            user = session.query(User).filter_by(
+            user = session.query(User).filter(
                 User.usuario == usuario).first().as_dict()
 
             if not user or not check_password_hash(user["senha"], senha):
