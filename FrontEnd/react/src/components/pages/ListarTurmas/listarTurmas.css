@@ -23,7 +23,7 @@
     flex-wrap: wrap !important;
 }
 
-.link {
+.link-info {
 text-decoration: none;
   color: var(--elements-second-color);
   font-family: 'Montserrat', sans-serif;    
@@ -37,7 +37,7 @@ text-decoration: none;
   align-items: center;
 }
 
-.link:hover{
+.link-info:hover{
     transform: translateY(-4px);
 }
 

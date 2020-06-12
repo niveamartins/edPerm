@@ -1,4 +1,89 @@
-.main {
+.profile__container {
+	margin: 2em;
+	font-family: 'Montserrat', sans-serif;
+	display: flex;
+	/* quebra linha */
+	flex-wrap: wrap; 
+}
+
+@media (max-width: 950px) {
+	.profile__container {
+	  justify-content: center;
+	}
+ }
+ 
+ .profile__container-info {
+	 display: flex;
+	 flex-direction: column;
+	 align-items: center;
+ }
+
+.profile__container-info h1 {
+	font-weight: bolder;
+	margin: 0;
+}
+
+.profile__container-info .subtitle {
+	font-size: 14px;
+	font-weight: 100;
+	line-height: 20px;
+	letter-spacing: 0.5px;
+	margin: 20px 0 30px;
+}
+
+.profile__container-info .subtitle-qr {
+	font-weight: bold;
+}
+
+.profile__container-info .card {
+	width: 400px;
+	height: 250px;
+	margin: 5px 0 10px 0;
+}
+
+.profile__container-info .card img {
+	width: 60%;
+}
+.profile__container-buttons {
+	display: flex;
+	justify-content: center;
+}
+
+.personal-buttons {
+	text-decoration: none;
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 1.1em;
+	border: none;
+	margin: 10px;
+	padding: 10px;
+	color: #fff;
+	background-color: var(--elements-second-color);
+	border-radius: var(--border-button);
+	transition: all 0.3s ease 0s;
+
+	display: flex;
+	align-items: center;
+}
+
+.profile__container-options {
+	margin: 1em;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+}
+
+.profile__container-options button {
+	width: 350px;
+	display: flex;
+	align-items: center;
+}
+
+
+
+
+/* .main {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -14,23 +99,8 @@
 	justify-content: center;
 }
 
-.card-container-local .subtitle {
-	font-size: 14px;
-	font-weight: 100;
-	line-height: 20px;
-	letter-spacing: 0.5px;
-	margin: 20px 0 30px;
-}
 
-.card-container-local h1 {
-	padding-top: 30px;
-	font-weight: bolder;
-	margin: 0;
-}
 
-.card-container-local .subtitle-qr {
-	font-weight: bold;
-	margin: 0 !important;
 }
 
 label {
@@ -43,28 +113,9 @@ button {
 	align-items: center;
 }
 
-.personal-buttons {
-	text-decoration: none;
-	text-transform: uppercase;
-	font-weight: bold;
-	font-size: 1.1em;
-	border: none;
-	margin: 10px;
-	padding: 10px;
-	color: #fff;
-	background-color: var(--elements-second-color);
-	border-radius: var(--border-button);
-   transition: all 0.3s ease 0s;
-}
 
-.buttons {
-	display: flex;
-    flex-direction: row-reverse;
-    margin-bottom: 2em;
-}
 
 .nav-info-pessoais {
-	/* height: 400px; */
 	margin-top: 2rem;
 	display: flex;
 	flex-direction: column;
@@ -82,4 +133,4 @@ button {
 		align-items: stretch;
 		width: 100%;
 	}
-}
+} */

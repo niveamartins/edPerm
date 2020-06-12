@@ -1,5 +1,6 @@
 //página de login
 import React, { useState } from "react"
+import { Link } from 'react-router-dom'
 import api from "../../../services/api"
 
 function Inicio() {
@@ -44,7 +45,7 @@ function Inicio() {
 	return (
 		<div className="login-index">
 			<div className="index-header">
-				<a href="/">Educação Permanente</a>
+				<Link to="/">Educação Permanente</Link>
 			</div>
 
 			<main className="main-content-forms">
@@ -110,10 +111,10 @@ function Inicio() {
 								required
 							/>
 							<input type="submit" class="button" value="cadastrar" />
-							<a href="/">
+							<Link to="/">
 								Já possui uma conta?{" "}
 								<span class="form-highlight">Faça login</span>
-							</a>
+							</Link>
 						</form>
 					</div>
 				</div>

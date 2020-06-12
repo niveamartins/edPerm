@@ -1,5 +1,6 @@
 //página de login 
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import './inicio.css'
 
@@ -12,7 +13,7 @@ function Inicio() {
     return (
         <div className="login-index">
             <div className="index-header">
-                <a href="/">Educação Permanente</a>
+                <Link to="/">Educação Permanente</Link>
             </div>
 
             <main className="main-content-forms">
@@ -23,11 +24,11 @@ function Inicio() {
                             <p>Realize login para ter acesso a funcionalidades exclusivas.</p>
                             <input type="text" name="usuario" class="form-input" placeholder="Usuário"/>
                             <input type="password" name="senha" class="form-input" placeholder="Senha"></input>
-.                            <a href="cadusuario" class="signup">Não possui conta? <span class="form-highlight">Se cadastre</span></a>
+.                            <Link to="cadusuario" class="signup">Não possui conta? <span class="form-highlight">Se cadastre</span></Link>
                         </form>
-                        <a href="/turmas">
+                        <Link to="/turmas">
                             <button class="button" value="Login">Login</button>
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </main>

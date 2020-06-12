@@ -11,7 +11,7 @@ import { Accessibility } from '../../accessibility'
 
 function CadastrarTurma() {
 
-    const responsavel = "aaaaa"
+    const responsavel = "keith"
     // const [responsavel, setResponsavel] = useState("");
     const [nome_do_curso, setTurma] = useState("");  
     const [carga_horaria_total, setCarga] = useState("");
