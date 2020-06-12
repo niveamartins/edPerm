@@ -93,7 +93,7 @@ function Turma(props) {
 						</Link>
 						<Link to= {{ 
 							  pathname: "/cadaula", 
-							  state: [turma]
+							  state: turma
 							}}	 
 							  className="link">
 							<button class="button">

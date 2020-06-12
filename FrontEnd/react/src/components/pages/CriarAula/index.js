@@ -11,17 +11,17 @@ import { Accessibility } from "../../accessibility"
 
 const CriarAula = props => {
 
-    const [turma, setTurma] = useState("")
     const [dia, setDia] = useState("")
     const [horaInicio, setInicio] = useState("")
     const [horaTermino, setTermino] = useState("")
-    const [propositor, setPropositor] = useState("")
+    // const [propositor, setPropositor] = useState("")
     
     
-    const info = props.location.state[0][0]
-    setTurma(info.id_turma)
+	const info = props.location.state
+	const turma = info[0].id_turma
+	const propositor = "Wilton"
 
-	setPropositor("aaaaa") // Mudar aqui quando tiver o login setado.
+	// setPropositor("aaaaa") // Mudar aqui quando tiver o login setado.
 
 	async function handleCreate(e) {
 		e.preventDefault()
@@ -33,6 +33,8 @@ const CriarAula = props => {
 			horaTermino,
 			propositor,
 		}
+
+		console.log(data)
 
 		// try {
 		//   api.post("/cadastrarhorario", data);
@@ -57,13 +59,13 @@ const CriarAula = props => {
 					<div className="card">
 						<table className="card-list">
 							<tr className="title">
-								<td>{info.nome_do_curso}</td>
+								<td>{info[0].nome_do_curso}</td>
 							</tr>
 							<tr className="tutor">
 								<td>Responsável:</td>
 								<td>
 									<span className="tutor__highlight">
-										{info.NomeDoPropositor}
+										{info[0].NomeDoPropositor}
 									</span>
 								</td>
 							</tr>
@@ -73,19 +75,19 @@ const CriarAula = props => {
 							</tr>
 							<tr className="content">
 								<td className="name">Carga horária total</td>
-								<td className="value">{info.carga_horaria_total}</td>
+								<td className="value">{info[0].carga_horaria_total}</td>
 							</tr>
 							<tr className="content">
 								<td className="name">Tolerância</td>
-								<td className="value">{info.tolerancia}</td>
+								<td className="value">{info[0].tolerancia}</td>
 							</tr>
 							<tr className="content">
 								<td className="name">Modalidade</td>
-								<td className="value">{info.modalidade}</td>
+								<td className="value">{info[0].modalidade}</td>
 							</tr>
 							<tr className="content">
 								<td className="name">Tag</td>
-								<td className="value">{info.modalidade}</td>
+								<td className="value">{info[0].modalidade}</td>
 							</tr>
 						</table>
 					</div>
@@ -95,15 +97,17 @@ const CriarAula = props => {
 						<div class="form-container">
 							<form onSubmit={handleCreate}>
 								<h1>Cadastre sua aula!</h1>
-								<input
-									type="date"
-									name="data"
+								<select 
 									class="form-input"
-									placeholder="Dia da Semana"
-									value={dia}
+									name="data" 
 									onChange={(e) => setDia(e.target.value)}
-									required
-								/>
+									required>
+									<option value="Segunda">Segunda</option> 
+									<option value="Terça" selected>Terça</option>
+									<option value="Quarta">Quarta</option>
+									<option value="Quinta">Quinta</option>
+									<option value="Sexta">Sexta</option>	
+								</select>
 								<input
 									type="time"
 									name="inicio"

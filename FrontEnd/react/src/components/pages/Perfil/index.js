@@ -41,7 +41,7 @@ function Perfil() {
 								</button>
 							</Link>
 							<Link to="/dadosPessoais">
-								<button size="large" class="personal-buttons" disabled>
+								<button size="large" class="personal-buttons">
 									<AccountCircle id="icons"></AccountCircle>
 									<label>Dados Pessoais</label>
 								</button>
