@@ -2,7 +2,7 @@ import sys
 
 from database.session import get_session
 from sqlalchemy.exc import InternalError
-from database.model.Model import User
+from database.model.Model import User, UserComplemento
 from utilities.loggers import get_logger
 from werkzeug.security import generate_password_hash
 
@@ -25,7 +25,16 @@ class CreateUserService:
             session.add(user)
             session.commit()
 
-            return user.as_dict()
+            userComplemento = UserComplemento(user=user, tag="placeholder", profissao=userData["profissao"],
+                                           funcao=userData["funcao"], superintendenciaDaSUBPAV="placeholder", CAP=userData["cap"], unidadeBasicaDeSaude="placeholder")
+            session.add(userComplemento)
+            session.commit()
+
+            userDict =  user.as_dict()
+            #remove user password from return 
+            userDict.pop("senha")
+
+            return {**userDict, **userComplemento.as_dict()}
         except InternalError:
             logger.error("Banco de dados (EdPermanente) desconhecido")
             return "502ERROR"

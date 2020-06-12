@@ -98,7 +98,7 @@ def gerarqrcode(codigo_aluno):
 def cadastrar():
 
     userData = request.get_json()
-    userDataFields = ["usuario", "email", "senha", "cpf", "telefone", "tipo"]
+    userDataFields = ["usuario", "email", "senha", "cpf", "telefone", "tipo", "cap", "funcao", "profissao"]
 
     if not all(field in userData for field in userDataFields):
         return "Missing information", 400
