@@ -114,6 +114,9 @@ class UserComplemento(Base):
     user = relationship('User', uselist=False,
                         backref="complementoUser", foreign_keys=id_do_user)
 
+    def as_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
 
 class AlunoApoiador(Base):
     __tablename__ = 'alunoApoiador'
