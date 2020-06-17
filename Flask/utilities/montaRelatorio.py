@@ -116,8 +116,4 @@ def frequencia(Aluno):
         'Turma' : []
      }
 
-
-def atualizapresenca(Presenca, Horario):
-    DeltaTime = Horario.HorarioTermino - Presenca.ultimoCheckIn.time()
-    
     
