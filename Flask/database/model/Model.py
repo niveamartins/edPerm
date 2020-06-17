@@ -130,12 +130,14 @@ class AlunoApoiador(Base):
 class Presenca(Base):
     __tablename__ = 'presenca'
     id_presenca = Column(Integer, primary_key=True)
-    presenca_id_aluno = Column(Integer, ForeignKey(
-        'aluno.id_aluno'), nullable=False)
-    presenca_id_turma = Column(Integer, ForeignKey(
-        'turma.id_turma'), nullable=False)
-    ultimoCheckIn = Column(DateTime, nullable=True)
-    presencaAtualizada = Column(Boolean, nullable=True, default=True)
-    presencaTotal = Column(DateTime, nullable=False)
+    presenca_id_aluno = Column(Integer, ForeignKey('aluno.id_aluno'), nullable=False)
+    presenca_id_turma = Column(Integer, ForeignKey('turma.id_turma'), nullable=False)
+    CheckIn = Column(DateTime, nullable=True)
+    presencaValidade = Column(Boolean, nullable=True)
 
-# TODO: ESTUDAR DATETIME NA HORA DE IMPLEMENTAR A FUNÇÃO DE CHECKIN
+class PresencaTot(Base):
+    __tablename__ = 'presencatot'
+    id_presencatot = Column(Integer, primary_key=True)
+    presencatot_id_aluno = Column(Integer, ForeignKey'aluno.id_aluno', nullable=False)
+    presencatot_id_turma = Column(Integer, ForeignKey'turma.id_turma', nullable=False)
+    presenca_total = Column(Interval, nullable=False, default=datetime.timedelta(seconds=0))

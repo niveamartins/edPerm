@@ -181,22 +181,7 @@ def listarturma():
 
 @blueprint.route("/atualizarpresenca", methods=['POST'])
 def atualizarpresenca():
-    if not request.is_json:
-        return jsonify({"msg": "Missing JSON in request"}), 400
-
-    apoiador = get_jwt_identity()
-    aluno = request.get_json()
-    session = get_session()
-    alunoApoiadordata = session.query(AlunoApoiador).filter_by(
-        apoiador_id_user=apoiador.id).one()
-    data = session.query(Presenca).filter_by(
-        presenca_id_aluno=aluno["id_aluno"], presenca_id_turma=alunoApoiadordata.apoiador_id_turma)
-    data.ultimoCheckIn = datetime.now().time().replace(tzinfo=timezone.utc)
-    data.presencaAtualizada = False
-    session.commit()
-    session.close()
-
-    return jsonify({"msg": "Presença do aluno contabilizada"}), 200
+    pass
 
 @blueprint.route("/cadastraraluno", methods=['POST'])
 def cadastraraluno(): 
@@ -252,30 +237,14 @@ def cadastrarhorario():
 #AINDA NÃO TERMINADA
 @blueprint.route("/chamadavalidar", methods=['POST'])
 def chamadapesquisar():
-    if not request.is_json:
-       return jsonify({"msg": "Missing JSON in request"}), 400
-    
-    propositor = get_jwt_identity()
-    turma = request.get_json()
-    session = get_session()
-    turma = session.query(Turma).filter_by(id_turma=turma["id"]).one()
-    presencas = session.query(Presenca).filter_by(presenca_id_turma=turma["id"],presencaAtualizada=False).all()
-    DiaDaSemanaCheckIn = func.extract(data[0].ultimoCheckIn,'dow')
-    for i in turma.Horarios:
-        if (tradutor[DiaDaSemanaCheckIn] == i.DiaDaSemana):
-            horario = i
+    pass
+    #if not request.is_json:
+    #   return jsonify({"msg": "Missing JSON in request"}), 400
+     
 
-    for i in presencas:
-        atualizapresenca(i,horario)
-    session.commit()
-    session.close()
-    return jsonify({"msg": "Presenças Atualizadas"}), 200   
+### RELATORIOS ###
 
-    ### RELATORIOS ###
-
-    # RELATORIO CONTATO
-
-
+# RELATORIO CONTATO
 @blueprint.route('/relatoriocontato', methods=['GET'])
 @cross_origin(origin="localhost")
 def get_relatoriocontato():
