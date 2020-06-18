@@ -1,8 +1,9 @@
 from sqlalchemy import (Column, String, Integer, Text,
-                        Enum, ForeignKey, Table, Time, Boolean, DateTime)
+                        Enum, ForeignKey, Table, Time, Boolean, DateTime, Interval)
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, backref
 from database.model.Base.Base import Base
+from datetime import datetime
 
 # ASSOCIATIONS TABLES
 
