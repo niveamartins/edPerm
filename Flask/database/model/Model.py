@@ -138,6 +138,6 @@ class Presenca(Base):
 class PresencaTot(Base):
     __tablename__ = 'presencatot'
     id_presencatot = Column(Integer, primary_key=True)
-    presencatot_id_aluno = Column(Integer, ForeignKey'aluno.id_aluno', nullable=False)
-    presencatot_id_turma = Column(Integer, ForeignKey'turma.id_turma', nullable=False)
+    presencatot_id_aluno = Column(Integer, ForeignKey('aluno.id_aluno'), nullable=False)
+    presencatot_id_turma = Column(Integer, ForeignKey('turma.id_turma'), nullable=False)
     presenca_total = Column(Interval, nullable=False, default=datetime.timedelta(seconds=0))
