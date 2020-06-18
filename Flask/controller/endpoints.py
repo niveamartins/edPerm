@@ -10,8 +10,6 @@ from flask_jwt_extended import (jwt_required, get_jwt_identity)
 from sqlalchemy import func
 from flask_cors import CORS, cross_origin
 
-from database.db_create import Banco
-from database.pessoas import Pessoa
 from database.session import get_session
 from database.model.Model import *
 from utilities.montaRelatorio import *

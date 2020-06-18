@@ -1,8 +1,9 @@
 from sqlalchemy import (Column, String, Integer, Text,
-                        Enum, ForeignKey, Table, Time, Boolean, DateTime)
+                        Enum, ForeignKey, Table, Time, Boolean, DateTime, Interval)
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, backref
 from database.model.Base.Base import Base
+from datetime import timedelta
 
 # ASSOCIATIONS TABLES
 
@@ -138,6 +139,6 @@ class Presenca(Base):
 class PresencaTot(Base):
     __tablename__ = 'presencatot'
     id_presencatot = Column(Integer, primary_key=True)
-    presencatot_id_aluno = Column(Integer, ForeignKey'aluno.id_aluno', nullable=False)
-    presencatot_id_turma = Column(Integer, ForeignKey'turma.id_turma', nullable=False)
-    presenca_total = Column(Interval, nullable=False, default=datetime.timedelta(seconds=0))
+    presencatot_id_aluno = Column(Integer, ForeignKey('aluno.id_aluno'), nullable=False)
+    presencatot_id_turma = Column(Integer, ForeignKey('turma.id_turma'), nullable=False)
+    presenca_total = Column(Interval, nullable=False, default=timedelta(seconds=0))
