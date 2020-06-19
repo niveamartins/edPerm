@@ -74,6 +74,7 @@ def dados_pessoais():
     return jsonify(data)
 
 @blueprint.route('/qrcode/<int:codigo_aluno>', methods=['GET'])
+@jwt_required
 def gerarqrcode(codigo_aluno):
     qr = qrcode.QRCode(
         version=1,
@@ -93,6 +94,7 @@ def gerarqrcode(codigo_aluno):
     return send_file(url+f'{codigo_aluno}.png', mimetype='image/png')
 
 @blueprint.route("/cadastrar", methods=['POST'])
+@jwt_required
 def cadastrar():
 
     userData = request.get_json()
@@ -111,6 +113,7 @@ def cadastrar():
 
 
 @blueprint.route("/cadastrardadoscomplementares", methods=['POST'])
+@jwt_required
 def cadastrarDadosComplementares():
 
     # Não testado a parte dos Json
@@ -132,6 +135,7 @@ def cadastrarDadosComplementares():
 
 # refatorado
 @blueprint.route("/cadastrarturma", methods=['POST'])
+@jwt_required
 def cadastrarturma():
 
     # Não testado a parte dos Json
@@ -151,7 +155,8 @@ def cadastrarturma():
 
 
 
-@blueprint.route('/listaturma/<int:codigo_turma>') 
+@blueprint.route('/listaturma/<int:codigo_turma>')
+@jwt_required 
 def turma(codigo_turma):
     session=get_session()
     data = session.query(Turma).filter_by(id_turma=codigo_turma).one()
@@ -165,6 +170,7 @@ def turma(codigo_turma):
 
 
 @blueprint.route("/listaturma", methods=['GET'])
+@jwt_required
 def listarturma():
     #user_id = request.json.get('user_id', None)
 
@@ -178,10 +184,12 @@ def listarturma():
 
 
 @blueprint.route("/atualizarpresenca", methods=['POST'])
+@jwt_required
 def atualizarpresenca():
     pass
 
 @blueprint.route("/cadastraraluno", methods=['POST'])
+@jwt_required
 def cadastraraluno(): 
 
     #Não testado a parte dos Json
@@ -199,7 +207,8 @@ def cadastraraluno():
     return jsonify(Aluno)
 
 
-@ blueprint.route("/cadastrarapoiador", methods=['POST'])
+@blueprint.route("/cadastrarapoiador", methods=['POST'])
+@jwt_required
 def cadastrarapoiador():
 
     # Não testado a parte dos Json
@@ -216,7 +225,8 @@ def cadastrarapoiador():
     return jsonify(Apoiador)
 
 
-@ blueprint.route("/cadastrarhorario", methods=['POST'])
+@blueprint.route("/cadastrarhorario", methods=['POST'])
+@jwt_required
 def cadastrarhorario():
     # Não testado a parte dos Json
 
@@ -234,6 +244,7 @@ def cadastrarhorario():
 
 #AINDA NÃO TERMINADA
 @blueprint.route("/chamadavalidar", methods=['POST'])
+@jwt_required
 def chamadapesquisar():
     pass
     #if not request.is_json:
@@ -244,6 +255,7 @@ def chamadapesquisar():
 
 # RELATORIO CONTATO
 @blueprint.route('/relatoriocontato', methods=['GET'])
+@jwt_required
 @cross_origin(origin="localhost")
 def get_relatoriocontato():
     session = get_session()
@@ -255,7 +267,8 @@ def get_relatoriocontato():
 # RELATORIO CPF/NOME
 
 
-@ blueprint.route('/relatoriocpfnome', methods=['GET'])
+@blueprint.route('/relatoriocpfnome', methods=['GET'])
+@jwt_required
 def get_relatoriocpfnome():
     session = get_session()
     data = session.query(Turma).all()
@@ -270,7 +283,8 @@ def get_relatoriocpfnome():
 # AINDA NÃO SERÁ IMPLEMENTADO, PRECISA DA FUNÇÃO DE CHECKIN
 
 
-@ blueprint.route('/relatoriofrequencia', methods=['GET'])
+@blueprint.route('/relatoriofrequencia', methods=['GET'])
+@jwt_required
 def get_relatoriofrequencia():
     '''
     Frequência: frequência computada em dias, horas e minutos com base no horário de check-in do cursista.
@@ -286,7 +300,8 @@ def get_relatoriofrequencia():
 # RELATORIO PROFISSAO
 
 
-@ blueprint.route('/relatorioprofissao/<string:NomeDaProfissao>', methods=['GET', 'POST'])
+@blueprint.route('/relatorioprofissao/<string:NomeDaProfissao>', methods=['GET', 'POST'])
+@jwt_required
 def get_relatorioprofissao(NomeDaProfissao):
     JSON, err = relatorioatividades('profissao', NomeDaProfissao)
     if err == -1:
@@ -297,7 +312,8 @@ def get_relatorioprofissao(NomeDaProfissao):
 # RELATORIO CAP
 
 
-@ blueprint.route('/relatorioCAP/<string:NomeDoCAP>', methods=['GET'])
+@blueprint.route('/relatorioCAP/<string:NomeDoCAP>', methods=['GET'])
+@jwt_required
 def get_relatorioCAP(NomeDoCAP):
     JSON, err = relatorioatividades('CAP', NomeDoCAP)
     if err == -1:
@@ -308,7 +324,8 @@ def get_relatorioCAP(NomeDoCAP):
 # RELATORIO FUNÇÃO
 
 
-@ blueprint.route('/relatoriofuncao/<string:NomeDaFuncao>', methods=['GET'])
+@blueprint.route('/relatoriofuncao/<string:NomeDaFuncao>', methods=['GET'])
+@jwt_required
 def get_relatoriofuncao(NomeDaFuncao):
     JSON, err = relatorioatividades('funcao', NomeDaFuncao)
     if err == -1:
@@ -319,7 +336,8 @@ def get_relatoriofuncao(NomeDaFuncao):
 # RELATORIO SUPERINTENDENCIA
 
 
-@ blueprint.route('/relatoriosuperintendencia/<string:NomeDaSuperintendencia>', methods=['GET'])
+@blueprint.route('/relatoriosuperintendencia/<string:NomeDaSuperintendencia>', methods=['GET'])
+@jwt_required
 def get_relatoriosuperentendencia(NomeDaSuperintendencia):
     JSON, err = relatorioatividades("superintendencia", NomeDaSuperintendencia)
     if err == -1:
@@ -330,7 +348,8 @@ def get_relatoriosuperentendencia(NomeDaSuperintendencia):
 # RELATORIO UNIDADE
 
 
-@ blueprint.route('/relatoriounidade/<string:NomeDaUnidade>', methods=['GET'])
+@blueprint.route('/relatoriounidade/<string:NomeDaUnidade>', methods=['GET'])
+@jwt_required
 def get_relatoriounidade(NomeDaUnidade):
     JSON, err = relatorioatividades("unidade", NomeDaUnidade)
     if err == -1:
@@ -340,7 +359,8 @@ def get_relatoriounidade(NomeDaUnidade):
 
 
 # Concluintes: relatório de cursos finalizados para emissão de certificados pelo propositor.
-@ blueprint.route('/relatorioconcluintes', methods=['GET'])
+@blueprint.route('/relatorioconcluintes', methods=['GET'])
+@jwt_required
 def get_concluintes():
     session = get_session()
     data = session.query(Turma).filter_by(IsConcluido=1).all()
@@ -352,7 +372,7 @@ def get_concluintes():
     return jsonify(JSON)
 
 
-@ blueprint.route('/testdata', methods=['GET'])
+@blueprint.route('/testdata', methods=['GET'])
 def data():
     try:
         session = get_session()
