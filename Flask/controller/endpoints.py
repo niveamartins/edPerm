@@ -209,20 +209,18 @@ def cadastraraluno():
 
 @blueprint.route("/cadastrarapoiador", methods=['POST'])
 @jwt_required
-def cadastrarapoiador():
-
-    # Não testado a parte dos Json
+def cadastrarapoiador():    
 
     apoiadorData = request.get_json()
-    apoiadorDataFields = ["usuario", "nome_do_curso"]
+    apoiadorDataFields = ["email_apoiador", "id_turma"]
 
     if not all(field in apoiadorData for field in apoiadorDataFields):
         return "Missing information", 400
 
     cadastrarApoiador = CreateApoiadorService()
 
-    Apoiador = cadastrarApoiador.execute(apoiadorData)
-    return jsonify(Apoiador)
+    msg = cadastrarApoiador.execute(apoiadorData)
+    return jsonify(msg)
 
 
 @blueprint.route("/cadastrarhorario", methods=['POST'])
@@ -419,6 +417,7 @@ def data():
             a = session.query(User).filter_by(Id=x.alunos_id_user).first()
             print(a.usuario)
         logger.info("informações de teste inseridas no banco de dados")
+        session.close()
         return "200OK"
     except InternalError:
         logger.error("Banco de dados (EdPermanente) desconhecido")
