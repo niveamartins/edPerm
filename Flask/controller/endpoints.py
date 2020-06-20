@@ -17,7 +17,6 @@ from utilities.loggers import get_logger
 from utilities.DateTimes import tradutor
 from services.CreateUserService import CreateUserService
 from services.CreateTurmaService import CreateTurmaService
-from services.CreateComplementoService import CreateComplementoService
 from services.CreateAlunoService import CreateAlunoService
 from services.CreateApoiadorService import CreateApoiadorService
 from services.CreateHorarioService import CreateHorarioService
@@ -111,26 +110,11 @@ def cadastrar():
 
 # refatorado
 
-
+#TODO: estruturar como será a segunda parte do cadastramento de informações
 @blueprint.route("/cadastrardadoscomplementares", methods=['POST'])
 @jwt_required
 def cadastrarDadosComplementares():
-
-    # Não testado a parte dos Json
-
-    complementoData = request.get_json()
-
-    complementoDataFields = ["usuario", "tag", "profissao", "funcao",
-                             "superintendenciaDaSUBPAV", "CAP", "unidadeBasicaDeSaude"]
-
-    if not all(field in complementoData for field in complementoDataFields):
-        return "Missing information", 400
-
-    createComplemento = CreateComplementoService()
-
-    Complemento = createComplemento.execute(complementoData)
-
-    return jsonify(Complemento)
+    pass
 
 
 # refatorado
