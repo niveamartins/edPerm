@@ -34,8 +34,6 @@ class CreateApoiadorService:
                                 return QueryUsuario.AlunoApoiador.as_dict()
                         else:
                             return "Usuario não é um apoiador", 400
-                    else:
-                        return "Dados Complementares não preenchidos", 400
                 else:
                     return "Turma não cadastrada", 400
             else:

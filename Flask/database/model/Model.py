@@ -32,11 +32,10 @@ class User(Base):
     telefone = Column(String(9), nullable=False)
     tipo = Column(Enum('adm', 'gestor', 'coordenador',
                        'propositor', 'cursista', 'apoiador'), nullable=False)
-    funcao = Column(String(20),nullable=True)),
-    profissao = Column(String(30),nullable=True),
-    UnidadeBasicadeSaude=Column(String(30),nullable=True),
-    CAP=Column(String(4),nullable=True)
-    )                   
+    funcao = Column(String(20),nullable=True)
+    profissao = Column(String(30),nullable=True)
+    UnidadeBasicadeSaude=Column(String(30),nullable=True)
+    CAP=Column(String(4),nullable=True)                  
 
     # ONE TO ONE
 
