@@ -392,32 +392,17 @@ def data():
                        carga_horaria_total=60, tolerancia=30, modalidade="n sei", turma_tag="tbm n sei")
         Turma2 = Turma(id_responsavel=User2.Id, nome_do_curso="iot", IsConcluido=1,
                        carga_horaria_total=60, tolerancia=30, modalidade="n sei", turma_tag="tbm n sei")
-        UserComplemento1 = UserComplemento(user=User1, tag="naosei1", profissao="advogado",
-                                           funcao="direcao", superintendenciaDaSUBPAV="SIAP", CAP="1.0", unidadeBasicaDeSaude="1")
-        UserComplemento2 = UserComplemento(user=User2, tag="naosei2", profissao="medico",
-                                           funcao="direcao", superintendenciaDaSUBPAV="SAP", CAP="1.0", unidadeBasicaDeSaude="1")
-        UserComplemento3 = UserComplemento(user=User3, tag="naosei3", profissao="engenheiro",
-                                           funcao="gerencia", superintendenciaDaSUBPAV="SVS", CAP="1.0", unidadeBasicaDeSaude="1")
-        UserComplemento4 = UserComplemento(user=User4, tag="naosei4", profissao="pedreiro",
-                                           funcao="gerencia", superintendenciaDaSUBPAV="SPS", CAP="1.0", unidadeBasicaDeSaude="1")
-        Aluno1 = Aluno(alunoUser=User1, complementoUser=UserComplemento1)
-        Aluno2 = Aluno(alunoUser=User3, complementoUser=UserComplemento3)
-        Aluno3 = Aluno(alunoUser=User2, complementoUser=UserComplemento2)
-        Aluno4 = Aluno(alunoUser=User4, complementoUser=UserComplemento4)
-        session.add_all([Aluno1, Aluno2, Aluno3, Aluno4, UserComplemento1,
-                         UserComplemento2, UserComplemento3, UserComplemento4, Turma1, Turma2])
+    
+        Aluno1 = Aluno(alunoUser=User1)
+        Aluno2 = Aluno(alunoUser=User3)
+        Aluno3 = Aluno(alunoUser=User2) 
+        Aluno4 = Aluno(alunoUser=User4) 
+        session.add_all([Aluno1, Aluno2, Aluno3, Aluno4, Turma1, Turma2])
         session.commit()
         Turma1.Alunos.append(Aluno1)
         Turma1.Alunos.append(Aluno2)
         Turma2.Alunos.append(Aluno1)
         session.commit()
-        if (User5.Aluno != None):
-            print("aaa")
-        if (User4.Aluno != None):
-            print("fasfasga")
-        for x in Turma1.Alunos:
-            a = session.query(User).filter_by(Id=x.alunos_id_user).first()
-            print(a.usuario)
         logger.info("informações de teste inseridas no banco de dados")
         return "200OK"
     except InternalError:
