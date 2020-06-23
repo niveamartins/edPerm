@@ -32,6 +32,10 @@ class User(Base):
     telefone = Column(String(9), nullable=False)
     tipo = Column(Enum('adm', 'gestor', 'coordenador',
                        'propositor', 'cursista', 'apoiador'), nullable=False)
+    funcao = Column(String(20),nullable=True)
+    profissao = Column(String(30),nullable=True)
+    UnidadeBasicadeSaude=Column(String(30),nullable=True)
+    CAP=Column(String(4),nullable=True)                  
 
     # ONE TO ONE
 
@@ -51,12 +55,6 @@ class Aluno(Base):
     id_aluno = Column(Integer, primary_key=True)
     alunos_id_user = Column(Integer, ForeignKey(
         'user.Id'), nullable=False, unique=True)
-    alunos_id_complemento = Column(Integer, ForeignKey(
-        'userComplemento.id_complemento'), nullable=False, unique=True)
-
-    # ONE TO ONE
-    complementoUser = relationship(
-        'UserComplemento', uselist=False, backref="AlunocomplementoUser")
 
     # ONE TO MANY
     presencas = relationship('Presenca', backref='alunoDono')
@@ -98,25 +96,6 @@ class Horario(Base):
     DiaDaSemana = Column(String(20), nullable=False)
     HorarioInicio = Column(Time, nullable=False)
     HorarioTermino = Column(Time, nullable=False)
-
-
-class UserComplemento(Base):
-    __tablename__ = 'userComplemento'
-    id_complemento = Column(Integer, primary_key=True)
-    id_do_user = Column(Integer, ForeignKey('user.Id'),
-                        nullable=False, unique=True)
-    tag = Column(String(20), nullable=False)
-    profissao = Column(String(20), nullable=False)
-    funcao = Column(String(20), nullable=False)
-    superintendenciaDaSUBPAV = Column(String(30), nullable=False)
-    CAP = Column(String(20), nullable=False)
-    unidadeBasicaDeSaude = Column(String(30), nullable=False)
-
-    user = relationship('User', uselist=False,
-                        backref="complementoUser", foreign_keys=id_do_user)
-
-    def as_dict(self):
-        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
 
 class AlunoApoiador(Base):
