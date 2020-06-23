@@ -233,13 +233,22 @@ def cadastrarhorario():
     horarioData = request.get_json()
     horarioDataFields = ["Turma", "DiaDaSemana",
                          "Inicio", "Termino", "Propositor"]
+    user = get_jwt_identity()
+    if(user['tipo']!='propositor'):
+        return "Usuario não tem permissão", 400
+
+    horarioData['Propositor'] = user['usuario']
 
     if not all(field in horarioData for field in horarioDataFields):
-        return "Missing information", 400
+        return "Missing information"
 
     cadastrarHorario = CreateHorarioService()
-
     Horario = cadastrarHorario.execute(horarioData)
+    erros = ["Turma não cadastrada", "Horario ja cadastrado"]
+    for er in erros:
+        if(Horario == er):
+            return Horario
+
     return jsonify(Horario)
 
 #AINDA NÃO TERMINADA
