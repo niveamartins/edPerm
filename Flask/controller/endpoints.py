@@ -10,8 +10,6 @@ from flask_jwt_extended import (jwt_required, get_jwt_identity)
 from sqlalchemy import func
 from flask_cors import CORS, cross_origin
 
-from database.db_create import Banco
-from database.pessoas import Pessoa
 from database.session import get_session
 from database.model.Model import *
 from utilities.montaRelatorio import *
@@ -19,7 +17,6 @@ from utilities.loggers import get_logger
 from utilities.DateTimes import tradutor
 from services.CreateUserService import CreateUserService
 from services.CreateTurmaService import CreateTurmaService
-from services.CreateComplementoService import CreateComplementoService
 from services.CreateAlunoService import CreateAlunoService
 from services.CreateApoiadorService import CreateApoiadorService
 from services.CreateHorarioService import CreateHorarioService
@@ -76,6 +73,7 @@ def dados_pessoais():
     return jsonify(data)
 
 @blueprint.route('/qrcode/<int:codigo_aluno>', methods=['GET'])
+@jwt_required
 def gerarqrcode(codigo_aluno):
     qr = qrcode.QRCode(
         version=1,
@@ -95,6 +93,7 @@ def gerarqrcode(codigo_aluno):
     return send_file(url+f'{codigo_aluno}.png', mimetype='image/png')
 
 @blueprint.route("/cadastrar", methods=['POST'])
+@jwt_required
 def cadastrar():
 
     userData = request.get_json()
@@ -111,29 +110,16 @@ def cadastrar():
 
 # refatorado
 
-
+#TODO: estruturar como será a segunda parte do cadastramento de informações
 @blueprint.route("/cadastrardadoscomplementares", methods=['POST'])
+@jwt_required
 def cadastrarDadosComplementares():
-
-    # Não testado a parte dos Json
-
-    complementoData = request.get_json()
-
-    complementoDataFields = ["usuario", "tag", "profissao", "funcao",
-                             "superintendenciaDaSUBPAV", "CAP", "unidadeBasicaDeSaude"]
-
-    if not all(field in complementoData for field in complementoDataFields):
-        return "Missing information", 400
-
-    createComplemento = CreateComplementoService()
-
-    Complemento = createComplemento.execute(complementoData)
-
-    return jsonify(Complemento)
+    pass
 
 
 # refatorado
 @blueprint.route("/cadastrarturma", methods=['POST'])
+@jwt_required
 def cadastrarturma():
 
     # Não testado a parte dos Json
@@ -153,7 +139,8 @@ def cadastrarturma():
 
 
 
-@blueprint.route('/listaturma/<int:codigo_turma>') 
+@blueprint.route('/listaturma/<int:codigo_turma>')
+@jwt_required 
 def turma(codigo_turma):
     session=get_session()
     data = session.query(Turma).filter_by(id_turma=codigo_turma).one()
@@ -167,6 +154,7 @@ def turma(codigo_turma):
 
 
 @blueprint.route("/listaturma", methods=['GET'])
+@jwt_required
 def listarturma():
     #user_id = request.json.get('user_id', None)
 
@@ -180,25 +168,12 @@ def listarturma():
 
 
 @blueprint.route("/atualizarpresenca", methods=['POST'])
+@jwt_required
 def atualizarpresenca():
-    if not request.is_json:
-        return jsonify({"msg": "Missing JSON in request"}), 400
-
-    apoiador = get_jwt_identity()
-    aluno = request.get_json()
-    session = get_session()
-    alunoApoiadordata = session.query(AlunoApoiador).filter_by(
-        apoiador_id_user=apoiador.id).one()
-    data = session.query(Presenca).filter_by(
-        presenca_id_aluno=aluno["id_aluno"], presenca_id_turma=alunoApoiadordata.apoiador_id_turma)
-    data.ultimoCheckIn = datetime.now().time().replace(tzinfo=timezone.utc)
-    data.presencaAtualizada = False
-    session.commit()
-    session.close()
-
-    return jsonify({"msg": "Presença do aluno contabilizada"}), 200
+    pass
 
 @blueprint.route("/cadastraraluno", methods=['POST'])
+@jwt_required
 def cadastraraluno(): 
 
     #Não testado a parte dos Json
@@ -216,7 +191,8 @@ def cadastraraluno():
     return jsonify(Aluno)
 
 
-@ blueprint.route("/cadastrarapoiador", methods=['POST'])
+@blueprint.route("/cadastrarapoiador", methods=['POST'])
+@jwt_required
 def cadastrarapoiador():
 
     # Não testado a parte dos Json
@@ -233,7 +209,8 @@ def cadastrarapoiador():
     return jsonify(Apoiador)
 
 
-@ blueprint.route("/cadastrarhorario", methods=['POST'])
+@blueprint.route("/cadastrarhorario", methods=['POST'])
+@jwt_required
 def cadastrarhorario():
     # Não testado a parte dos Json
 
@@ -251,32 +228,18 @@ def cadastrarhorario():
 
 #AINDA NÃO TERMINADA
 @blueprint.route("/chamadavalidar", methods=['POST'])
+@jwt_required
 def chamadapesquisar():
-    if not request.is_json:
-       return jsonify({"msg": "Missing JSON in request"}), 400
-    
-    propositor = get_jwt_identity()
-    turma = request.get_json()
-    session = get_session()
-    turma = session.query(Turma).filter_by(id_turma=turma["id"]).one()
-    presencas = session.query(Presenca).filter_by(presenca_id_turma=turma["id"],presencaAtualizada=False).all()
-    DiaDaSemanaCheckIn = func.extract(data[0].ultimoCheckIn,'dow')
-    for i in turma.Horarios:
-        if (tradutor[DiaDaSemanaCheckIn] == i.DiaDaSemana):
-            horario = i
+    pass
+    #if not request.is_json:
+    #   return jsonify({"msg": "Missing JSON in request"}), 400
+     
 
-    for i in presencas:
-        atualizapresenca(i,horario)
-    session.commit()
-    session.close()
-    return jsonify({"msg": "Presenças Atualizadas"}), 200   
+### RELATORIOS ###
 
-    ### RELATORIOS ###
-
-    # RELATORIO CONTATO
-
-
+# RELATORIO CONTATO
 @blueprint.route('/relatoriocontato', methods=['GET'])
+@jwt_required
 @cross_origin(origin="localhost")
 def get_relatoriocontato():
     session = get_session()
@@ -288,7 +251,8 @@ def get_relatoriocontato():
 # RELATORIO CPF/NOME
 
 
-@ blueprint.route('/relatoriocpfnome', methods=['GET'])
+@blueprint.route('/relatoriocpfnome', methods=['GET'])
+@jwt_required
 def get_relatoriocpfnome():
     session = get_session()
     data = session.query(Turma).all()
@@ -303,7 +267,8 @@ def get_relatoriocpfnome():
 # AINDA NÃO SERÁ IMPLEMENTADO, PRECISA DA FUNÇÃO DE CHECKIN
 
 
-@ blueprint.route('/relatoriofrequencia', methods=['GET'])
+@blueprint.route('/relatoriofrequencia', methods=['GET'])
+@jwt_required
 def get_relatoriofrequencia():
     '''
     Frequência: frequência computada em dias, horas e minutos com base no horário de check-in do cursista.
@@ -319,7 +284,8 @@ def get_relatoriofrequencia():
 # RELATORIO PROFISSAO
 
 
-@ blueprint.route('/relatorioprofissao/<string:NomeDaProfissao>', methods=['GET', 'POST'])
+@blueprint.route('/relatorioprofissao/<string:NomeDaProfissao>', methods=['GET', 'POST'])
+@jwt_required
 def get_relatorioprofissao(NomeDaProfissao):
     JSON, err = relatorioatividades('profissao', NomeDaProfissao)
     if err == -1:
@@ -330,7 +296,8 @@ def get_relatorioprofissao(NomeDaProfissao):
 # RELATORIO CAP
 
 
-@ blueprint.route('/relatorioCAP/<string:NomeDoCAP>', methods=['GET'])
+@blueprint.route('/relatorioCAP/<string:NomeDoCAP>', methods=['GET'])
+@jwt_required
 def get_relatorioCAP(NomeDoCAP):
     JSON, err = relatorioatividades('CAP', NomeDoCAP)
     if err == -1:
@@ -341,7 +308,8 @@ def get_relatorioCAP(NomeDoCAP):
 # RELATORIO FUNÇÃO
 
 
-@ blueprint.route('/relatoriofuncao/<string:NomeDaFuncao>', methods=['GET'])
+@blueprint.route('/relatoriofuncao/<string:NomeDaFuncao>', methods=['GET'])
+@jwt_required
 def get_relatoriofuncao(NomeDaFuncao):
     JSON, err = relatorioatividades('funcao', NomeDaFuncao)
     if err == -1:
@@ -352,7 +320,8 @@ def get_relatoriofuncao(NomeDaFuncao):
 # RELATORIO SUPERINTENDENCIA
 
 
-@ blueprint.route('/relatoriosuperintendencia/<string:NomeDaSuperintendencia>', methods=['GET'])
+@blueprint.route('/relatoriosuperintendencia/<string:NomeDaSuperintendencia>', methods=['GET'])
+@jwt_required
 def get_relatoriosuperentendencia(NomeDaSuperintendencia):
     JSON, err = relatorioatividades("superintendencia", NomeDaSuperintendencia)
     if err == -1:
@@ -363,7 +332,8 @@ def get_relatoriosuperentendencia(NomeDaSuperintendencia):
 # RELATORIO UNIDADE
 
 
-@ blueprint.route('/relatoriounidade/<string:NomeDaUnidade>', methods=['GET'])
+@blueprint.route('/relatoriounidade/<string:NomeDaUnidade>', methods=['GET'])
+@jwt_required
 def get_relatoriounidade(NomeDaUnidade):
     JSON, err = relatorioatividades("unidade", NomeDaUnidade)
     if err == -1:
@@ -373,7 +343,8 @@ def get_relatoriounidade(NomeDaUnidade):
 
 
 # Concluintes: relatório de cursos finalizados para emissão de certificados pelo propositor.
-@ blueprint.route('/relatorioconcluintes', methods=['GET'])
+@blueprint.route('/relatorioconcluintes', methods=['GET'])
+@jwt_required
 def get_concluintes():
     session = get_session()
     data = session.query(Turma).filter_by(IsConcluido=1).all()
@@ -385,7 +356,7 @@ def get_concluintes():
     return jsonify(JSON)
 
 
-@ blueprint.route('/testdata', methods=['GET'])
+@blueprint.route('/testdata', methods=['GET'])
 def data():
     try:
         session = get_session()
@@ -405,32 +376,17 @@ def data():
                        carga_horaria_total=60, tolerancia=30, modalidade="n sei", turma_tag="tbm n sei")
         Turma2 = Turma(id_responsavel=User2.Id, nome_do_curso="iot", IsConcluido=1,
                        carga_horaria_total=60, tolerancia=30, modalidade="n sei", turma_tag="tbm n sei")
-        UserComplemento1 = UserComplemento(user=User1, tag="naosei1", profissao="advogado",
-                                           funcao="direcao", superintendenciaDaSUBPAV="SIAP", CAP="1.0", unidadeBasicaDeSaude="1")
-        UserComplemento2 = UserComplemento(user=User2, tag="naosei2", profissao="medico",
-                                           funcao="direcao", superintendenciaDaSUBPAV="SAP", CAP="1.0", unidadeBasicaDeSaude="1")
-        UserComplemento3 = UserComplemento(user=User3, tag="naosei3", profissao="engenheiro",
-                                           funcao="gerencia", superintendenciaDaSUBPAV="SVS", CAP="1.0", unidadeBasicaDeSaude="1")
-        UserComplemento4 = UserComplemento(user=User4, tag="naosei4", profissao="pedreiro",
-                                           funcao="gerencia", superintendenciaDaSUBPAV="SPS", CAP="1.0", unidadeBasicaDeSaude="1")
-        Aluno1 = Aluno(alunoUser=User1, complementoUser=UserComplemento1)
-        Aluno2 = Aluno(alunoUser=User3, complementoUser=UserComplemento3)
-        Aluno3 = Aluno(alunoUser=User2, complementoUser=UserComplemento2)
-        Aluno4 = Aluno(alunoUser=User4, complementoUser=UserComplemento4)
-        session.add_all([Aluno1, Aluno2, Aluno3, Aluno4, UserComplemento1,
-                         UserComplemento2, UserComplemento3, UserComplemento4, Turma1, Turma2])
+    
+        Aluno1 = Aluno(alunoUser=User1)
+        Aluno2 = Aluno(alunoUser=User3)
+        Aluno3 = Aluno(alunoUser=User2) 
+        Aluno4 = Aluno(alunoUser=User4) 
+        session.add_all([Aluno1, Aluno2, Aluno3, Aluno4, Turma1, Turma2])
         session.commit()
         Turma1.Alunos.append(Aluno1)
         Turma1.Alunos.append(Aluno2)
         Turma2.Alunos.append(Aluno1)
         session.commit()
-        if (User5.Aluno != None):
-            print("aaa")
-        if (User4.Aluno != None):
-            print("fasfasga")
-        for x in Turma1.Alunos:
-            a = session.query(User).filter_by(Id=x.alunos_id_user).first()
-            print(a.usuario)
         logger.info("informações de teste inseridas no banco de dados")
         return "200OK"
     except InternalError:

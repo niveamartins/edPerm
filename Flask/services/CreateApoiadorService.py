@@ -16,8 +16,6 @@ class CreateApoiadorService:
             if (QueryUsuario != None):
                 QueryTurma = session.query(Turma).filter_by(nome_do_curso=cadastroData['nome_do_curso']).first()
                 if (QueryTurma != None):
-                    QueryComplemento = session.query(UserComplemento).filter_by(id_do_user=QueryUsuario.Id).first()
-                    if (QueryComplemento != None):
                         if(QueryUsuario.tipo == 'apoiador'):
                             for apoiadores in QueryTurma.AlunosApoiadores:
                                 buscaDoUsuario = session.query(User).filter_by(Id = apoiadores.apoiador_id_user).first()
@@ -36,8 +34,6 @@ class CreateApoiadorService:
                                 return QueryUsuario.AlunoApoiador.as_dict()
                         else:
                             return "Usuario não é um apoiador", 400
-                    else:
-                        return "Dados Complementares não preenchidos", 400
                 else:
                     return "Turma não cadastrada", 400
             else:

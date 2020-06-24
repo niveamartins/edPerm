@@ -85,11 +85,11 @@ def listaturma(Turma):
 def atividade_aluno(Aluno):
     return {
             'id_aluno':f'{Aluno.id_aluno}',
-            'profissao':f'{Aluno.complementoUser.profissao}',
-            'funcao':f'{Aluno.complementoUser.funcao}',
-            'superintendenciadaSUBPAV':f'{Aluno.complementoUser.superintendenciaDaSUBPAV}',
-            'CAP':f'{Aluno.complementoUser.CAP}',
-            'unidade':f'{Aluno.complementoUser.unidadeBasicaDeSaude}',
+            'profissao':f'{Aluno.alunoUser.profissao}',
+            'funcao':f'{Aluno.alunoUser.funcao}',
+            'superintendenciadaSUBPAV':f'{Aluno.alunoUser.superintendenciaDaSUBPAV}',
+            'CAP':f'{Aluno.alunoUser.CAP}',
+            'unidade':f'{Aluno.alunoUser.unidadeBasicaDeSaude}',
             'id_user':f'{Aluno.alunoUser.Id}',
             'aluno_nome':f'{Aluno.alunoUser.usuario}'
         
@@ -109,15 +109,11 @@ def concluintes(Turma):
 def frequencia(Aluno):
     return {
         "tipoDeRelatorio":"frequencia",
-        'Nome': f'{Aluno.complementoUser.usuario}',
-        'cpf': f'{Aluno.complementoUser.cpf}',
+        'Nome': f'{Aluno.alunoUser.usuario}',
+        'cpf': f'{Aluno.alunoUser.cpf}',
         'id_aluno' : f'{Aluno.id_aluno}',
         'id_user_aluno' : f'{Aluno.alunos_id_user}',
         'Turma' : []
      }
 
-
-def atualizapresenca(Presenca, Horario):
-    DeltaTime = Horario.HorarioTermino - Presenca.ultimoCheckIn.time()
-    
     

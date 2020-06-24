@@ -1,8 +1,9 @@
 from sqlalchemy import (Column, String, Integer, Text,
-                        Enum, ForeignKey, Table, Time, Boolean, DateTime)
+                        Enum, ForeignKey, Table, Time, Boolean, DateTime, Interval)
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, backref
 from database.model.Base.Base import Base
+from datetime import timedelta
 
 # ASSOCIATIONS TABLES
 
@@ -31,6 +32,10 @@ class User(Base):
     telefone = Column(String(9), nullable=False)
     tipo = Column(Enum('adm', 'gestor', 'coordenador',
                        'propositor', 'cursista', 'apoiador'), nullable=False)
+    funcao = Column(String(20),nullable=True)
+    profissao = Column(String(30),nullable=True)
+    UnidadeBasicadeSaude=Column(String(30),nullable=True)
+    CAP=Column(String(4),nullable=True)                  
 
     # ONE TO ONE
 
@@ -50,12 +55,6 @@ class Aluno(Base):
     id_aluno = Column(Integer, primary_key=True)
     alunos_id_user = Column(Integer, ForeignKey(
         'user.Id'), nullable=False, unique=True)
-    alunos_id_complemento = Column(Integer, ForeignKey(
-        'userComplemento.id_complemento'), nullable=False, unique=True)
-
-    # ONE TO ONE
-    complementoUser = relationship(
-        'UserComplemento', uselist=False, backref="AlunocomplementoUser")
 
     # ONE TO MANY
     presencas = relationship('Presenca', backref='alunoDono')
@@ -99,25 +98,6 @@ class Horario(Base):
     HorarioTermino = Column(Time, nullable=False)
 
 
-class UserComplemento(Base):
-    __tablename__ = 'userComplemento'
-    id_complemento = Column(Integer, primary_key=True)
-    id_do_user = Column(Integer, ForeignKey('user.Id'),
-                        nullable=False, unique=True)
-    tag = Column(String(20), nullable=False)
-    profissao = Column(String(20), nullable=False)
-    funcao = Column(String(20), nullable=False)
-    superintendenciaDaSUBPAV = Column(String(30), nullable=False)
-    CAP = Column(String(20), nullable=False)
-    unidadeBasicaDeSaude = Column(String(30), nullable=False)
-
-    user = relationship('User', uselist=False,
-                        backref="complementoUser", foreign_keys=id_do_user)
-
-    def as_dict(self):
-        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
-
-
 class AlunoApoiador(Base):
     __tablename__ = 'alunoApoiador'
     id_alunoApoiador = Column(Integer, primary_key=True)
@@ -130,12 +110,14 @@ class AlunoApoiador(Base):
 class Presenca(Base):
     __tablename__ = 'presenca'
     id_presenca = Column(Integer, primary_key=True)
-    presenca_id_aluno = Column(Integer, ForeignKey(
-        'aluno.id_aluno'), nullable=False)
-    presenca_id_turma = Column(Integer, ForeignKey(
-        'turma.id_turma'), nullable=False)
-    ultimoCheckIn = Column(DateTime, nullable=True)
-    presencaAtualizada = Column(Boolean, nullable=True, default=True)
-    presencaTotal = Column(DateTime, nullable=False)
+    presenca_id_aluno = Column(Integer, ForeignKey('aluno.id_aluno'), nullable=False)
+    presenca_id_turma = Column(Integer, ForeignKey('turma.id_turma'), nullable=False)
+    CheckIn = Column(DateTime, nullable=True)
+    presencaValidade = Column(Boolean, nullable=True)
 
-# TODO: ESTUDAR DATETIME NA HORA DE IMPLEMENTAR A FUNÇÃO DE CHECKIN
+class PresencaTot(Base):
+    __tablename__ = 'presencatot'
+    id_presencatot = Column(Integer, primary_key=True)
+    presencatot_id_aluno = Column(Integer, ForeignKey('aluno.id_aluno'), nullable=False)
+    presencatot_id_turma = Column(Integer, ForeignKey('turma.id_turma'), nullable=False)
+    presenca_total = Column(Interval, nullable=False, default=timedelta(seconds=0))
