@@ -1,0 +1,14 @@
+.main-inicio {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   /* margin-top: 3em; */
+   margin-bottom: 2em;
+}
+
+.main-inicio h1 {
+   text-align: center;
+   font-size: 1.5em;
+   margin-bottom: 2.5rem;
+}

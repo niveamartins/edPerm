@@ -144,7 +144,7 @@ function Inicio() {
 								required
 							/>
 							<input type="submit" class="button" value="cadastrar" />
-							<Link to="/">
+							<Link to="/login">
 								Já possui uma conta?{" "}
 								<span class="form-highlight">Faça login</span>
 							</Link>

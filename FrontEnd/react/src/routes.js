@@ -6,9 +6,11 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 // Aqui iremos importar todas as páginas
 import CadastrarAlunos from './components/pages/CadastrarAlunos';
 import CadastrarTurma from './components/pages/CadastrarTurmas';
-import Inicio from './components/pages/Inicio'
+import Login from './components/pages/Login'
 import CadastroUsuario from './components/pages/CadastroUsuario'
 import EsqueciASenha from './components/pages/EsqueciASenha'
+import Inicio from './components/pages/Inicio'
+import OpcoesTurmas from './components/pages/OpcoesTurmas'
 import ListarTurmas from './components/pages/ListarTurmas'
 import Turma from './components/pages/Turma'
 import Presenca from './components/pages/Presenca'
@@ -28,11 +30,13 @@ export default function Routes() {
     return (
         <BrowserRouter>
             <Switch>
-                <Route exact path="/" component={Inicio} /> 
+                <Route exact path="/" component={Inicio}/>
+                <Route path="/login" component={Login} /> 
                 <Route path="/cadalunos" component={CadastrarAlunos} />
                 <Route path="/cadturma" component={CadastrarTurma} />
                 <Route path="/cadusuario" component={CadastroUsuario} /> 
                 <Route path="/esqueciasenha" component={EsqueciASenha} /> 
+                <Route path="/opcoesTurmas" component={OpcoesTurmas} />
                 <Route path="/turmas" component={ListarTurmas} /> 
                 <Route path="/turma" component={Turma} />
                 <Route path="/presenca" component={Presenca}/>

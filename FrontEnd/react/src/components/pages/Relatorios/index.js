@@ -6,7 +6,7 @@ import { Footer } from "../../footer"
 import { Accessibility } from "../../accessibility"
 import CardRelatorio from "./CardRelatorio"
 
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+// import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 import "./relatorios.css"
 
@@ -16,9 +16,9 @@ const relatorios = () => {
 			<Accessibility />
 			<NavBar />
 			<main>
-				<Link to="/turma">
+				{/* <Link to="/turma">
 					<ArrowBackIcon id="return-icon" />
-				</Link>
+				</Link> */}
 				<div className="document__links">
 
 					<Link to= {{

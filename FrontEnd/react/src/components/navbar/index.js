@@ -19,11 +19,10 @@ export function NavBar() {
         <div>
             <header>
 
-                <div className="logo"><a href="/turmas">Educação Permanente</a></div>
+                <div className="logo"><Link to="/">Educação Permanente</Link></div>
 
-                <nav className="myNav" id="myNav">
+                {/* <nav className="myNav" id="myNav">
 
-                        {/* button for nav sliding */}
                         <input type="checkbox" id="check" />
                         <label htmlFor="check" className="checkbtn">
                             <MenuIcon id="toggle-button" />
@@ -35,7 +34,7 @@ export function NavBar() {
                             <li><NavLink to="/turmas" className="middle" title="Listar Turmas" activeClassName="active__link">Turmas</NavLink></li>
                             <li><NavLink to="/Perfil" className="middle" title="Perfil" activeClassName="active__link">Perfil</NavLink></li>
                         </ul>
-                </nav>
+                </nav> */}
 
                     {/* logout button */}
                     <Link to="/" title="Sair"> <PowerSettingsNewIcon id="nav-elements" /> </Link>
