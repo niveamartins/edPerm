@@ -25,7 +25,7 @@ export function NavBar() {
 
                         {/* button for nav sliding */}
                         <input type="checkbox" id="check" />
-                        <label for="check" class="checkbtn">
+                        <label htmlFor="check" className="checkbtn">
                             <MenuIcon id="toggle-button" />
                         </label>
 

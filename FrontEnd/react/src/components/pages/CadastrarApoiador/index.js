@@ -13,12 +13,11 @@ import { Accessibility } from '../../accessibility'
 
 function CadastrarApoiador(props) {
 
-    const [turma, setTurma] = useState("");  
     const [aluno, setAluno] = useState("");
 
     let info = props.location.state;
 
-    setTurma(info[0].id_turma)
+    const turma = info[0].id_turma;
 
     async function handleCreate(e) {
                 
@@ -29,7 +28,9 @@ function CadastrarApoiador(props) {
           aluno
 
         };
-    
+        
+        console.log(data)
+        /*
         try {
           api.post("/cadastrarhorario", data);
     
@@ -39,6 +40,7 @@ function CadastrarApoiador(props) {
           console.log(err);
           alert("Erro no cadastro, tente novamente");
         }
+        */
       }
 
 

@@ -25,6 +25,9 @@ function Inicio() {
 			cpf,
 			telefone,
 			tipo,
+			cap,
+			funcao,
+			profissao
 		}
 
 		if (senha == confirm_password) {
@@ -140,7 +143,6 @@ function Inicio() {
 								onChange={(e) => setProfissao(e.target.value)}
 								required
 							/>
-							
 							<input type="submit" class="button" value="cadastrar" />
 							<Link to="/">
 								Já possui uma conta?{" "}
