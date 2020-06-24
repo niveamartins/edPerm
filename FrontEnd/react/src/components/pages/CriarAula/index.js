@@ -52,9 +52,9 @@ const CriarAula = props => {
 			<Accessibility />
 			<NavBar />
 			<main className="main">
-				<a href="/turma">
+				{/* <Link to="/turma">
 					<ArrowBackIcon id="return-icon" />
-				</a>
+				</Link> */}
 				<div className="card-container">
 					<div className="card">
 						<table className="card-list">

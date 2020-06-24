@@ -37,7 +37,7 @@ export function NavBar() {
                 </nav> */}
 
                     {/* logout button */}
-                    <Link to="/" title="Sair"> <PowerSettingsNewIcon id="nav-elements" /> </Link>
+                    <Link to="/login" title="Sair"> <PowerSettingsNewIcon id="nav-elements" /> </Link>
 
             </header>
         </div>

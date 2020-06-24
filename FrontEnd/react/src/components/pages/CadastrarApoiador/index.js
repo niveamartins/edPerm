@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react'
-// import { Link } from '../../../../node_modules/react-router-dom';
+import { Link } from '../../../../node_modules/react-router-dom';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 import api from '../../../services/api';
@@ -49,9 +49,9 @@ function CadastrarApoiador(props) {
             <Accessibility />
             <NavBar />
             <main className="main">
-                <a href="/turma">
+                {/* <Link to="/turma">
                     <ArrowBackIcon id="return-icon" />
-                </a>
+                </Link> */}
                 <div className="card-container">
 					<div className="card">
 						<table className="card-list">

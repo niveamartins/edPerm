@@ -17,16 +17,18 @@ const opcoesTurmas = () => (
 						title="Criar Turma"
 					/>
 					<Button
-						link="/turmas"
+						// link="/turmasCriadas"
+						link="turmas"
+						title="Listar Turmas Criadas"
+					/>
+					<Button
+						// link="/turmasInscritas"
+						link="turmas"
 						title="Listar Turmas Inscritas"
 					/>
 					<Button
-						link="/turmas"
+						link="/turmasApoiador"
 						title="Listar turmas apoiador"
-					/>
-               <Button
-						link="/turmas"
-						title="Editar turmas"
 					/>
 				</div>
 			</main>
