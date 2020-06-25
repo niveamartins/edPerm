@@ -34,6 +34,7 @@ function Inicio() {
 			try {
 				api.post("/cadastrar", data)
 
+
 				alert(`O usuário foi cadastrado com sucesso!`)
 			} catch (err) {
 				console.log(err)

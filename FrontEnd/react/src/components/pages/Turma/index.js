@@ -16,7 +16,9 @@ function Turma(props) {
 	const url = "listaturma/" + id
 	useEffect(() => {
 		try {
-			api.get(url).then((response) => {
+			const token = localStorage.getItem("token")
+            const AuthStr = 'Bearer '.concat(token); 
+			api.get(url, { headers: { Authorization: AuthStr }}).then((response) => {
 				setTurmas(response.data)
 			})
 		} catch (err) {
@@ -59,10 +61,7 @@ function Turma(props) {
 								<td className="name">Modalidade</td>
 								<td className="value">{item.modalidade}</td>
 							</tr>
-							<tr className="content">
-								<td className="name">Tag</td>
-								<td className="value">{item.modalidade}</td>
-							</tr>
+							
 						</table>
 					</div>
 				</div>
@@ -90,7 +89,7 @@ function Turma(props) {
 							  state: turma
 							}}	 
 							  className="link">
-							<button class="button">
+							<button class="button" disabled>
 								<label>Criar Aula</label>
 							</button>
 						</Link>
