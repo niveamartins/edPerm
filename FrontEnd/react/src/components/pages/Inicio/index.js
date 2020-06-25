@@ -15,6 +15,8 @@ function Inicio() {
     const [senha, setSenha] = useState("")
     const history = useHistory();
 
+    localStorage.removeItem("token");
+
 	async function handleCreate(e) {
 		e.preventDefault()
 

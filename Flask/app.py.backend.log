@@ -183,3 +183,7 @@
 [2020-06-19 19:06:03,907 - /media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
 [2020-06-19 19:08:05,970 - /media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
 [2020-06-19 19:08:06,031 - /media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-24 20:46:56,584 - app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-24 20:46:58,500 - app.py - INFO]: Inicializando a poll de conexões
+[2020-06-24 20:46:59,192 - /home/nivea/Documentos/projetos/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-24 20:46:59,236 - /home/nivea/Documentos/projetos/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
