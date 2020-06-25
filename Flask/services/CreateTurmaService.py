@@ -15,7 +15,7 @@ class CreateTurmaService:
         #Isso pode gerar um problema, perguntar para secretaria
         
         session = get_session()
-        busca = session.query(User).filter_by(usuario=turmaData['responsavel']).first()
+        busca = session.query(User).filter_by(Id=turmaData['responsavel']).first()
         if (busca != None):
             cadastrar = Turma(id_responsavel = busca.Id, IsConcluido = False, nome_do_curso = turmaData['nome_do_curso'] ,carga_horaria_total = turmaData['carga_horaria_total'], tolerancia = turmaData['tolerancia'], modalidade = turmaData['modalidade'], turma_tag = turmaData['turma_tag'])
             session.add_all([cadastrar])

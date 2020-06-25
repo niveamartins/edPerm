@@ -10,9 +10,8 @@ import { Accessibility } from '../../accessibility'
 
 
 function CadastrarTurma() {
-
-    const responsavel = "keith"
-    // const [responsavel, setResponsavel] = useState("");
+    const responsavel = localStorage.getItem("user_id")
+    
     const [nome_do_curso, setTurma] = useState("");  
     const [carga_horaria_total, setCarga] = useState("");
     const [tolerancia, setTolerancia] = useState("");

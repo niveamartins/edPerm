@@ -1,0 +1,42 @@
+
+.button__link-container {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+}
+
+.button__link {
+   width: 200px;
+   height: 180px;
+   background-color: #fff;
+   border-radius: 28px;
+   box-shadow: 0 2px 3px #ccc;
+   transition: ease-in-out 0.2s;
+
+   padding: 10px;
+   margin: 0 1em 1.5em 1em;
+
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}
+
+.button__link:hover {
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+   cursor: pointer;
+}
+
+.button__link-title {
+   text-align: center;
+   font-size: 30px;
+   color: var(--elements-color);
+}
+
+.button__link-description {
+   font-weight: bold;
+   color: #686868;
+   letter-spacing: 0.3px;
+   margin-top: 10px;
+   text-align: center;
+}

@@ -34,6 +34,7 @@ function Inicio() {
 			try {
 				api.post("/cadastrar", data)
 
+
 				alert(`O usuário foi cadastrado com sucesso!`)
 			} catch (err) {
 				console.log(err)
@@ -144,7 +145,7 @@ function Inicio() {
 								required
 							/>
 							<input type="submit" class="button" value="cadastrar" />
-							<Link to="/">
+							<Link to="/login">
 								Já possui uma conta?{" "}
 								<span class="form-highlight">Faça login</span>
 							</Link>

@@ -15,7 +15,9 @@ function Relatorio(props) {
 
 	useEffect(() => {
 		try {
-			api.get(url).then((response) => {
+			const token = localStorage.getItem("token")
+            const AuthStr = 'Bearer '.concat(token); 
+			api.get(url, { headers: { Authorization: AuthStr }}).then((response) => {
 				setRelatorio(response.data)
 			})
 		} catch (err) {
