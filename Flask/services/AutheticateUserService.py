@@ -16,9 +16,8 @@ class AutheticateUserService:
             session = get_session()
 
             userQuery = session.query(User).filter_by(usuario = usuario).first()
-
             if not userQuery or not check_password_hash(userQuery.as_dict()["senha"], senha):
-                return "Usuario ou senha incorretos.", 400
+                return {"Error":"Usuario ou senha incorretos."}, 400
             user = userQuery.as_dict()
             user = {
                 "id": user["Id"],
@@ -26,8 +25,8 @@ class AutheticateUserService:
             }
             expires = timedelta(hours=24)
             access_token = create_access_token(identity=user, expires_delta=expires)
-
-            return access_token
+            response= {"access_token":access_token}
+            return response
 
         except InternalError:
             logger.error("Banco de dados (EdPermanente) desconhecido")
