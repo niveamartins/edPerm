@@ -25,16 +25,11 @@ class CreateUserService:
             session.add(user)
             session.commit()
 
-            userComplemento = UserComplemento(user=user, tag="placeholder", profissao=userData["profissao"],
-                                           funcao=userData["funcao"], superintendenciaDaSUBPAV="placeholder", CAP=userData["cap"], unidadeBasicaDeSaude="placeholder")
-            session.add(userComplemento)
-            session.commit()
-
             userDict =  user.as_dict()
             #remove user password from return 
             userDict.pop("senha")
 
-            return {**userDict, **userComplemento.as_dict()}
+            return {**userDict}
         except InternalError:
             logger.error("Banco de dados (EdPermanente) desconhecido")
             return "502ERROR"

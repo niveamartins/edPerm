@@ -51,9 +51,9 @@ def logar():
     if not senha:
         return jsonify({"msg": "Missing senha parameter"}), 400
     authenticateUser = AutheticateUserService()
-    access_token = authenticateUser.execute(usuario, senha)
-
-    return jsonify(access_token=access_token), 200
+    response = authenticateUser.execute(usuario, senha)
+    print(response)
+    return jsonify(response), 200
 
 
 @blueprint.route('/authTest', methods=['GET'])
@@ -94,11 +94,10 @@ def gerarqrcode(codigo_aluno):
     return send_file(url+f'{codigo_aluno}.png', mimetype='image/png')
 
 @blueprint.route("/cadastrar", methods=['POST'])
-@jwt_required
 def cadastrar():
 
     userData = request.get_json()
-    userDataFields = ["usuario", "email", "senha", "cpf", "telefone", "tipo", "cap", "funcao", "profissao"]
+    userDataFields = ["usuario", "email", "senha", "cpf", "telefone", "tipo"]
 
     if not all(field in userData for field in userDataFields):
         return "Missing information", 400
@@ -135,7 +134,6 @@ def cadastrarDadosComplementares():
 
 # refatorado
 @blueprint.route("/cadastrarturma", methods=['POST'])
-@jwt_required
 def cadastrarturma():
 
     # Não testado a parte dos Json
@@ -156,7 +154,7 @@ def cadastrarturma():
 
 
 @blueprint.route('/listaturma/<int:codigo_turma>')
-@jwt_required 
+@jwt_required
 def turma(codigo_turma):
     session=get_session()
     data = session.query(Turma).filter_by(id_turma=codigo_turma).one()
@@ -170,7 +168,6 @@ def turma(codigo_turma):
 
 
 @blueprint.route("/listaturma", methods=['GET'])
-@jwt_required
 def listarturma():
     #user_id = request.json.get('user_id', None)
 
@@ -197,8 +194,8 @@ def cadastraraluno():
     cadastroData = request.get_json()
     cadastroDataFields = ["usuario", "nome_do_curso"]
 
-    # if not all(field in cadastroData for field in cadastroDataFields):
-    #     return "Missing information", 400
+    if not all(field in cadastroData for field in cadastroDataFields):
+         return "Missing information", 400
 
     cadastrarAluno = CreateAlunoService()
 
@@ -390,32 +387,8 @@ def data():
                        carga_horaria_total=60, tolerancia=30, modalidade="n sei", turma_tag="tbm n sei")
         Turma2 = Turma(id_responsavel=User2.Id, nome_do_curso="iot", IsConcluido=1,
                        carga_horaria_total=60, tolerancia=30, modalidade="n sei", turma_tag="tbm n sei")
-        UserComplemento1 = UserComplemento(user=User1, tag="naosei1", profissao="advogado",
-                                           funcao="direcao", superintendenciaDaSUBPAV="SIAP", CAP="1.0", unidadeBasicaDeSaude="1")
-        UserComplemento2 = UserComplemento(user=User2, tag="naosei2", profissao="medico",
-                                           funcao="direcao", superintendenciaDaSUBPAV="SAP", CAP="1.0", unidadeBasicaDeSaude="1")
-        UserComplemento3 = UserComplemento(user=User3, tag="naosei3", profissao="engenheiro",
-                                           funcao="gerencia", superintendenciaDaSUBPAV="SVS", CAP="1.0", unidadeBasicaDeSaude="1")
-        UserComplemento4 = UserComplemento(user=User4, tag="naosei4", profissao="pedreiro",
-                                           funcao="gerencia", superintendenciaDaSUBPAV="SPS", CAP="1.0", unidadeBasicaDeSaude="1")
-        Aluno1 = Aluno(alunoUser=User1, complementoUser=UserComplemento1)
-        Aluno2 = Aluno(alunoUser=User3, complementoUser=UserComplemento3)
-        Aluno3 = Aluno(alunoUser=User2, complementoUser=UserComplemento2)
-        Aluno4 = Aluno(alunoUser=User4, complementoUser=UserComplemento4)
-        session.add_all([Aluno1, Aluno2, Aluno3, Aluno4, UserComplemento1,
-                         UserComplemento2, UserComplemento3, UserComplemento4, Turma1, Turma2])
+        session.add_all([Turma1, Turma2])
         session.commit()
-        Turma1.Alunos.append(Aluno1)
-        Turma1.Alunos.append(Aluno2)
-        Turma2.Alunos.append(Aluno1)
-        session.commit()
-        if (User5.Aluno != None):
-            print("aaa")
-        if (User4.Aluno != None):
-            print("fasfasga")
-        for x in Turma1.Alunos:
-            a = session.query(User).filter_by(Id=x.alunos_id_user).first()
-            print(a.usuario)
         logger.info("informações de teste inseridas no banco de dados")
         session.close()
         return "200OK"

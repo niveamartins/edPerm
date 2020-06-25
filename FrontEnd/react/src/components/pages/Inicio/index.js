@@ -17,6 +17,8 @@ function Inicio() {
 
     localStorage.removeItem("token");
 
+    
+
 	async function handleCreate(e) {
 		e.preventDefault()
 
@@ -27,24 +29,33 @@ function Inicio() {
 
 		console.log(data)
 
-		try {
-		    api.post("/logar", data).then((response) => {
-                localStorage.setItem("token", response.data.access_token)
-                const token = response.data.access_token; 
-                let user = jwt(token)
-                user = user.identity
+		 try {
+		    await api.post("/logar", data).then((response) => {
+                console.log(response.data.access_token)
+                localStorage.setItem("token", response.data.access_token)      
 
-                localStorage.setItem("user", user)
+            })
 
-                history.push("/turmas");
-			})
+            let user = jwt(localStorage.getItem("token"))
+            console.log(user)
 
+            let user_id = user.identity.id
+            localStorage.setItem("user_id", user_id)
+            
+            let user_username = user.identity.usuario
+            localStorage.setItem("user_username", user_username)
+
+
+
+            history.push("/turmas");
 
 		} catch (err) {
 		    console.log(err);
 		    alert("Erro no cadastro, tente novamente");
-		 }
-	}
+         }
+    }
+    
+    
 
     //adaptar login para js
     //fazer mudanças para usar useState

@@ -15,7 +15,6 @@ class CreateApoiadorService:
         TuplaUserTurma = session.query(User,Turma).filter(User.email == cadastroData["email_apoiador"], Turma.id_turma == cadastroData["id_turma"]).first()
         
         if not TuplaUserTurma:
-            print("Email cagado")
             return {"Error":"Email invalido"}, 502
 
         apoiador = AlunoApoiador(apoiador_id_turma=TuplaUserTurma[1].id_turma,apoiador_id_user=TuplaUserTurma[0].Id)
