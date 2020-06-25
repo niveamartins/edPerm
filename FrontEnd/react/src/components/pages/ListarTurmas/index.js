@@ -14,7 +14,9 @@ function ListarTurmas() {
 
 	useEffect(() => {
 		try {
-			api.get("listaturma").then((response) => {
+			const token = localStorage.getItem("token")
+            const AuthStr = 'Bearer '.concat(token); 
+			api.get("listaturma", { headers: { Authorization: AuthStr }}).then((response) => {
 				setTurmas(response.data)
 			})
 		} catch (err) {

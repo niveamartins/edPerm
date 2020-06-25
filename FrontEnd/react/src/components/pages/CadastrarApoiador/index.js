@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react'
-// import { Link } from '../../../../node_modules/react-router-dom';
+import { Link } from '../../../../node_modules/react-router-dom';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 import api from '../../../services/api';
@@ -13,34 +13,40 @@ import { Accessibility } from '../../accessibility'
 
 function CadastrarApoiador(props) {
 
-    const [aluno, setAluno] = useState("");
+    const [email_apoiador, setAluno] = useState("");
 
     let info = props.location.state;
 
-    const turma = info[0].id_turma;
+    const id_turma = info[0].id_turma;
 
     async function handleCreate(e) {
                 
         e.preventDefault();
     
         const data = {
-          turma, 
-          aluno
+          email_apoiador, 
+          id_turma
 
         };
         
         console.log(data)
-        /*
         try {
-          api.post("/cadastrarhorario", data);
-    
-          alert(`O aluno foi cadastrado como apoiador da turma com sucesso!`);
+          const token = localStorage.getItem("token")
+          const AuthStr = 'Bearer '.concat(token); 
+          api.post("/cadastrarapoiador", data, { headers: { Authorization: AuthStr }}).then((response) => {
+              if (response.data.hasOwnProperty('error') === true) {
+                alert("O e-mail cadastrado não existe no banco de dados");
+              } else {
+                alert(`O aluno foi cadastrado como apoiador da turma com sucesso!`);
+              }
+            
+        });
+
 
         } catch (err) {
           console.log(err);
           alert("Erro no cadastro, tente novamente");
         }
-        */
       }
 
 
@@ -49,9 +55,9 @@ function CadastrarApoiador(props) {
             <Accessibility />
             <NavBar />
             <main className="main">
-                <a href="/turma">
+                {/* <Link to="/turma">
                     <ArrowBackIcon id="return-icon" />
-                </a>
+                </Link> */}
                 <div className="card-container">
 					<div className="card">
 						<table className="card-list">
@@ -82,10 +88,7 @@ function CadastrarApoiador(props) {
 								<td className="name">Modalidade</td>
 								<td className="value">{info[0].modalidade}</td>
 							</tr>
-							<tr className="content">
-								<td className="name">Tag</td>
-								<td className="value">{info[0].modalidade}</td>
-							</tr>
+
 						</table>
 					</div>
 			    </div>
@@ -95,7 +98,7 @@ function CadastrarApoiador(props) {
                             <form onSubmit={handleCreate}>
                                 <h1>Cadastre o apoiador!</h1>
                                 <p>Insira abaixo o código do aluno escolhido.</p>
-                                <input name="aluno" class="form-input" placeholder="Código do Aluno" value={aluno} onChange={e => setAluno(e.target.value)} required />
+                                <input name="aluno" class="form-input" placeholder="E-mail do Aluno" value={email_apoiador} onChange={e => setAluno(e.target.value)} required />
                                 <input type="submit" class="button" value="cadastrar apoiador" />
                             </form>
 
