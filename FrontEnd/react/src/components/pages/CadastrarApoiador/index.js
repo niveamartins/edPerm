@@ -31,7 +31,9 @@ function CadastrarApoiador(props) {
         
         console.log(data)
         try {
-          api.post("/cadastrarhorario", data).then((response) => {
+          const token = localStorage.getItem("token")
+          const AuthStr = 'Bearer '.concat(token); 
+          api.post("/cadastrarapoiador", data, { headers: { Authorization: AuthStr }}).then((response) => {
               if (response.data.hasOwnProperty('error') === true) {
                 alert("O e-mail cadastrado não existe no banco de dados");
               } else {
@@ -86,10 +88,7 @@ function CadastrarApoiador(props) {
 								<td className="name">Modalidade</td>
 								<td className="value">{info[0].modalidade}</td>
 							</tr>
-							<tr className="content">
-								<td className="name">Tag</td>
-								<td className="value">{info[0].modalidade}</td>
-							</tr>
+
 						</table>
 					</div>
 			    </div>
