@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 // npm install react-router-dom
 
 
@@ -29,6 +29,9 @@ import Relatorio from './components/pages/Relatorio'
 export default function Routes() {
     return (
         <BrowserRouter>
+            {localStorage.getItem("token") == null &&
+                <Redirect to="/login" />
+            }
             <Switch>
                 <Route exact path="/" component={Inicio}/>
                 <Route path="/login" component={Login} /> 
