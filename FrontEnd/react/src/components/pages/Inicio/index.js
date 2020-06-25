@@ -16,7 +16,8 @@ function Inicio() {
     const history = useHistory();
 
     localStorage.removeItem("token");
-
+    localStorage.removeItem("user_id");
+    localStorage.removeItem("user_username");
     
 
 	async function handleCreate(e) {
