@@ -84,12 +84,6 @@ function Turma(props) {
 								<label>Lista de Presença</label>
 							</button>
 						</Link>
-
-						<Link to="/relatorios" className="link">
-							<button class="button">
-								<label>Relatórios</label>
-							</button>
-						</Link>
 						<Link to= {{ 
 							  pathname: "/cadaula", 
 							  state: turma

@@ -1,89 +1,40 @@
-//página de login 
-import React, { useState } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import React, { Fragment } from "react"
 
-import api from "../../../services/api"
+import { NavBar } from "../../navbar"
+import { Footer } from "../../footer"
+import { Accessibility } from "../../accessibility"
+import Button from "../../Button"
 
-import './inicio.css'
-
-import jwt from 'jwt-decode'
-
-
+import "./Inicio.css"
 
 function Inicio() {
-    const [usuario, setUsuario] = useState("")
-    const [senha, setSenha] = useState("")
-    const history = useHistory();
-
-    localStorage.removeItem("token");
-    localStorage.removeItem("user_id");
-    localStorage.removeItem("user_username");
-    
-
-	async function handleCreate(e) {
-		e.preventDefault()
-
-		const data = {
-            senha,
-            usuario
-		}
-
-		console.log(data)
-
-		 try {
-		    await api.post("/logar", data).then((response) => {
-                console.log(response.data.access_token)
-                localStorage.setItem("token", response.data.access_token)      
-
-            })
-
-            let user = jwt(localStorage.getItem("token"))
-            console.log(user)
-
-            let user_id = user.identity.id
-            localStorage.setItem("user_id", user_id)
-            
-            let user_username = user.identity.usuario
-            localStorage.setItem("user_username", user_username)
-
-
-
-            history.push("/turmas");
-
-		} catch (err) {
-		    console.log(err);
-		    alert("Erro no cadastro, tente novamente");
-         }
-    }
-    
-    
-
-    //adaptar login para js
-    //fazer mudanças para usar useState
-    //mudar links esqueci a senha e cadastro
-    // <a href="esqueciasenha" class="forgot">Esqueceu a senha?</a>
-    return (
-        <div className="login-index">
-            <div className="index-header">
-                <Link to="/">Educação Permanente</Link>
-            </div>
-
-            <main className="main-content-forms">
-                <div className="form-page-container">
-                    <div className="form-container">
-                        <form onSubmit={handleCreate}>
-                            <h1>Olá!</h1>
-                            <p>Realize login para ter acesso a funcionalidades exclusivas.</p>
-                            <input type="text" name="usuario" className="form-input" placeholder="Usuário" value={usuario} onChange={e => setUsuario(e.target.value)} required/>
-                            <input type="password" name="senha" className="form-input" placeholder="Senha" value={senha} onChange={e => setSenha(e.target.value)} required/>
-                            <input type="submit" className="button" value="Login" />
-.                           <Link to="cadusuario" className="signup">Não possui conta? <span className="form-highlight">Se cadastre</span></Link>
-                        </form>
-                    </div>
-                </div>
-            </main>
-        </div>
-    )
+	return (
+		<Fragment>
+			<Accessibility />
+			<NavBar />
+			<main className="main-inicio">
+				<h1>Bem vindo, usuário!</h1>
+				<div className="button__link-container">
+					<Button
+						link="/opcoesTurmas"
+						title="Turmas"
+						description="Crie, Edite e Liste Turmas"
+					/>
+					<Button
+						link="/perfil"
+						title="Perfil"
+						description="Acesse seu perfil"
+					/>
+					<Button
+						link="/relatorios"
+						title="Relatórios"
+						description="Visualize os relatórios gerados"
+					/>
+				</div>
+			</main>
+			<Footer />
+		</Fragment>
+	)
 }
 
 export default Inicio

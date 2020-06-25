@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react'
+import { Link } from 'react-router-dom'
 //import { Link } from '../../../../node_modules/react-router-dom';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
@@ -18,9 +19,9 @@ function Presenca() {
             <Accessibility />
             <NavBar />
             <main className="main">
-                <a href="/turma">
+                {/* <Link to="/turma">
                 <ArrowBackIcon id="return-icon" />
-                </a>
+                </Link> */}
                 <div className="card-container">
                     <div className="card">
                         <table className="card-list">
