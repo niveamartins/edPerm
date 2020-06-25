@@ -12,6 +12,11 @@ function Inicio() {
     const [usuario, setUsuario] = useState("")
     const [senha, setSenha] = useState("")
     const history = useHistory();
+	
+    localStorage.removeItem("token");
+    localStorage.removeItem("user_id");
+    localStorage.removeItem("user_username");
+    
 
 	async function handleCreate(e) {
 		e.preventDefault()
@@ -21,21 +26,20 @@ function Inicio() {
             usuario
 		}
 
-		console.log(data)
-
 		try {
-		    api.post("/logar", data).then((response) => {
-                localStorage.setItem("token", response.data.access_token)
-                const token = response.data.access_token; 
-                let user = jwt(token)
-                user = user.identity
+		    await api.post("/logar", data).then((response) => {
+                    localStorage.setItem("token", response.data.access_token)
+		  })
+			
+		let user = jwt(localStorage.getItem("token"))
 
-                localStorage.setItem("user", user)
-
-                history.push("/turmas");
-			})
-
-
+            	let user_id = user.identity.id
+            	localStorage.setItem("user_id", user_id)
+            
+            	let user_username = user.identity.usuario
+            	localStorage.setItem("user_username", user_username)
+		history.push("/");
+	       
 		} catch (err) {
 		    console.log(err);
 		    alert("Erro no cadastro, tente novamente");
