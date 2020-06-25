@@ -35,6 +35,7 @@ class CreateAlunoService:
                             return QueryUsuario.Aluno.as_dict()
                     else:
                        return "Usuario não é um cursista", 400
+
                 else:
                     return "Turma não cadastrada", 400
             else:

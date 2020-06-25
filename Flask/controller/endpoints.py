@@ -17,7 +17,6 @@ from utilities.loggers import get_logger
 from utilities.DateTimes import tradutor
 from services.CreateUserService import CreateUserService
 from services.CreateTurmaService import CreateTurmaService
-from services.CreateComplementoService import CreateComplementoService
 from services.CreateAlunoService import CreateAlunoService
 from services.CreateApoiadorService import CreateApoiadorService
 from services.CreateHorarioService import CreateHorarioService
@@ -110,26 +109,11 @@ def cadastrar():
 
 # refatorado
 
-
+#TODO: estruturar como será a segunda parte do cadastramento de informações
 @blueprint.route("/cadastrardadoscomplementares", methods=['POST'])
 @jwt_required
 def cadastrarDadosComplementares():
-
-    # Não testado a parte dos Json
-
-    complementoData = request.get_json()
-
-    complementoDataFields = ["usuario", "tag", "profissao", "funcao",
-                             "superintendenciaDaSUBPAV", "CAP", "unidadeBasicaDeSaude"]
-
-    if not all(field in complementoData for field in complementoDataFields):
-        return "Missing information", 400
-
-    createComplemento = CreateComplementoService()
-
-    Complemento = createComplemento.execute(complementoData)
-
-    return jsonify(Complemento)
+    pass
 
 
 # refatorado
@@ -387,7 +371,16 @@ def data():
                        carga_horaria_total=60, tolerancia=30, modalidade="n sei", turma_tag="tbm n sei")
         Turma2 = Turma(id_responsavel=User2.Id, nome_do_curso="iot", IsConcluido=1,
                        carga_horaria_total=60, tolerancia=30, modalidade="n sei", turma_tag="tbm n sei")
-        session.add_all([Turma1, Turma2])
+
+        Aluno1 = Aluno(alunoUser=User1)
+        Aluno2 = Aluno(alunoUser=User3)
+        Aluno3 = Aluno(alunoUser=User2) 
+        Aluno4 = Aluno(alunoUser=User4) 
+        session.add_all([Aluno1, Aluno2, Aluno3, Aluno4, Turma1, Turma2])
+        session.commit()
+        Turma1.Alunos.append(Aluno1)
+        Turma1.Alunos.append(Aluno2)
+        Turma2.Alunos.append(Aluno1)
         session.commit()
         logger.info("informações de teste inseridas no banco de dados")
         session.close()
