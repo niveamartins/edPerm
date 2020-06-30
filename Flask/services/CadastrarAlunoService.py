@@ -15,7 +15,14 @@ class CadastrarAlunoService:
         TuplaUserTurma = session.query(User,Turma).filter(User.cpf == cadastroData["cpf"], Turma.id_turma == cadastroData["id_do_curso"]).first()
         
         if not TuplaUserTurma:
-            return {"Error":"Cpf invalido"}, 502
+            return {"Error":"cpf invalido"}, 502
+
+        if not(TuplaUserTurma[0].Aluno):
+            return {"Error":"Aluno não existente"}, 502
+      
+        for alunos in TuplaUserTurma[1].Alunos:
+                if(alunos.id_aluno == TuplaUserTurma[0].Aluno.id_aluno):
+                    return {"Error":"Aluno já cadastrado na turma"}, 502
 
         TuplaUserTurma[1].Alunos.append(TuplaUserTurma[0].Aluno)
         session.commit()

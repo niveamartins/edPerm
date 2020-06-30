@@ -403,6 +403,15 @@ def data():
         session.add_all([Aluno1, Aluno2, Aluno3, Aluno4, Turma1, Turma2])
         session.commit()
         Turma1.Alunos.append(User1.Aluno)
+        Turma1.Alunos.append(Aluno2)
+        Turma1.Alunos.append(Aluno3)
+
+        for alunos in Turma1.Alunos:
+                if(alunos.id_aluno == User1.Aluno.id_aluno):
+                    print("Testando")
+
+        if not(User5.Aluno):
+            print('Oi')
         session.commit()
         logger.info("informações de teste inseridas no banco de dados")
         session.close()
