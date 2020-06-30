@@ -21,6 +21,7 @@ from services.CreateAlunoService import CreateAlunoService
 from services.CreateApoiadorService import CreateApoiadorService
 from services.CreateHorarioService import CreateHorarioService
 from services.AutheticateUserService import AutheticateUserService
+from services.CadastrarAlunoService import CadastrarAlunoService
 from services.ListTurmaService import ListTurmaService
 
 blueprint = Blueprint('endpoints', __name__) 
@@ -187,6 +188,29 @@ def cadastraraluno():
 
     return jsonify(Aluno)
 
+
+# Issue 36
+@blueprint.route("/cadastraralunonaturma", methods=['POST'])
+@jwt_required
+def cadastraralunonaturma(): 
+
+    #Não testado a parte dos Json
+    #Perguntar se
+    #cpf == do token
+    #preciso testar se o usuario e aluno
+    cadastroData = request.get_json()
+    cadastroDataFields = ["cpf", "id_do_curso"]
+
+    if not all(field in cadastroData for field in cadastroDataFields):
+         return "Missing information", 400
+
+    cadastrarAlunoNaTurma = CadastrarAlunoService()
+
+    msg = cadastrarAlunoNaTurma.execute(cadastroData)
+
+    return jsonify(msg)
+
+# Issue 36
 
 @blueprint.route("/cadastrarapoiador", methods=['POST'])
 @jwt_required
@@ -378,9 +402,7 @@ def data():
         Aluno4 = Aluno(alunoUser=User4) 
         session.add_all([Aluno1, Aluno2, Aluno3, Aluno4, Turma1, Turma2])
         session.commit()
-        Turma1.Alunos.append(Aluno1)
-        Turma1.Alunos.append(Aluno2)
-        Turma2.Alunos.append(Aluno1)
+        Turma1.Alunos.append(User1.Aluno)
         session.commit()
         logger.info("informações de teste inseridas no banco de dados")
         session.close()
