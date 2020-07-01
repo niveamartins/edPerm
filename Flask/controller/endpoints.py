@@ -22,6 +22,7 @@ from services.CreateApoiadorService import CreateApoiadorService
 from services.CreateHorarioService import CreateHorarioService
 from services.AutheticateUserService import AutheticateUserService
 from services.ListTurmaService import ListTurmaService
+from services.CreatePresencaService import CreatePresencaService
 
 blueprint = Blueprint('endpoints', __name__) 
 CORS(blueprint)
@@ -72,25 +73,6 @@ def dados_pessoais():
     del data["senha"]
     return jsonify(data)
 
-@blueprint.route('/qrcode/<int:codigo_aluno>', methods=['GET'])
-@jwt_required
-def gerarqrcode(codigo_aluno):
-    qr = qrcode.QRCode(
-        version=1,
-        error_correction=qrcode.constants.ERROR_CORRECT_L,
-        box_size=10,
-        border=4,
-    )
-    session = get_session()
-    data = session.query(Aluno).filter_by(id_aluno=codigo_aluno).one()
-    JSON = data.alunoUser.as_dict()
-    qr.add_data(JSON)
-    qr.make(fit=True)
-    img = qr.make_image()
-    url = path.abspath(__file__).split('controller')[0]
-    img.save(url+f'{codigo_aluno}.png')
-
-    return send_file(url+f'{codigo_aluno}.png', mimetype='image/png')
 
 @blueprint.route("/cadastrar", methods=['POST'])
 def cadastrar():
@@ -107,7 +89,6 @@ def cadastrar():
 
     return jsonify(user)
 
-# refatorado
 
 #TODO: estruturar como será a segunda parte do cadastramento de informações
 @blueprint.route("/cadastrardadoscomplementares", methods=['POST'])
@@ -116,9 +97,8 @@ def cadastrarDadosComplementares():
     pass
 
 
-# refatorado
 @blueprint.route("/cadastrarturma", methods=['POST'])
-def cadastrarturma():
+def cadastrarturma(): 
 
     # Não testado a parte dos Json
 
@@ -130,9 +110,7 @@ def cadastrarturma():
     #     return "Missing information", 400
 
     createTurma = CreateTurmaService()
-    print(turmaData)
     turma = createTurma.execute(turmaData)
-    print(turma)
     return jsonify(turma)
 
 
@@ -164,14 +142,22 @@ def listarturma():
 
 
 
-@blueprint.route("/atualizarpresenca", methods=['POST'])
+@blueprint.route("/marcarpresenca", methods=['POST'])
 @jwt_required
 def atualizarpresenca():
-    pass
+    presencaData = request.get_json()
+    presencaDataFields = ["emailAluno","idAluno","idTurma"]
+
+    if not all(field in presencaData for field in presencaDataFields):
+        return {"Error":"Bad Request"}
+
+    marcarPresenca = CreatePresencaService()
+    presenca = marcarPresenca.execute(presencaData)
+    return jsonify(presenca)
 
 @blueprint.route("/cadastraraluno", methods=['POST'])
 @jwt_required
-def cadastraraluno(): 
+def cadastraraluno():
 
     #Não testado a parte dos Json
 
@@ -190,7 +176,7 @@ def cadastraraluno():
 
 @blueprint.route("/cadastrarapoiador", methods=['POST'])
 @jwt_required
-def cadastrarapoiador():    
+def cadastrarapoiador():
 
     apoiadorData = request.get_json()
     apoiadorDataFields = ["email_apoiador", "id_turma"]
@@ -228,14 +214,13 @@ def chamadapesquisar():
     pass
     #if not request.is_json:
     #   return jsonify({"msg": "Missing JSON in request"}), 400
-     
+
 
 ### RELATORIOS ###
 
 # RELATORIO CONTATO
 @blueprint.route('/relatoriocontato', methods=['GET'])
 @jwt_required
-@cross_origin(origin="localhost")
 def get_relatoriocontato():
     session = get_session()
     data = session.query(User).all()
