@@ -127,3 +127,17 @@
 [2020-06-20 00:35:23,130 - /media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
 [2020-06-20 00:36:11,218 - /media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
 [2020-06-20 00:36:11,291 - /media/sidney/Novo volume/Git/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-24 11:27:59,690 - app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-24 11:28:01,214 - app.py - INFO]: Inicializando a poll de conexões
+[2020-06-24 11:28:01,658 - /home/keith/code/equipe/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-24 11:28:01,687 - /home/keith/code/equipe/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-24 11:34:48,192 - /home/keith/code/equipe/EducacaoPermanente/Flask/app.py - ERROR]: Banco de dados (EdPermanente) desconhecido
+[2020-06-24 11:34:48,192 - /home/keith/code/equipe/EducacaoPermanente/Flask/app.py - ERROR]: Banco de dados (EdPermanente) desconhecido
+[2020-06-24 11:34:48,192 - /home/keith/code/equipe/EducacaoPermanente/Flask/app.py - ERROR]: Banco de dados (EdPermanente) desconhecido
+[2020-06-24 20:11:31,571 - app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-24 20:11:32,518 - app.py - INFO]: Inicializando a poll de conexões
+[2020-06-24 20:11:32,924 - /home/keith/code/equipe/EducacaoPermanente/Flask/app.py - INFO]: Estabelecendo conexão com o banco de dados
+[2020-06-24 20:11:32,954 - /home/keith/code/equipe/EducacaoPermanente/Flask/app.py - INFO]: Inicializando a poll de conexões
+[2020-06-24 20:34:49,411 - /home/keith/code/equipe/EducacaoPermanente/Flask/app.py - ERROR]: Banco de dados (EdPermanente) desconhecido
+[2020-06-24 20:34:49,411 - /home/keith/code/equipe/EducacaoPermanente/Flask/app.py - ERROR]: Banco de dados (EdPermanente) desconhecido
+[2020-06-24 20:34:49,411 - /home/keith/code/equipe/EducacaoPermanente/Flask/app.py - ERROR]: Banco de dados (EdPermanente) desconhecido
