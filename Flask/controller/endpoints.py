@@ -198,11 +198,17 @@ def cadastraralunonaturma():
     #Perguntar se
     #cpf == do token
     #preciso testar se o usuario e aluno
+    userData = get_jwt_identity()
     cadastroData = request.get_json()
-    cadastroDataFields = ["cpf", "id_do_curso"]
+    cadastroDataFields = ["cpfAluno", "idTurma"]
+    
+
+
 
     if not all(field in cadastroData for field in cadastroDataFields):
          return "Missing information", 400
+
+    cadastroData['id'] = userData['id']
 
     cadastrarAlunoNaTurma = CadastrarAlunoService()
 
