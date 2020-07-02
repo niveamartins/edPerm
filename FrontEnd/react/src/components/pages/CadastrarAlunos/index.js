@@ -26,7 +26,10 @@ function CadastrarAlunos() {
           };
       
           try {
-            api.post("/cadastraraluno", data);
+            const token = localStorage.getItem("token")
+            const AuthStr = 'Bearer '.concat(token); 
+            
+            api.post("/cadastraraluno", data, { headers: { Authorization: AuthStr }});
       
             alert(`O aluno foi cadastrado na turma com sucesso!`);
   
