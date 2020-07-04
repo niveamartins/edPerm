@@ -142,15 +142,15 @@ def cadastrarturma():
 
     turmaData = request.get_json()
     turmaDataFields = ["responsavel", "nome_do_curso",
-                       "carga_horaria_total", "tolerancia", "modalidade", "turma_tag"]
+                       "carga_horaria_total", "tolerancia", "modalidade"]
 
-    # if not all(field in turmaData for field in turmaDataFields):
-    #     return "Missing information", 400
+    if not all(field in turmaData for field in turmaDataFields):
+        return "Missing information", 400
 
     createTurma = CreateTurmaService()
-    print(turmaData)
+    
     turma = createTurma.execute(turmaData)
-    print(turma)
+    
     return jsonify(turma)
 
 
@@ -231,25 +231,19 @@ def cadastrarhorario():
     # Não testado a parte dos Json
 
     horarioData = request.get_json()
-    horarioDataFields = ["Turma", "DiaDaSemana",
-                         "Inicio", "Termino", "Propositor"]
+    horarioDataFields = ["idTurma", "DiaDaSemana",
+                         "hInicio", "hTermino"]
     user = get_jwt_identity()
-    if(user['tipo']!='propositor'):
-        return "Usuario não tem permissão", 400
-
-    horarioData['Propositor'] = user['usuario']
-
+    
     if not all(field in horarioData for field in horarioDataFields):
         return "Missing information"
 
-    cadastrarHorario = CreateHorarioService()
-    Horario = cadastrarHorario.execute(horarioData)
-    erros = ["Turma não cadastrada", "Horario ja cadastrado"]
-    for er in erros:
-        if(Horario == er):
-            return Horario
+    horarioData['idPropositor'] = user['id']
 
-    return jsonify(Horario)
+    cadastrarHorario = CreateHorarioService()
+    response = cadastrarHorario.execute(horarioData)
+    
+    return jsonify(response)
 
 #AINDA NÃO TERMINADA
 @blueprint.route("/chamadavalidar", methods=['POST'])
