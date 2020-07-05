@@ -16,20 +16,18 @@ class CreateHorarioService:
 
         for horarios in QueryTurma.Horarios:
           diaDaSemanaSobreposto = (horarios.DiaDaSemana == horarioData['DiaDaSemana'])
-          hInicioSobreposto = is_time_between(horarios.HorarioInicio,horarios.HorarioTermino,horarioData['hInicio'])
-          hTerminoSobreposto = is_time_between(horarios.HorarioInicio,horarios.HorarioTermino,horarioData['hTermino'])
-          #TODO: consertar sobreposição 
-          if diaDaSemanaSobreposto and (hInicioSobreposto or hTerminoSobreposto):
+          horarioSobreposto = sobreposicaoDeHorario(horarios.HorarioInicio,horarios.HorarioTermino,horarioData['hInicio'],horarioData['hTermino'])
+          if (diaDaSemanaSobreposto and horarioSobreposto):
             return {"Error":"Horario sobreposto"}
         horario = Horario(HorarioIdTurma = QueryTurma.id_turma, DiaDaSemana = horarioData['DiaDaSemana'],HorarioInicio = horarioData['hInicio'], HorarioTermino = horarioData['hTermino'])
         session.add(horario)
         session.commit()
         return {"Sucess":"Horario Cadastrado"}
 
-def is_time_between(begin_time, end_time, check_time=None):
+def sobreposicaoDeHorario(horarioDeInicioDoBD, horarioDeTerminoDoBD, hInicio=None, hTermino=None):
     
-    check_time = check_time or datetime.utcnow().time()
-    if begin_time < end_time:
-        return check_time >= begin_time and check_time <= end_time
-    else:
-        return check_time >= begin_time or check_time <= end_time
+    hInicio = hInicio or datetime.utcnow().time()
+    hTermino = hTermino or datetime.utcnow().time()
+    return (hInicio >= horarioDeInicioDoBD and hInicio <= horarioDeTerminoDoBD) or (hTermino >= horarioDeInicioDoBD and hTermino <= horarioDeTerminoDoBD) or (hInicio <= horarioDeInicioDoBD and hTermino>= horarioDeTerminoDoBD)
+
+    

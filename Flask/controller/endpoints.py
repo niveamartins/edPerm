@@ -94,7 +94,6 @@ def gerarqrcode(codigo_aluno):
     return send_file(url+f'{codigo_aluno}.png', mimetype='image/png')
 
 @blueprint.route("/cadastrar", methods=['POST'])
-@jwt_required
 def cadastrar():
 
     userData = request.get_json()
