@@ -28,19 +28,45 @@ class LerPresenca extends Component {
       console.error(err)
     }
 
+    getDadosQR = dadosQR => {
+      dadosQR = dadosQR.toString()
+      let content = []
+      content.push(
+      
+        <p>
+          {dadosQR}
+        </p>
+      
+      )
+      return content
+  
+    }
+
     render() {
       return ( 
           <div>
             <h2>Leitor de QrCode</h2>
-            <QrReader
-            delay={300}
-            onError={this.handleError}
-            onScan={this.handleScan}
-            facingMode="enviroment"
-            style={{ height:'100%' }}
-            />
+            
+            <div>
+              <QrReader
+              delay={300}
+              onError={this.handleError}
+              onScan={this.handleScan}
+              facingMode="enviroment"
+              style={{ height:'100%' }}
+              />
+            </div>
+            
+            <div>
+              {this.getDadosQR(this.state.result)}
+            </div>
+          
             <button className="button">Confirmar</button>
+          
+          
+
           </div>
+
       )
     }
   }
