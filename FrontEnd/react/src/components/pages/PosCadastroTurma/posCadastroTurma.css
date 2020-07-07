@@ -1,0 +1,113 @@
+.card-concluido {
+	width: 500px;
+	height: 300px;
+	padding: 20px;
+	background-color: #fff;
+	border-radius: 20px;
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.card-concluido__header {
+   display: flex;
+   align-items: center;
+}
+
+.card-concluido__header h3 {
+	font-size: 2em;
+	margin-bottom: 10px;
+}
+
+.card-concluido__header svg {
+   margin-left: -30px;
+   margin-top: -30px;
+   font-size: 100px;
+   color: var(--elements-color);
+}
+
+.card-concluido__link {
+   margin-top: 30px;
+}
+
+.card-concluido__link input {
+	outline: none;
+   border: none;
+   font-family: 'Montserrat', sans-serif;
+   font-size: 1em;
+   background-color: #e6e6e6;
+   padding: 10px;
+}
+
+.card-concluido__link button {
+   background-color: #fff;
+   outline: none;
+   border: solid 2px var(--elements-second-color);
+   border-radius: 15px;
+   font-size: 1em;
+   font-family: 'Montserrat', sans-serif;
+   color: var(--elements-second-color);
+   font-weight: bold;
+
+   margin-left: 20px;
+   padding: 10px;
+   display: flex;
+   align-items: center;
+}
+
+.card-concluido__link button .copy-icon {
+   color: var(--elements-second-color);
+   margin-left: 5px;
+}
+
+.card-concluido__link button:hover,
+.card-concluido__link button:hover .copy-icon {
+   background-color: var(--elements-second-color);
+   color: #fff;
+}
+
+/* mensagem acima do botão de copiar*/
+.tooltip {
+	position: relative;
+	display: inline-block;
+}
+
+.tooltip .tooltiptext {
+	box-shadow: 0 2px 3px #ccc;
+	visibility: hidden;
+	width: 200px;
+	background-color: var(--elements-third-color);
+	color: #fff;
+	font-weight: bold;
+	font-size: 16px;
+	letter-spacing: 0.8px;
+	text-align: center;
+	border-radius: 20px;
+	padding: 10px;
+	position: absolute;
+	z-index: 1;
+	bottom: 150%;
+	left: 50%;
+	margin-left: -75px;
+	opacity: 0;
+	transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+	content: "";
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	margin-left: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: var(--elements-third-color) transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+	visibility: visible;
+	opacity: 1;
+}
