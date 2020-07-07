@@ -1,32 +1,33 @@
-import sys
-
 from database.session import get_session
-from sqlalchemy.exc import InternalError
 from database.model.Model import *
-from utilities.loggers import get_logger
+from datetime import datetime, time
 
-#Não testado a parte dos Json
+#horarioData=["idTurma", "DiaDaSemana","hInicio", "hTermino","idPropositor"]
 
 class CreateHorarioService:
     def execute(self, horarioData):
-        logger = get_logger(sys.argv[0])
-        try:
-            session = get_session()
-            QueryTurma = session.query(Turma).filter_by(nome_do_curso=horarioData['Turma']).first()
-            if (QueryTurma != None):
-                QueryUsuario = session.query(User).filter_by(usuario=horarioData['Propositor']).first()
-                if (QueryUsuario != None):
-                    if(QueryTurma.id_responsavel == QueryUsuario.Id):
-                        horario = Horario(HorarioIdTurma = QueryTurma.id_turma, DiaDaSemana = horarioData['DiaDaSemana'],HorarioInicio = horarioData['Inicio'], HorarioTermino = horarioData['Termino'])
-                        session.add_all([horario])
-                        session.commit()
-                        return horario.as_dict()
-                    else:
-                        return "Usuario não é o responsavel pela turma", 400
-                else:
-                    return "Usuario não cadastrado", 400
-            else:
-                return "Turma não cadastrada", 400
-        except InternalError:
-            logger.error("Banco de dados (EdPermanente) desconhecido")
-            return "502ERROR"
+        session = get_session()
+        QueryTurma = session.query(Turma).filter_by(id_turma=horarioData['idTurma'],id_responsavel=horarioData["idPropositor"]).first()
+        if not QueryTurma:
+          return {"Error":"Turma não cadastrada"}
+        
+        horarioData['hInicio']=datetime.strptime(horarioData['hInicio'], '%H:%M:%S').time()
+        horarioData['hTermino']=datetime.strptime(horarioData['hTermino'], '%H:%M:%S').time()
+
+        for horarios in QueryTurma.Horarios:
+          diaDaSemanaSobreposto = (horarios.DiaDaSemana == horarioData['DiaDaSemana'])
+          horarioSobreposto = sobreposicaoDeHorario(horarios.HorarioInicio,horarios.HorarioTermino,horarioData['hInicio'],horarioData['hTermino'])
+          if (diaDaSemanaSobreposto and horarioSobreposto):
+            return {"Error":"Horario sobreposto"}
+        horario = Horario(HorarioIdTurma = QueryTurma.id_turma, DiaDaSemana = horarioData['DiaDaSemana'],HorarioInicio = horarioData['hInicio'], HorarioTermino = horarioData['hTermino'])
+        session.add(horario)
+        session.commit()
+        return {"Sucess":"Horario Cadastrado"}
+
+def sobreposicaoDeHorario(horarioDeInicioDoBD, horarioDeTerminoDoBD, hInicio=None, hTermino=None):
+    
+    hInicio = hInicio or datetime.utcnow().time()
+    hTermino = hTermino or datetime.utcnow().time()
+    return (hInicio >= horarioDeInicioDoBD and hInicio <= horarioDeTerminoDoBD) or (hTermino >= horarioDeInicioDoBD and hTermino <= horarioDeTerminoDoBD) or (hInicio <= horarioDeInicioDoBD and hTermino>= horarioDeTerminoDoBD)
+
+    
