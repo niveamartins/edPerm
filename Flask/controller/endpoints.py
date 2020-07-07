@@ -21,6 +21,7 @@ from services.CreateAlunoService import CreateAlunoService
 from services.CreateApoiadorService import CreateApoiadorService
 from services.CreateHorarioService import CreateHorarioService
 from services.AutheticateUserService import AutheticateUserService
+from services.CadastrarAlunoService import CadastrarAlunoService
 from services.ListTurmaService import ListTurmaService
 from services.CreatePresencaService import CreatePresencaService
 
@@ -104,13 +105,15 @@ def cadastrarturma():
 
     turmaData = request.get_json()
     turmaDataFields = ["responsavel", "nome_do_curso",
-                       "carga_horaria_total", "tolerancia", "modalidade", "turma_tag"]
+                       "carga_horaria_total", "tolerancia", "modalidade"]
 
-    # if not all(field in turmaData for field in turmaDataFields):
-    #     return "Missing information", 400
+    if not all(field in turmaData for field in turmaDataFields):
+        return "Missing information", 400
 
     createTurma = CreateTurmaService()
+
     turma = createTurma.execute(turmaData)
+
     return jsonify(turma)
 
 
@@ -174,6 +177,35 @@ def cadastraraluno():
     return jsonify(Aluno)
 
 
+# Issue 36
+@blueprint.route("/cadastraralunonaturma", methods=['POST'])
+@jwt_required
+def cadastraralunonaturma(): 
+
+    #Não testado a parte dos Json
+    #Perguntar se
+    #cpf == do token
+    #preciso testar se o usuario e aluno
+    userData = get_jwt_identity()
+    cadastroData = request.get_json()
+    cadastroDataFields = ["cpfAluno", "idTurma"]
+    
+
+
+
+    if not all(field in cadastroData for field in cadastroDataFields):
+         return "Missing information", 400
+
+    cadastroData['id'] = userData['id']
+
+    cadastrarAlunoNaTurma = CadastrarAlunoService()
+
+    msg = cadastrarAlunoNaTurma.execute(cadastroData)
+
+    return jsonify(msg)
+
+# Issue 36
+
 @blueprint.route("/cadastrarapoiador", methods=['POST'])
 @jwt_required
 def cadastrarapoiador():
@@ -196,16 +228,19 @@ def cadastrarhorario():
     # Não testado a parte dos Json
 
     horarioData = request.get_json()
-    horarioDataFields = ["Turma", "DiaDaSemana",
-                         "Inicio", "Termino", "Propositor"]
-
+    horarioDataFields = ["idTurma", "DiaDaSemana",
+                         "hInicio", "hTermino"]
+    user = get_jwt_identity()
+    
     if not all(field in horarioData for field in horarioDataFields):
-        return "Missing information", 400
+        return "Missing information"
+
+    horarioData['idPropositor'] = user['id']
 
     cadastrarHorario = CreateHorarioService()
-
-    Horario = cadastrarHorario.execute(horarioData)
-    return jsonify(Horario)
+    response = cadastrarHorario.execute(horarioData)
+    
+    return jsonify(response)
 
 #AINDA NÃO TERMINADA
 @blueprint.route("/chamadavalidar", methods=['POST'])
@@ -363,9 +398,16 @@ def data():
         Aluno4 = Aluno(alunoUser=User4) 
         session.add_all([Aluno1, Aluno2, Aluno3, Aluno4, Turma1, Turma2])
         session.commit()
-        Turma1.Alunos.append(Aluno1)
+        Turma1.Alunos.append(User1.Aluno)
         Turma1.Alunos.append(Aluno2)
-        Turma2.Alunos.append(Aluno1)
+        Turma1.Alunos.append(Aluno3)
+
+        for alunos in Turma1.Alunos:
+                if(alunos.id_aluno == User1.Aluno.id_aluno):
+                    print("Testando")
+
+        if not(User5.Aluno):
+            print('Oi')
         session.commit()
         logger.info("informações de teste inseridas no banco de dados")
         session.close()
