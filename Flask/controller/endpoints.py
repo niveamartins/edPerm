@@ -145,6 +145,7 @@ def listarturma():
 
 
 
+
 @blueprint.route("/marcarpresenca", methods=['POST'])
 @jwt_required
 def atualizarpresenca():
@@ -175,7 +176,6 @@ def cadastraraluno():
     Aluno = cadastrarAluno.execute(cadastroData)
 
     return jsonify(Aluno)
-
 
 # Issue 36
 @blueprint.route("/cadastraralunonaturma", methods=['POST'])
@@ -249,7 +249,7 @@ def chamadapesquisar():
     pass
     #if not request.is_json:
     #   return jsonify({"msg": "Missing JSON in request"}), 400
-
+    
 
 ### RELATORIOS ###
 
