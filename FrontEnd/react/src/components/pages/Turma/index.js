@@ -9,6 +9,9 @@ import { Accessibility } from "../../accessibility"
 
 import "./Turma.css"
 
+//colocar com o link da turma
+import LinkIcon from '@material-ui/icons/Link';
+
 function Turma(props) {
 	const [turma, setTurmas] = useState([])
 

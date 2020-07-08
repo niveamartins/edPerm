@@ -68,7 +68,7 @@ function Presenca() {
                         </table>
                     </div>
                 <div className="info-turmas">
-                    <div class="card">
+                    <div class="card presenca">
                         <table class="presence-list">
                             <tr class="title">
                                 <td>Lista de presença</td>

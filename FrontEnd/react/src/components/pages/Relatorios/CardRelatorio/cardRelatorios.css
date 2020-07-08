@@ -29,3 +29,9 @@ h3.document__link-title {
    height: 0px;
    border: 1px solid #b6b6b6;
 }
+
+@media (max-width: 500px) {
+   .document__link {
+      transform: scale(0.9);
+   }
+}

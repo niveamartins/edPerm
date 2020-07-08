@@ -6,6 +6,8 @@
 -> Arrumar navegação para mobile para diversos dispositivos
 -> Adaptar tamanho cards e fontes
 -> Colocar header fixa no scroll
+-> Conferir campos de cadastros com requisições do banco
+-> Acrescentar animações para quando elementos carregarem na tela
 */
 
 
@@ -173,6 +175,13 @@ footer .links .logo img {
   padding-top: 30px;
   font-weight: bolder;
   margin: 0;
+}
+
+/* mobile */
+@media (max-width: 500px) {
+  .form-container, .main-content-forms {
+    transform: scale(0.9);
+  }
 }
 
 #data {

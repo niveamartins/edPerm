@@ -24,6 +24,7 @@ import EditarCadastro from './components/pages/editarCadastro'
 import DadosPessoais from './components/pages/dadosPessoais'
 import Relatorios from './components/pages/Relatorios'
 import Relatorio from './components/pages/Relatorio'
+import PosCadastroTurma from './components/pages/PosCadastroTurma'
 
 // Aqui definimos todas as rotas
 export default function Routes() {
@@ -42,6 +43,7 @@ export default function Routes() {
                 <Route path="/turmas" component={ListarTurmas} /> 
                 <Route path="/turma" component={Turma} />
                 <Route path="/cadturma" component={CadastrarTurma} />
+                <Route path="/cadastroTurmaEfetuado" component={PosCadastroTurma} />
                 
                 <Route path="/cadalunos" component={CadastrarAlunos} />
                 <Route path="/cadapoiador" component={CadastrarApoiador} />

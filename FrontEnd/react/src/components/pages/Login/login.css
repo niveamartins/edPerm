@@ -1,3 +1,18 @@
 body {
     background-color: #efefef;
 }
+
+@media (max-width: 500px) {
+    .form-page-container,
+    .form-container, .main-content-forms {
+      transform: scale(0.9);
+    }
+
+    .form-page-container .login {
+        margin-top: 150px;
+    }
+
+    .index-header {
+        font-size: 0.8em;
+    }
+  }

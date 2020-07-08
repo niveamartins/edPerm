@@ -80,6 +80,17 @@
 	align-items: center;
 }
 
+@media (max-width: 500px) {
+   .profile__container {
+		transform: scale(0.8);
+		margin-left: 0px;
+		margin-right: 0px;
+	}
+	.profile__container h1 {
+		margin-top: -20%;
+	}
+}
+
 
 
 
