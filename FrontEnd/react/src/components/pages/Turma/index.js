@@ -89,6 +89,7 @@ function Turma(props) {
 							  state: turma
 							}}	 
 							  className="link">
+
 							<button className="button" disabled>
 								<label>Criar Aula</label>
 							</button>
