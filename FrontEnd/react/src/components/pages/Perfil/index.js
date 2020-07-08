@@ -7,6 +7,7 @@ import Class from "@material-ui/icons/Class"
 import Done from "@material-ui/icons/Done"
 import AccountCircle from "@material-ui/icons/AccountCircle"
 
+import api from "../../../services/api"
 import { NavBar } from "../../navbar"
 import { Footer } from "../../footer"
 import { Accessibility } from "../../accessibility"
@@ -32,12 +33,20 @@ function Perfil() {
 	}, [])
 
 	function createQR(dadosQR){
-		dadosQR = dadosQR.toString()
+		for (var key in dadosQR){
+			var attrName = key;
+			if (attrName != "email" && attrName != "cpf") {
+				delete dadosQR [ attrName ]
+			}
+
+		}
+
+		dadosQR = JSON.stringify(dadosQR)
+		
 		let content = []
 		content.push(
 		
-			<QRCode value={dadosQR} renderAs='svg'/>,
-		mountNode
+			<QRCode value={dadosQR} renderAs='svg' size='300' />
 		
 		)
 		return content

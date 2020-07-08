@@ -29,16 +29,29 @@ class LerPresenca extends Component {
     }
 
     getDadosQR = dadosQR => {
-      dadosQR = dadosQR.toString()
-      let content = []
-      content.push(
+
+      if (dadosQR != "No result") {
+        dadosQR = dadosQR.toString()
+        dadosQR = JSON.parse(dadosQR)
+
+        let content = []
+        content.push(
       
-        <p>
-          {dadosQR}
-        </p>
+        
+          <table className="card-list">
+            <tr className="content">
+              <td className="name">CPF</td>
+              <td className="value">{dadosQR.cpf}</td>
+            </tr>
+            <tr className="content">
+              <td className="name">E-mail</td>
+              <td className="value">{dadosQR.email}</td>
+            </tr>
+          </table>
       
       )
       return content
+      }
   
     }
 
