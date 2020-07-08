@@ -33,7 +33,7 @@ class CadastrarAlunoService:
     def executeAluno(self, cadastroData):
         session = get_session()
 
-        TuplaLinkTurmaUser=session.query(LinkCadastramento,Turma,User).filter(LinkCadastramento.token==cadastroData['token'],Turma.id_turma==LinkCadastramento.link_id_turma,User.cpf==cadastroData['cpf']).first()
+        TuplaLinkTurmaUser=session.query(LinkCadastramento,Turma,User).filter(LinkCadastramento.token==cadastroData['tokenTurma'],Turma.id_turma==LinkCadastramento.link_id_turma,User.cpf==cadastroData['cpf']).first()
 
         if not TuplaLinkTurmaUser:
             return {"Error":"Link não existe ou está expirado"}

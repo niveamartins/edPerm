@@ -1,4 +1,5 @@
 import sys
+import uuid
 
 from sqlalchemy import desc
 from database.session import get_session
@@ -21,7 +22,8 @@ class CreateTurmaService:
             session.add(cadastrar)
             session.commit()
             turma = session.query(Turma).filter_by(id_responsavel=cadastrar.id_responsavel,IsConcluido=False).order_by(desc(Turma.id_turma)).first()
-            link = LinkCadastramento(link_id_turma=turma.id_turma)
+
+            link = LinkCadastramento(token=str(uuid.uuid4()),link_id_turma=turma.id_turma)
             session.add(link)
             session.commit()
             return session.query(LinkCadastramento).filter_by(link_id_turma=turma.id_turma).first().as_dict()

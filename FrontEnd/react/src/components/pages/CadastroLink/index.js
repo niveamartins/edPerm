@@ -1,6 +1,4 @@
-import React, { Fragment, useState } from 'react';
-
-import './cadastroAlunos.css'
+import React, { Fragment, useState, useEffect } from 'react';
 
 import api from '../../../services/api';
 
@@ -12,8 +10,8 @@ import { Accessibility } from '../../accessibility'
 
 function CadastroLink(props) {
 
-      const tokenTurma = this.props.match.params.token
-      const id_turma = this.props.match.params.turma
+      const tokenTurma = props.match.params.token
+      const id_turma = props.match.params.turma
 
       const [cpf, setCPF] = useState("");  
       const [dadosAluno, setDA] = useState([])
@@ -30,11 +28,13 @@ function CadastroLink(props) {
               })
 
               api.get(url, { headers: { Authorization: AuthStr }}).then((response) => {
-				setDT(response.data)
+                console.log(response.data)
+				setDT(response.data[0])
 			})
 
           } catch (err) {
           }
+          console.log(dadosTurma)
       }, [])
 
   
@@ -76,7 +76,7 @@ function CadastroLink(props) {
             <div class="form-container">
               <form onSubmit={handleCreate}>
                 <h1>Cadastre-se na turma!</h1>
-                <p>Você está se cadastrando na turma <strong>{dadosTurma.nome_do_curso}</strong> com o professor(a) <strong>{dadosTurma.NomeDoPropositor}</strong>.</p>
+            <p>Você está se cadastrando na turma <b>{dadosTurma.nome_do_curso}</b> com o professor(a) <b>{dadosTurma.NomeDoPropositor}</b>.</p>
                 <p>Para confirmar, por favor, preencha o campo abaixo com o seu CPF.</p>
                 <input name="aluno" class="form-input" placeholder="CPF" value={cpf} onChange={e => setCPF(e.target.value)} required />
                 <input type="submit" class="button" value="cadastrar" />

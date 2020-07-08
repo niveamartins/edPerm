@@ -8,7 +8,8 @@ import "./posCadastroTurma.css"
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 import DoneIcon from '@material-ui/icons/Done';
 
-function Inicio() {
+function Inicio(props) {
+  let DadosLink = props.location.state.detail
 	function copiarTexto() {
 		const linkTurma = document.getElementById("link-turma")
 
@@ -33,7 +34,7 @@ function Inicio() {
 	window.addEventListener("load", () => {
 		document.querySelector(".card-concluido").classList.add("loaded")
 	})
-
+  let link = window.location.hostname + "/cadlink/"+DadosLink.link_id_turma+'/'+DadosLink.token
 	return (
 		<Fragment>
 			<Accessibility />
@@ -46,7 +47,7 @@ function Inicio() {
 					</div>
 					<p>Utilize o link abaixo para que alunos se inscrevam na turma:</p>
 					<div className="card-concluido__link">
-						<input type="text" id="link-turma" />
+						<input type="text" id="link-turma" value={link} disabled />
 						<div className="tooltip">
 							<button onClick={copiarTexto} onMouseOut={outFunc}>
 								<span class="tooltiptext" id="myTooltip">
