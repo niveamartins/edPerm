@@ -246,7 +246,7 @@ def cadastrarhorario():
 @jwt_required
 def autocadastro():
     cadastroData=request.get_json()
-    cadastroDataFields = ["cpf","token"]
+    cadastroDataFields = ["cpf","tokenTurma"]
 
     if not all(field in cadastroData for field in cadastroDataFields):
         return {"Error":"Missing information"}
