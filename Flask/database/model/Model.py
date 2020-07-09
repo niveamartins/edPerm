@@ -35,7 +35,7 @@ class User(Base):
     funcao = Column(String(20),nullable=True)
     profissao = Column(String(30),nullable=True)
     UnidadeBasicadeSaude=Column(String(30),nullable=True)
-    CAP=Column(String(4),nullable=True)
+    CAP=Column(String(4),nullable=True)                  
 
     # ONE TO ONE
 
@@ -121,6 +121,7 @@ class PresencaTot(Base):
     presencatot_id_aluno = Column(Integer, ForeignKey('aluno.id_aluno'), nullable=False)
     presencatot_id_turma = Column(Integer, ForeignKey('turma.id_turma'), nullable=False)
     presenca_total = Column(Interval, nullable=False, default=timedelta(seconds=0))
+<<<<<<< HEAD
 
 
 class LinkCadastramento(Base):
@@ -133,3 +134,5 @@ class LinkCadastramento(Base):
     
     def as_dict(self):
         return {c.name:getattr(self,c.name) for c in self.__table__.columns}
+=======
+>>>>>>> master

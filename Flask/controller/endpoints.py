@@ -262,7 +262,6 @@ def chamadapesquisar():
     pass
     #if not request.is_json:
     #   return jsonify({"msg": "Missing JSON in request"}), 400
-    
 
 ### RELATORIOS ###
 

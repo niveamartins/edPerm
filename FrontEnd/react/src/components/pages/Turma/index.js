@@ -93,9 +93,9 @@ function Turma(props) {
 							}}	 
 							  className="link">
 
-							<button className="button" disabled>
-								<label>Criar Aula</label>
-							</button>
+                <button className="button" disabled>
+                  <label>Criar Aula</label>
+                </button>
 						</Link>
 						<Link to= {{ 
 							  pathname: "/cadapoiador", 
