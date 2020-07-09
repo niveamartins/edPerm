@@ -52,7 +52,7 @@ function Inicio() {
 	return (
 		<div className="login-index">
 			<div className="index-header">
-				<Link to="/">Educação Permanente</Link>
+				<Link to="/login">Educação Permanente</Link>
 			</div>
 
 			<main className="main-content-forms">

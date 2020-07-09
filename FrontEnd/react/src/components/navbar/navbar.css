@@ -110,8 +110,20 @@ header .logo a {
 	transform: translateY(-4px);
 }
 
+@media (max-width: 500px) {
+	header .logo a {
+		font-size: 1.4em;
+		margin-left: -5px;
+	}
+
+	#nav-elements {
+		font-size: 2em;
+		margin-right: 10px;
+	}
+}
+
 /* Responsive layout */
-@media (max-width: 1300px) {
+/* @media (max-width: 1300px) {
 	.checkbtn {
 		display: block;
   }
@@ -147,43 +159,4 @@ header .logo a {
 	#check:checked ~ ul {
 		left: 0;
 	}
-}
-
-@media only screen and (max-width: 930px) {
-	.checkbtn {
-		top: 38px;
-	}
-}
-
-@media (max-width: 730px) {
-	.checkbtn {
-		top: 45px;
-		font-size: 1.5em;
-	}
-
-	header .logo a {
-		font-size: 1.4em;
-		margin-left: -5px;
-	}
-
-	#nav-elements {
-		font-size: 2em;
-  }
-}
-
-@media (max-width: 650px) {
-	nav ul {
-		top: 78px;
-	}
-
-	.checkbtn {
-		top: 35px;
-	}
-}
-
-@media (max-width: 540px) {
-	.checkbtn {
-		 top: 35px;
-		 left: 10px;
-	 }
- }
+} */
