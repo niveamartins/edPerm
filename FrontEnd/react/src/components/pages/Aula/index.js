@@ -85,11 +85,6 @@ function Aula() {
 								<td className="value">Feitosa</td>
 							</tr>
 						</table>
-						<Link to="/leitor" className="link">
-							<button size="large" className="button">
-								<label>Dar Presença</label>
-							</button>
-						</Link>
 					</div>
 				</div>
 			</main>

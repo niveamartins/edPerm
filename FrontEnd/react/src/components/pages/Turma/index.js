@@ -9,6 +9,9 @@ import { Accessibility } from "../../accessibility"
 
 import "./Turma.css"
 
+//colocar com o link da turma
+import LinkIcon from '@material-ui/icons/Link';
+
 function Turma(props) {
 	const [turma, setTurmas] = useState([])
 
@@ -80,7 +83,7 @@ function Turma(props) {
 					<div className="nav-info-turmas">
 						<Link to="/presenca"
 							className="link">
-							<button class="button" disabled>
+							<button className="button" disabled>
 								<label>Lista de Presença</label>
 							</button>
 						</Link>
@@ -89,22 +92,28 @@ function Turma(props) {
 							  state: turma
 							}}	 
 							  className="link">
-							<button class="button" disabled>
-								<label>Criar Aula</label>
-							</button>
+
+                <button className="button" disabled>
+                  <label>Criar Aula</label>
+                </button>
 						</Link>
 						<Link to= {{ 
 							  pathname: "/cadapoiador", 
 							  state: turma
 							}}
 							 className="link">
-							<button class="button">
+							<button className="button">
 								<label>Cadastrar Aluno Apoiador</label>
 							</button>
 						</Link>
 						<Link to="/aulas" className="link">
-							<button class="button" disabled>
+							<button className="button" disabled>
 								<label>Aulas</label>
+							</button>
+						</Link>
+						<Link to="/leitor" className="link">
+							<button className="button">
+								<label>Dar Presença</label>
 							</button>
 						</Link>
 					</div>

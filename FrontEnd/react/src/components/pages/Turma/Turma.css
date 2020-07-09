@@ -31,3 +31,16 @@
     flex-direction: column;
   }
 }
+
+@media (max-width: 500px) {
+  .main.turma {
+     transform: scale(0.9);
+  }
+  .nav-info-turmas {
+    margin-top: -10%;
+  }
+
+  .info-turmas {
+    margin-top: -20%!important;
+  }  
+}

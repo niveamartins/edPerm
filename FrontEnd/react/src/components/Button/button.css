@@ -40,3 +40,9 @@
    margin-top: 10px;
    text-align: center;
 }
+
+@media (max-width: 500px) {
+   .button__link {
+      transform: scale(0.9);
+   }
+}

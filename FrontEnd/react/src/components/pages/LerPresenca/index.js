@@ -28,19 +28,58 @@ class LerPresenca extends Component {
       console.error(err)
     }
 
+    getDadosQR = dadosQR => {
+
+      if (dadosQR != "No result") {
+        dadosQR = dadosQR.toString()
+        dadosQR = JSON.parse(dadosQR)
+
+        let content = []
+        content.push(
+      
+        
+          <table className="card-list">
+            <tr className="content">
+              <td className="name">CPF</td>
+              <td className="value">{dadosQR.cpf}</td>
+            </tr>
+            <tr className="content">
+              <td className="name">E-mail</td>
+              <td className="value">{dadosQR.email}</td>
+            </tr>
+          </table>
+      
+      )
+      return content
+      }
+  
+    }
+
     render() {
       return ( 
           <div>
             <h2>Leitor de QrCode</h2>
-            <QrReader
-            delay={300}
-            onError={this.handleError}
-            onScan={this.handleScan}
-            facingMode="enviroment"
-            style={{ height:'100%' }}
-            />
+            
+            <div>
+              <QrReader
+              delay={300}
+              onError={this.handleError}
+              onScan={this.handleScan}
+              facingMode="enviroment"
+              style={{ height:'100%' }}
+              />
+            </div>
+            
+            <div>
+              {this.getDadosQR(this.state.result)}
+            </div>
+          
             <button className="button">Confirmar</button>
+          
+          
+
           </div>
+
       )
     }
   }

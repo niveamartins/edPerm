@@ -10,3 +10,9 @@
 tr.students td.presence__name {
     padding-right: 13em;
 }
+
+@media (max-width: 500px) {
+    .card.presenca {
+       margin-top: 15%;
+    }
+ }
