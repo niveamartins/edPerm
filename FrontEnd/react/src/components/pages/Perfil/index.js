@@ -1,4 +1,4 @@
-import React, { Fragment } from "react"
+import React, { Fragment, useState, useEffect } from 'react'
 import { Link } from "../../../../node_modules/react-router-dom"
 
 // icons
@@ -7,16 +7,53 @@ import Class from "@material-ui/icons/Class"
 import Done from "@material-ui/icons/Done"
 import AccountCircle from "@material-ui/icons/AccountCircle"
 
+import api from "../../../services/api"
 import { NavBar } from "../../navbar"
 import { Footer } from "../../footer"
 import { Accessibility } from "../../accessibility"
 
 import "./perfil.css"
 
-const qrcodeimg = require("../../../assets/qr-code-teste.png")
+var QRCode = require('qrcode.react');
 
 function Perfil() {
-	//preencher dados da turma com db
+	const [dados, setDados] = useState([])
+
+	//alterar rota.
+	useEffect(() => {
+		try {
+            const token = localStorage.getItem("token")
+            const AuthStr = 'Bearer '.concat(token); 
+			api.get("/dadosPessoais", { headers: { Authorization: AuthStr }}).then((response) => {
+                setDados(response.data)
+			})
+		} catch (err) {
+			alert("Não foi possível encontrar o usuário desejada, tente novamente")
+		}
+	}, [])
+
+	function createQR(dadosQR){
+		for (var key in dadosQR){
+			var attrName = key;
+			if (attrName != "email" && attrName != "cpf") {
+				delete dadosQR [ attrName ]
+			}
+
+		}
+
+		dadosQR = JSON.stringify(dadosQR)
+		
+		let content = []
+		content.push(
+		
+			<QRCode value={dadosQR} renderAs='svg' size='300' />
+		
+		)
+		return content
+
+	}
+	
+
 
 	return (
 		<Fragment>
@@ -31,7 +68,7 @@ function Perfil() {
 						</p>
 						<p className="subtitle-qr">Seu QR Code de acesso</p>
 						<div className="card">
-							<img src={qrcodeimg} alt="QRCode de acesso" />
+							{createQR(dados)}
 						</div>
 						<div className="profile__container-buttons">
 							<Link to="/editarDados">

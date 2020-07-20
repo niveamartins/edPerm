@@ -3,8 +3,8 @@ from sqlalchemy import (Column, String, Integer, Text,
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, backref
 from database.model.Base.Base import Base
-from datetime import timedelta
-
+from datetime import datetime,timedelta
+import uuid
 # ASSOCIATIONS TABLES
 
 alunoApoiadoXturma = Table('aaxt', Base.metadata,
@@ -35,7 +35,7 @@ class User(Base):
     funcao = Column(String(20),nullable=True)
     profissao = Column(String(30),nullable=True)
     UnidadeBasicadeSaude=Column(String(30),nullable=True)
-    CAP=Column(String(4),nullable=True)                  
+    CAP=Column(String(4),nullable=True)
 
     # ONE TO ONE
 
@@ -83,7 +83,7 @@ class Turma(Base):
                           backref=backref('MinhasTurmas', lazy='dynamic'))
     AlunosApoiadores = relationship(
         'AlunoApoiador', secondary=alunoApoiadoXturma, backref=backref('turmasApoiadas', lazy='dynamic'))
-    
+
     def as_dict(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
@@ -121,3 +121,15 @@ class PresencaTot(Base):
     presencatot_id_aluno = Column(Integer, ForeignKey('aluno.id_aluno'), nullable=False)
     presencatot_id_turma = Column(Integer, ForeignKey('turma.id_turma'), nullable=False)
     presenca_total = Column(Interval, nullable=False, default=timedelta(seconds=0))
+
+
+class LinkCadastramento(Base):
+    __tablename__ = 'link'
+    token = Column(String(36), primary_key=True, default=str(uuid.uuid4()))
+    link_id_turma = Column(Integer, ForeignKey('turma.id_turma'),
+            nullable=False)
+    validade = Column(DateTime,
+            nullable=False,default=datetime.now()+timedelta(minutes=3))
+    
+    def as_dict(self):
+        return {c.name:getattr(self,c.name) for c in self.__table__.columns}

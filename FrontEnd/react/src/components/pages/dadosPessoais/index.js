@@ -23,8 +23,6 @@ function DadosPessoais() {
 		}
     }, [])
     
-   
-    //preencher dados da turma com db
 
     const getDadosContent = (dado) => {
 		let content = []

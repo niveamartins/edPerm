@@ -33,10 +33,22 @@ function CadastrarTurma() {
 		}
 
 		try {
-			api.post("/cadastrarturma", data)
+         let resposta
+
+         const token = localStorage.getItem("token")
+         const AuthStr = 'Bearer '.concat(token)
+		 await api.post("/cadastrarturma", data, {headers:{Authorization:AuthStr}}).then(
+          (response)=>{
+            resposta=response.data
+            
+          }
+      )
+         history.push({
+                pathname: '/cadastroTurmaEfetuado',
+                state:{ detail: resposta}
+            })
 
       // alert(`A turma foi cadastrada com sucesso!`)
-      history.push("/cadastroTurmaEfetuado")
       
 		} catch (err) {
 			console.log(err)

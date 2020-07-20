@@ -145,6 +145,7 @@ def listarturma():
 
 
 
+
 @blueprint.route("/marcarpresenca", methods=['POST'])
 @jwt_required
 def atualizarpresenca():
@@ -176,11 +177,10 @@ def cadastraraluno():
 
     return jsonify(Aluno)
 
-
 # Issue 36
 @blueprint.route("/cadastraralunonaturma", methods=['POST'])
 @jwt_required
-def cadastraralunonaturma(): 
+def cadastraralunonaturma():
 
     #Não testado a parte dos Json
     #Perguntar se
@@ -189,7 +189,7 @@ def cadastraralunonaturma():
     userData = get_jwt_identity()
     cadastroData = request.get_json()
     cadastroDataFields = ["cpfAluno", "idTurma"]
-    
+
 
 
 
@@ -242,6 +242,19 @@ def cadastrarhorario():
     
     return jsonify(response)
 
+@blueprint.route("/autocadastro",methods=['POST'])
+@jwt_required
+def autocadastro():
+    cadastroData=request.get_json()
+    cadastroDataFields = ["cpf","tokenTurma"]
+
+    if not all(field in cadastroData for field in cadastroDataFields):
+        return {"Error":"Missing information"}
+
+    cadastraraluno=CadastrarAlunoService().executeAluno(cadastroData)
+    return cadastraraluno
+
+
 #AINDA NÃO TERMINADA
 @blueprint.route("/chamadavalidar", methods=['POST'])
 @jwt_required
@@ -249,7 +262,7 @@ def chamadapesquisar():
     pass
     #if not request.is_json:
     #   return jsonify({"msg": "Missing JSON in request"}), 400
-
+    
 
 ### RELATORIOS ###
 
