@@ -9,14 +9,14 @@
  }
  
  .autocomplete-wrapper input {
-  background-color: #eee;
+  background-color: hsl(0, 0%, 95%);
    padding: 12px 15px;
    font-size: 14px;
    width: 100%;
  }
  
  .autocomplete-wrapper input:focus {
-   border-color:#77c9d4;
+   border-color:hsl(0, 0%, 95%);
    box-shadow: none;
    outline: none;
  }
@@ -28,7 +28,7 @@
    max-height: 280px;
    overflow: hidden;
    overflow-y: auto;
-   background-color: #eee;
+   background-color: hsl(0, 0%, 95%);
    border-top: none;
  }
  
@@ -40,11 +40,11 @@
  }
  
  .autocomplete-wrapper .item.selected-item {
-   background-color: rgba(87, 188, 144, 0.3);
+   background-color: rgb(226, 226, 226);
    color: #000;
  }
  
  .autocomplete-wrapper .item:hover {
-   background-color: rgba(87, 188, 144, 0.3);
+   background-color: rgb(226, 226, 226);
    color: #000;
  }

@@ -40,7 +40,6 @@ html, body {
 }
 
 body {
-  /* font-family: Arial, Helvetica, sans-serif; */
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -186,6 +185,12 @@ footer .links .logo img {
   margin-top: 100px;
 }
 
+/* select usado em castro turmas e usuário */
+.select {
+  width: 100%;
+  padding: 5px 0 5px 0;
+}
+
 .form-container a {
   color: #333;
   font-size: 14px;
@@ -224,7 +229,8 @@ footer .links .logo img {
 }
 
 .form-container input:not([type="submit"]) {
-  background-color: #eee;
+  outline: none;
+  background-color: hsl(0, 0%, 95%);
   border: none;
   padding: 12px 15px;
   margin: 8px 0;

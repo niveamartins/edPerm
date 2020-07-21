@@ -11,6 +11,7 @@ import "./Turma.css"
 
 //colocar com o link da turma
 import LinkIcon from '@material-ui/icons/Link';
+import { capitalize } from "@material-ui/core"
 
 function Turma(props) {
 	const [turma, setTurmas] = useState([])
@@ -54,15 +55,15 @@ function Turma(props) {
 							</tr>
 							<tr className="content">
 								<td className="name">Carga horária total</td>
-								<td className="value">{item.carga_horaria_total}</td>
+								<td className="value">{item.carga_horaria_total}h</td>
 							</tr>
 							<tr className="content">
 								<td className="name">Tolerância</td>
-								<td className="value">{item.tolerancia}</td>
+								<td className="value">{item.tolerancia}%</td>
 							</tr>
 							<tr className="content">
 								<td className="name">Modalidade</td>
-								<td className="value">{item.modalidade}</td>
+								<td className="value">{capitalize(item.modalidade)}</td>
 							</tr>
 							
 						</table>
