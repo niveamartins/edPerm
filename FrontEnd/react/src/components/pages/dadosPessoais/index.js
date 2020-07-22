@@ -8,7 +8,6 @@ import api from "../../../services/api"
 
 const qrcodeimg = require('../../../assets/qr-code-teste.png')
 
-
 function DadosPessoais() {
     const [dados, setDados] = useState([])
 
@@ -70,7 +69,7 @@ function DadosPessoais() {
             <Accessibility />
             <NavBar />
             <main className="main">
-                <div className="card-container">
+                <div className="card-container dados-pessoais">
                     <div className="card">
                         <img src={qrcodeimg}/>
                     </div>

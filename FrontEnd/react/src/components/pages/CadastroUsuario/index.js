@@ -1,7 +1,15 @@
 //página de login
 import React, { useState } from "react"
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom"
 import api from "../../../services/api"
+import { useHistory } from "react-router-dom"
+
+//dados pré estabelecidos CAP
+import { capData, renderCapTitle } from "./capData"
+//autocomplete pra exibir dados cap
+import Autocomplete from "react-autocomplete"
+
+import './cadUsuario.css'
 
 function Inicio() {
 	const [usuario, setUsuario] = useState("")
@@ -15,6 +23,8 @@ function Inicio() {
 	const [funcao, setFuncao] = useState("")
 	const [profissao, setProfissao] = useState("")
 
+	const history = useHistory()
+
 	async function handleCreate(e) {
 		e.preventDefault()
 
@@ -27,15 +37,15 @@ function Inicio() {
 			tipo,
 			cap,
 			funcao,
-			profissao
+			profissao,
 		}
 
 		if (senha == confirm_password) {
 			try {
 				api.post("/cadastrar", data)
 
-
 				alert(`O usuário foi cadastrado com sucesso!`)
+				history.push('/login')
 			} catch (err) {
 				console.log(err)
 				alert("Erro no cadastro, tente novamente")
@@ -47,8 +57,8 @@ function Inicio() {
 
 	const title = {
 		marginTop: "300px",
-    }
-    
+	}
+
 	return (
 		<div className="login-index">
 			<div className="index-header">
@@ -117,7 +127,7 @@ function Inicio() {
 								onChange={(e) => setTelefone(e.target.value)}
 								required
 							/>
-							<input
+							{/* <input
 								type="text"
 								name="cap"
 								class="form-input"
@@ -125,7 +135,27 @@ function Inicio() {
 								value={cap}
 								onChange={(e) => setCap(e.target.value)}
 								required
-							/>
+							/> */}
+							<div className="autocomplete-wrapper">
+								<Autocomplete
+									inputProps={{ placeholder: 'Selecione o Cap', required: true, type: 'select' }}
+									value={cap}
+									items={capData()}
+									getItemValue={(item) => item.nome}
+									shouldItemRender={renderCapTitle}
+									renderMenu={(item) => <div className="dropdown">{item}</div>}
+									renderItem={(item, isHighlighted) => (
+										<div
+											className={`item ${isHighlighted ? "selected-item" : ""}`}
+										>
+											{item.nome}
+										</div>
+									)}
+									onChange={(e) => setCap(e.target.value)}
+									onSelect={(val) => setCap(val)}
+								/>
+							</div>
+
 							<input
 								type="text"
 								name="funcao"

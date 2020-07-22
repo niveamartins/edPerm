@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react"
-import { useHistory } from 'react-router-dom'
+import { useHistory } from "react-router-dom"
 
 import "./cadastroTurma.css"
 import api from "../../../services/api"
@@ -16,9 +16,9 @@ function CadastrarTurma() {
 	const [carga_horaria_total, setCarga] = useState("")
 	const [tolerancia, setTolerancia] = useState("")
 	const [modalidade, setModalidade] = useState("")
-  const [turma_tag, setTag] = useState("")
-  
-  const history = useHistory()
+	const [turma_tag, setTag] = useState("")
+
+	const history = useHistory()
 
 	async function handleCreate(e) {
 		e.preventDefault()
@@ -33,23 +33,21 @@ function CadastrarTurma() {
 		}
 
 		try {
-         let resposta
+			let resposta
 
-         const token = localStorage.getItem("token")
-         const AuthStr = 'Bearer '.concat(token)
-		 await api.post("/cadastrarturma", data, {headers:{Authorization:AuthStr}}).then(
-          (response)=>{
-            resposta=response.data
-            
-          }
-      )
-         history.push({
-                pathname: '/cadastroTurmaEfetuado',
-                state:{ detail: resposta}
-            })
+			const token = localStorage.getItem("token")
+			const AuthStr = "Bearer ".concat(token)
+			await api
+				.post("/cadastrarturma", data, { headers: { Authorization: AuthStr } })
+				.then((response) => {
+					resposta = response.data
+				})
+			history.push({
+				pathname: "/cadastroTurmaEfetuado",
+				state: { detail: resposta },
+			})
 
-      // alert(`A turma foi cadastrada com sucesso!`)
-      
+			// alert(`A turma foi cadastrada com sucesso!`)
 		} catch (err) {
 			console.log(err)
 			alert("Erro no cadastro, tente novamente")
