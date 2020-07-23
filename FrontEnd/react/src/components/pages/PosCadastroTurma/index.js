@@ -13,7 +13,7 @@ function Inicio(props) {
 	function copiarTexto() {
 		const linkTurma = document.getElementById("link-turma")
 
-		//selectiona o texto
+		//seleciona o texto
 		linkTurma.select()
 		linkTurma.setSelectionRange(0, 99999) //para mobile
 
@@ -47,7 +47,7 @@ function Inicio(props) {
 					</div>
 					<p>Utilize o link abaixo para que alunos se inscrevam na turma:</p>
 					<div className="card-concluido__link">
-						<input type="text" id="link-turma" value={link} disabled />
+						<input type="text" id="link-turma" value={link} readOnly/>
 						<div className="tooltip">
 							<button onClick={copiarTexto} onMouseOut={outFunc}>
 								<span class="tooltiptext" id="myTooltip">
