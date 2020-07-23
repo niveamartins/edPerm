@@ -2,6 +2,7 @@ import React, { Fragment, useState } from "react"
 import { useHistory } from "react-router-dom"
 import Select from "react-select"
 
+
 import "./cadastroTurma.css"
 import api from "../../../services/api"
 
