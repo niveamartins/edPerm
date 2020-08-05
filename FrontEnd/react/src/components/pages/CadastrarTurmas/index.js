@@ -1,6 +1,13 @@
 import React, { Fragment, useState } from "react"
 import { useHistory } from "react-router-dom"
-import Select from "react-select"
+
+import { makeStyles, withStyles } from "@material-ui/core/styles"
+import InputLabel from "@material-ui/core/InputLabel"
+import MenuItem from "@material-ui/core/MenuItem"
+import FormControl from "@material-ui/core/FormControl"
+import Select from "@material-ui/core/Select"
+import NativeSelect from "@material-ui/core/NativeSelect"
+import InputBase from "@material-ui/core/InputBase"
 
 import "./cadastroTurma.css"
 import api from "../../../services/api"
@@ -15,8 +22,9 @@ function CadastrarTurma() {
 
 	const [nome_do_curso, setTurma] = useState("")
 	const [carga_horaria_total, setCarga] = useState("")
-	const [tolerancia, setTolerancia] = useState("")
-	const [modalidade, setModalidade] = useState("")
+	// campos iniciais no select (tolerancia e modalidade)
+	const [tolerancia, setTolerancia] = useState("75")
+	const [modalidade, setModalidade] = useState("presencial")
 	const [turma_tag, setTag] = useState("")
 
 	const history = useHistory()
@@ -68,31 +76,49 @@ function CadastrarTurma() {
 		{ value: "distancia", label: "A distância" },
 	]
 
-	//const publicoAlvo = []
-
-	//Select styles
-	const customSelectStyles = {
-		option: (base, state) => ({
-			...base,
-			backgroundColor: state.isSelected ? "hsl(0, 0%, 95%)" : "ccc",
-			color: "000",
-			outline: "none",
-			// This line disable the blue border
-			boxShadow: state.isFocused ? 0 : 0,
-			"&:hover": {
-				border: state.isFocused ? 1 : 1,
+	const BootstrapInput = withStyles((theme) => ({
+		root: {
+			"label + &": {
+				marginTop: theme.spacing(3),
+				marginBottom: "10px"
 			},
-		}),
-	}
-	const theme = (theme) => ({
-		...theme,
-		colors: {
-			...theme.colors,
-			primary25: "#eee",
-			primary: "#eee",
 		},
-		borderRadius: 0,
-	})
+		input: {
+			borderRadius: 4,
+			position: "relative",
+			backgroundColor: "hsl(0, 0%, 95%)",
+			width: "100%",
+			border: "1px solid #ced4da",
+			fontSize: 16,
+			padding: "10px 26px 10px 12px",
+			transition: theme.transitions.create(["border-color", "box-shadow"]),
+			// Use the system font instead of the default Roboto font.
+			fontFamily: [
+				"-apple-system",
+				"BlinkMacSystemFont",
+				'"Segoe UI"',
+				"Roboto",
+				'"Helvetica Neue"',
+				"Arial",
+				"sans-serif",
+				'"Apple Color Emoji"',
+				'"Segoe UI Emoji"',
+				'"Segoe UI Symbol"',
+			].join(","),
+			"&:focus": {
+				borderRadius: 4,
+				borderColor: "#80bdff",
+				boxShadow: "0 0 0 0.2rem rgba(0,123,255,.25)",
+			},
+		},
+	}))(InputBase)
+
+	const useStyles = makeStyles((theme) => ({
+		margin: {
+			margin: theme.spacing(1),
+		},
+	}))
+
 
 	return (
 		<Fragment>
@@ -105,6 +131,7 @@ function CadastrarTurma() {
 							<h1>Cadastre sua turma!</h1>
 							<p>Cadastre aqui sua turma Educação Permanente.</p>
 							<form onSubmit={handleCreate}>
+								<br/><br/>
 								<input
 									name="nome"
 									className="form-input"
@@ -130,30 +157,44 @@ function CadastrarTurma() {
 									onChange={(e) => setTolerancia(e.target.value)}
 									required
 								/> */}
-								<Select
-									styles={customSelectStyles}
-									theme={theme}
-									className="select"
-									placeholder="Tolerância"
-									options={toleranciaOptions}
-									onChange={(value) => setTolerancia(value.value)}
-								/>
-								{/* <input
-									name="modalidade"
-									className="form-input"
-									placeholder="Modalidade"
-									value={modalidade}
-									onChange={(e) => setModalidade(e.target.value)}
-									required
-								/> */}
-								<Select
-									styles={customSelectStyles}
-									theme={theme}
-									className="select"
-									placeholder="Modalidade"
-									options={modalidadeOptions}
-									onChange={(value) => setModalidade(value.value)}
-								/>
+
+								<FormControl>
+									<InputLabel htmlFor="demo-customized-select-native">
+										Tolerância
+									</InputLabel>
+									<NativeSelect
+										id="demo-customized-select-native"
+										value={tolerancia}
+										onChange={(e) => setTolerancia(e.target.value)}
+										input={<BootstrapInput />}
+										required
+									>
+										{toleranciaOptions.map((option) => {
+											return (
+												<option value={option.value}>{option.label}</option>
+											)
+										})}
+									</NativeSelect>
+								</FormControl>
+
+								<FormControl>
+									<InputLabel htmlFor="demo-customized-select-native">
+										Modalidade
+									</InputLabel>
+									<NativeSelect
+										id="demo-customized-select-native"
+										value={modalidade}
+										onChange={(e) => setModalidade(e.target.value)}
+										input={<BootstrapInput />}
+									>
+										{modalidadeOptions.map((option) => {
+											return (
+												<option value={option.value}>{option.label}</option>
+											)
+										})}
+									</NativeSelect>
+								</FormControl>
+
 								<input
 									name="tag"
 									className="form-input"
