@@ -28,8 +28,6 @@ function Inicio() {
 
 	const history = useHistory()
 
-	const history = useHistory()
-
 	async function handleCreate(e) {
 		e.preventDefault()
 
