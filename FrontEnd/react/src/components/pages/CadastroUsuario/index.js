@@ -4,12 +4,15 @@ import { Link } from "react-router-dom"
 import api from "../../../services/api"
 import { useHistory } from "react-router-dom"
 
-//dados pré estabelecidos CAP
-import { capData, renderCapTitle } from "./capData"
-//autocomplete pra exibir dados cap
-import Autocomplete from "react-autocomplete"
+import TextField from "@material-ui/core/TextField"
+import Autocomplete from "@material-ui/lab/Autocomplete"
 
-import './cadUsuario.css'
+// dados pré estabelecidos CAP
+import { capData } from "./data/capData"
+// dados pré estabelecidos Profissão
+import { profissaoCargo, profissaoChefia } from "./data/profissaoData"
+
+import "./cadUsuario.css"
 
 function Inicio() {
 	const [usuario, setUsuario] = useState("")
@@ -20,8 +23,8 @@ function Inicio() {
 	const tipo = "adm"
 	const [confirm_password, setConfPass] = useState("")
 	const [cap, setCap] = useState("")
-	const [funcao, setFuncao] = useState("")
 	const [profissao, setProfissao] = useState("")
+	const [funcao, setFuncao] = useState("")
 
 	const history = useHistory()
 
@@ -45,7 +48,7 @@ function Inicio() {
 				api.post("/cadastrar", data)
 
 				alert(`O usuário foi cadastrado com sucesso!`)
-				history.push('/login')
+				history.push("/login")
 			} catch (err) {
 				console.log(err)
 				alert("Erro no cadastro, tente novamente")
@@ -57,6 +60,10 @@ function Inicio() {
 
 	const title = {
 		marginTop: "300px",
+	}
+
+	const selectStyle = { 
+		//... 
 	}
 
 	return (
@@ -74,7 +81,7 @@ function Inicio() {
 							<input
 								type="text"
 								name="usuario"
-								class="form-input"
+								className="form-input"
 								placeholder="Usuário"
 								value={usuario}
 								onChange={(e) => setUsuario(e.target.value)}
@@ -83,16 +90,19 @@ function Inicio() {
 							<input
 								type="text"
 								name="email"
-								class="form-input"
+								className="form-input"
 								placeholder="Email"
 								value={email}
-								onChange={(e) => setEmail(e.target.value)}
+								onChange={(e) => {
+									setEmail(e.target.value)
+									console.log(email)
+								}}
 								required
 							></input>
 							<input
 								type="password"
 								name="senha"
-								class="form-input"
+								className="form-input"
 								placeholder="Senha"
 								value={senha}
 								onChange={(e) => setSenha(e.target.value)}
@@ -102,7 +112,7 @@ function Inicio() {
 								type="password"
 								name="confirme_senha"
 								id="confirm_password"
-								class="form-input"
+								className="form-input"
 								placeholder="Confirme a Senha"
 								value={confirm_password}
 								onChange={(e) => setConfPass(e.target.value)}
@@ -112,7 +122,7 @@ function Inicio() {
 								type="text"
 								maxLength="11"
 								name="cpf"
-								class="form-input"
+								className="form-input"
 								placeholder="CPF"
 								value={cpf}
 								onChange={(e) => setCpf(e.target.value)}
@@ -121,63 +131,85 @@ function Inicio() {
 							<input
 								type="tel"
 								name="tel"
-								class="form-input"
+								className="form-input"
 								placeholder="Telefone"
 								value={telefone}
 								onChange={(e) => setTelefone(e.target.value)}
 								required
 							/>
-							{/* <input
-								type="text"
-								name="cap"
-								class="form-input"
-								placeholder="CAP"
-								value={cap}
-								onChange={(e) => setCap(e.target.value)}
-								required
-							/> */}
-							<div className="autocomplete-wrapper">
-								<Autocomplete
-									inputProps={{ placeholder: 'Selecione o Cap', required: true, type: 'select' }}
-									value={cap}
-									items={capData()}
-									getItemValue={(item) => item.nome}
-									shouldItemRender={renderCapTitle}
-									renderMenu={(item) => <div className="dropdown">{item}</div>}
-									renderItem={(item, isHighlighted) => (
-										<div
-											className={`item ${isHighlighted ? "selected-item" : ""}`}
-										>
-											{item.nome}
-										</div>
-									)}
-									onChange={(e) => setCap(e.target.value)}
-									onSelect={(val) => setCap(val)}
-								/>
-							</div>
 
-							<input
-								type="text"
-								name="funcao"
-								class="form-input"
-								placeholder="Função"
-								value={funcao}
-								onChange={(e) => setFuncao(e.target.value)}
-								required
+							<Autocomplete
+								inputValue={cap}
+								onInputChange={(_, val) => {
+									setCap(val)
+								}}
+								options={capData}
+								getOptionLabel={(option) => option.nome}
+								getOptionSelected={(option, value) =>
+									option.nome === value.nome
+								}
+								renderInput={(params) => (
+									<TextField
+										{...params}
+										label=""
+										required
+										placeholder="Selecione sua CAP"
+										margin="normal"
+										fullWidth
+										variant="outlined"
+									/>
+								)}
 							/>
-							<input
-								type="text"
-								name="profissao"
-								class="form-input"
-								placeholder="Profissão"
-								value={profissao}
-								onChange={(e) => setProfissao(e.target.value)}
-								required
+
+							<Autocomplete
+								inputValue={profissao}
+								onInputChange={(_, val) => {
+									setProfissao(val)
+								}}
+								options={profissaoCargo}
+								getOptionLabel={(option) => option.label}
+								getOptionSelected={(option, value) =>
+									option.value === value.value
+								}
+								renderInput={(params) => (
+									<TextField
+										{...params}
+										label=""
+										required
+										placeholder="Selecione sua profissão"
+										margin="normal"
+										fullWidth
+										variant="outlined"
+									/>
+								)}
 							/>
-							<input type="submit" class="button" value="cadastrar" />
+
+							<Autocomplete
+								inputValue={funcao}
+								onInputChange={(_, val) => {
+									setFuncao(val)
+								}}
+								options={profissaoChefia}
+								getOptionLabel={(option) => option.label}
+								getOptionSelected={(option, value) =>
+									option.value === value.value
+								}
+								renderInput={(params) => (
+									<TextField
+										{...params}
+										label=""
+										required
+										placeholder="Selecione sua função"
+										margin="normal"
+										fullWidth
+										variant="outlined"
+									/>
+								)}
+							/>
+							<input type="submit" className="button" value="cadastrar" />
 							<Link to="/login">
 								Já possui uma conta?{" "}
-								<span class="form-highlight">Faça login</span>
+								<span className="form-highlight">Faça login</span>
 							</Link>
 						</form>
 					</div>

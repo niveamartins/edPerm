@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Kaushan+Script&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 /* 
 -> Arrumar navegação para mobile para diversos dispositivos
@@ -229,7 +230,6 @@ footer .links .logo img {
 }
 
 .form-container input:not([type="submit"]) {
-  outline: none;
   background-color: hsl(0, 0%, 95%);
   border: none;
   padding: 12px 15px;
