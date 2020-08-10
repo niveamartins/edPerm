@@ -24,6 +24,7 @@ from services.AutheticateUserService import AutheticateUserService
 from services.CadastrarAlunoService import CadastrarAlunoService
 from services.ListTurmaService import ListTurmaService
 from services.CreatePresencaService import CreatePresencaService
+from services.makeValidacaoService import makeValidacaoService
 
 blueprint = Blueprint('endpoints', __name__) 
 CORS(blueprint)
@@ -258,11 +259,19 @@ def autocadastro():
 #AINDA NÃO TERMINADA
 @blueprint.route("/chamadavalidar", methods=['POST'])
 @jwt_required
-def chamadapesquisar():
-    pass
-    #if not request.is_json:
-    #   return jsonify({"msg": "Missing JSON in request"}), 400
+def chamadavalidar():
+    if not request.is_json:
+       return jsonify({"Error": "Missing JSON in request"}), 400
     
+    user = get_jwt_identity()
+    session = get_session()
+    checkCargo = session.query(User).filter_by(Id=user["id"],usuario=user["usuario"]).one().as_dict()
+    if checkCargo["tipo"]=='cursista' or checkCargo["tipo"]=='apoiador':
+        return jsonify({"Error": "Cargo não autorizado"})
+    
+    validacao = makeValidacao().execute(request.get_json())
+
+    return jsonify(validacao)
 
 ### RELATORIOS ###
 

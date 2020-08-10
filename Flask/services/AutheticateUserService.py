@@ -21,7 +21,8 @@ class AutheticateUserService:
             user = userQuery.as_dict()
             user = {
                 "id": user["Id"],
-                "usuario": user["usuario"]
+                "usuario": user["usuario"],
+                "tipo": user["usuario"]
             }
             expires = timedelta(hours=24)
             access_token = create_access_token(identity=user, expires_delta=expires)

@@ -32,9 +32,9 @@ class User(Base):
     telefone = Column(String(9), nullable=False)
     tipo = Column(Enum('adm', 'gestor', 'coordenador',
                        'propositor', 'cursista', 'apoiador'), nullable=False)
-    funcao = Column(String(20),nullable=True)
-    profissao = Column(String(30),nullable=True)
-    UnidadeBasicadeSaude=Column(String(30),nullable=True)
+    funcao = Column(Text,nullable=True)
+    profissao = Column(Text,nullable=True)
+    UnidadeBasicadeSaude=Column(Text,nullable=True)
     CAP=Column(String(4),nullable=True)
 
     # ONE TO ONE
@@ -69,11 +69,11 @@ class Turma(Base):
     id_turma = Column(Integer, primary_key=True)
     id_responsavel = Column(Integer, ForeignKey('user.Id'), nullable=False)
     IsConcluido = Column(Boolean, nullable=False)
-    nome_do_curso = Column(String(30), nullable=False)
+    nome_do_curso = Column(Text, nullable=False)
     carga_horaria_total = Column(Integer, nullable=False)
     tolerancia = Column(Integer, nullable=False)
-    modalidade = Column(String(20), nullable=False)
-    turma_tag = Column(String(20), nullable=True)
+    modalidade = Column(Text, nullable=False)
+    turma_tag = Column(Text, nullable=True)
 
     # ONE TO MANY
     Horarios = relationship('Horario', backref="Turma")
@@ -129,7 +129,7 @@ class LinkCadastramento(Base):
     link_id_turma = Column(Integer, ForeignKey('turma.id_turma'),
             nullable=False)
     validade = Column(DateTime,
-            nullable=False,default=datetime.now()+timedelta(minutes=3))
+            nullable=False,default=datetime.now()+timedelta(weeks=1))
     
     def as_dict(self):
         return {c.name:getattr(self,c.name) for c in self.__table__.columns}

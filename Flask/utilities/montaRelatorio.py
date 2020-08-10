@@ -116,4 +116,13 @@ def frequencia(Aluno):
         'Turma' : []
      }
 
+def frequenciaTurma(Presencatot, Turma):
+    return {
+        'id_turma' : f'{Turma.id_turma}',
+        'nome_do_curso' : f'{Turma.nome_do_curso}', 
+        'id_do_responsavel' : f'{Turma.id_responsavel}',
+        'nomeDoPropositor': f'{Turma.propositor.usuario}',
+        'Carga_Horaria_Total' : f'{Turma.carga_horaria_total}',
+        'PresencaTotal': f'{Presencatot.presenca_total}'
+    }
     

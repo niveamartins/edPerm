@@ -10,7 +10,7 @@ class CreateHorarioService:
         QueryTurma = session.query(Turma).filter_by(id_turma=horarioData['idTurma'],id_responsavel=horarioData["idPropositor"]).first()
         if not QueryTurma:
           return {"Error":"Turma não cadastrada"}
-        
+
         horarioData['hInicio']=datetime.strptime(horarioData['hInicio'], '%H:%M:%S').time()
         horarioData['hTermino']=datetime.strptime(horarioData['hTermino'], '%H:%M:%S').time()
 

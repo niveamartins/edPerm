@@ -6,7 +6,7 @@ import { Accessibility } from '../../accessibility'
 
 import api from "../../../services/api"
 
-const qrcodeimg = require('../../../assets/qr-code-teste.png')
+const QRCode = require('qrcode.react')
 
 
 function DadosPessoais() {
@@ -23,7 +23,28 @@ function DadosPessoais() {
 			alert("Não foi possível encontrar o usuário desejada, tente novamente")
 		}
     }, [])
-    
+ 
+    function createQR(dadosQR){
+        let a = {}
+		for (var key in dadosQR){
+			var attrName = key;
+			if (attrName != "email" && attrName != "cpf") {
+                continue
+			}
+            a[attrName] = dadosQR[attrName]
+		}
+
+		a = JSON.stringify(a)
+		
+		let content = []
+		content.push(
+		
+			<QRCode value={a} renderAs='svg' size='300' />
+		
+		)
+		return content
+
+	}
 
     const getDadosContent = (dado) => {
 		let content = []
@@ -72,7 +93,7 @@ function DadosPessoais() {
             <main className="main">
                 <div className="card-container">
                     <div className="card">
-                        <img src={qrcodeimg}/>
+                        {createQR(dados)}
                     </div>
                     <div className="card">
                         {getDadosContent(dados)}

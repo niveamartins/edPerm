@@ -35,6 +35,13 @@ const relatorios = () => {
 					}} className="link"> 
 						<CardRelatorio title="Contato" />
 					</Link>
+
+					<Link to= {{
+					pathname: "/relatorio",
+					state: "relatoriofrequencia"
+					}} className="link">
+						<CardRelatorio title="Frequência" />
+					</Link>
 				</div>
 			</main>
 			<Footer />
@@ -64,12 +71,7 @@ const relatorios = () => {
 					</a>
 
 
-					<Link to= {{
-					pathname: "/relatorio",
-					state: "relatoriofrequencia"
-					}} className="link">
-						<CardRelatorio title="Frequência" />
-					</Link>
+					
 
 
 					<Link to= {{
