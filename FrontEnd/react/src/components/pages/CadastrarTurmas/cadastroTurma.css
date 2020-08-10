@@ -40,5 +40,10 @@ form {
   }
 
 
+/* material-ui elements */
 
+.MuiFormControl-root {
+    width: 100%;
+}
+  
 

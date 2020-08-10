@@ -8,7 +8,6 @@ import api from "../../../services/api"
 
 const QRCode = require('qrcode.react')
 
-
 function DadosPessoais() {
     const [dados, setDados] = useState([])
 
@@ -91,7 +90,7 @@ function DadosPessoais() {
             <Accessibility />
             <NavBar />
             <main className="main">
-                <div className="card-container">
+                <div className="card-container dados-pessoais">
                     <div className="card">
                         {createQR(dados)}
                     </div>

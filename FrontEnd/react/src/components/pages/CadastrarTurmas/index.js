@@ -1,5 +1,11 @@
 import React, { Fragment, useState } from "react"
-import { useHistory } from 'react-router-dom'
+import { useHistory } from "react-router-dom"
+
+import { makeStyles, withStyles } from "@material-ui/core/styles"
+import InputLabel from "@material-ui/core/InputLabel"
+import FormControl from "@material-ui/core/FormControl"
+import NativeSelect from "@material-ui/core/NativeSelect"
+import InputBase from "@material-ui/core/InputBase"
 
 import "./cadastroTurma.css"
 import api from "../../../services/api"
@@ -14,11 +20,12 @@ function CadastrarTurma() {
 
 	const [nome_do_curso, setTurma] = useState("")
 	const [carga_horaria_total, setCarga] = useState("")
-	const [tolerancia, setTolerancia] = useState("")
-	const [modalidade, setModalidade] = useState("")
-  const [turma_tag, setTag] = useState("")
-  
-  const history = useHistory()
+	// campos iniciais no select (tolerancia e modalidade)
+	const [tolerancia, setTolerancia] = useState("75")
+	const [modalidade, setModalidade] = useState("presencial")
+	const [turma_tag, setTag] = useState("")
+
+	const history = useHistory()
 
 	async function handleCreate(e) {
 		e.preventDefault()
@@ -33,28 +40,83 @@ function CadastrarTurma() {
 		}
 
 		try {
-         let resposta
+			let resposta
 
-         const token = localStorage.getItem("token")
-         const AuthStr = 'Bearer '.concat(token)
-		 await api.post("/cadastrarturma", data, {headers:{Authorization:AuthStr}}).then(
-          (response)=>{
-            resposta=response.data
-            
-          }
-      )
-         history.push({
-                pathname: '/cadastroTurmaEfetuado',
-                state:{ detail: resposta}
-            })
+			const token = localStorage.getItem("token")
+			const AuthStr = "Bearer ".concat(token)
+			await api
+				.post("/cadastrarturma", data, { headers: { Authorization: AuthStr } })
+				.then((response) => {
+					resposta = response.data
+				})
+			history.push({
+				pathname: "/cadastroTurmaEfetuado",
+				state: { detail: resposta },
+			})
 
-      // alert(`A turma foi cadastrada com sucesso!`)
-      
+			// alert(`A turma foi cadastrada com sucesso!`)
 		} catch (err) {
 			console.log(err)
 			alert("Erro no cadastro, tente novamente")
 		}
 	}
+
+	const toleranciaOptions = [
+		{ value: "75", label: "75%" },
+		{ value: "80", label: "80%" },
+		{ value: "90", label: "90%" },
+		{ value: "95", label: "95%" },
+	]
+
+	const modalidadeOptions = [
+		{ value: "presencial", label: "Presencial" },
+		{ value: "semipresencial", label: "Semipresencial" },
+		{ value: "distancia", label: "A distância" },
+	]
+
+	const BootstrapInput = withStyles((theme) => ({
+		root: {
+			"label + &": {
+				marginTop: theme.spacing(3),
+				marginBottom: "10px"
+			},
+		},
+		input: {
+			borderRadius: 4,
+			position: "relative",
+			backgroundColor: "hsl(0, 0%, 95%)",
+			width: "100%",
+			border: "1px solid #ced4da",
+			fontSize: 16,
+			padding: "10px 26px 10px 12px",
+			transition: theme.transitions.create(["border-color", "box-shadow"]),
+			// Use the system font instead of the default Roboto font.
+			fontFamily: [
+				"-apple-system",
+				"BlinkMacSystemFont",
+				'"Segoe UI"',
+				"Roboto",
+				'"Helvetica Neue"',
+				"Arial",
+				"sans-serif",
+				'"Apple Color Emoji"',
+				'"Segoe UI Emoji"',
+				'"Segoe UI Symbol"',
+			].join(","),
+			"&:focus": {
+				borderRadius: 4,
+				borderColor: "#80bdff",
+				boxShadow: "0 0 0 0.2rem rgba(0,123,255,.25)",
+			},
+		},
+	}))(InputBase)
+
+	const useStyles = makeStyles((theme) => ({
+		margin: {
+			margin: theme.spacing(1),
+		},
+	}))
+
 
 	return (
 		<Fragment>
@@ -62,50 +124,78 @@ function CadastrarTurma() {
 			<NavBar />
 			<main className="main">
 				<main className="main-content-forms">
-					<div class="form-page-container">
-						<div class="form-container">
+					<div className="form-page-container">
+						<div className="form-container">
 							<h1>Cadastre sua turma!</h1>
 							<p>Cadastre aqui sua turma Educação Permanente.</p>
 							<form onSubmit={handleCreate}>
+								<br/><br/>
 								<input
 									name="nome"
-									class="form-input"
+									className="form-input"
 									placeholder="Nome do Curso"
 									value={nome_do_curso}
 									onChange={(e) => setTurma(e.target.value)}
 									required
 								/>
-								{/* <div class="form-line"> */}
-								{/* </div> */}
-								{/* <div class="form-line"> */}
 								<input
 									name="carga"
-									class="form-input"
+									className="form-input"
 									placeholder="Carga Horária"
+									maxLength="3"
 									value={carga_horaria_total}
 									onChange={(e) => setCarga(e.target.value)}
 									required
 								/>
-								<input
+								{/* <input
 									name="tolerancia"
-									class="form-input-second"
+									className="form-input-second"
 									placeholder="Tolerância"
 									value={tolerancia}
 									onChange={(e) => setTolerancia(e.target.value)}
 									required
-								/>
-								{/* </div> */}
-								<input
-									name="modalidade"
-									class="form-input"
-									placeholder="Modalidade"
-									value={modalidade}
-									onChange={(e) => setModalidade(e.target.value)}
-									required
-								/>
+								/> */}
+
+								<FormControl>
+									<InputLabel htmlFor="demo-customized-select-native">
+										Tolerância
+									</InputLabel>
+									<NativeSelect
+										id="demo-customized-select-native"
+										value={tolerancia}
+										onChange={(e) => setTolerancia(e.target.value)}
+										input={<BootstrapInput />}
+										required
+									>
+										{toleranciaOptions.map((option) => {
+											return (
+												<option value={option.value}>{option.label}</option>
+											)
+										})}
+									</NativeSelect>
+								</FormControl>
+
+								<FormControl>
+									<InputLabel htmlFor="demo-customized-select-native">
+										Modalidade
+									</InputLabel>
+									<NativeSelect
+										id="demo-customized-select-native"
+										value={modalidade}
+										onChange={(e) => setModalidade(e.target.value)}
+										input={<BootstrapInput />}
+									>
+										{modalidadeOptions.map((option) => {
+											return (
+												<option value={option.value}>{option.label}</option>
+											)
+										})}
+									</NativeSelect>
+								</FormControl>
+
 								<input
 									name="tag"
-									class="form-input"
+									className="form-input"
 									placeholder="Tag"
 									value={turma_tag}
 									onChange={(e) => setTag(e.target.value)}

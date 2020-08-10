@@ -1,0 +1,15 @@
+
+
+/* material-ui elements */
+
+.MuiOutlinedInput-root {
+  padding: 0;
+  height: 40px;
+  background-color: hsl(0, 0%, 95%);
+}
+
+.MuiOutlinedInput-input {
+  margin: -10px!important;
+  padding: 10px!important;
+}
+
