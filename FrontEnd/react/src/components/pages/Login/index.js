@@ -5,6 +5,7 @@ import { Link, useHistory } from "react-router-dom"
 import api from "../../../services/api"
 
 import "./login.css"
+import NavBar from '../../navbar'
 
 import jwt from "jwt-decode"
 
@@ -49,11 +50,9 @@ function Inicio() {
 	//mudar links esqueci a senha e cadastro
 	// <a href="esqueciasenha" class="forgot">Esqueceu a senha?</a>
 	return (
+		<>
+		<NavBar login />
 		<div className="login-index">
-			<div className="index-header">
-				<Link to="/login">Educação Permanente</Link>
-			</div>
-
 			<main className="main-content-forms">
 				<div className="form-page-container login">
 					<div className="form-container">
@@ -88,6 +87,7 @@ function Inicio() {
 				</div>
 			</main>
 		</div>
+		</>
 	)
 }
 

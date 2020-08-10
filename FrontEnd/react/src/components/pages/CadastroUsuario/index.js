@@ -7,6 +7,8 @@ import { useHistory } from "react-router-dom"
 import TextField from "@material-ui/core/TextField"
 import Autocomplete from "@material-ui/lab/Autocomplete"
 
+import NavBar from '../../navbar'
+
 // dados pré estabelecidos CAP
 import { capData } from "./data/capData"
 // dados pré estabelecidos Profissão
@@ -67,13 +69,11 @@ function Inicio() {
 	}
 
 	return (
+		<>
+		<NavBar login/>
 		<div className="login-index">
-			<div className="index-header">
-				<Link to="/login">Educação Permanente</Link>
-			</div>
-
 			<main className="main-content-forms">
-				<div className="form-page-container">
+				<div className="form-page-container cad-user">
 					<div className="form-container">
 						<form onSubmit={handleCreate}>
 							<h1 style={title}>Bem vindo(a)!</h1>
@@ -216,6 +216,7 @@ function Inicio() {
 				</div>
 			</main>
 		</div>
+		</>
 	)
 }
 

@@ -1,17 +1,5 @@
-.form-page-container {
-    height: 500px;
-}
-
-.form-container h1 {
-    margin-top: 1.4em;
-}
-
-.form-container p {
-    padding: 0 15px;
-}
-
-form {
-    width: 100%;
+.form-page-container.cad-turma {
+    height: 600px;
 }
 
 .form-container {
@@ -21,24 +9,23 @@ form {
     justify-content: center;
     width: 100%;
 }
+.form-container h1 {
+    margin-top: 1.4em;
+}
+
+.form-container p {
+    padding: 0 15px;
+}
+
+form {
+    margin-top: -10px;
+    width: 100%;
+}
 
 #cad__class-button {
     margin-bottom: 20px;
-    margin-top: 0;
+    padding: 6px;
 }
-
-.form-page-container {
-    /* enable scroll */
-    overflow-y: scroll;
-    /* Hide scrollbar for IE and Edge */
-    -ms-overflow-style: none;
-  }
-  
-  /* Hide scrollbar */
-  .form-page-container::-webkit-scrollbar {
-    display: none;
-  }
-
 
 /* material-ui elements */
 

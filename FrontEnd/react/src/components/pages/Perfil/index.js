@@ -7,10 +7,14 @@ import Class from "@material-ui/icons/Class"
 import Done from "@material-ui/icons/Done"
 import AccountCircle from "@material-ui/icons/AccountCircle"
 
+// icons
+import Checkmark from '../../../assets/img/IconeCheckmark.png'
+import Lapis from '../../../assets/img/IconeLapis.png'
+import Pessoa from '../../../assets/img/IconePessoa.png'
+import Turmas from '../../../assets/img/IconeTurmas.png'
+
 import api from "../../../services/api"
 import { NavBar } from "../../navbar"
-import { Footer } from "../../footer"
-import { Accessibility } from "../../accessibility"
 
 import "./perfil.css"
 
@@ -57,29 +61,28 @@ function Perfil() {
 
 	return (
 		<Fragment>
-			<Accessibility />
 			<NavBar />
 			<main className="main">
 				<div className="profile__container">
 					<div className="profile__container-info">
-						<h1>Olá, usuário!</h1>
+						<h1 className="bold">Olá, usuário!</h1>
 						<p className="subtitle">
-							Visualize suas informações pessoais nesta página!
+							Visualize suas informações pessoais nesta página.
 						</p>
-						<p className="subtitle-qr">Seu QR Code de acesso</p>
+						<p className="subtitle-qr bold">Seu QR Code de acesso:</p>
 						<div className="card">
 							{createQR(dados)}
 						</div>
 						<div className="profile__container-buttons">
 							<Link to="/editarDados">
-								<button size="large" class="personal-buttons" disabled>
-									<Create id="icons"></Create>
+								<button size="large" class="personal-buttons bold" disabled>
+									<img src={Lapis} alt="Icone editar"></img>
 									<label>Editar Dados</label>
 								</button>
 							</Link>
 							<Link to="/dadosPessoais">
-								<button size="large" class="personal-buttons">
-									<AccountCircle id="icons"></AccountCircle>
+								<button size="large" class="personal-buttons bold">
+								<img src={Pessoa} alt="Icone pessoa"></img>
 									<label>Dados Pessoais</label>
 								</button>
 							</Link>
@@ -87,21 +90,20 @@ function Perfil() {
 					</div>
 					<div className="profile__container-options">
 						<Link to="/turmasinscritas" className="link">
-							<button size="large" class="button" disabled>
-								<Class id="icons"></Class>
+							<button size="large" class="button bold" disabled>
+							<img src={Turmas} alt="Icone turmas"></img>
 								<label>Turmas Inscritas</label>
 							</button>
 						</Link>
 						<Link to="/presencaspessoais" className="link">
-							<button size="large" class="button" disabled>
-								<Done id="icons"></Done>
+							<button size="large" class="button bold" disabled>
+							<img src={Checkmark} alt="Icone checkmarck"></img>
 								<label>Presenças</label>
 							</button>
 						</Link>
 					</div>
 				</div>
 			</main>
-			<Footer />
 		</Fragment>
 	)
 }

@@ -1,24 +1,4 @@
-.accessibility {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--elements-third-color);
-  text-align: center;
-  color: #fff;
-  font-weight: bold;
-  font-size: 1.2em;
-  display: flex;
-  justify-content: center;
-}
-
-svg#accessible-elements {
-  color: #fff;
-  font-size: 1.6em;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-}
-
+/* helper pop up content */
 #help {
   position: absolute;
   z-index: 1000;
@@ -31,7 +11,6 @@ svg#accessible-elements {
 
 #help .help__content {
   margin: 5% 5% 5% 10%;
-  font-family: 'Montserrat', sans-serif;
   display: flex;
   flex-wrap: wrap;
 }
@@ -47,7 +26,8 @@ svg#accessible-elements {
 }
 
 #help .help__content ul li .list__title {
-  color: var(--elements-third-color);
+  color: var(--elements-color);
+  font-family: 'gadugi-bold';
   font-weight: 700;
 }
 

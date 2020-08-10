@@ -12,8 +12,6 @@ import api from "../../../services/api"
 
 // import { Link } from './node_modules/react-router-dom';
 import { NavBar } from "../../navbar"
-import { Footer } from "../../footer"
-import { Accessibility } from "../../accessibility"
 
 function CadastrarTurma() {
 	const responsavel = localStorage.getItem("user_id")
@@ -120,16 +118,14 @@ function CadastrarTurma() {
 
 	return (
 		<Fragment>
-			<Accessibility />
 			<NavBar />
 			<main className="main">
 				<main className="main-content-forms">
-					<div className="form-page-container">
+					<div className="form-page-container cad-turma">
 						<div className="form-container">
-							<h1>Cadastre sua turma!</h1>
-							<p>Cadastre aqui sua turma Educação Permanente.</p>
+							<h1 className="bold">Cadastre sua turma!</h1>
+							<p>Cadastre aqui sua turma de Educação Permanente.</p>
 							<form onSubmit={handleCreate}>
-								<br/><br/>
 								<input
 									name="nome"
 									className="form-input"
@@ -147,14 +143,6 @@ function CadastrarTurma() {
 									onChange={(e) => setCarga(e.target.value)}
 									required
 								/>
-								{/* <input
-									name="tolerancia"
-									className="form-input-second"
-									placeholder="Tolerância"
-									value={tolerancia}
-									onChange={(e) => setTolerancia(e.target.value)}
-									required
-								/> */}
 
 								<FormControl>
 									<InputLabel htmlFor="demo-customized-select-native">
@@ -203,7 +191,7 @@ function CadastrarTurma() {
 								/>
 								<input
 									type="submit"
-									className="button"
+									className="button bold"
 									id="cad__class-button"
 									value="cadastrar Turma"
 								/>
@@ -212,7 +200,6 @@ function CadastrarTurma() {
 					</div>
 				</main>
 			</main>
-			<Footer />
 		</Fragment>
 	)
 }
