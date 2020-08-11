@@ -18,6 +18,7 @@
 }
 
 .card-concluido__header h3 {
+	font-family: 'gadugi-bold';
 	font-size: 2em;
 	margin-bottom: 10px;
 }
@@ -79,7 +80,7 @@
 	box-shadow: 0 2px 3px #ccc;
 	visibility: hidden;
 	width: 200px;
-	background-color: var(--elements-third-color);
+	background-color: var(--details-color);
 	color: #fff;
 	font-weight: bold;
 	font-size: 16px;
@@ -104,7 +105,7 @@
 	margin-left: -5px;
 	border-width: 5px;
 	border-style: solid;
-	border-color: var(--elements-third-color) transparent transparent transparent;
+	border-color: var(--details-color) transparent transparent transparent;
 }
 
 .tooltip:hover .tooltiptext {

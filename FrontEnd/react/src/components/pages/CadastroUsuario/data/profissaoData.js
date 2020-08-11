@@ -59,4 +59,5 @@ export const profissaoChefia = [
       { label: "Subgerente", value: "subgerente" },
       { label: "Subsecretario", value: "subsecretario" },
       { label: "Superintendente", value: "superintendente" },
+      { label: "Nenhum dos Anteriores", value: ""}
 ]

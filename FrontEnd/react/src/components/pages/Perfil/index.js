@@ -65,7 +65,7 @@ function Perfil() {
 			<main className="main">
 				<div className="profile__container">
 					<div className="profile__container-info">
-						<h1 className="bold">Olá, usuário!</h1>
+						<h1 className="bold">Olá, {localStorage.getItem("user_username")}!</h1>
 						<p className="subtitle">
 							Visualize suas informações pessoais nesta página.
 						</p>

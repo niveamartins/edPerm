@@ -4,6 +4,7 @@ import api from '../../../services/api';
 
 // import { Link } from './node_modules/react-router-dom';
 import { NavBar } from '../../navbar'
+import './cadLink.css'
 
 function CadastroLink(props) {
 
@@ -68,7 +69,7 @@ function CadastroLink(props) {
       <NavBar />
       <main className="main">
         <div class="main-content-forms">
-          <div class="form-page-container">
+          <div class="form-page-container cad-link">
             <div class="form-container">
               <form onSubmit={handleCreate}>
                 <h1>Cadastre-se na turma!</h1>

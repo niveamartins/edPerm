@@ -39,7 +39,7 @@ function Inicio(props) {
 			<main className="main">
 				<div className="card-concluido">
 					<div className="card-concluido__header">
-						<h3 bold>Turma cadastrada com sucesso!</h3>
+						<h3>Turma cadastrada com sucesso!</h3>
                   <DoneIcon />
 					</div>
 					<p>Utilize o link abaixo para que alunos se inscrevam na turma:</p>

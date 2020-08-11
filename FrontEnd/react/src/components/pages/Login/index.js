@@ -17,6 +17,7 @@ function Inicio() {
 	localStorage.removeItem("token")
 	localStorage.removeItem("user_id")
 	localStorage.removeItem("user_username")
+	localStorage.removeItem('user.type')
 
 	async function handleCreate(e) {
 		e.preventDefault()
@@ -38,6 +39,10 @@ function Inicio() {
 
 			let user_username = user.identity.usuario
 			localStorage.setItem("user_username", user_username)
+
+			let user_type = user.identity.tipo
+			localStorage.setItem('user_type',user_type)
+
 			history.push("/")
 		} catch (err) {
 			console.log(err)

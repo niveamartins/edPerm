@@ -70,10 +70,10 @@ function DadosPessoais() {
                                 <td className="name">Telefone</td>
                                 <td className="value">{item.telefone}</td>
                             </tr>
-                            <tr className="content">
+                            {/* {<tr className="content">
                                 <td className="name">Tipo</td>
                                 <td className="value">{item.tipo}</td>
-                            </tr>
+                            </tr>} */}
                         </tbody>
                     </table>
 				
