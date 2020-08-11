@@ -1,8 +1,6 @@
 import React, { Fragment } from "react"
 
 import { NavBar } from "../../navbar"
-import { Footer } from "../../footer"
-import { Accessibility } from "../../accessibility"
 
 import "./posCadastroTurma.css"
 import FileCopyIcon from '@material-ui/icons/FileCopy';
@@ -37,12 +35,11 @@ function Inicio(props) {
   let link = window.location.hostname + "/cadlink/"+DadosLink.link_id_turma+'/'+DadosLink.token
 	return (
 		<Fragment>
-			<Accessibility />
 			<NavBar />
 			<main className="main">
 				<div className="card-concluido">
 					<div className="card-concluido__header">
-						<h3>Turma cadastrada com sucesso!</h3>
+						<h3 bold>Turma cadastrada com sucesso!</h3>
                   <DoneIcon />
 					</div>
 					<p>Utilize o link abaixo para que alunos se inscrevam na turma:</p>
@@ -60,7 +57,6 @@ function Inicio(props) {
 					</div>
 				</div>
 			</main>
-			<Footer />
 		</Fragment>
 	)
 }

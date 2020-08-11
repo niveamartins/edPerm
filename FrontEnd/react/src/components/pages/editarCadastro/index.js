@@ -1,8 +1,6 @@
 import React, { Fragment } from "react"
 
 import { NavBar } from "../../navbar"
-import { Footer } from "../../footer"
-import { Accessibility } from "../../accessibility"
 
 function EditarCadastro() {
 	//Integrar cadastro com js
@@ -19,7 +17,6 @@ function EditarCadastro() {
 
 	return (
 		<Fragment>
-			<Accessibility />
 			<NavBar />
 			<main className="main">
 				<main className="main-content-forms">
@@ -62,7 +59,6 @@ function EditarCadastro() {
 					</div>
 				</main>
 			</main>
-			<Footer />
 		</Fragment>
 	)
 }

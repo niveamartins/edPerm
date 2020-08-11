@@ -6,9 +6,6 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import './aulas.css'
 
 import { NavBar } from '../../navbar'
-import { Footer } from '../../footer'
-import { Accessibility } from '../../accessibility'
-
 
 function Aulas() {
 
@@ -16,7 +13,6 @@ function Aulas() {
 
     return (
         <Fragment>
-            <Accessibility />
             <NavBar />
             <main className="main">
                 {/* <Link to="/turma">
@@ -95,7 +91,6 @@ function Aulas() {
                     </div>
                 </div>
             </main>
-            <Footer />
         </Fragment>
 
     )

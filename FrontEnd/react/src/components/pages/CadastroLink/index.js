@@ -4,9 +4,6 @@ import api from '../../../services/api';
 
 // import { Link } from './node_modules/react-router-dom';
 import { NavBar } from '../../navbar'
-import { Footer } from '../../footer'
-import { Accessibility } from '../../accessibility'
-
 
 function CadastroLink(props) {
 
@@ -68,7 +65,6 @@ function CadastroLink(props) {
   
   return (
     <Fragment>
-      <Accessibility />
       <NavBar />
       <main className="main">
         <div class="main-content-forms">
@@ -85,7 +81,6 @@ function CadastroLink(props) {
           </div>
         </div>
       </main>
-      <Footer />
     </Fragment>
   );
 }

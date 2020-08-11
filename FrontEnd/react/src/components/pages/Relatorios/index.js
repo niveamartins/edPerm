@@ -2,8 +2,6 @@ import React, { Fragment } from "react"
 import { Link } from '../../../../node_modules/react-router-dom'
 
 import { NavBar } from "../../navbar"
-import { Footer } from "../../footer"
-import { Accessibility } from "../../accessibility"
 import CardRelatorio from "./CardRelatorio"
 
 // import ArrowBackIcon from '@material-ui/icons/ArrowBack';
@@ -13,7 +11,6 @@ import "./relatorios.css"
 const relatorios = () => {
 	return (
 		<Fragment>
-			<Accessibility />
 			<NavBar />
 			<main>
 				{/* <Link to="/turma">
@@ -44,7 +41,6 @@ const relatorios = () => {
 					</Link>
 				</div>
 			</main>
-			<Footer />
 		</Fragment>
 	)
 }
