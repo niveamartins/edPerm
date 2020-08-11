@@ -56,6 +56,9 @@ class Aluno(Base):
     alunos_id_user = Column(Integer, ForeignKey(
         'user.Id'), nullable=False, unique=True)
 
+    # ONE TO ONE
+    presencatot = relationship('PresencaTot', backref='alunoDono')
+
     # ONE TO MANY
     presencas = relationship('Presenca', backref='alunoDono')
 

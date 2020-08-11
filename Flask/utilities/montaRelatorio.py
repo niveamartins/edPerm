@@ -113,7 +113,7 @@ def frequencia(Aluno):
         'cpf': f'{Aluno.alunoUser.cpf}',
         'id_aluno' : f'{Aluno.id_aluno}',
         'id_user_aluno' : f'{Aluno.alunos_id_user}',
-        'Turma' : []
+        'Turmas' : []
      }
 
 def frequenciaTurma(Presencatot, Turma):

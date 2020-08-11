@@ -307,16 +307,26 @@ def get_relatoriocpfnome():
 @blueprint.route('/relatoriofrequencia', methods=['GET'])
 @jwt_required
 def get_relatoriofrequencia():
-    '''
-    Frequência: frequência computada em dias, horas e minutos com base no horário de check-in do cursista.
-    Ele poderá acompanhar a própria carga-horária com base na tolerância informada pelo propositor da atividade.
-    '''
+    
     session = get_session()
-    data = session.query(Aluno).all()
-    JSON = [frequencia(i) for i in data]
+    TuplaAlunoPresencaTotTurma = session.query(Aluno,PresencaTot,Turma).filter(Aluno.id_aluno == PresencaTot.presencatot_id_aluno, PresencaTot.presencatot_id_turma == Turma.id_turma).all()
+    print(TuplaAlunoPresencaTotTurma)
+    if not TuplaAlunoPresencaTotTurma:
+        return jsonify({"Error":"Ocorreu um erro na base de dados"})
+
+    #TODO: POPULAR O PRESENCATOT
+    Alunos = [frequencia(i) for i in TuplaAlunoPresencaTotTurma[0]]
+    
+    for (aluno, infoAlunos) in zip(TuplaAlunoPresencaTotTurma[0],Alunos):
+        for turma in aluno.MinhasTurmas:
+            for presencatot in TuplaAlunoPresencaTotTurma[1]:
+                if presencatot.presencatot_id_turma == turma.id_turma:
+                    infoAlunos["Turmas"].append(frequenciaTurma(presencatot,turma))
+    
+
 
     session.close()
-    return jsonify()
+    return jsonify(infoAlunos)
 
 # RELATORIO PROFISSAO
 
