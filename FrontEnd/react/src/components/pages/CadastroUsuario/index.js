@@ -95,7 +95,6 @@ function Inicio() {
 									value={email}
 									onChange={(e) => {
 										setEmail(e.target.value)
-										console.log(email)
 									}}
 									required
 								></input>
@@ -131,6 +130,7 @@ function Inicio() {
 								<input
 									type="tel"
 									name="tel"
+									maxLength="9"
 									className="form-input"
 									placeholder="Telefone"
 									value={telefone}
