@@ -110,7 +110,7 @@ function Turma(props) {
 							<label>Aulas</label>
 						</button>
 					</Link>
-					<Link to="/leitor" className="link">
+					<Link to={"/leitor/" + id} className="link">
 						<button className="button bold">
 							<label>Dar Presença</label>
 						</button>

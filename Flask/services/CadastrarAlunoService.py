@@ -19,7 +19,7 @@ class CadastrarAlunoService:
             TuplaUserTurma[1].Alunos.append(aluno)
             session.commit()
             session.close()
-            return {"Sucess":"Aluno cadastrado na turma"}, 200 
+            return {"Success":"Aluno cadastrado na turma"}, 200 
         if TuplaUserTurma[0].Aluno in TuplaUserTurma[1].Alunos:
             return {"Error":"Aluno já cadastrado na turma"}, 502
 
@@ -27,7 +27,7 @@ class CadastrarAlunoService:
         session.commit()
         session.close()
 
-        return {"Sucess":"Aluno cadastrado na turma"}, 200
+        return {"Success":"Aluno cadastrado na turma"}, 200
 
     #cadastroData=["cpf","token"]
     def executeAluno(self, cadastroData):
@@ -44,8 +44,20 @@ class CadastrarAlunoService:
             session.close()
             return {"Error":"Link não existe ou está expirado"}
 
-        TuplaLinkTurmaUser[1].Alunos.append(TuplaLinkTurmaUser[2].Aluno)
+
+        if not(TuplaLinkTurmaUser[2].Aluno):
+            aluno = Aluno(alunoUser=TuplaLinkTurmaUser[2])
+            session.add(aluno)
+            TuplaLinkTurmaUser[1].Alunos.append(aluno)
+            session.commit()
+            session.close()
+            return {"Success":"Aluno cadastrado na turma"}, 200 
+        if TuplaLinkTurmaUser[0].Aluno in TuplaLinkTurmaUser[1].Alunos:
+            return {"Error":"Aluno já cadastrado na turma"}, 502
+
+        alunos = TuplaLinkTurmaUser[1].Alunos
+        alunos.append(TuplaLinkTurmaUser[2].Aluno)
         session.commit()
         session.close()
-        return {"Sucess":"Aluno cadastrado"}
+        return {"Success":"Aluno cadastrado"}
 

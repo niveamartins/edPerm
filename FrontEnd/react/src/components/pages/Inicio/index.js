@@ -6,9 +6,9 @@ import Button from "../../Button"
 import "./Inicio.css"
 
 function Inicio() {
+	let user_type = localStorage.getItem('user_type')
 
-	function getRelatorios(){
-		let user_type = localStorage.getItem('user_type')
+	function getButtonByType(){
 		
 		if (user_type == "cursista" || user_type == "apoiador"){
 			return (
@@ -17,7 +17,7 @@ function Inicio() {
 						link="/opcoesTurmas"
 						title="Turmas"
 						description="Liste Turmas"
-					/>
+						/>
 				</>
 			)
 		} else{
@@ -28,7 +28,8 @@ function Inicio() {
 						title="Turmas"
 						description="Crie, Edite e Liste Turmas"
 					/>
-				
+
+
 				</>
 			)
 		}
@@ -46,16 +47,19 @@ function Inicio() {
 						title="Perfil"
 						description="Acesse seu perfil"
 					/>
-					{getRelatorios()}
+					{getButtonByType()}
 					
+					{ user_type === "adm" &&
+					<Button
+							link="/relatorios"
+							title="Relatórios"
+							description="Visualize os relatórios gerados"
+						/>
+					}
 				</div>
 			</main>
 		</Fragment>
 	)
 }
-/*<Button
-						link="/relatorios"
-						title="Relatórios"
-						description="Visualize os relatórios gerados"
-					/> */
+
 export default Inicio

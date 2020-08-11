@@ -54,7 +54,6 @@ def logar():
         return jsonify({"msg": "Missing senha parameter"}), 400
     authenticateUser = AutheticateUserService()
     response = authenticateUser.execute(usuario, senha)
-    print(response)
     return jsonify(response), 200
 
 
@@ -151,7 +150,7 @@ def listarturma():
 @jwt_required
 def atualizarpresenca():
     presencaData = request.get_json()
-    presencaDataFields = ["emailAluno","idAluno","idTurma"]
+    presencaDataFields = ["emailAluno","idTurma","Horas"]
 
     if not all(field in presencaData for field in presencaDataFields):
         return {"Error":"Bad Request"}
@@ -337,24 +336,18 @@ def get_relatoriocpfnome():
 def get_relatoriofrequencia():
     
     session = get_session()
-    TuplaAlunoPresencaTotTurma = session.query(Aluno,PresencaTot,Turma).filter(Aluno.id_aluno == PresencaTot.presencatot_id_aluno, PresencaTot.presencatot_id_turma == Turma.id_turma).all()
-    print(TuplaAlunoPresencaTotTurma)
-    if not TuplaAlunoPresencaTotTurma:
+    Turmas = session.query(Turma,Aluno).filter(Aluno.id_aluno == PresencaTot.presencatot_id_aluno, PresencaTot.presencatot_id_turma == Turma.id_turma).all()
+    if not Turma:
         return jsonify({"Error":"Ocorreu um erro na base de dados"})
 
-    #TODO: POPULAR O PRESENCATOT
-    Alunos = [frequencia(i) for i in TuplaAlunoPresencaTotTurma[0]]
-    
-    for (aluno, infoAlunos) in zip(TuplaAlunoPresencaTotTurma[0],Alunos):
-        for turma in aluno.MinhasTurmas:
-            for presencatot in TuplaAlunoPresencaTotTurma[1]:
-                if presencatot.presencatot_id_turma == turma.id_turma:
-                    infoAlunos["Turmas"].append(frequenciaTurma(presencatot,turma))
-    
+    response = [frequenciaTurma(i) for i in Turmas]
 
+    for (i,j) in zip(Turmas,response):
+        for z in i.Alunos:
+            j['Alunos'].append(frequencia(z))
 
     session.close()
-    return jsonify(infoAlunos)
+    return jsonify(response)
 
 # RELATORIO PROFISSAO
 

@@ -55,7 +55,7 @@ export default function Routes() {
                 <Route path="/aulas" component= {Aulas} />
                 <Route path="/aula" component={Aula} />
                 <Route path="/presenca" component={Presenca}/>
-                <Route path="/leitor" component= {LerPresenca} />
+                <Route path="/leitor/:id_turma" component= {LerPresenca} />
 
                 <Route path="/relatorios" component={Relatorios}/>
                 <Route path="/relatorio" component={Relatorio}/>

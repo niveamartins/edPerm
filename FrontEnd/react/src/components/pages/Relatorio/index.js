@@ -129,26 +129,55 @@ function Relatorio(props) {
 			)
 
 		case "relatoriofrequencia":
-			const getFrequenciaContent = (frequencia) => {
+			const getAlunoFreqContent = (alunos) => {
 				let content = []
-				for (let idx in frequencia) {
-					const item = frequencia[idx]
+				for (let idx in alunos) {
+					const item = alunos[idx]
 					content.push(
-						<li className="card-relatorio frequencia">
-							<div>
-								<div>
-									<p className="title">{item.Nome}</p>
-									<p className="bold">{item.id_aluno}</p>
-								</div>
-								<p>{item.cpf}</p>
-								<p className="bold">{item.id_user_aluno}</p>
-								<p>
-									{
-										//Um item.Turma é uma lista, tem que percorrer
-									}
-								</p>
-							</div>
-						</li>
+						<tr className="info-alunos">
+							<td>{item.Nome}</td>
+							<td className="cpf">{item.cpf}</td>
+							<td>{item.presenca}</td>
+						</tr>
+					)
+				}
+				return content
+			}
+			const getFrequenciaContent = (turmas) => {
+				let content = []
+				for (let idx in turmas) {
+					const item = turmas[idx]
+					content.push(
+						<table className="card-relatorio cpf">
+							<thead>
+								<tr>
+									<td className="campo">Turma: </td>
+									<td>
+										<strong className="bold">{item.id_turma}</strong>
+										<span className="info">{item.nome_do_curso}</span>
+									</td>
+								</tr>
+								<tr>
+									<td className="campo">Propositor: </td>
+									<td>
+										<strong className="bold">{item.id_do_responsavel}</strong>{" "}
+										<span className="info">{item.nomeDoPropositor}</span>
+									</td>
+								</tr>
+								<tr>
+									<td className="campo">Carga horária total: </td>
+									<td>
+										<strong className="bold">{item.Carga_Horaria_Total}</strong>
+									</td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td className="campo">Alunos: </td>
+								</tr>
+								{getAlunoContent(item.Alunos)}
+							</tbody>
+						</table>
 					)
 
 					// Dentro do push devemos colocar o html da parte de cada um dos cpfs

@@ -108,21 +108,19 @@ def concluintes(Turma):
 
 def frequencia(Aluno):
     return {
-        "tipoDeRelatorio":"frequencia",
-        'Nome': f'{Aluno.alunoUser.usuario}',
+        'usuario': f'{Aluno.alunoUser.usuario}',
         'cpf': f'{Aluno.alunoUser.cpf}',
-        'id_aluno' : f'{Aluno.id_aluno}',
-        'id_user_aluno' : f'{Aluno.alunos_id_user}',
-        'Turmas' : []
+        'presenca': f'{Aluno.presencatot.presenca_total}'
      }
 
-def frequenciaTurma(Presencatot, Turma):
+def frequenciaTurma(Turma):
     return {
+        "tipoDeRelatorio":"frequencia",
         'id_turma' : f'{Turma.id_turma}',
         'nome_do_curso' : f'{Turma.nome_do_curso}', 
         'id_do_responsavel' : f'{Turma.id_responsavel}',
         'nomeDoPropositor': f'{Turma.propositor.usuario}',
         'Carga_Horaria_Total' : f'{Turma.carga_horaria_total}',
-        'PresencaTotal': f'{Presencatot.presenca_total}'
+        'Alunos': []
     }
     

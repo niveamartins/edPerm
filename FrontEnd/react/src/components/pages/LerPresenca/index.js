@@ -1,38 +1,58 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 //npm install --save react-qr-reader
 import QrReader from 'react-qr-reader';
 
+import { NavBar } from "../../navbar"
+import api from "../../../services/api"
+
+import "./lerpresenca.css"
+
+function LerPresenca(props) {
+    const [dadosAluno, setAluno] = useState('')    
+    const [dadoHora, setHora] = useState('')
 
 
-class LerPresenca extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-          delay: 300,
-          result: "No result"
-        };
-        this.handleScan = this.handleScan.bind(this);
-
-      }
-  
-    handleScan = data => {
+    const handleScan = data => {
       if (data) {
-        this.setState({
-          result: data
-        })
+        data = JSON.parse(data)
+        setAluno(data)
         alert('O QR Code foi lido!');
       }
     }
-    handleError = err => {
+    
+    const handleError = err => {
       console.error(err)
     }
 
-    getDadosQR = dadosQR => {
+    const handlePresenca = e => {
+      
 
-      if (dadosQR != "No result") {
-        dadosQR = dadosQR.toString()
-        dadosQR = JSON.parse(dadosQR)
+      let data = {
+        'idTurma': props.match.params.id_turma,
+        'emailAluno': dadosAluno.email,
+        'Horas': dadoHora
+      }
+      
+      try {
+        
+        const token = localStorage.getItem("token")
+        const AuthStr = "Bearer ".concat(token)
+        api
+          .post("/marcarpresenca", data, { headers: { Authorization: AuthStr } })
+          .then((response) => {
+            alert("Presença marcada com sucesso")
+          })
+  
+        // alert(`A turma foi cadastrada com sucesso!`)
+      } catch (err) {
+        console.log(err)
+        alert("Erro na marcação de presença, tente novamente")
+      }
+        
+    }
+
+    function getDadosQR (dadosQR) {
+
 
         let content = []
         content.push(
@@ -51,37 +71,50 @@ class LerPresenca extends Component {
       
       )
       return content
-      }
   
     }
 
-    render() {
-      return ( 
+    return ( 
           <div>
-            <h2>Leitor de QrCode</h2>
+            <NavBar />
+            <br></br>
+
+            <h2 bold>Leitor de QrCode</h2>
+            
+            <br></br>
             
             <div>
               <QrReader
               delay={300}
-              onError={this.handleError}
-              onScan={this.handleScan}
+              onError={handleError}
+              onScan={handleScan}
               facingMode="enviroment"
-              style={{ height:'100%' }}
+              style={{ height:'90%' }}
               />
             </div>
             
             <div>
-              {this.getDadosQR(this.state.result)}
+              {getDadosQR(dadosAluno)}
             </div>
-          
-            <button className="button">Confirmar</button>
-          
-          
 
+      
+            <input
+									name="carga"
+									className="form-input"
+									placeholder="Horas Obtidas"
+                  maxLength="3"
+                  type="number"
+									value={dadoHora}
+									onChange={(e) => setHora(e.target.value)}
+									required
+								/>
+
+            <button onClick={handlePresenca} className="button">Confirmar</button>
+          
+     
           </div>
 
       )
     }
-  }
 
 export default LerPresenca;
