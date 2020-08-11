@@ -255,6 +255,21 @@ def autocadastro():
     cadastraraluno=CadastrarAlunoService().executeAluno(cadastroData)
     return cadastraraluno
 
+@blueprint.route('/getHorarios', methods=['GET'])
+@jwt_required
+def get_horarios():
+    if not request.is_json:
+           return jsonify({"Error": "Missing JSON in request"}), 400
+    
+    session = get_session()
+    turma_id = request.get_json()
+    Horarios = session.query(Horario).filter_by(HorarioIdTurma=turma_id["TurmaID"]).all()
+    if not Horarios:
+        return jsonify({"Error":"Não há nenhum horario cadastrado para esta turma"})
+
+    response = [horario.as_dict() for horario in Horarios]
+    return jsonify(response)
+
 
 #AINDA NÃO TERMINADA
 @blueprint.route("/chamadavalidar", methods=['GET','POST'])
@@ -273,7 +288,7 @@ def chamadavalidar():
         validacao = makeValidacao().execute(request.get_json())
     
         return jsonify(validacao)
-        
+
     elif request.method == 'GET':
         if not request.is_json:
            return jsonify({"Error": "Missing JSON in request"}), 400

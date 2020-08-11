@@ -100,6 +100,8 @@ class Horario(Base):
     HorarioInicio = Column(Time, nullable=False)
     HorarioTermino = Column(Time, nullable=False)
 
+    def as_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
 class AlunoApoiador(Base):
     __tablename__ = 'alunoApoiador'
