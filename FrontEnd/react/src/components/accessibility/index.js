@@ -3,6 +3,8 @@ import HelpOutlineIcon from "@material-ui/icons/HelpOutline"
 
 import "./accessibility.css"
 
+import Help from '../../assets/img/IconHelp.png'
+
 export class Accessibility extends Component {
 	constructor(props) {
 		super(props)
@@ -17,10 +19,10 @@ export class Accessibility extends Component {
 
 	handleClick() {
 		if (!this.state.helpVisible) {
-            //se visível adiciona eventListener
+			//se visível adiciona eventListener
 			document.addEventListener("click", this.handleOutsideClick, false)
 		} else {
-            //se não visível remove eventListener
+			//se não visível remove eventListener
 			document.removeEventListener("click", this.handleOutsideClick, false)
 		}
 
@@ -31,7 +33,7 @@ export class Accessibility extends Component {
 
 	handleOutsideClick(e) {
 		// ignora clicks no popup (this.node === null para corrigir bug ao clicar link nav)
-		if ( this.node === null || this.node.contains(e.target)) {
+		if (this.node === null || this.node.contains(e.target)) {
 			return
 		}
 
@@ -85,7 +87,7 @@ export class Accessibility extends Component {
 				)}
 				<div className="accessibility">
 					<div alt="Ajuda" title="Ajuda" onClick={this.handleClick}>
-						<HelpOutlineIcon id="accessible-elements" />
+						<img src={Help} alt="Ícone Ajuda" className="nav-icons"/>
 					</div>
 				</div>
 			</Fragment>

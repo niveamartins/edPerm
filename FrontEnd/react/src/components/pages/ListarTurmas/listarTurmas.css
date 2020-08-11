@@ -27,7 +27,6 @@
 .link-info {
 	text-decoration: none;
 	color: var(--elements-second-color);
-	font-family: "Montserrat", sans-serif;
 	font-weight: bold;
 	position: absolute;
 	margin-left: 60%;

@@ -4,11 +4,7 @@ import { Link } from 'react-router-dom'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 import { NavBar } from '../../navbar'
-import { Footer } from '../../footer'
-import { Accessibility } from '../../accessibility'
-
 import './presenca.css'
-
 
 function Presenca() {
 
@@ -16,7 +12,6 @@ function Presenca() {
 
     return (
         <Fragment>
-            <Accessibility />
             <NavBar />
             <main className="main">
                 {/* <Link to="/turma">
@@ -89,7 +84,6 @@ function Presenca() {
                 </div>
                 </div>
             </main>
-            <Footer />
         </Fragment>
 
     )

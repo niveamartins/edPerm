@@ -2,6 +2,14 @@ body {
     background-color: #efefef;
 }
 
+.form-page-container.login {
+    height: 450px;
+}
+
+.form-page-container.login p {
+    margin-bottom: 10px;
+}
+
 @media (max-width: 500px) {
     .form-page-container,
     .form-container, .main-content-forms {

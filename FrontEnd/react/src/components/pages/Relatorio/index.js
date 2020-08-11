@@ -1,8 +1,6 @@
 import React, { Fragment, useState, useEffect } from "react"
 
 import { NavBar } from "../../navbar"
-import { Footer } from "../../footer"
-import { Accessibility } from "../../accessibility"
 
 import "./relatorio.css"
 
@@ -58,14 +56,12 @@ function Relatorio(props) {
 
 			return (
 				<Fragment>
-					<Accessibility />
 					<NavBar />
 					<main>
 						<div className="card-container">
 							<ul>{getContatoContent(relatorio)}</ul>
 						</div>
 					</main>
-					<Footer />
 				</Fragment>
 			)
 
@@ -95,14 +91,14 @@ function Relatorio(props) {
 								<tr>
 									<td className="campo">Turma: </td>
 									<td>
-										<strong>{item.id_turma}</strong>{" "}
+										<strong className="bold">{item.id_turma}</strong>
 										<span className="info">{item.nomeDoCurso}</span>
 									</td>
 								</tr>
 								<tr>
 									<td className="campo">Propositor: </td>
 									<td>
-										<strong>{item.idPropositor}</strong>{" "}
+										<strong className="bold">{item.idPropositor}</strong>{" "}
 										<span className="info">{item.propositor}</span>
 									</td>
 								</tr>
@@ -123,14 +119,12 @@ function Relatorio(props) {
 
 			return (
 				<Fragment>
-					<Accessibility />
 					<NavBar />
 					<main>
 						<div className="card-container">
 							<ul>{getCPFContent(relatorio)}</ul>
 						</div>
 					</main>
-					<Footer />
 				</Fragment>
 			)
 
@@ -144,10 +138,10 @@ function Relatorio(props) {
 							<div>
 								<div>
 									<p className="title">{item.Nome}</p>
-									<p>{item.id_aluno}</p>
+									<p className="bold">{item.id_aluno}</p>
 								</div>
 								<p>{item.cpf}</p>
-								<p>{item.id_user_aluno}</p>
+								<p className="bold">{item.id_user_aluno}</p>
 								<p>
 									{
 										//Um item.Turma é uma lista, tem que percorrer
@@ -164,14 +158,12 @@ function Relatorio(props) {
 
 			return (
 				<Fragment>
-					<Accessibility />
 					<NavBar />
 					<main className="main">
 						<div className="container-relatorios">
 							<ul>{getFrequenciaContent(relatorio)}</ul>
 						</div>
 					</main>
-					<Footer />
 				</Fragment>
 			)
 
@@ -189,14 +181,12 @@ function Relatorio(props) {
 
 			return (
 				<Fragment>
-					<Accessibility />
 					<NavBar />
 					<main className="main">
 						<div className="container-relatorios">
 							<ul>{getProfissaoContent(relatorio)}</ul>
 						</div>
 					</main>
-					<Footer />
 				</Fragment>
 			)
 
@@ -214,14 +204,12 @@ function Relatorio(props) {
 
 			return (
 				<Fragment>
-					<Accessibility />
 					<NavBar />
 					<main className="main">
 						<div className="container-relatorios">
 							<ul>{getCAPContent(relatorio)}</ul>
 						</div>
 					</main>
-					<Footer />
 				</Fragment>
 			)
 
@@ -239,14 +227,12 @@ function Relatorio(props) {
 
 			return (
 				<Fragment>
-					<Accessibility />
 					<NavBar />
 					<main className="main">
 						<div className="container-relatorios">
 							<ul>{getSIContent(relatorio)}</ul>
 						</div>
 					</main>
-					<Footer />
 				</Fragment>
 			)
 
@@ -264,14 +250,12 @@ function Relatorio(props) {
 
 			return (
 				<Fragment>
-					<Accessibility />
 					<NavBar />
 					<main className="main">
 						<div className="container-relatorios">
 							<ul>{getUnidadeContent(relatorio)}</ul>
 						</div>
 					</main>
-					<Footer />
 				</Fragment>
 			)
 
@@ -321,14 +305,12 @@ function Relatorio(props) {
 
 			return (
 				<Fragment>
-					<Accessibility />
 					<NavBar />
 					<main>
 						<div className="card-container">
 							<ul>{getConcluintesContent(relatorio)}</ul>
 						</div>
 					</main>
-					<Footer />
 				</Fragment>
 			)
 	}

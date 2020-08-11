@@ -1,13 +1,10 @@
 import React, { Fragment } from 'react'
 
 import { NavBar } from "../../navbar"
-import { Footer } from "../../footer"
-import { Accessibility } from "../../accessibility"
 import Button from "../../Button"
 
 const opcoesTurmas = () => (
    <Fragment>
-			<Accessibility />
 			<NavBar />
 			<main className="main-inicio">
 				<h1>Funções disponíveis para Turmas:</h1>
@@ -32,7 +29,6 @@ const opcoesTurmas = () => (
 					/>
 				</div>
 			</main>
-			<Footer />
 		</Fragment>
 )
 

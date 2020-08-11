@@ -6,8 +6,6 @@ import api from "../../../services/api"
 import "./criarAula.css"
 
 import { NavBar } from "../../navbar"
-import { Footer } from "../../footer"
-import { Accessibility } from "../../accessibility"
 
 const CriarAula = props => {
 
@@ -49,7 +47,6 @@ const CriarAula = props => {
 
 	return (
 		<Fragment>
-			<Accessibility />
 			<NavBar />
 			<main className="main">
 				{/* <Link to="/turma">
@@ -132,7 +129,6 @@ const CriarAula = props => {
 					</div>
 				</div> 
 			</main>
-			<Footer />
 		</Fragment>
 	)
 }

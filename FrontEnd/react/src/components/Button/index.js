@@ -6,8 +6,8 @@ import './button.css'
 const button = (props) => (
       <Link to={props.link}>
          <div className="button__link">
-            <h3 className="button__link-title">{props.title}</h3>
-            <p className="button__link-description">{props.description}</p>
+            <h3 className="button__link-title bold">{props.title}</h3>
+            <p className="button__link-description bold">{props.description}</p>
          </div>
       </Link>
 )

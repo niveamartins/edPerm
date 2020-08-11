@@ -3,8 +3,6 @@ import { Link } from "../../../../node_modules/react-router-dom"
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 import { NavBar } from "../../navbar"
-import { Footer } from "../../footer"
-import { Accessibility } from "../../accessibility"
 
 import "./aula.css"
 
@@ -13,7 +11,6 @@ function Aula() {
 
 	return (
 		<Fragment>
-			<Accessibility />
 			<NavBar />
 			<main className="main">
 				<Link to="/turma">
@@ -88,7 +85,6 @@ function Aula() {
 					</div>
 				</div>
 			</main>
-			<Footer />
 		</Fragment>
 	)
 }

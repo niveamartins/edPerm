@@ -1,8 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react'
 // import AddIcon from '@material-ui/icons/Add';
 import { NavBar } from '../../navbar'
-import { Footer } from '../../footer'
-import { Accessibility } from '../../accessibility'
 
 import api from "../../../services/api"
 
@@ -66,7 +64,6 @@ function DadosPessoais() {
 
     return (
         <Fragment>
-            <Accessibility />
             <NavBar />
             <main className="main">
                 <div className="card-container dados-pessoais">
@@ -79,7 +76,6 @@ function DadosPessoais() {
                 </div>
                 
             </main>
-            <Footer />
         </Fragment>
 
     )
