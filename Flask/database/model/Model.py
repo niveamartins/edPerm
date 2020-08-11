@@ -118,6 +118,10 @@ class Presenca(Base):
     CheckIn = Column(DateTime, nullable=True)
     presencaValidade = Column(Boolean, nullable=True)
 
+    def as_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
+
 class PresencaTot(Base):
     __tablename__ = 'presencatot'
     id_presencatot = Column(Integer, primary_key=True)

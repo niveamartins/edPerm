@@ -7,11 +7,6 @@
 #*.pdb
 #*.sqlite3
 
-### images ###
-*.png
-*.jpeg
-*.jpg
-
 ### Logs ###
 Flask/app.py.backend.log
 

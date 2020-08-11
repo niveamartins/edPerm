@@ -257,21 +257,34 @@ def autocadastro():
 
 
 #AINDA NÃO TERMINADA
-@blueprint.route("/chamadavalidar", methods=['POST'])
+@blueprint.route("/chamadavalidar", methods=['GET','POST'])
 @jwt_required
 def chamadavalidar():
-    if not request.is_json:
-       return jsonify({"Error": "Missing JSON in request"}), 400
+    if request.method == 'POST':
+        if not request.is_json:
+           return jsonify({"Error": "Missing JSON in request"}), 400
+        
+        user = get_jwt_identity()
+        session = get_session()
+        checkCargo = session.query(User).filter_by(Id=user["id"],usuario=user["usuario"]).one().as_dict()
+        if checkCargo["tipo"]=='cursista' or checkCargo["tipo"]=='apoiador':
+            return jsonify({"Error": "Cargo não autorizado"})
+        
+        validacao = makeValidacao().execute(request.get_json())
     
-    user = get_jwt_identity()
-    session = get_session()
-    checkCargo = session.query(User).filter_by(Id=user["id"],usuario=user["usuario"]).one().as_dict()
-    if checkCargo["tipo"]=='cursista' or checkCargo["tipo"]=='apoiador':
-        return jsonify({"Error": "Cargo não autorizado"})
-    
-    validacao = makeValidacao().execute(request.get_json())
+        return jsonify(validacao)
+        
+    elif request.method == 'GET':
+        if not request.is_json:
+           return jsonify({"Error": "Missing JSON in request"}), 400
+        user = get_jwt_identity()
+        session = get_session()
+        dadosTurma = request.get_json()
 
-    return jsonify(validacao)
+        getChamada = session.query(Presenca).filter_by(presencaValidade=0,presenca_id_turma=dadosTurma['idTurma']).all()
+
+        response = [i.as_dict() for i in getChamada]
+        return jsonify(response)    
 
 ### RELATORIOS ###
 
