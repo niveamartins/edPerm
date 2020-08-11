@@ -33,7 +33,7 @@ function Inicio() {
 			})
 
 			let user = jwt(localStorage.getItem("token"))
-
+			console.log( user.identity)
 			let user_id = user.identity.id
 			localStorage.setItem("user_id", user_id)
 
