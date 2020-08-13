@@ -17,6 +17,9 @@ import { profissaoCargo, profissaoChefia } from "./data/profissaoData"
 import { userType } from "./data/userData"
 
 import "./cadUsuario.css"
+import { capitalize } from "@material-ui/core"
+
+String.prototype.capitalize = function() {   return this.charAt(0).toUpperCase() + this.slice(1) }
 
 function Inicio() {
 	const [usuario, setUsuario] = useState("")
@@ -213,7 +216,7 @@ function Inicio() {
 										setTipo(val)
 									}}
 									options={userType}
-									getOptionLabel={(option) => option.label}
+									getOptionLabel={(option) => capitalize(option.label)}
 									getOptionSelected={(option, value) =>
 										option.value === value.value
 									}
