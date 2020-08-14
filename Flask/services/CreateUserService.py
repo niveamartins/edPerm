@@ -16,7 +16,8 @@ class CreateUserService:
             userAlreadyExists = session.query(User).filter(
                 User.usuario == userData['usuario']).first()
 
-            
+            if(userData["usuario"].find(" ") != -1):
+                return "Proibido uso de espaço no usuario", 400
 
             if userAlreadyExists:
                 return "User Already Exists", 400
@@ -28,10 +29,15 @@ class CreateUserService:
             if checarcpf:
                 return "cpf ja em uso", 400
 
+            checaremail = session.query(User).filter(
+                User.email == userData['email']).first()
+
+            if checaremail:
+                return "Email ja em uso", 400
+
+
             userData["senha"] = generate_password_hash(userData["senha"])
 
-            if(userData["usuario"].find(" ") != -1):
-                return "Proibido uso de espaço no usuario", 400
 
             user = User(usuario=userData["usuario"], email=userData["email"], senha=userData["senha"],
                         cpf=userData["cpf"], telefone=userData["telefone"], tipo=userData["tipo"], funcao=userData["funcao"],

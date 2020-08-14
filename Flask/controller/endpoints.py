@@ -16,6 +16,7 @@ from utilities.montaRelatorio import *
 from utilities.loggers import get_logger
 from utilities.DateTimes import tradutor
 from services.CreateUserService import CreateUserService
+from services.DeleteApoiadorService import DeleteApoiadorService
 from services.TransformarEmAdmService import TransformarEmAdmService
 from services.AtualizarUserService import AtualizarUserService
 from services.CreateTurmaService import CreateTurmaService
@@ -257,6 +258,23 @@ def cadastrarapoiador():
     cadastrarApoiador = CreateApoiadorService()
 
     msg = cadastrarApoiador.execute(apoiadorData)
+    return jsonify(msg)
+
+@blueprint.route("/deletarapoiador", methods=['POST'])
+@jwt_required
+def deletarapoiador():
+
+    deleteData = request.get_json()
+    deleteDataFields = ["cpfApoiador", "idTurma"]
+
+
+    if not all(field in deleteData for field in deleteDataFields):
+         return "Missing information", 400
+
+    deleteApoiador = DeleteApoiadorService()
+
+    msg = deleteApoiador.execute(deleteData)
+
     return jsonify(msg)
 
 

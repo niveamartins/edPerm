@@ -16,10 +16,12 @@ class AtualizarUserService:
             user = session.query(User).filter(
                 User.Id == userData['id']).first()
 
-            print(userData['id'])
 
             if not user:
                 return "Usuario nao encontrado", 400
+
+            if(userData["usuario"].find(" ") != -1):
+                return "Proibido uso de espaço no usuario", 400
 
             #Depois deixar bonito
             checarusuario = session.query(User).filter(
@@ -36,8 +38,12 @@ class AtualizarUserService:
                 if (user.cpf != userData['cpf']):
                     return "cpf ja em uso", 400
 
-            if(userData["usuario"].find(" ") != -1):
-                return "Proibido uso de espaço no usuario", 400
+            checaremail = session.query(User).filter(
+                User.email == userData['email']).first()
+
+            if checaremail:
+                if (user.email != userData['email']):
+                    return "Email ja em uso", 400
 
             #atualizações começo
             if not(userData['usuario'] == ""):
