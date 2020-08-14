@@ -16,6 +16,7 @@ from utilities.montaRelatorio import *
 from utilities.loggers import get_logger
 from utilities.DateTimes import tradutor
 from services.CreateUserService import CreateUserService
+from services.AtualizarUserService import AtualizarUserService
 from services.CreateTurmaService import CreateTurmaService
 from services.CreateAlunoService import CreateAlunoService
 from services.CreateApoiadorService import CreateApoiadorService
@@ -89,6 +90,26 @@ def cadastrar():
     user = createUser.execute(userData)
 
     return jsonify(user)
+
+@blueprint.route("/atualizarusuario", methods=['POST'])
+@jwt_required
+def atualizarusuario():
+
+    #Não testado a parte dos Json
+    userDataID = get_jwt_identity()
+    userData = request.get_json()
+    userDataFields = ["usuario", "email", "senha", "cpf", "telefone", "tipo"]
+    
+    if not all(field in userData for field in userDataFields):
+         return "Missing information", 400
+
+    userData['id'] = userDataID['id']
+
+    atualizaruser = AtualizarUserService()
+
+    User = atualizaruser.execute(userData)
+
+    return jsonify(User)
 
 
 #TODO: estruturar como será a segunda parte do cadastramento de informações
