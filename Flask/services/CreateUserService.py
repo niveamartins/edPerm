@@ -15,8 +15,17 @@ class CreateUserService:
             userAlreadyExists = session.query(User).filter(
                 User.usuario == userData['usuario']).first()
 
+            
+
             if userAlreadyExists:
                 return "User Already Exists", 400
+
+            #Depois deixar bonito
+            checarcpf = session.query(User).filter(
+                User.cpf == userData['cpf']).first()
+
+            if checarcpf:
+                return "cpf ja em uso", 400
 
             userData["senha"] = generate_password_hash(userData["senha"])
 
