@@ -72,7 +72,7 @@ function Inicio() {
 	return (
 		<>
 			<NavBar login />
-			<div className="login-index">
+			<main className="main">
 				<main className="main-content-forms">
 					<div className="form-page-container cad-user">
 						<div className="form-container">
@@ -236,13 +236,13 @@ function Inicio() {
 								<input type="submit" className="button" value="cadastrar" />
 								<Link to="/login">
 									Já possui uma conta?{" "}
-									<span className="form-highlight">Faça login</span>
+									<span className="form-highlight cad-user">Faça login</span>
 								</Link>
 							</form>
 						</div>
 					</div>
 				</main>
-			</div>
+			</main>
 		</>
 	)
 }

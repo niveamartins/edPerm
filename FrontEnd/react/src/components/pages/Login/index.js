@@ -57,7 +57,7 @@ function Inicio() {
 	return (
 		<>
 		<NavBar login />
-		<div className="login-index">
+		<main className="main">
 			<main className="main-content-forms">
 				<div className="form-page-container login">
 					<div className="form-container">
@@ -91,7 +91,7 @@ function Inicio() {
 					</div>
 				</div>
 			</main>
-		</div>
+		</main>
 		</>
 	)
 }
