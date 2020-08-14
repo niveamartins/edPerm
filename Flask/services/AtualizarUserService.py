@@ -6,7 +6,8 @@ from database.model.Model import User
 from utilities.loggers import get_logger
 from werkzeug.security import generate_password_hash
 
-#userDataFields = ["usuario", "email", "senha", "cpf", "telefone", "tipo"]
+#userDataFields = ["usuario", "email", "senha", "cpf", "telefone", "tipo", "funcao", "profissao", "UnidadeBasicadeSaude", "CAP"]
+
 class AtualizarUserService:
     def execute(self, userData):
         logger = get_logger(sys.argv[0])
@@ -35,6 +36,9 @@ class AtualizarUserService:
                 if (user.cpf != userData['cpf']):
                     return "cpf ja em uso", 400
 
+            if(userData["usuario"].find(" ") != -1):
+                return "Proibido uso de espaço no usuario", 400
+
             #atualizações começo
             if not(userData['usuario'] == ""):
                 user.usuario = userData['usuario']
@@ -54,6 +58,18 @@ class AtualizarUserService:
 
             if not(userData['tipo'] == ""):
                 user.tipo = userData['tipo']
+
+            if not(userData['funcao'] == ""):
+                user.funcao = userData['funcao']
+
+            if not(userData['profissao'] == ""):
+                user.profissao = userData['profissao']
+
+            if not(userData['UnidadeBasicadeSaude'] == ""):
+                user.UnidadeBasicadeSaude = userData['UnidadeBasicadeSaude']
+
+            if not(userData['CAP'] == ""):
+                user.CAP = userData['CAP']
 
             session.commit()
             #atualizações fim

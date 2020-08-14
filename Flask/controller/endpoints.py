@@ -16,6 +16,7 @@ from utilities.montaRelatorio import *
 from utilities.loggers import get_logger
 from utilities.DateTimes import tradutor
 from services.CreateUserService import CreateUserService
+from services.TransformarEmAdmService import TransformarEmAdmService
 from services.AtualizarUserService import AtualizarUserService
 from services.CreateTurmaService import CreateTurmaService
 from services.CreateAlunoService import CreateAlunoService
@@ -30,6 +31,22 @@ from services.makeValidacaoService import makeValidacaoService
 blueprint = Blueprint('endpoints', __name__) 
 CORS(blueprint)
 logger = get_logger(sys.argv[0])
+
+@blueprint.route("/transformaremadm", methods=['POST'])
+def transformaremadm():
+
+    userData = request.get_json()
+    userDataFields = ["id"]
+
+    if not all(field in userData for field in userDataFields):
+        return "Missing information", 400
+
+    transformarEmAdm = TransformarEmAdmService()
+
+    user = transformarEmAdm.execute(userData)
+
+    return jsonify(user)
+
 
 #AINDA NÃO SERÁ IMPLEMENTADA
 @blueprint.route("/esqueci", methods=['POST'])
@@ -80,7 +97,7 @@ def dados_pessoais():
 def cadastrar():
 
     userData = request.get_json()
-    userDataFields = ["usuario", "email", "senha", "cpf", "telefone", "tipo"]
+    userDataFields = ["usuario", "email", "senha", "cpf", "telefone", "tipo", "funcao", "profissao", "UnidadeBasicadeSaude", "CAP"]
 
     if not all(field in userData for field in userDataFields):
         return "Missing information", 400
@@ -98,7 +115,7 @@ def atualizarusuario():
     #Não testado a parte dos Json
     userDataID = get_jwt_identity()
     userData = request.get_json()
-    userDataFields = ["usuario", "email", "senha", "cpf", "telefone", "tipo"]
+    userDataFields = ["usuario", "email", "senha", "cpf", "telefone", "tipo", "funcao", "profissao", "UnidadeBasicadeSaude", "CAP"]
     
     if not all(field in userData for field in userDataFields):
          return "Missing information", 400

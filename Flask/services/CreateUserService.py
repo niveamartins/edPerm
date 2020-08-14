@@ -6,6 +6,7 @@ from database.model.Model import User
 from utilities.loggers import get_logger
 from werkzeug.security import generate_password_hash
 
+#userDataFields = ["usuario", "email", "senha", "cpf", "telefone", "tipo", "funcao", "profissao", "UnidadeBasicadeSaude", "CAP"]
 
 class CreateUserService:
     def execute(self, userData):
@@ -29,8 +30,12 @@ class CreateUserService:
 
             userData["senha"] = generate_password_hash(userData["senha"])
 
+            if(userData["usuario"].find(" ") != -1):
+                return "Proibido uso de espaço no usuario", 400
+
             user = User(usuario=userData["usuario"], email=userData["email"], senha=userData["senha"],
-                        cpf=userData["cpf"], telefone=userData["telefone"], tipo=userData["tipo"])
+                        cpf=userData["cpf"], telefone=userData["telefone"], tipo=userData["tipo"], funcao=userData["funcao"],
+                        profissao=userData["profissao"], UnidadeBasicadeSaude=userData["UnidadeBasicadeSaude"], CAP=userData["CAP"])
             session.add(user)
             session.commit()
 
