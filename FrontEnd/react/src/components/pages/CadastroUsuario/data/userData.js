@@ -1,8 +1,9 @@
 // user type
 export const userType = [
-   { label: "gestor", value: "gestor" },
-   { label: "coordenador", value: "coordenador" },
-   { label: "propositor", value: "propositor" },
-   { label: "cursista", value: "cursista" },
-   { label: "adm", value: "adm" }
+   { label: "Selecione seu tipo de usuário", value: "" },
+   { label: "Gestor", value: "gestor" },
+   { label: "Coordenador", value: "coordenador" },
+   { label: "Propositor", value: "propositor" },
+   { label: "Cursista", value: "cursista" },
+   { label: "Admin", value: "adm" }
 ]

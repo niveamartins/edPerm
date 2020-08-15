@@ -172,6 +172,7 @@ function CadastrarTurma() {
 										value={modalidade}
 										onChange={(e) => setModalidade(e.target.value)}
 										input={<BootstrapInput />}
+										required
 									>
 										{modalidadeOptions.map((option) => {
 											return (

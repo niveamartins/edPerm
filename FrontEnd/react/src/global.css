@@ -155,7 +155,6 @@ a {
 }
 
 .form-container form h1 {
-  padding-top: 30px;
   font-family: 'gadugi-bold';
   margin: -10px 0;
 }
@@ -182,7 +181,7 @@ a {
   font-size: 14px;
   text-decoration: none;
   /* margin: 15px 0px; */
-  padding-bottom: 40px;
+  padding-bottom: 20px;
 }
 
 .form-container p {

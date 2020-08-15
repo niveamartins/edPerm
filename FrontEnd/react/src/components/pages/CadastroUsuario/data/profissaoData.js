@@ -1,4 +1,5 @@
 export const profissaoCargo = [
+      { label: "Selecione sua profissão", value: "" },
       { label: "Agente Comunitário de Saúde", value: "acs" },
       { label: "Setor Administrativo", value: "administrativo" },
       { label: "Agente de Saúde", value: "agentesaude" },
@@ -47,6 +48,7 @@ export const profissaoCargo = [
    ]
 
 export const profissaoChefia = [
+      { label: "Selecione sua função", value: "" },
       { label: "Assessor", value: "assessor" },
       { label: "Assistente", value: "assistente" },
       { label: "Auxiliar de Chefia", value: "auxiliar de chefia" },
@@ -59,5 +61,5 @@ export const profissaoChefia = [
       { label: "Subgerente", value: "subgerente" },
       { label: "Subsecretario", value: "subsecretario" },
       { label: "Superintendente", value: "superintendente" },
-      { label: "Nenhum dos Anteriores", value: ""}
+      { label: "Nenhum dos Anteriores", value: "nenhuma"}
 ]
