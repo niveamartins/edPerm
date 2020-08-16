@@ -216,7 +216,8 @@ a {
 	display: none;
 }
 
-.form-container input:not([type="submit"]) {
+.form-container input:not([type="submit"]),
+.qr-reader__card input {
 	background-color: hsl(0, 0%, 95%);
 	border: none;
 	padding: 12px 15px;
