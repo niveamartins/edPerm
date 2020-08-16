@@ -20,8 +20,8 @@ class DeleteApoiadorService:
             if not (TuplaUserTurma[0].AlunoApoiador in TuplaUserTurma[1].AlunosApoiadores):
                 return "Usuario não é apoiador da turma", 400
 
-            apoiador = session.query(AlunoApoiador).filter(AlunoApoiador.id_alunoApoiador==TuplaUserTurma[0].AlunoApoiador.id_alunoApoiador).first()    
-            session.delete(apoiador)
+            #apoiador = session.query(alunoApoiadoXturma).first()
+            #session.delete(apoiador)
             session.commit()
 
 

@@ -23,6 +23,8 @@ class ListTurmaAlunoService:
         try:
             session = get_session()
             QueryUsuario = session.query(User).filter(User.usuario == apoiadorData["usuario"]).first()
+            if not QueryUsuario:
+                return {"Error":"Usuario não cadastrado"}, 502
             if not QueryUsuario.Aluno:
                 return {"Error":"Usuario não está inscrito em nenhuma turma"}, 502
             data = session.query(Turma).all()

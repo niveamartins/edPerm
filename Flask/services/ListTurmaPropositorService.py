@@ -23,6 +23,8 @@ class ListTurmaPropositorService:
         try:
             session = get_session()
             QueryUsuario = session.query(User).filter(User.usuario == apoiadorData["usuario"]).first()
+            if not QueryUsuario:
+                return {"Error":"Usuario não cadastrado"}, 502
             turmas = [turma_info(i) for i in QueryUsuario.TurmaProposta]
             session.close()
             return turmas
