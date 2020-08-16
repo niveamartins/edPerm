@@ -88,7 +88,6 @@ function LerPresenca(props) {
 					className="form-input"
 					placeholder="Horas Obtidas"
 					maxLength="3"
-					readOnly
 					type="number"
 					value={dadoHora}
 					onChange={(e) => setHora(e.target.value)}
