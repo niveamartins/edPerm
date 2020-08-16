@@ -21,14 +21,7 @@ class CreateAlunoService:
             QueryTurma = session.query(Turma).filter_by(nome_do_curso=cadastroData['nome_do_curso']).first()
             if (QueryTurma == None):
                 return "Turma não cadastrada", 400
-            
-            QueryComplemento = session.query(UserComplemento).filter_by(id_do_user=QueryUsuario.Id).first()           
-            if (QueryComplemento == None):
-                return "Dados Complementares não preenchidos", 400
-
-            if(QueryUsuario.tipo != 'cursista'):
-                return "Usuario não é um cursista", 400
-
+         
             for alunos in QueryTurma.Alunos:
                 if(alunos.alunos_id_user == QueryUsuario.Id):
                     return "Aluno ja cadastrado na turma"
@@ -38,7 +31,7 @@ class CreateAlunoService:
                 session.commit()
                 return QueryUsuario.Aluno.as_dict()
             else: 
-                aluno = Aluno(alunos_id_user=QueryUsuario.Id, alunos_id_complemento=QueryComplemento.id_complemento)
+                aluno = Aluno(alunos_id_user=QueryUsuario.Id)
                 session.add_all([aluno])
                 session.commit()
                 QueryTurma.Alunos.append(QueryUsuario.Aluno)

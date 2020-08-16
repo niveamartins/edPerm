@@ -26,6 +26,10 @@ from services.CreateHorarioService import CreateHorarioService
 from services.AutheticateUserService import AutheticateUserService
 from services.CadastrarAlunoService import CadastrarAlunoService
 from services.ListTurmaService import ListTurmaService
+from services.ListUserService import ListUserService
+from services.ListTurmaApoiadorService import ListTurmaApoiadorService
+from services.ListTurmaAlunoService import ListTurmaAlunoService
+from services.ListTurmaPropositorService import ListTurmaPropositorService
 from services.CreatePresencaService import CreatePresencaService
 from services.makeValidacaoService import makeValidacaoService
 
@@ -181,8 +185,48 @@ def listarturma():
     return jsonify(turmas)
 
 
+@blueprint.route("/listausuario", methods=['GET'])
+def listarusuarios():
+    ListUser = ListUserService()
+    usuarios = ListUser.execute()
+    return jsonify(usuarios)
 
 
+@blueprint.route("/listaturmaapoiador", methods=['Post'])
+def listarturmaapoiador():
+    apoiadorData = request.get_json()
+    apoiadorDataFields = ["usuario"]
+
+    if not all(field in apoiadorData for field in apoiadorDataFields):
+        return "Missing information", 400
+
+    ListTurma = ListTurmaApoiadorService()
+    Turma = ListTurma.execute(apoiadorData)
+    return jsonify(Turma)
+
+@blueprint.route("/listaturmaaluno", methods=['Post'])
+def listaturmaaluno():
+    alunoData = request.get_json()
+    alunoDataFields = ["usuario"]
+
+    if not all(field in alunoData for field in alunoDataFields):
+        return "Missing information", 400
+
+    ListTurma = ListTurmaAlunoService()
+    Turma = ListTurma.execute(alunoData)
+    return jsonify(Turma)
+
+@blueprint.route("/listaturmapropositor", methods=['Post'])
+def listaturmapropositor():
+    propositorData = request.get_json()
+    propositorDataFields = ["usuario"]
+
+    if not all(field in propositorData for field in propositorDataFields):
+        return "Missing information", 400
+
+    ListTurma = ListTurmaPropositorService()
+    Turma = ListTurma.execute(propositorData)
+    return jsonify(Turma)
 
 
 @blueprint.route("/marcarpresenca", methods=['POST'])
