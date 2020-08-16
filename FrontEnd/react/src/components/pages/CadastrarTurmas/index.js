@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from "react"
 import { useHistory } from "react-router-dom"
+import { Redirect } from 'react-router-dom'
 
 import { makeStyles, withStyles } from "@material-ui/core/styles"
 import InputLabel from "@material-ui/core/InputLabel"
@@ -15,6 +16,10 @@ import { NavBar } from "../../navbar"
 
 function CadastrarTurma() {
 	const responsavel = localStorage.getItem("user_id")
+	const user_type = localStorage.getItem("user_type")
+
+	let redirectIfNotAuth = null
+	if (user_type == "cursista" || user_type == "apoiador") redirectIfNotAuth = <Redirect to="/" />
 
 	const [nome_do_curso, setTurma] = useState("")
 	const [carga_horaria_total, setCarga] = useState("")
@@ -118,6 +123,7 @@ function CadastrarTurma() {
 
 	return (
 		<Fragment>
+			{redirectIfNotAuth}
 			<NavBar />
 			<main className="main">
 				<main className="main-content-forms">

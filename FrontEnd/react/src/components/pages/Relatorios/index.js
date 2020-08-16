@@ -1,5 +1,6 @@
 import React, { Fragment } from "react"
 import { Link } from '../../../../node_modules/react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 import { NavBar } from "../../navbar"
 import CardRelatorio from "./CardRelatorio"
@@ -9,8 +10,14 @@ import CardRelatorio from "./CardRelatorio"
 import "./relatorios.css"
 
 const relatorios = () => {
+
+	const user_type = localStorage.getItem("user_type")
+   let redirectIfNotAuth = null
+   if (user_type !== "adm") redirectIfNotAuth = <Redirect to="/" />
+
 	return (
 		<Fragment>
+			{redirectIfNotAuth}
 			<NavBar />
 			<main>
 				{/* <Link to="/turma">
@@ -24,7 +31,6 @@ const relatorios = () => {
 					}} className="link"> 
 						<CardRelatorio title="CPF/Nome" />
 					</Link>
-
 					
 					<Link to= {{
 					pathname: "/relatorio",

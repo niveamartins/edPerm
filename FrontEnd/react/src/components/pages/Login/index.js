@@ -82,10 +82,10 @@ function Inicio() {
 								onChange={(e) => setSenha(e.target.value)}
 								required
 							/>
-							<input type="submit" className="button" value="Login" />.{" "}
+							<input type="submit" className="button" value="Login" />
 							<Link to="cadusuario" className="signup">
-								Não possui conta?{" "}
-								<span className="form-highlight">Se cadastre</span>
+								Não possui conta?
+								<span className="form-highlight"> Cadastre-se!</span>
 							</Link>
 						</form>
 					</div>
