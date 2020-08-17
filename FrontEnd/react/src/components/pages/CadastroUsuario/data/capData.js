@@ -1,5 +1,6 @@
 export const capData = [
 	{ label: "Selecione sua Unidade", value: "" },
+	{ label: "Nível Central", cap: "central" },
 	{ label: "CF Dona Zica", cap: 1.0 },
 	{ label: "CF Estácio de Sá", cap: 1.0 },
 	{ label: "CF Estivadores", cap: 1.0 },
@@ -278,4 +279,5 @@ export const caps = [
 	{ label: "CAP 5.1", value: 5.1 },
 	{ label: "CAP 5.2", value: 5.2 },
 	{ label: "CAP 5.3", value: 5.3 },
+	{ label: "Nível central", value: "central" },
 ]
