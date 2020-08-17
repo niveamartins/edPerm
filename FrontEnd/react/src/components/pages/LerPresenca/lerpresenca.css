@@ -1,17 +1,18 @@
 .qr-reader {
-    width: 100%;
+    width: 100vw;
     margin-bottom: 3em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .qr-reader__title {
     font-family: "gadugi-bold";
-    text-align: center;
     font-size: 1.7em;
 }
 
 .qr-reader__element {
     width: 650px;
-    margin: auto;
 }
 
 @media (max-width: 700px)  {
@@ -27,7 +28,6 @@
 
 .card.qr-reader {
     width: 400px;
-    margin: auto;
     margin-top: 30px;
 }
 
@@ -49,16 +49,19 @@
 
     width: 400px;
     padding: 20px;
-    margin: auto;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 
 @media (max-width: 450px)  {
     .qr-reader__element {
-        width: 300px;
+        width: 90%;
     }
     .card.qr-reader {
+        width: 90%;
+    }
+
+    .qr-reader__card {
         width: 90%;
     }
 }
