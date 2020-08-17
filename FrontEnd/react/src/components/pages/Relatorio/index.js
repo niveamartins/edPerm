@@ -11,6 +11,8 @@ function Relatorio(props) {
 
 	const url = props.location.state
 
+	let oddOrEven = null
+
 	useEffect(() => {
 		try {
 			const token = localStorage.getItem("token")
@@ -28,11 +30,16 @@ function Relatorio(props) {
 			const getContatoContent = (contato) => {
 				let content = []
 				console.log(relatorio)
+
+				// par ou ímpar pra adicionar estilo no css ao último elemento
+				const elementsQtDefiner = relatorio.length % 2 ? 'odd' : 'even'
+				oddOrEven = elementsQtDefiner
+
 				for (let idx in contato) {
 					const item = contato[idx]
 					console.log(item)
 					content.push(
-						<table className="card-relatorio contato">
+						<table className={`${oddOrEven}-elements`}>
 							<thead>
 								<tr>
 									<td className="topo__contato">
@@ -42,8 +49,8 @@ function Relatorio(props) {
 								</tr>
 							</thead>
 							<tbody>
-								<tr>{item.email}</tr>
-								<tr>{item.telefone}</tr>
+								<tr>Email: <span className="value">{item.email}</span></tr>
+								<tr>Telefone: <span className="value">{item.telefone}</span></tr>
 							</tbody>
 						</table>
 					)
@@ -59,7 +66,9 @@ function Relatorio(props) {
 					<NavBar />
 					<main>
 						<div className="card-container">
-							<ul>{getContatoContent(relatorio)}</ul>
+						<div className="card-relatorio">
+							<ul>{getContatoContent(relatorio)}</ul>							
+						</div>
 						</div>
 					</main>
 				</Fragment>
