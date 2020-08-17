@@ -36,7 +36,7 @@ function Turma(props) {
 				<div className="card-container">
 					<div className="card">
 						<table className="card-list">
-							<tr className="title bold">
+							<tr className="title">
 								<td>{item.nome_do_curso}</td>
 							</tr>
 							<tr className="tutor">
@@ -53,15 +53,15 @@ function Turma(props) {
 							</tr>
 							<tr className="content">
 								<td className="name">Carga horária total</td>
-								<td className="value bold">{item.carga_horaria_total}h</td>
+								<td className="value">{item.carga_horaria_total}h</td>
 							</tr>
 							<tr className="content">
 								<td className="name">Tolerância</td>
-								<td className="value bold">{item.tolerancia}%</td>
+								<td className="value">{item.tolerancia}%</td>
 							</tr>
 							<tr className="content">
 								<td className="name">Modalidade</td>
-								<td className="value bold">{capitalize(item.modalidade)}</td>
+								<td className="value">{capitalize(item.modalidade)}</td>
 							</tr>
 						</table>
 					</div>

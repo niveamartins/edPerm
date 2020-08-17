@@ -5,7 +5,7 @@ import { Link, useHistory } from "react-router-dom"
 import api from "../../../services/api"
 
 import "./login.css"
-import NavBar from '../../navbar'
+import NavBar from "../../navbar"
 
 import jwt from "jwt-decode"
 
@@ -17,7 +17,7 @@ function Inicio() {
 	localStorage.removeItem("token")
 	localStorage.removeItem("user_id")
 	localStorage.removeItem("user_username")
-	localStorage.removeItem('user.type')
+	localStorage.removeItem("user.type")
 
 	async function handleCreate(e) {
 		e.preventDefault()
@@ -33,7 +33,7 @@ function Inicio() {
 			})
 
 			let user = jwt(localStorage.getItem("token"))
-			console.log( user.identity)
+			console.log(user.identity)
 			let user_id = user.identity.id
 			localStorage.setItem("user_id", user_id)
 
@@ -41,7 +41,7 @@ function Inicio() {
 			localStorage.setItem("user_username", user_username)
 
 			let user_type = user.identity.tipo
-			localStorage.setItem('user_type',user_type)
+			localStorage.setItem("user_type", user_type)
 
 			history.push("/")
 		} catch (err) {
@@ -56,42 +56,44 @@ function Inicio() {
 	// <a href="esqueciasenha" class="forgot">Esqueceu a senha?</a>
 	return (
 		<>
-		<NavBar login />
-		<main className="main">
-			<main className="main-content-forms">
-				<div className="form-page-container login">
-					<div className="form-container">
-						<form onSubmit={handleCreate}>
-							<h1>Olá!</h1>
-							<p>Realize login para ter acesso a funcionalidades exclusivas.</p>
-							<input
-								type="text"
-								name="usuario"
-								className="form-input"
-								placeholder="Usuário"
-								value={usuario}
-								onChange={(e) => setUsuario(e.target.value)}
-								required
-							/>
-							<input
-								type="password"
-								name="senha"
-								className="form-input"
-								placeholder="Senha"
-								value={senha}
-								onChange={(e) => setSenha(e.target.value)}
-								required
-							/>
-							<input type="submit" className="button" value="Login" />
-							<Link to="cadusuario" className="signup">
-								Não possui conta?
-								<span className="form-highlight"> Cadastre-se!</span>
-							</Link>
-						</form>
+			<NavBar login />
+			<main className="main">
+				<main className="main-content-forms">
+					<div className="form-page-container login">
+						<div className="form-container">
+							<form onSubmit={handleCreate}>
+								<h1>Olá!</h1>
+								<p>
+									Realize login para ter acesso a funcionalidades exclusivas.
+								</p>
+								<input
+									type="text"
+									name="usuario"
+									className="form-input"
+									placeholder="Usuário"
+									value={usuario}
+									onChange={(e) => setUsuario(e.target.value)}
+									required
+								/>
+								<input
+									type="password"
+									name="senha"
+									className="form-input"
+									placeholder="Senha"
+									value={senha}
+									onChange={(e) => setSenha(e.target.value)}
+									required
+								/>
+								<input type="submit" className="button" value="Login" />
+								<Link to="cadusuario" className="signup">
+									Não possui conta?
+									<span className="form-highlight"> Cadastre-se!</span>
+								</Link>
+							</form>
+						</div>
 					</div>
-				</div>
+				</main>
 			</main>
-		</main>
 		</>
 	)
 }

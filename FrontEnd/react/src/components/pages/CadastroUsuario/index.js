@@ -36,6 +36,12 @@ function Inicio() {
 	const [profissao, setProfissao] = useState("")
 	const [funcao, setFuncao] = useState("")
 
+	const [erroNome, setErroNome] = useState("")
+	const [erroEmail, setErroEmail] = useState("")
+	const [erroSenha, setErroSenha] = useState("")
+	const [erroCpf, setErroCpf] = useState("")
+	const [erroTelefone, setErroTelefone] = useState("")
+
 	const history = useHistory()
 
 	async function handleCreate(e) {
@@ -134,29 +140,57 @@ function Inicio() {
 									className="form-input"
 									placeholder="Usuário"
 									value={usuario}
-									onChange={(e) => setUsuario(e.target.value)}
 									required
+									onChange={(e) => {
+										setUsuario(e.target.value)
+										const regex = new RegExp("^[a-zA-Z0-9]+$")
+										let regexTestNome = !regex.test(e.target.value)
+										setErroNome(regexTestNome)
+									}}
 								/>
+
+								{erroNome && (
+									<p className="error">
+										Digite um valor alfanumérico sem espaços
+									</p>
+								)}
+
 								<input
 									type="text"
 									name="email"
 									className="form-input"
 									placeholder="Email"
 									value={email}
+									required
 									onChange={(e) => {
 										setEmail(e.target.value)
+										const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
+										let regexTestEmail = !regex.test(e.target.value)
+										setErroEmail(regexTestEmail)
 									}}
-									required
 								></input>
+
+								{erroEmail && <p className="error">Digite um e-mail válido</p>}
+
 								<input
 									type="password"
 									name="senha"
 									className="form-input"
 									placeholder="Senha"
 									value={senha}
-									onChange={(e) => setSenha(e.target.value)}
 									required
+									onChange={(e) => {
+										setSenha(e.target.value)
+										const regex = new RegExp("^.{4,15}$")
+										let regexTestSenha = !regex.test(e.target.value)
+										setErroSenha(regexTestSenha)
+									}}
 								/>
+
+								{erroSenha && (
+									<p className="error">Senha deve ter de 4 a 15 caracteres</p>
+								)}
+
 								<input
 									type="password"
 									name="confirme_senha"
@@ -174,9 +208,21 @@ function Inicio() {
 									className="form-input"
 									placeholder="CPF"
 									value={cpf}
-									onChange={(e) => setCpf(e.target.value)}
 									required
+									onChange={(e) => {
+										setCpf(e.target.value)
+										const regex = new RegExp("^([0-9]{11})$")
+										let regexTestCpf = !regex.test(e.target.value)
+										setErroCpf(regexTestCpf)
+									}}
 								/>
+
+								{erroCpf && (
+									<p className="error">
+										Digite um valor numérico de 11 dígitos para o CPF
+									</p>
+								)}
+
 								<input
 									type="tel"
 									name="tel"
@@ -184,9 +230,20 @@ function Inicio() {
 									className="form-input"
 									placeholder="Telefone"
 									value={telefone}
-									onChange={(e) => setTelefone(e.target.value)}
 									required
+									onChange={(e) => {
+										setTelefone(e.target.value)
+										const regex = new RegExp("^([0-9]{8,9})$")
+										let regexTestTelefone = !regex.test(e.target.value)
+										setErroTelefone(regexTestTelefone)
+									}}
 								/>
+
+								{erroTelefone && (
+									<p className="error">
+										Digite um valor numérico de 8 a 9 dígitos
+									</p>
+								)}
 
 								<FormControl>
 									<InputLabel htmlFor="demo-customized-select-native">

@@ -11,6 +11,14 @@
   margin-bottom: 20px;
 }
 
+/* input validation */
+p.error {
+  color: red;
+  margin: -5px 0!important;
+  font-size: 13px!important;
+  float: left;
+}
+
 /* material-ui elements */
 
 .MuiOutlinedInput-root {

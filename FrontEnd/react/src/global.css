@@ -413,6 +413,7 @@ button:disabled label {
 .card-list .value,
 .presence-list .value {
   color: var(--elements-color);
+  font-family: "gadugi-bold";
   font-weight: 700;
 }
 

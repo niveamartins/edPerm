@@ -66,7 +66,7 @@ function ListarTurmas() {
 						<tbody>
 							<tr className="content">
 								<td className="name">Carga horária total</td>
-								<td className="value bold">{item.Carga_Horaria_Total}</td>
+								<td className="value">{item.Carga_Horaria_Total}h</td>
 							</tr>
 						</tbody>
 					</table>

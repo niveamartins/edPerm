@@ -11,6 +11,7 @@
 
 .card-list .title {
 	align-self: center;
+	font-family: "gadugi-bold";
 }
 
 .card-list tr.content {
@@ -29,7 +30,7 @@
 	color: var(--elements-second-color);
 	font-weight: bold;
 	position: absolute;
-	margin-left: 60%;
+	margin-left: 320px;
 	margin-top: -10px;
 
 	display: flex;
@@ -39,10 +40,6 @@
 
 .link-info:hover {
 	transform: translateY(-4px);
-}
-
-.teste {
-	display: inline-block;
 }
 
 @media (max-width: 560px) {
