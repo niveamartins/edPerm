@@ -53,7 +53,6 @@ export class Accessibility extends Component {
 					>
 						<div className="help__content">
 							<ul>
-								<li>(Mudar quando for a versão final)</li>
 								<li>
 									Acompanhe as turmas disponíveis na plataforma Educação
 									Permanente!
@@ -61,7 +60,7 @@ export class Accessibility extends Component {
 								<li>
 									<span className="list__title">Gestores e Coordenadores:</span>
 									<br />
-									Abram novas turmas.
+									Abram novas turmas!
 								</li>
 								<li>
 									<span className="list__title">Propositores:</span>
@@ -72,14 +71,12 @@ export class Accessibility extends Component {
 								<li>
 									<span className="list__title">Alunos:</span>
 									<br />
-									Se inscrevam em turmas e recebam um QRCode por email para
-									confirmar presença nos dias das aulas. E também se tornem
-									instrutores de turmas já cursadas!
+									Se inscrevam em turmas, confirmem presença com seus QR Codes personalizados e se tornem apoiadores para confirmar presenças!
 								</li>
 								<li>
-									<span className="list__title">Instrutores:</span>
+									<span className="list__title">Apoiadores:</span>
 									<br />
-									Confirmem a presença de alunos em aulas.
+									Confirmem a presença de alunos em aulas!
 								</li>
 							</ul>
 						</div>

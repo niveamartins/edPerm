@@ -2,7 +2,7 @@ import React, { Fragment, useState } from "react"
 import { useHistory } from "react-router-dom"
 import { Redirect } from 'react-router-dom'
 
-import { makeStyles, withStyles } from "@material-ui/core/styles"
+import {  withStyles } from "@material-ui/core/styles"
 import InputLabel from "@material-ui/core/InputLabel"
 import FormControl from "@material-ui/core/FormControl"
 import NativeSelect from "@material-ui/core/NativeSelect"
@@ -113,13 +113,6 @@ function CadastrarTurma() {
 			},
 		},
 	}))(InputBase)
-
-	const useStyles = makeStyles((theme) => ({
-		margin: {
-			margin: theme.spacing(1),
-		},
-	}))
-
 
 	return (
 		<Fragment>
