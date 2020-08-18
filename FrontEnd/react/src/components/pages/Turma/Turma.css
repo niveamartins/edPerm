@@ -24,8 +24,13 @@
   width: 350px;
 }
 
-@media(max-width: 1024px) {
+@media (max-width: 820px) {
+  .nav-info-turmas {
+    margin-top: -200px;
+  }
+}
 
+@media(max-width: 1024px) {
   .class-details {
     display: flex;
     flex-direction: column;

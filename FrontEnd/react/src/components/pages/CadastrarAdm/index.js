@@ -110,8 +110,9 @@ function CadastrarAdm(props) {
 							<form onSubmit={handleCreate}>
 								<h1>Cadastre o Admistrador!</h1>
 								<p>
-									Selecione abaixo o usuário a ser promovido para administrador!
+									Selecione abaixo o usuário a ser promovido para administrador
 								</p>
+								<br/>
 								<FormControl>
 									<InputLabel htmlFor="demo-customized-select-native">
 										Usuário

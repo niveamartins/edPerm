@@ -8,21 +8,31 @@ import { NavBar } from "../../navbar"
 import "../ListarTurmas/listarTurmas.css"
 
 function ListarTurmas() {
-   const [turmasAluno, setTurmasAluno] = useState([])
+	const [turmasAluno, setTurmasAluno] = useState([])
 
-   // aviso inicial para quando ainda não tiver turmas
-   let empty = null
-   if (turmasAluno.length === 0) empty = <p className="empty">Não há turmas</p>
+	// aviso inicial para quando ainda não tiver turmas
+	let empty = null
+	if (turmasAluno.length === 0) empty = <p className="empty">Não há turmas</p>
 
-   const usuario = localStorage.getItem("user_username")
+	const usuario = localStorage.getItem("user_username")
+
+	const data = {
+		usuario,
+	}
 
 	useEffect(() => {
 		try {
 			const token = localStorage.getItem("token")
-         const AuthStr = 'Bearer '.concat(token); 
-			api.post("listaturmaaluno", usuario, { headers: { Authorization: AuthStr }}).then((response) => {
-				setTurmasAluno(response.data)
-			})
+			const AuthStr = "Bearer ".concat(token)
+			api
+				.post("listaturmaaluno", data, { headers: { Authorization: AuthStr } })
+				.then((response) => {
+					if (response.data[0].Error && response.data[1] == "502") {
+						return
+					} else {
+						setTurmasAluno(response.data)
+					}
+				})
 		} catch (err) {
 			alert("Não foi possível encontrar as turmas, tente novamente")
 		}
@@ -88,9 +98,9 @@ function ListarTurmas() {
 			<NavBar />
 			<main>
 				<div className="card-container">
-               {empty}
-               {getTurmasContent(turmasAluno)}
-            </div>
+					{empty}
+					{getTurmasContent(turmasAluno)}
+				</div>
 			</main>
 		</Fragment>
 	)

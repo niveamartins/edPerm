@@ -14,14 +14,21 @@ function ListarTurmas() {
    let empty = null
    if (turmasApoiador.length === 0) empty = <p className="empty">Não há turmas</p>
 
-   const usuario = localStorage.getItem("user_username")
+	const usuario = localStorage.getItem("user_username")
+	
+	const data = {
+		usuario
+	}
 
 	useEffect(() => {
 		try {
 			const token = localStorage.getItem("token")
          const AuthStr = 'Bearer '.concat(token); 
-			api.post("listaturmaapoiador", usuario, { headers: { Authorization: AuthStr }}).then((response) => {
-				setTurmasApoiador(response.data)
+			api.post("listaturmaapoiador", data, { headers: { Authorization: AuthStr }}).then((response) => {
+				if (response.data[0].Error && response.data[1] == "502") return
+				else {
+					setTurmasApoiador(response.data)
+				}
 			})
 		} catch (err) {
 			alert("Não foi possível encontrar as turmas, tente novamente")
