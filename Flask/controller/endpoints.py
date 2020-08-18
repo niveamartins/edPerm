@@ -16,6 +16,9 @@ from utilities.montaRelatorio import *
 from utilities.loggers import get_logger
 from utilities.DateTimes import tradutor
 from services.CreateUserService import CreateUserService
+from services.DeleteApoiadorService import DeleteApoiadorService
+from services.TransformarEmAdmService import TransformarEmAdmService
+from services.AtualizarUserService import AtualizarUserService
 from services.CreateTurmaService import CreateTurmaService
 from services.CreateAlunoService import CreateAlunoService
 from services.CreateApoiadorService import CreateApoiadorService
@@ -23,12 +26,32 @@ from services.CreateHorarioService import CreateHorarioService
 from services.AutheticateUserService import AutheticateUserService
 from services.CadastrarAlunoService import CadastrarAlunoService
 from services.ListTurmaService import ListTurmaService
+from services.ListUserService import ListUserService
+from services.ListTurmaApoiadorService import ListTurmaApoiadorService
+from services.ListTurmaAlunoService import ListTurmaAlunoService
+from services.ListTurmaPropositorService import ListTurmaPropositorService
 from services.CreatePresencaService import CreatePresencaService
 from services.makeValidacaoService import makeValidacaoService
 
 blueprint = Blueprint('endpoints', __name__) 
 CORS(blueprint)
 logger = get_logger(sys.argv[0])
+
+@blueprint.route("/transformaremadm", methods=['POST'])
+def transformaremadm():
+
+    userData = request.get_json()
+    userDataFields = ["id"]
+
+    if not all(field in userData for field in userDataFields):
+        return "Missing information", 400
+
+    transformarEmAdm = TransformarEmAdmService()
+
+    user = transformarEmAdm.execute(userData)
+
+    return jsonify(user)
+
 
 #AINDA NÃO SERÁ IMPLEMENTADA
 @blueprint.route("/esqueci", methods=['POST'])
@@ -79,7 +102,7 @@ def dados_pessoais():
 def cadastrar():
 
     userData = request.get_json()
-    userDataFields = ["usuario", "email", "senha", "cpf", "telefone", "tipo"]
+    userDataFields = ["usuario", "email", "senha", "cpf", "telefone", "tipo", "funcao", "profissao", "UnidadeBasicadeSaude", "CAP"]
 
     if not all(field in userData for field in userDataFields):
         return "Missing information", 400
@@ -89,6 +112,26 @@ def cadastrar():
     user = createUser.execute(userData)
 
     return jsonify(user)
+
+@blueprint.route("/atualizarusuario", methods=['POST'])
+@jwt_required
+def atualizarusuario():
+
+    #Não testado a parte dos Json
+    userDataID = get_jwt_identity()
+    userData = request.get_json()
+    userDataFields = ["usuario", "email", "senha", "cpf", "telefone", "tipo", "funcao", "profissao", "UnidadeBasicadeSaude", "CAP"]
+    
+    if not all(field in userData for field in userDataFields):
+         return "Missing information", 400
+
+    userData['id'] = userDataID['id']
+
+    atualizaruser = AtualizarUserService()
+
+    User = atualizaruser.execute(userData)
+
+    return jsonify(User)
 
 
 #TODO: estruturar como será a segunda parte do cadastramento de informações
@@ -142,8 +185,48 @@ def listarturma():
     return jsonify(turmas)
 
 
+@blueprint.route("/listausuario", methods=['GET'])
+def listarusuarios():
+    ListUser = ListUserService()
+    usuarios = ListUser.execute()
+    return jsonify(usuarios)
 
 
+@blueprint.route("/listaturmaapoiador", methods=['Post'])
+def listarturmaapoiador():
+    apoiadorData = request.get_json()
+    apoiadorDataFields = ["usuario"]
+
+    if not all(field in apoiadorData for field in apoiadorDataFields):
+        return "Missing information", 400
+
+    ListTurma = ListTurmaApoiadorService()
+    Turma = ListTurma.execute(apoiadorData)
+    return jsonify(Turma)
+
+@blueprint.route("/listaturmaaluno", methods=['Post'])
+def listaturmaaluno():
+    alunoData = request.get_json()
+    alunoDataFields = ["usuario"]
+
+    if not all(field in alunoData for field in alunoDataFields):
+        return "Missing information", 400
+
+    ListTurma = ListTurmaAlunoService()
+    Turma = ListTurma.execute(alunoData)
+    return jsonify(Turma)
+
+@blueprint.route("/listaturmapropositor", methods=['Post'])
+def listaturmapropositor():
+    propositorData = request.get_json()
+    propositorDataFields = ["usuario"]
+
+    if not all(field in propositorData for field in propositorDataFields):
+        return "Missing information", 400
+
+    ListTurma = ListTurmaPropositorService()
+    Turma = ListTurma.execute(propositorData)
+    return jsonify(Turma)
 
 
 @blueprint.route("/marcarpresenca", methods=['POST'])
@@ -219,6 +302,23 @@ def cadastrarapoiador():
     cadastrarApoiador = CreateApoiadorService()
 
     msg = cadastrarApoiador.execute(apoiadorData)
+    return jsonify(msg)
+
+@blueprint.route("/deletarapoiador", methods=['POST'])
+@jwt_required
+def deletarapoiador():
+
+    deleteData = request.get_json()
+    deleteDataFields = ["cpfApoiador", "idTurma"]
+
+
+    if not all(field in deleteData for field in deleteDataFields):
+         return "Missing information", 400
+
+    deleteApoiador = DeleteApoiadorService()
+
+    msg = deleteApoiador.execute(deleteData)
+
     return jsonify(msg)
 
 

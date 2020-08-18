@@ -16,9 +16,15 @@ class CreateApoiadorService:
         
         if not TuplaUserTurma:
             return {"Error":"Email invalido"}, 502
+        
+        if not (TuplaUserTurma[0].AlunoApoiador):
+            apoiador = AlunoApoiador(apoiador_id_turma=TuplaUserTurma[1].id_turma,apoiador_id_user=TuplaUserTurma[0].Id)
+            session.add(apoiador)
+        else:
+            apoiador = TuplaUserTurma[0].AlunoApoiador
 
-        apoiador = AlunoApoiador(apoiador_id_turma=TuplaUserTurma[1].id_turma,apoiador_id_user=TuplaUserTurma[0].Id)
-        session.add(apoiador)
+        if (apoiador in TuplaUserTurma[1].AlunosApoiadores):
+            return {"Error":"Usuario ja é apoiador desta turma!"}, 502
         TuplaUserTurma[1].AlunosApoiadores.append(apoiador)
         session.commit()
         session.close()
