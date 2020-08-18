@@ -12,6 +12,9 @@ import EsqueciASenha from './components/pages/EsqueciASenha'
 import Inicio from './components/pages/Inicio'
 import OpcoesTurmas from './components/pages/OpcoesTurmas'
 import ListarTurmas from './components/pages/ListarTurmas'
+import ListarTurmasAluno from './components/pages/ListarTurmasAluno'
+import ListarTurmasApoiador from './components/pages/ListarTurmasApoiador'
+import ListarTurmasPropositor from './components/pages/ListarTurmasPropositor'
 import Turma from './components/pages/Turma'
 import Presenca from './components/pages/Presenca'
 import CriarAula from './components/pages/CriarAula'
@@ -43,6 +46,9 @@ export default function Routes() {
 
                 <Route path="/opcoesTurmas" component={OpcoesTurmas} />
                 <Route path="/turmas" component={ListarTurmas} /> 
+                <Route path="/turmasAluno" component={ListarTurmasAluno} />
+                <Route path="/turmasApoiador" component={ListarTurmasApoiador} />
+                <Route path="/turmasPropositor" component={ListarTurmasPropositor} />
                 <Route path="/turma" component={Turma} />
                 <Route path="/cadturma" component={CadastrarTurma} />
                 <Route path="/cadastroTurmaEfetuado" component={PosCadastroTurma} />

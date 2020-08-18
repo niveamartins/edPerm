@@ -4,7 +4,7 @@ import { NavBar } from "../../navbar"
 import Button from "../../Button"
 
 const opcoesTurmas = () => {
-	let criarTurmaButton = <Button link="/cadTurma" title="Criar Turma" />
+	let criarTurmaButton = <Button link="/cadTurma" title="Criar Turma" description="Crie uma nova turma"/>
 
 	const user_type = localStorage.getItem("user_type")
 	if (user_type == "cursista" || user_type == "apoiador")
@@ -17,9 +17,25 @@ const opcoesTurmas = () => {
 				<h1>Funções disponíveis para Turmas:</h1>
 				<div className="button__link-container">
 					<Button
-						// link="/turmasCriadas"
+						// link="turmasCriadas"
 						link="turmas"
-						title="Listar Turmas"
+						title="Turmas"
+						description="Liste todas as turmas"
+					/>
+					<Button
+						link="turmasAluno"
+						title="Turmas Aluno"
+						description="Liste suas turmas como aluno"
+					/>
+					<Button
+						link="turmasApoiador"
+						title="Turmas Apoiador"
+						description="Liste suas turmas como apoiador"
+					/>
+					<Button
+						link="turmasPropositor"
+						title="Turmas Propositor"
+						description="Liste suas turmas como propositor"
 					/>
 					{criarTurmaButton}
 				</div>

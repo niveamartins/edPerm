@@ -1,67 +1,72 @@
-import React, { Fragment, useState } from "react"
-import { Redirect } from 'react-router-dom'
+import React, { Fragment, useState, useEffect } from "react"
+import { Redirect, useHistory } from "react-router-dom"
 
 import api from "../../../services/api"
-import { makeStyles, withStyles } from "@material-ui/core/styles"
+import { withStyles } from "@material-ui/core/styles"
 import InputLabel from "@material-ui/core/InputLabel"
 import FormControl from "@material-ui/core/FormControl"
 import NativeSelect from "@material-ui/core/NativeSelect"
 import InputBase from "@material-ui/core/InputBase"
 
 import { NavBar } from "../../navbar"
-import './cadAdm.css'
+import "./cadAdm.css"
 
 function CadastrarAdm(props) {
-	const [user, setAdm] = useState("")
-
-	// let info = props.location.state
+	const [listaUsers, setListaUsers] = useState([])
+	const [id, setAdmId] = useState("")
 
 	const user_type = localStorage.getItem("user_type")
 	let redirectIfNotAuth = null
 	if (user_type !== "adm") redirectIfNotAuth = <Redirect to="/" />
 
+	const history = useHistory()
+
+	// loading users on page load
+	useEffect(() => {
+		try {
+			api.get("/listausuario").then((response) => {
+				const notAdms = response.data.filter((user) => user.tipo !== "adm")
+				setListaUsers(notAdms)
+				setAdmId(notAdms[0].Id)
+			})
+		} catch (err) {
+			console.log(err)
+			alert("Não foi possível listar usuários")
+		}
+	}, [])
+
 	async function handleCreate(e) {
-		// e.preventDefault()
-
-		// const data = {
-		// 	email_apoiador,
-		// 	id_turma,
-		// }
-
-		// console.log(data)
-		// try {
-		// 	const token = localStorage.getItem("token")
-		// 	const AuthStr = "Bearer ".concat(token)
-		// 	api
-		// 		.post("/cadastrarapoiador", data, {
-		// 			headers: { Authorization: AuthStr },
-		// 		})
-		// 		.then((response) => {
-		// 			if (response.data.hasOwnProperty("error") === true) {
-		// 				alert("O e-mail cadastrado não existe no banco de dados")
-		// 			} else {
-		// 				alert(`O aluno foi cadastrado como apoiador da turma com sucesso!`)
-		// 			}
-		// 		})
-		// } catch (err) {
-		// 	console.log(err)
-		// 	alert("Erro no cadastro, tente novamente")
-		// }
-   }
-   
-	const userOptions = [
-		{ value: "", label: "Selecione o usuário" },
-		{ value: "1", label: "user1" },
-		{ value: "2", label: "user2" },
-		{ value: "3", label: "user3" },
-		{ value: "4", label: "user4" },
-	]
+		e.preventDefault()
+		const data = {
+			id,
+		}
+		console.log(data)
+		try {
+			const token = localStorage.getItem("token")
+			const AuthStr = "Bearer ".concat(token)
+			api
+				.post("/transformaremadm", data, {
+					headers: { Authorization: AuthStr },
+				})
+				.then((response) => {
+					if (response.data.hasOwnProperty("error") === true) {
+						alert("Não foi possível promover usuário a adm")
+					} else {
+						alert("O usuário foi promovido a administrador com sucesso!")
+						history.go(0)
+					}
+				})
+		} catch (err) {
+			console.log(err)
+			alert("Erro no cadastro, tente novamente")
+		}
+	}
 
 	const BootstrapInput = withStyles((theme) => ({
 		root: {
 			"label + &": {
 				marginTop: theme.spacing(3),
-				marginBottom: "10px"
+				marginBottom: "10px",
 			},
 		},
 		input: {
@@ -96,38 +101,38 @@ function CadastrarAdm(props) {
 
 	return (
 		<Fragment>
-         {redirectIfNotAuth}
+			{redirectIfNotAuth}
 			<NavBar />
 			<main className="main">
 				<div className="info-turmas apoiador">
-					<div class="form-page-container adm">
-						<div class="form-container adm">
+					<div className="form-page-container adm">
+						<div className="form-container adm">
 							<form onSubmit={handleCreate}>
 								<h1>Cadastre o Admistrador!</h1>
-								<p>Selecione abaixo o usuário a ser promovido para administrador!</p>
+								<p>
+									Selecione abaixo o usuário a ser promovido para administrador!
+								</p>
 								<FormControl>
 									<InputLabel htmlFor="demo-customized-select-native">
 										Usuário
 									</InputLabel>
 									<NativeSelect
 										id="demo-customized-select-native"
-										value={user}
-										onChange={(e) => setAdm(e.target.value)}
+										value={id}
+										onChange={(e) => setAdmId(e.target.value)}
 										input={<BootstrapInput />}
 										required
 									>
-										{userOptions.map((option) => {
+										{listaUsers.map((option) => {
 											return (
-												<option value={option.value}>{option.label}</option>
+												<option value={option.Id} key={option.Id}>
+													{option.usuario} ({option.tipo})
+												</option>
 											)
 										})}
 									</NativeSelect>
 								</FormControl>
-								<input
-									type="submit"
-									class="button"
-									value="cadastrar adm"
-								/>
+								<input type="submit" className="button" value="cadastrar adm" />
 							</form>
 						</div>
 					</div>

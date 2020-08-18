@@ -5,20 +5,23 @@ import { Link } from "../../../../node_modules/react-router-dom"
 import api from "../../../services/api"
 import { NavBar } from "../../navbar"
 
-import "./listarTurmas.css"
+import "../ListarTurmas/listarTurmas.css"
 
 function ListarTurmas() {
-	const [turmas, setTurmas] = useState([])
+   const [turmasPropositor, setTurmasPropositor] = useState([])
 
-	let empty = null
-   if (turmas.length === 0) empty = <p className="empty">Não há turmas</p>
+   // aviso inicial para quando ainda não tiver turmas
+   let empty = null
+   if (turmasPropositor.length === 0) empty = <p className="empty">Não há turmas</p>
+
+   const usuario = localStorage.getItem("user_username")
 
 	useEffect(() => {
 		try {
 			const token = localStorage.getItem("token")
-            const AuthStr = 'Bearer '.concat(token); 
-			api.get("listaturma", { headers: { Authorization: AuthStr }}).then((response) => {
-				setTurmas(response.data)
+         const AuthStr = 'Bearer '.concat(token); 
+			api.post("listaturmapropositor", usuario, { headers: { Authorization: AuthStr }}).then((response) => {
+				setTurmasPropositor(response.data)
 			})
 		} catch (err) {
 			alert("Não foi possível encontrar as turmas, tente novamente")
@@ -84,7 +87,10 @@ function ListarTurmas() {
 		<Fragment>
 			<NavBar />
 			<main>
-				<div className="card-container">{getTurmasContent(turmas)}</div>
+				<div className="card-container">
+               {empty}
+               {getTurmasContent(turmasPropositor)}
+            </div>
 			</main>
 		</Fragment>
 	)
