@@ -48,7 +48,7 @@ export const profissaoCargo = [
    ]
 
 export const profissaoChefia = [
-      { label: "Selecione sua função", value: "" },
+      { label: "Nenhuma das funções listadas", value: "" },
       { label: "Assessor", value: "assessor" },
       { label: "Assistente", value: "assistente" },
       { label: "Auxiliar de Chefia", value: "auxiliar de chefia" },
@@ -61,5 +61,4 @@ export const profissaoChefia = [
       { label: "Subgerente", value: "subgerente" },
       { label: "Subsecretario", value: "subsecretario" },
       { label: "Superintendente", value: "superintendente" },
-      { label: "Nenhum dos Anteriores", value: "nenhuma"}
 ]

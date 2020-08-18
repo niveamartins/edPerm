@@ -16,6 +16,7 @@ const opcoesTurmas = () => {
 			<main className="main-inicio">
 				<h1>Funções disponíveis para Turmas:</h1>
 				<div className="button__link-container">
+					{criarTurmaButton}
 					<Button
 						// link="turmasCriadas"
 						link="turmas"
@@ -37,7 +38,6 @@ const opcoesTurmas = () => {
 						title="Turmas Propositor"
 						description="Liste suas turmas como propositor"
 					/>
-					{criarTurmaButton}
 				</div>
 			</main>
 		</Fragment>

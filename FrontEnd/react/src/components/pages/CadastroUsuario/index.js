@@ -1,5 +1,5 @@
 //página de login
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import api from "../../../services/api"
 import { useHistory } from "react-router-dom"
@@ -33,6 +33,7 @@ function Inicio() {
 	const [confirm_password, setConfPass] = useState("")
 	const [CAP, setCAP] = useState("")
 	const [UnidadeBasicadeSaude, setUnidadeBasicadeSaude] = useState("")
+	const [listaUnidades, setListaUnidades] = useState([])
 	const [profissao, setProfissao] = useState("")
 	const [funcao, setFuncao] = useState("")
 
@@ -43,6 +44,16 @@ function Inicio() {
 	const [erroTelefone, setErroTelefone] = useState("")
 
 	const history = useHistory()
+
+	// quando cap mudar mudam as unidades
+	useEffect(() => {
+		const unidadesFiltradas = capData.filter((unidade) => unidade.cap == CAP)
+		// apenas unidades de certa CAP
+		setListaUnidades(unidadesFiltradas)
+		// para não enviar "" caso usuário não mude o select da primeira opção
+		const unidadeInicial = unidadesFiltradas[0] ? unidadesFiltradas[0].label : ''
+		setUnidadeBasicadeSaude(unidadeInicial)
+	}, [CAP])
 
 	async function handleCreate(e) {
 		e.preventDefault()
@@ -241,7 +252,7 @@ function Inicio() {
 
 								{erroTelefone && (
 									<p className="error">
-										Digite um valor numérico de 8 a 9 dígitos
+										Digite um valor numérico de 8 a 9 dígitos para o telefone
 									</p>
 								)}
 
@@ -275,13 +286,11 @@ function Inicio() {
 										input={<BootstrapInput />}
 										required
 									>
-										{capData
-											.filter((option) => option.cap == CAP)
-											.map((option) => {
-												return (
-													<option value={option.label}>{option.label}</option>
-												)
-											})}
+										{listaUnidades.map((option) => {
+											return (
+												<option value={option.label}>{option.label}</option>
+											)
+										})}
 									</NativeSelect>
 								</FormControl>
 
@@ -313,7 +322,6 @@ function Inicio() {
 										value={funcao}
 										onChange={(e) => setFuncao(e.target.value)}
 										input={<BootstrapInput />}
-										required
 									>
 										{profissaoChefia.map((option) => {
 											return (
