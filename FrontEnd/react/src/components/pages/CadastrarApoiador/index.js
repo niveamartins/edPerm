@@ -8,7 +8,7 @@ import { NavBar } from "../../navbar"
 
 function CadastrarApoiador(props) {
 	const [email_apoiador, setAluno] = useState("")
-
+		
 	let info = props.location.state
 
 	const id_turma = info[0].id_turma
@@ -87,7 +87,8 @@ function CadastrarApoiador(props) {
 						<div class="form-container apoiador">
 							<form onSubmit={handleCreate}>
 								<h1>Cadastre o apoiador!</h1>
-								<p>Insira abaixo o código do aluno escolhido.</p>
+								<p>Insira abaixo o código do aluno escolhido</p>
+								<br/>
 								<input
 									name="aluno"
 									class="form-input"

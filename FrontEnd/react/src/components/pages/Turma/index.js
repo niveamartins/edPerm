@@ -14,6 +14,12 @@ import { capitalize } from "@material-ui/core"
 function Turma(props) {
 	const [turma, setTurmas] = useState([])
 
+	let cadastrarApoiador = null
+	let darPresenca = null
+
+	const user_type = localStorage.getItem("user_type")
+	const user_username = localStorage.getItem("user_username")
+
 	const id = props.location.state
 	const url = "listaturma/" + id
 	useEffect(() => {
@@ -72,6 +78,46 @@ function Turma(props) {
 		return content
 	}
 
+	const propositor = turma[0] ? turma[0].NomeDoPropositor : ''
+	const isPropositor = user_username == propositor
+	// usuários que poderiam ter cadastrado a turma
+	const allowedAllUser = user_type == "propositor" || user_type == "adm" || user_type == "gestor" || user_type == "coordenador"
+
+	if (allowedAllUser &&  isPropositor) {
+		cadastrarApoiador = (
+			<Link
+				to={{
+					pathname: "/cadapoiador",
+					state: turma,
+				}}
+				className="link"
+			>
+				<button className="button bold">
+					<label>Cadastrar Aluno Apoiador</label>
+				</button>
+			</Link>
+		)
+
+		darPresenca = (
+			<Link to={"/leitor/" + id} className="link">
+						<button className="button bold">
+							<label>Dar Presença</label>
+						</button>
+					</Link>
+		)
+	}
+
+	// const apoiador = user_type == 'apoiador'
+	// if (apoiador) {
+	// 	darPresenca = (
+	// 		<Link to={"/leitor/" + id} className="link">
+	// 					<button className="button bold">
+	// 						<label>Dar Presença</label>
+	// 					</button>
+	// 				</Link>
+	// 	)
+	// }
+
 	return (
 		<Fragment>
 			<NavBar />
@@ -94,27 +140,13 @@ function Turma(props) {
 							<label>Criar Aula</label>
 						</button>
 					</Link>
-					<Link
-						to={{
-							pathname: "/cadapoiador",
-							state: turma,
-						}}
-						className="link"
-					>
-						<button className="button bold">
-							<label>Cadastrar Aluno Apoiador</label>
-						</button>
-					</Link>
+						{cadastrarApoiador}
 					<Link to="/aulas" className="link">
 						<button className="button bold" disabled>
 							<label>Aulas</label>
 						</button>
 					</Link>
-					<Link to={"/leitor/" + id} className="link">
-						<button className="button bold">
-							<label>Dar Presença</label>
-						</button>
-					</Link>
+					{darPresenca}
 				</div>
 			</main>
 		</Fragment>
