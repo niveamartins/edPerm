@@ -34,20 +34,20 @@ function Relatorio(props) {
 					content.push(
 						<table className="relatorio-content">
 							<tbody>
-							<tr>
-								<td className="id__contato">
-									<strong>{item.id}</strong>
-								</td>
-								<td>
-								<span className="value">{item.nome}</span>
-								</td>
-								<td>
-									<span className="value">{item.email}</span>
-								</td>
-								<td className="telefone__contato">
-									<span className="value">{item.telefone}</span>
-								</td>
-							</tr>
+								<tr>
+									<td className="id__contato">
+										<strong>{item.id}</strong>
+									</td>
+									<td>
+										<span className="value">{item.nome}</span>
+									</td>
+									<td>
+										<span className="value">{item.email}</span>
+									</td>
+									<td className="telefone__contato">
+										<span className="value">{item.telefone}</span>
+									</td>
+								</tr>
 							</tbody>
 						</table>
 					)
@@ -64,18 +64,18 @@ function Relatorio(props) {
 					<main>
 						<div className="card-container">
 							<div className="card-relatorio">
-								<p className="campo">Contato</p>
+								<p className="campo">Contatos</p>
 								<table>
-								<thead className="relatorio-head">
-								<tr>
-									<th className="campo">Usuário</th>
-									<th className="campo email">E-mail</th>
-									<th className="campo">Telefone</th>
-								</tr>
-							</thead>
+									<thead className="relatorio-head">
+										<tr>
+											<th className="campo">Usuário</th>
+											<th className="campo email">E-mail</th>
+											<th className="campo">Telefone</th>
+										</tr>
+									</thead>
 								</table>
 								<div className="relatorio-content__container">
-								{getContatoContent(relatorio)}
+									{getContatoContent(relatorio)}
 								</div>
 							</div>
 						</div>
