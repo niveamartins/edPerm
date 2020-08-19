@@ -13,22 +13,74 @@
 	width: 1000px;
 
 	display: flex;
-	flex-wrap: wrap;
+	flex-direction: column;
 }
 
-/* Fazer isso com javascript!!! */
-
-.card-relatorio table.odd-elements:last-child,
-.card-relatorio table.odd-elements:nth-last-child(2):nth-child(odd) {
-	margin-right: 50%;
+.campo {
+	padding-top: 10px;
+	font-size: 0.9em;
+	text-transform: uppercase;
+	font-family: "gadugi-bold";
 }
 
-/* .card-relatorio table:last-child {
-	width: 50%!important;
-} */
+p.campo {
+	text-align: center;
+	font-size: 1.2em;
+}
 
-.card-relatorio table {
-	width: 50%;
+table.relatorio-head thead{
+	display: flex;
+	justify-content: space-between;
+}
+
+tr th:nth-child(1) {
+	width: 30%;
+}
+
+tr th:nth-child(2) {
+	width: 55%;
+}
+
+.card-relatorio .relatorio-content__container .relatorio-content{
+	width: 100%!important;
+	display: flex;
+	justify-content: space-between;
+}
+
+table.relatorio-content tbody{
+	width: 100%;
+}
+
+table.relatorio-content tbody tr {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+table.relatorio-content tbody tr td:not(:first-child) {
+	text-align: center;
+	width: 25%;
+	padding-left: -30px;
+}
+
+table.relatorio-content tbody tr td:nth-child(3) {
+	width: 60%;
+}
+
+table.relatorio-content tbody tr td:nth-child(4) {
+	width: 15%;
+	margin-right: -20px;
+}
+
+
+td.id__contato {
+	margin-left: -20px;
+	font-size: 1.1em;
+	padding-bottom: 5px;
+}
+
+tbody tr {
+	margin: 0 20px;
 }
 
 @media (max-width: 1100px) {
@@ -36,14 +88,6 @@
 		width: 800px;
 	}
 
-	.card-relatorio table {
-		width: 100% !important;
-	}
-
-	.card-relatorio table.odd-elements:last-child,
-	.card-relatorio table.odd-elements:nth-last-child(2):nth-child(odd) {
-		margin-right: 0;
-	}
 }
 
 @media (max-width: 850px) {
@@ -52,14 +96,15 @@
 	}
 }
 
-@media (max-width: 650px) {
+@media (max-width: 770px) {
 	.card-relatorio tr {
 		font-size: 1em !important;
 	}
-}
 
-.card-relatorio.contato {
-	width: 320px;
+	.id__contato {
+		margin-left: -40px!important;
+	}
+
 }
 
 .card-relatorio.cpf {
@@ -98,31 +143,10 @@ td.cpf {
 	font-size: 0.8em !important;
 }
 
-tbody {
-	display: flex;
-	flex-direction: column;
-}
-
-tbody tr {
-	margin: 0 20px;
-	display: flex;
-	justify-content: space-between;
-}
-.campo {
-	padding-top: 10px;
-	font-size: 0.9em;
-	text-transform: uppercase;
-	font-family: "gadugi-bold";
-}
 
 span.info {
 	text-transform: capitalize;
 	margin-left: 5px;
-}
-
-.topo__contato {
-	font-size: 1.1em;
-	padding-bottom: 5px;
 }
 
 td.topo__contato .campo {

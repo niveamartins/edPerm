@@ -11,13 +11,11 @@ function Relatorio(props) {
 
 	const url = props.location.state
 
-	let oddOrEven = null
-
 	useEffect(() => {
 		try {
 			const token = localStorage.getItem("token")
-            const AuthStr = 'Bearer '.concat(token); 
-			api.get(url, { headers: { Authorization: AuthStr }}).then((response) => {
+			const AuthStr = "Bearer ".concat(token)
+			api.get(url, { headers: { Authorization: AuthStr } }).then((response) => {
 				setRelatorio(response.data)
 			})
 		} catch (err) {
@@ -30,27 +28,26 @@ function Relatorio(props) {
 			const getContatoContent = (contato) => {
 				let content = []
 				console.log(relatorio)
-
-				// par ou ímpar pra adicionar estilo no css ao último elemento
-				const elementsQtDefiner = relatorio.length % 2 ? 'odd' : 'even'
-				oddOrEven = elementsQtDefiner
-
 				for (let idx in contato) {
 					const item = contato[idx]
 					console.log(item)
 					content.push(
-						<table className={`${oddOrEven}-elements`}>
-							<thead>
-								<tr>
-									<td className="topo__contato">
-									<strong>{item.id}</strong>
-									<span className="campo">{item.nome}</span>
-									</td>
-								</tr>
-							</thead>
+						<table className="relatorio-content">
 							<tbody>
-								<tr>Email: <span className="value">{item.email}</span></tr>
-								<tr>Telefone: <span className="value">{item.telefone}</span></tr>
+							<tr>
+								<td className="id__contato">
+									<strong>{item.id}</strong>
+								</td>
+								<td>
+								<span className="value">{item.nome}</span>
+								</td>
+								<td>
+									<span className="value">{item.email}</span>
+								</td>
+								<td className="telefone__contato">
+									<span className="value">{item.telefone}</span>
+								</td>
+							</tr>
 							</tbody>
 						</table>
 					)
@@ -66,9 +63,21 @@ function Relatorio(props) {
 					<NavBar />
 					<main>
 						<div className="card-container">
-						<div className="card-relatorio">
-							<ul>{getContatoContent(relatorio)}</ul>							
-						</div>
+							<div className="card-relatorio">
+								<p className="campo">Contato</p>
+								<table>
+								<thead className="relatorio-head">
+								<tr>
+									<th className="campo">Usuário</th>
+									<th className="campo email">E-mail</th>
+									<th className="campo">Telefone</th>
+								</tr>
+							</thead>
+								</table>
+								<div className="relatorio-content__container">
+								{getContatoContent(relatorio)}
+								</div>
+							</div>
 						</div>
 					</main>
 				</Fragment>
