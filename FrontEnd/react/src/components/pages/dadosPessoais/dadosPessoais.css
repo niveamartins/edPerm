@@ -1,0 +1,15 @@
+.QR-container {
+   display: flex;
+   flex-direction: column;
+   padding: 20px 20px 10px 20px;
+}
+
+.download-QR__button {
+   cursor: pointer;
+   text-decoration: none;
+	text-transform: uppercase;
+	font-family: "gadugi-bold";
+   font-size: 1.1em;
+   margin: 10px 0;
+	color: var(--elements-color);
+}

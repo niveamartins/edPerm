@@ -35,14 +35,9 @@
 }
 
 .profile__container-info .card {
-	width: 400px;
-	height: 250px;
 	margin: 5px 0 10px 0;
 }
 
-.profile__container-info .card img {
-	width: 60%;
-}
 .profile__container-buttons {
 	display: flex;
 	justify-content: center;
