@@ -17,7 +17,12 @@ function Inicio() {
 	localStorage.removeItem("token")
 	localStorage.removeItem("user_id")
 	localStorage.removeItem("user_username")
-	localStorage.removeItem("user.type")
+	localStorage.removeItem("user_type")
+
+	// busca url autoCadastro no localStorage
+	const urlTurmaAutocadastro = localStorage.getItem("urlAutoSignup")
+	// se encontrar redireciona pra esse link após o login
+	const redirectAfterAuth = urlTurmaAutocadastro ? urlTurmaAutocadastro : "/"
 
 	async function handleCreate(e) {
 		e.preventDefault()
@@ -43,7 +48,7 @@ function Inicio() {
 			let user_type = user.identity.tipo
 			localStorage.setItem("user_type", user_type)
 
-			history.push("/")
+			history.push(redirectAfterAuth)
 		} catch (err) {
 			console.log(err)
 			alert("Erro no cadastro, tente novamente")

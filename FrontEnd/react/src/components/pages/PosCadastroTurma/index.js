@@ -10,14 +10,11 @@ function Inicio(props) {
   let DadosLink = props.location.state.detail
 	function copiarTexto() {
 		const linkTurma = document.getElementById("link-turma")
-
 		//seleciona o texto
 		linkTurma.select()
 		linkTurma.setSelectionRange(0, 99999) //para mobile
-
 		//copia o texto
 		document.execCommand("copy")
-
 		//msg exibida acima do button
 		const tooltip = document.getElementById("myTooltip")
 		tooltip.innerHTML = "Link copiado!"
@@ -32,6 +29,7 @@ function Inicio(props) {
 	window.addEventListener("load", () => {
 		document.querySelector(".card-concluido").classList.add("loaded")
 	})
+	
   let link = window.location.hostname + "/cadlink/"+DadosLink.link_id_turma+'/'+DadosLink.token
 	return (
 		<Fragment>
@@ -43,7 +41,6 @@ function Inicio(props) {
                   <DoneIcon />
 					</div>
 					<p>Utilize o link abaixo para que alunos se inscrevam na turma:</p>
-					<br/>
 					<div className="card-concluido__link">
 						<input type="text" id="link-turma" value={link} readOnly/>
 						<div className="tooltip">

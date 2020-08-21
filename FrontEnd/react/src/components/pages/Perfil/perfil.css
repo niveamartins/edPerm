@@ -5,8 +5,15 @@
 	flex-wrap: wrap; 
 }
 
-.profile__container img {
+.profile__container img,
+.personal-buttons img {
 	margin-right: 5px;
+}
+
+.profile__container-buttons button,
+.profile__container-buttons img,
+.profile__container-buttons label{
+   cursor: pointer;
 }
 
 @media (max-width: 950px) {

@@ -294,6 +294,7 @@ button:disabled label {
 	font-family: "gadugi-bold";
 	color: var(--elements-second-color);
 	font-size: 1.1em;
+	cursor: pointer;
 }
 
 /* Cards */

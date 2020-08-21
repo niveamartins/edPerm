@@ -6,6 +6,9 @@ import Button from "../../Button"
 import "./Inicio.css"
 
 function Inicio() {
+	// para o caso de alguém voltar pro início sem cancelar auto cadastro
+	localStorage.removeItem("urlAutoSignup")
+
 	const user_type = localStorage.getItem("user_type")
 
 	let turmasButton = (
