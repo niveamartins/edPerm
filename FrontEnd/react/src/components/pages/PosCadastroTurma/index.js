@@ -43,6 +43,7 @@ function Inicio(props) {
                   <DoneIcon />
 					</div>
 					<p>Utilize o link abaixo para que alunos se inscrevam na turma:</p>
+					<br/>
 					<div className="card-concluido__link">
 						<input type="text" id="link-turma" value={link} readOnly/>
 						<div className="tooltip">

@@ -8,10 +8,15 @@ import Acessibility from "../accessibility/index"
 import LogoEduca from "../../assets/img/logo.png"
 import LogoPrefeitura from '../../assets/img/LogoPref.png'
 import Logout from '../../assets/img/IconePower.png'
+// irá mudar após Sandra mandar ícone
+import Home from '../../assets/img/IconeCheckmark.png'
 export class NavBar extends Component {
 	render() {
 		let icons = (
 			<div className="nav-icons-container">
+				<Link to="/" title="Página inicial">
+					<img src={Home} alt="Ícone Home" className="nav-icons"></img>
+				</Link>
 				<Acessibility />
 				<Link to="/login" title="Sair">
 					<img src={Logout} alt="Ícone Logout" className="nav-icons"></img>

@@ -162,7 +162,7 @@ function Inicio() {
 
 								{erroNome && (
 									<p className="error">
-										Digite um valor alfanumérico sem espaços
+										Digite um valor alfanumérico sem espaços ou acentos
 									</p>
 								)}
 
@@ -252,7 +252,7 @@ function Inicio() {
 
 								{erroTelefone && (
 									<p className="error">
-										Digite um valor numérico de 8 a 9 dígitos para o telefone
+										Digite um valor numérico de 8 a 9 dígitos para o telefone (sem DDD)
 									</p>
 								)}
 
