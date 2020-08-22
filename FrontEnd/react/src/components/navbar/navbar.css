@@ -73,3 +73,35 @@ img.nav-logo {
 		display: none;
 	}
 }
+
+@media (max-width: 480px) {
+	.logo {
+		margin-left: -85px;
+		transform: scale(0.5);
+	}
+
+	.nav-icons {
+		transform: scale(0.7);
+		margin: 5px 0 0 0;
+	}
+
+	.header-content {
+		margin-left: -80px;
+	}
+}
+
+/* iphone 5/SE */
+@media (max-width: 330px) {
+	.logo {
+		margin-left: -100px;
+		transform: scale(0.45);
+	}
+
+	.nav-icons {
+		margin: 5px -5px 0 0;
+	}
+
+	.header-content {
+		margin-left: -95px;
+	}
+}
