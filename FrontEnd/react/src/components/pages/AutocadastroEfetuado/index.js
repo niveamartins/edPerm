@@ -33,7 +33,7 @@ function Inicio(props) {
 									<label>Ir para Perfil</label>
 								</button>
 							</Link>
-                     <Link to="/">
+                     <Link to="/opcoesTurmas">
 								<button size="large" class="personal-buttons bold">
 									<img src={Turmas} alt="Icone turma"></img>
 									<label>Ir para turmas</label>
