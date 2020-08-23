@@ -6,7 +6,7 @@ from database.model.Model import User
 from utilities.loggers import get_logger
 from werkzeug.security import generate_password_hash
 
-#userDataFields = ["usuario", "email", "senha", "cpf", "telefone", "tipo", "funcao", "profissao", "UnidadeBasicadeSaude", "CAP"]
+#userDataFields = ["usuario", "nome", "email", "senha", "cpf", "telefone", "funcao", "profissao", "UnidadeBasicadeSaude", "CAP"]
 
 class AtualizarUserService:
     def execute(self, userData):
@@ -18,10 +18,10 @@ class AtualizarUserService:
 
 
             if not user:
-                return "Usuario nao encontrado", 400
+                return {"Error":"Usuario nao encontrado"}, 400
 
             if(userData["usuario"].find(" ") != -1):
-                return "Proibido uso de espaço no usuario", 400
+                return {"Error":"Proibido uso de espaço no usuario"}, 400
 
             #Depois deixar bonito
             checarusuario = session.query(User).filter(
@@ -29,21 +29,21 @@ class AtualizarUserService:
 
             if checarusuario:
                 if (user.usuario.lower() != userData['usuario'].lower()):
-                    return "nome de usuario ja em uso", 400
+                    return {"Error":"Nome de usuario ja em uso"}, 400
 
             checarcpf = session.query(User).filter(
                 User.cpf == userData['cpf']).first()
 
             if checarcpf:
                 if (user.cpf != userData['cpf']):
-                    return "cpf ja em uso", 400
+                    return {"Error":"Cpf ja em uso"}, 400
 
             checaremail = session.query(User).filter(
                 User.email == userData['email']).first()
 
             if checaremail:
                 if (user.email != userData['email']):
-                    return "Email ja em uso", 400
+                    return {"Error":"Email ja em uso"}, 400
 
             #atualizações começo
             if not(userData['usuario'] == ""):
@@ -62,8 +62,8 @@ class AtualizarUserService:
             if not(userData['telefone'] == ""):
                 user.telefone = userData['telefone']
 
-            if not(userData['tipo'] == ""):
-                user.tipo = userData['tipo']
+            if not(userData['nome'] == ""):
+                user.tipo = userData['nome']
 
             if not(userData['funcao'] == ""):
                 user.funcao = userData['funcao']

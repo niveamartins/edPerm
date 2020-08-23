@@ -28,4 +28,4 @@ class CreateTurmaService:
             session.commit()
             return session.query(LinkCadastramento).filter_by(link_id_turma=turma.id_turma).first().as_dict()
         else:
-            return "Responsavel não cadastrado", 400
+            return {"Error":"Responsavel não cadastrado"}, 400

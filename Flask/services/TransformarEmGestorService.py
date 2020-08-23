@@ -8,7 +8,7 @@ from werkzeug.security import generate_password_hash
 
 #userDataFields = [id]
 
-class TransformarEmAdmService:
+class TransformarEmGestorService:
     def execute(self, userData):
         logger = get_logger(sys.argv[0])
         try:
@@ -19,7 +19,7 @@ class TransformarEmAdmService:
             if not user:
                 return {"Error":"Usuario nao encontrado."}, 400
 
-            user.adm = True
+            user.gestor = True
             
             session.commit()
 

@@ -11,7 +11,7 @@ class CadastrarAlunoService:
         TuplaUserTurma = session.query(User,Turma).filter(User.Id==cadastroData["id"],User.cpf==cadastroData["cpfAluno"],Turma.id_turma==cadastroData["idTurma"]).first()
 
         if not TuplaUserTurma:
-            return {"Error":"Usuário invalido"}, 502
+            return {"Error":"Usuário invalido"}, 400
 
         if not(TuplaUserTurma[0].Aluno):
             aluno = Aluno(alunoUser=TuplaUserTurma[0])
@@ -21,7 +21,7 @@ class CadastrarAlunoService:
             session.close()
             return {"Success":"Aluno cadastrado na turma"}, 200 
         if TuplaUserTurma[0].Aluno in TuplaUserTurma[1].Alunos:
-            return {"Error":"Aluno já cadastrado na turma"}, 502
+            return {"Error":"Aluno já cadastrado na turma"}, 400
 
         TuplaUserTurma[1].Alunos.append(TuplaUserTurma[0].Aluno)
         session.commit()
@@ -53,7 +53,7 @@ class CadastrarAlunoService:
             session.close()
             return {"Success":"Aluno cadastrado na turma"}, 200 
         if TuplaLinkTurmaUser[0].Aluno in TuplaLinkTurmaUser[1].Alunos:
-            return {"Error":"Aluno já cadastrado na turma"}, 502
+            return {"Error":"Aluno já cadastrado na turma"}, 400
 
         alunos = TuplaLinkTurmaUser[1].Alunos
         alunos.append(TuplaLinkTurmaUser[2].Aluno)

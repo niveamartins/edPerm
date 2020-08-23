@@ -24,9 +24,9 @@ class ListTurmaApoiadorService:
             session = get_session()
             QueryUsuario = session.query(User).filter(User.usuario == apoiadorData["usuario"]).first()
             if not QueryUsuario:
-                return {"Error":"Usuario não cadastrado"}, 502
+                return {"Error":"Usuario não cadastrado"}, 400
             if not QueryUsuario.AlunoApoiador:
-                return {"Error":"Usuario não está inscrito em nenhuma turma como apoiador"}, 502
+                return {"Error":"Usuario não está inscrito em nenhuma turma como apoiador"}, 400
             data = session.query(Turma).all()
             turmas = []
             for i in data:

@@ -5,37 +5,32 @@ from sqlalchemy.orm import relationship, backref
 from database.model.Base.Base import Base
 from datetime import datetime,timedelta
 import uuid
-# ASSOCIATIONS TABLES
-
-alunoApoiadoXturma = Table('aaxt', Base.metadata,
-                           Column('alunoApoiador_id', Integer, ForeignKey(
-                               'alunoApoiador.id_alunoApoiador')),
-                           Column('turma_id', Integer,
-                                  ForeignKey('turma.id_turma'))
-                           )
-
-alunoXturma = Table('axt', Base.metadata,
-                    Column('aluno_id', Integer, ForeignKey('aluno.id_aluno')),
-                    Column('turma_id', Integer, ForeignKey('turma.id_turma'))
-                    )
 
 
 # MODELS
 
 class User(Base):
     __tablename__ = 'user'
+#Infos pessoais
     Id = Column(Integer, primary_key=True)
+    nome = Column(Text, nullable=False)
     usuario = Column(Text, nullable=False)
     email = Column(Text, nullable=False)
     senha = Column(Text, nullable=False)
     cpf = Column(String(11), nullable=False)
     telefone = Column(String(9), nullable=False)
-    tipo = Column(Enum('adm', 'gestor', 'coordenador',
-                       'propositor', 'cursista', 'apoiador'), nullable=False)
+#Infos de uso
+    adm = Column(Boolean, nullable=False)
+    gestor = Column(Boolean, nullable=False)
+    coordenador = Column(Boolean, nullable=False)
+    propositor = Column(Boolean, nullable=False)
+    cursista = Column(Boolean, nullable=False)
+    apoiador = Column(Boolean, nullable=False)
+#Infos da prefeitura
     funcao = Column(Text,nullable=True)
     profissao = Column(Text,nullable=True)
     UnidadeBasicadeSaude=Column(Text,nullable=True)
-    CAP=Column(String(4),nullable=True)
+    CAP=Column(Text,nullable=True)
 
     # ONE TO ONE
 
@@ -82,10 +77,10 @@ class Turma(Base):
     Horarios = relationship('Horario', backref="Turma")
 
     # MANY TO MANY
-    Alunos = relationship('Aluno', secondary=alunoXturma,
+    Alunos = relationship('Aluno', secondary='axt',
                           backref=backref('MinhasTurmas', lazy='dynamic'))
     AlunosApoiadores = relationship(
-        'AlunoApoiador', secondary=alunoApoiadoXturma, backref=backref('turmasApoiadas', lazy='dynamic'))
+        'AlunoApoiador', secondary='aaxt', backref=backref('turmasApoiadas', lazy='dynamic'))
 
     def as_dict(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
@@ -106,10 +101,29 @@ class Horario(Base):
 class AlunoApoiador(Base):
     __tablename__ = 'alunoApoiador'
     id_alunoApoiador = Column(Integer, primary_key=True)
-    apoiador_id_turma = Column(Integer, ForeignKey(
-        'turma.id_turma'), nullable=False)
     apoiador_id_user = Column(Integer, ForeignKey(
         'user.Id'), nullable=False, unique=True)
+
+#Tabelas de associação
+
+
+class alunoXturma(Base):
+    __tablename__ = 'axt'
+    axt_id = Column(Integer, primary_key=True)
+    axt_alunoid = Column(Integer, ForeignKey(
+        'aluno.id_aluno'), nullable=False)
+    axt_turmaid = Column(Integer, ForeignKey(
+        'turma.id_turma'), nullable=False, unique=True)
+
+
+class alunoApoiadoXturma(Base):
+    __tablename__ = 'aaxt'
+    aaxt_id = Column(Integer, primary_key=True)
+    aaxt_apoiadorid = Column(Integer, ForeignKey(
+        'alunoApoiador.id_alunoApoiador'), nullable=False)
+    aaxt_turmaid = Column(Integer, ForeignKey(
+        'turma.id_turma'), nullable=False, unique=True)
+
 
 
 class Presenca(Base):

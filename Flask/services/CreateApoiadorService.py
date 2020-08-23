@@ -5,7 +5,7 @@ from sqlalchemy.exc import InternalError
 from database.model.Model import *
 from utilities.loggers import get_logger
 
-#cadastro data = {["email_apoiador", "id_turma"]}
+#cadastro data = {["email_apoiador", "id_turma", idDoPropositor]}
 
 class CreateApoiadorService:
     def execute(self, cadastroData):
@@ -15,16 +15,19 @@ class CreateApoiadorService:
         TuplaUserTurma = session.query(User,Turma).filter(User.email == cadastroData["email_apoiador"], Turma.id_turma == cadastroData["id_turma"]).first()
         
         if not TuplaUserTurma:
-            return {"Error":"Email invalido"}, 502
+            return {"Error":"Email invalido"}, 400
+
+        if not (TuplaUserTurma[1].id_responsavel == cadastroData['idDoPropositor']):
+            return {"Error":"Você não tem permissão para cadastrar um apoiador nessa turma"}, 400
         
         if not (TuplaUserTurma[0].AlunoApoiador):
-            apoiador = AlunoApoiador(apoiador_id_turma=TuplaUserTurma[1].id_turma,apoiador_id_user=TuplaUserTurma[0].Id)
+            apoiador = AlunoApoiador(apoiador_id_user=TuplaUserTurma[0].Id)
             session.add(apoiador)
         else:
             apoiador = TuplaUserTurma[0].AlunoApoiador
 
         if (apoiador in TuplaUserTurma[1].AlunosApoiadores):
-            return {"Error":"Usuario ja é apoiador desta turma!"}, 502
+            return {"Error":"Usuario ja é apoiador desta turma!"}, 400
         TuplaUserTurma[1].AlunosApoiadores.append(apoiador)
         session.commit()
         session.close()

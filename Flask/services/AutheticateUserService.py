@@ -22,7 +22,10 @@ class AutheticateUserService:
             user = {
                 "id": user["Id"],
                 "usuario": user["usuario"],
-                "tipo": user["tipo"]
+                "adm": user["adm"],
+                "propositor": user["propositor"],
+                "gestor": user["gestor"],
+                "coordenador":user["coordenador"]
             }
             expires = timedelta(hours=24)
             access_token = create_access_token(identity=user, expires_delta=expires)
