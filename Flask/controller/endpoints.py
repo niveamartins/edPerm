@@ -26,6 +26,7 @@ from services.TransformarEmPropositorService import TransformarEmPropositorServi
 from services.AtualizarUserService import AtualizarUserService
 from services.CreateTurmaService import CreateTurmaService
 from services.CreateApoiadorService import CreateApoiadorService
+from services.CreateAulaService import CreateAulaService
 from services.CreateHorarioService import CreateHorarioService
 from services.AutheticateUserService import AutheticateUserService
 from services.CadastrarAlunoService import CadastrarAlunoService
@@ -322,7 +323,7 @@ def listaturmapropositor():
 @jwt_required
 def atualizarpresenca():
     presencaData = request.get_json()
-    presencaDataFields = ["emailAluno","idTurma","Horas"]
+    presencaDataFields = ["emailAluno","id_aula"]
 
     if not all(field in presencaData for field in presencaDataFields):
         return {"Error":"Bad Request"}, 400
@@ -444,6 +445,26 @@ def cadastrarhorario():
 
     cadastrarHorario = CreateHorarioService()
     response = cadastrarHorario.execute(horarioData)
+    
+    return jsonify(response)
+
+@blueprint.route("/cadastraraula", methods=['POST'])
+@jwt_required
+def cadastraraula():
+    # Não testado a parte dos Json
+
+    AulaData = request.get_json()
+    AulaDataFields = ["nome_do_curso", "nome_da_aula", "hInicio", "hTermino"]
+
+    user = get_jwt_identity()
+    
+    if not all(field in AulaData for field in AulaDataFields):
+        return {"Error":"Missing information."}, 400
+
+    #horarioData['idPropositor'] = user['id']
+
+    cadastrarAula = CreateAulaService()
+    response = cadastrarAula.execute(AulaData)
     
     return jsonify(response)
 

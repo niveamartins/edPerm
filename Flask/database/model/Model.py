@@ -52,7 +52,7 @@ class Aluno(Base):
         'user.Id'), nullable=False, unique=True)
 
     # ONE TO ONE
-    presencatot = relationship('PresencaTot', backref='alunoDono')
+    presencatotal = relationship('PresencaTotal', backref='alunoDono')
 
     # ONE TO MANY
     presencas = relationship('Presenca', backref='alunoDono')
@@ -74,26 +74,13 @@ class Turma(Base):
     turma_tag = Column(Text, nullable=True)
 
     # ONE TO MANY
-    Horarios = relationship('Horario', backref="Turma")
+    Aulas = relationship('Aula', backref="Turma")
 
     # MANY TO MANY
     Alunos = relationship('Aluno', secondary='axt',
                           backref=backref('MinhasTurmas', lazy='dynamic'))
     AlunosApoiadores = relationship(
         'AlunoApoiador', secondary='aaxt', backref=backref('turmasApoiadas', lazy='dynamic'))
-
-    def as_dict(self):
-        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
-
-
-class Horario(Base):
-    __tablename__ = 'horario'
-    id_horario = Column(Integer, primary_key=True)
-    HorarioIdTurma = Column(Integer, ForeignKey(
-        'turma.id_turma'), nullable=False)
-    DiaDaSemana = Column(String(20), nullable=False)
-    HorarioInicio = Column(Time, nullable=False)
-    HorarioTermino = Column(Time, nullable=False)
 
     def as_dict(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
@@ -125,25 +112,35 @@ class alunoApoiadoXturma(Base):
         'turma.id_turma'), nullable=False, unique=True)
 
 
+class Aula(Base):
+    __tablename__ = 'aula'
+    id_aula = Column(Integer, primary_key=True)
+    nome_da_aula = Column(Text, nullable=False)
+    aula_id_turma = Column(Integer, ForeignKey('turma.id_turma'), nullable=False)
+    hora_de_inicio = Column(DateTime, nullable=False)
+    hora_de_termino = Column(DateTime, nullable=False)
+
 
 class Presenca(Base):
     __tablename__ = 'presenca'
     id_presenca = Column(Integer, primary_key=True)
     presenca_id_aluno = Column(Integer, ForeignKey('aluno.id_aluno'), nullable=False)
-    presenca_id_turma = Column(Integer, ForeignKey('turma.id_turma'), nullable=False)
+    presenca_id_aula = Column(Integer, ForeignKey('aula.id_aula'), nullable=False)
     CheckIn = Column(DateTime, nullable=True)
-    presencaValidade = Column(Boolean, nullable=True)
 
     def as_dict(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
 
-class PresencaTot(Base):
-    __tablename__ = 'presencatot'
-    id_presencatot = Column(Integer, primary_key=True)
-    presencatot_id_aluno = Column(Integer, ForeignKey('aluno.id_aluno'), nullable=False)
-    presencatot_id_turma = Column(Integer, ForeignKey('turma.id_turma'), nullable=False)
-    presenca_total = Column(Interval, nullable=False, default=timedelta(seconds=0))
+class PresencaTotal(Base):
+    __tablename__ = 'presencatotal'
+    id_presencatotal = Column(Integer, primary_key=True)
+    presencatotal_id_aluno = Column(Integer, ForeignKey('aluno.id_aluno'), nullable=False)
+    presencatotal_id_turma = Column(Integer, ForeignKey('turma.id_turma'), nullable=False)
+    numero_de_presencas = Column(Integer, nullable=False)
+    horas = Column(Integer, nullable=False)
+    minutos = Column(Integer, nullable=False)
+    segundos = Column(Integer, nullable=False)
 
 
 class LinkCadastramento(Base):
