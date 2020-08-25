@@ -13,6 +13,9 @@ class CadastrarAlunoService:
         if not TuplaUserTurma:
             return {"Error":"Usuário invalido"}, 400
 
+        if not(TuplaUserTurma[0].Id == cadastroData["id"] and TuplaUserTurma[0].cpf == cadastroData["cpfAluno"]):
+            return {"Error":"Cpf não pertence ao usuario logado"}, 400
+
         if not(TuplaUserTurma[0].Aluno):
             aluno = Aluno(alunoUser=TuplaUserTurma[0])
             session.add(aluno)

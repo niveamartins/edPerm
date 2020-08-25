@@ -51,7 +51,7 @@ class Aluno(Base):
     alunos_id_user = Column(Integer, ForeignKey(
         'user.Id'), nullable=False, unique=True)
 
-    # ONE TO ONE
+    # ONE TO MANY
     presencatotal = relationship('PresencaTotal', backref='alunoDono')
 
     # ONE TO MANY
@@ -75,6 +75,8 @@ class Turma(Base):
 
     # ONE TO MANY
     Aulas = relationship('Aula', backref="Turma")
+
+    Presencastotais = relationship('PresencaTotal', backref="Turma")
 
     # MANY TO MANY
     Alunos = relationship('Aluno', secondary='axt',
@@ -100,7 +102,7 @@ class alunoXturma(Base):
     axt_alunoid = Column(Integer, ForeignKey(
         'aluno.id_aluno'), nullable=False)
     axt_turmaid = Column(Integer, ForeignKey(
-        'turma.id_turma'), nullable=False, unique=True)
+        'turma.id_turma'), nullable=False)
 
 
 class alunoApoiadoXturma(Base):
@@ -109,7 +111,7 @@ class alunoApoiadoXturma(Base):
     aaxt_apoiadorid = Column(Integer, ForeignKey(
         'alunoApoiador.id_alunoApoiador'), nullable=False)
     aaxt_turmaid = Column(Integer, ForeignKey(
-        'turma.id_turma'), nullable=False, unique=True)
+        'turma.id_turma'), nullable=False)
 
 
 class Aula(Base):

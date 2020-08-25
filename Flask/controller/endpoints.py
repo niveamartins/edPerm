@@ -31,6 +31,8 @@ from services.CreateHorarioService import CreateHorarioService
 from services.AutheticateUserService import AutheticateUserService
 from services.CadastrarAlunoService import CadastrarAlunoService
 from services.ListTurmaService import ListTurmaService
+from services.ListPresencaTotalService import ListPresencaTotalService
+from services.ListAulaService import ListAulaService
 from services.ListUserService import ListUserService
 from services.ListTurmaApoiadorService import ListTurmaApoiadorService
 from services.ListTurmaAlunoService import ListTurmaAlunoService
@@ -291,6 +293,34 @@ def listarturmaapoiador():
     ListTurma = ListTurmaApoiadorService()
     Turma = ListTurma.execute(apoiadorData)
     return jsonify(Turma)
+
+@blueprint.route("/listaraulas", methods=['Post'])
+@jwt_required
+def listaraulas():
+    turmaData = request.get_json()
+    turmaDataFields = ["nome_do_curso"]
+
+    if not all(field in turmaData for field in turmaDataFields):
+        return {"Error":"Missing information."}, 400
+
+    ListAula = ListAulaService()
+    Aulas = ListAula.execute(turmaData)
+    return jsonify(Aulas)
+
+
+
+@blueprint.route("/listarPresencaTotal", methods=['Post'])
+@jwt_required
+def listarPresencaTotal():
+    turmaData = request.get_json()
+    turmaDataFields = ["nome_do_curso"]
+
+    if not all(field in turmaData for field in turmaDataFields):
+        return {"Error":"Missing information."}, 400
+
+    ListPresencas = ListPresencaTotalService()
+    Presencas = ListPresencas.execute(turmaData)
+    return jsonify(Presencas)
 
 @blueprint.route("/listaturmaaluno", methods=['Post'])
 @jwt_required

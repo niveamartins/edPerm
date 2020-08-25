@@ -63,7 +63,7 @@ class AtualizarUserService:
                 user.telefone = userData['telefone']
 
             if not(userData['nome'] == ""):
-                user.tipo = userData['nome']
+                user.nome = userData['nome']
 
             if not(userData['funcao'] == ""):
                 user.funcao = userData['funcao']
