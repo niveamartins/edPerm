@@ -49,33 +49,38 @@ class CreatePresencaService:
         presencatotal_id_turma=QueryTurma.id_turma).first()
 
         
-        #if not QueryPresencatotal:
-        #    return {"Error":"Error inesperado, contate o suporte"}, 400
-#
- #       totaldapresenca = (datetime.now() < TuplaUserAula[1].hora_de_inicio).total_seconds()
-#
- #       segundostotal = totaldapresenca%60
-  #      minutostotal = (totaldapresenca - segundostotal)/60
-   #     segundostotal = QueryPresencatotal.segundos + segundostotal
-#
- #       if(segundostotal >= 60):
-  #          seguntostotal = segundostotal - 60
-   #         totaldapresenca = minutostotal + 1
-#
- #       horastotal = minutostotal
- #       minutostotal = minutostotal%60
-  #      horastotal = (horastotal - minutostotal)/60
-#
- #       
-#
- #       QueryPresencatotal.numero_de_presencas = QueryPresencatotal.numero_de_presencas + 1
-#
- #       QueryPresencatotal.segundos = QueryPresencatotal.segundos + segundostotal
-#
- #       QueryPresencatotal.minutos = QueryPresencatotal.minutos
-#
- #       QueryPresencatotal.horas = QueryPresencatotal.horas
-        
+        if not QueryPresencatotal:
+            return {"Error":"Error inesperado, contate o suporte"}, 400
 
+
+        totaldapresenca = (TuplaUserAula[1].hora_de_termino - datetime.now()).total_seconds()
+        totaldapresenca = int(totaldapresenca)
+        segundostotal = totaldapresenca%60
+        minutostotal = int((totaldapresenca - segundostotal)/60)
+        segundostotal = QueryPresencatotal.segundos + segundostotal
+        if(segundostotal >= 60):
+            segundostotal = segundostotal - 60
+            minutostotal = minutostotal + 1
+
+        horastotal = minutostotal
+        minutostotal = minutostotal%60
+        horastotal = int((horastotal - minutostotal)/60)
+        minutostotal = minutostotal + QueryPresencatotal.minutos
+
+        if(minutostotal >= 60):
+            minutostotal = minutostotal - 60
+            horastotal = horastotal + 1
+        horastotal = horastotal + QueryPresencatotal.horas
+
+        QueryPresencatotal.numero_de_presencas = QueryPresencatotal.numero_de_presencas + 1
+ 
+
+        QueryPresencatotal.segundos = int(segundostotal)
+
+        QueryPresencatotal.minutos = int(minutostotal)
+
+        QueryPresencatotal.horas = int(horastotal)
+        
+        session.commit()
         session.close()
         return {"Sucess":"Presenca cadastrada"}
