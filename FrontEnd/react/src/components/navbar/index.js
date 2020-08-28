@@ -9,13 +9,13 @@ import LogoEduca from "../../assets/img/logo.png"
 import LogoPrefeitura from '../../assets/img/LogoPref.png'
 import Logout from '../../assets/img/IconePower.png'
 // irá mudar após Sandra mandar ícone
-import Home from '../../assets/img/IconeCheckmark.png'
+import Home from '../../assets/img/IconeHome.png'
 export class NavBar extends Component {
 	render() {
 		let icons = (
 			<div className="nav-icons-container">
 				<Link to="/" title="Página inicial">
-					<img src={Home} alt="Ícone Home" className="nav-icons"></img>
+					<img src={Home} alt="Ícone Home" id="home" className="nav-icons"></img>
 				</Link>
 				<Acessibility />
 				<Link to="/login" title="Sair">

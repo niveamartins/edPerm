@@ -3,6 +3,8 @@ import React, { Fragment, useState, useEffect } from "react"
 import { NavBar } from "../../navbar"
 
 import api from "../../../services/api"
+
+import Download from '../../../assets/img/IconeDownload.png'
 import "./dadosPessoais.css"
 
 const QRCode = require("qrcode.react")
@@ -46,7 +48,7 @@ function DadosPessoais() {
 					value="qr-code"
 				/>
 				<a className="download-QR__button" onClick={downloadQR}>
-					Faça download do QR Code
+				<img src={Download} alt="Icone download" className="download-icon"></img>Faça download do QR Code
 				</a>
 			</div>
 		)

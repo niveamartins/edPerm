@@ -82,6 +82,12 @@ body .bold {
 	}
 }
 
+@media (max-width: 480px) {
+	.grid-container {
+		grid-template-rows: 60px 1fr;
+	}
+}
+
 header {
 	grid-area: header;
 	background-color: var(--elements-color);

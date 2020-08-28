@@ -2,16 +2,11 @@ import React, { Fragment, useState, useEffect } from "react"
 import { Link } from "../../../../node_modules/react-router-dom"
 
 // icons
-import Create from "@material-ui/icons/Create"
-import Class from "@material-ui/icons/Class"
-import Done from "@material-ui/icons/Done"
-import AccountCircle from "@material-ui/icons/AccountCircle"
-
-// icons
 import Checkmark from "../../../assets/img/IconeCheckmark.png"
 import Lapis from "../../../assets/img/IconeLapis.png"
 import Pessoa from "../../../assets/img/IconePessoa.png"
 import Turmas from "../../../assets/img/IconeTurmas.png"
+import Download from '../../../assets/img/IconeDownload.png'
 
 import api from "../../../services/api"
 import { NavBar } from "../../navbar"
@@ -53,7 +48,7 @@ function Perfil() {
 			<div className="QR-container">
 				<QRCode value={dadosQR} size="300" id="qr-code" value="qr-code" />
 				<a className="download-QR__button" onClick={downloadQR}>
-					Faça download do QR Code
+				<img src={Download} alt="Icone download" className="download-icon"></img>Faça download do QR Code
 				</a>
 			</div>
 		)

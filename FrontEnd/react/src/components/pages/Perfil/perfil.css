@@ -16,6 +16,16 @@
    cursor: pointer;
 }
 
+.download-QR__button {
+	display: flex;
+	align-items: center;
+}
+
+.download-icon {
+	width: 20px;
+	margin-right: 5px;
+}
+
 @media (max-width: 950px) {
 	.profile__container {
 	  justify-content: center;
