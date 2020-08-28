@@ -4,6 +4,7 @@ import { Link } from "../../../../node_modules/react-router-dom"
 
 import api from "../../../services/api"
 import { NavBar } from "../../navbar"
+import { HomeButton } from '../../HomeButton'
 
 import "../ListarTurmas/listarTurmas.css"
 
@@ -102,6 +103,7 @@ function ListarTurmas() {
 					{getTurmasContent(turmasAluno)}
 				</div>
 			</main>
+			<HomeButton />
 		</Fragment>
 	)
 }

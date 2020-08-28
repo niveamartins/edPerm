@@ -13,6 +13,7 @@ import api from "../../../services/api"
 
 // import { Link } from './node_modules/react-router-dom';
 import { NavBar } from "../../navbar"
+import { HomeButton } from '../../HomeButton'
 
 function CadastrarTurma() {
 	const responsavel = localStorage.getItem("user_id")
@@ -200,6 +201,7 @@ function CadastrarTurma() {
 					</div>
 				</main>
 			</main>
+			<HomeButton />
 		</Fragment>
 	)
 }

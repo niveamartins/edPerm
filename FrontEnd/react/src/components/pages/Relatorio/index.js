@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react"
 
 import { NavBar } from "../../navbar"
+import { HomeButton } from '../../HomeButton'
 
 import "./relatorio.css"
 
@@ -80,6 +81,7 @@ function Relatorio(props) {
 							</div>
 						</div>
 					</main>
+					<HomeButton />
 				</Fragment>
 			)
 
@@ -143,6 +145,7 @@ function Relatorio(props) {
 							<ul>{getCPFContent(relatorio)}</ul>
 						</div>
 					</main>
+					<HomeButton />
 				</Fragment>
 			)
 
@@ -211,6 +214,7 @@ function Relatorio(props) {
 							<ul>{getFrequenciaContent(relatorio)}</ul>
 						</div>
 					</main>
+					<HomeButton />
 				</Fragment>
 			)
 

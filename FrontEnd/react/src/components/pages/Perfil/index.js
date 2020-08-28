@@ -10,6 +10,7 @@ import Download from '../../../assets/img/IconeDownload.png'
 
 import api from "../../../services/api"
 import { NavBar } from "../../navbar"
+import { HomeButton } from '../../HomeButton'
 
 import "./perfil.css"
 
@@ -113,6 +114,7 @@ function Perfil() {
 					</div>
 				</div>
 			</main>
+			<HomeButton />
 		</Fragment>
 	)
 }

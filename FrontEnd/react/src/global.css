@@ -69,25 +69,6 @@ body .bold {
 	grid-template-areas: "header" "main";
 }
 
-/* smaller header on mobile */
-@media (max-width: 830px) {
-	.grid-container {
-		grid-template-rows: 90px 1fr;
-	}
-}
-
-@media (max-width: 680px) {
-	.grid-container {
-		grid-template-rows: 70px 1fr;
-	}
-}
-
-@media (max-width: 480px) {
-	.grid-container {
-		grid-template-rows: 60px 1fr;
-	}
-}
-
 header {
 	grid-area: header;
 	background-color: var(--elements-color);
@@ -164,14 +145,6 @@ a {
 .form-container form h1 {
 	font-family: "gadugi-bold";
 	margin: -10px 0;
-}
-
-/* mobile */
-@media (max-width: 500px) {
-	.form-container,
-	.main-content-forms {
-		transform: scale(0.9);
-	}
 }
 
 #data {
@@ -506,6 +479,13 @@ button:disabled label {
 	}
 }
 
+/* smaller header on mobile */
+@media (max-width: 830px) {
+	.grid-container {
+		grid-template-rows: 90px 1fr;
+	}
+}
+
 /* Tablets and smaller */
 @media only screen and (max-width: 760px) {
 	#help {
@@ -513,3 +493,35 @@ button:disabled label {
 		left: 10%;
 	}
 }
+
+@media (max-width: 680px) {
+	.grid-container {
+		grid-template-rows: 70px 1fr;
+	}
+}
+
+@media (max-width: 480px) {
+	.grid-container {
+		grid-template-rows: 60px 1fr;
+	}
+
+	.form-container,
+	.main-content-forms {
+		transform: scale(0.9);
+	}
+}
+
+/* margin-top singup */
+@media (max-width: 510px) {
+	.form-page-container.cad-user {
+		margin-top: -2rem;
+	}
+}
+	
+/* IPhone 5/SE */
+@media (max-width: 350px) {
+	.form-page-container {
+		margin-left: -35px;
+	}
+}
+

@@ -23,6 +23,7 @@ import { userType } from "./data/userData"
 import "./cadUsuario.css"
 
 function Inicio() {
+	const [nome, setNome] = useState("")
 	const [usuario, setUsuario] = useState("")
 	const [email, setEmail] = useState("")
 	const [senha, setSenha] = useState("")
@@ -58,6 +59,7 @@ function Inicio() {
 		e.preventDefault()
 
 		const data = {
+			nome,
 			usuario,
 			email,
 			senha,
@@ -144,6 +146,17 @@ function Inicio() {
 								<p>
 									Efetue cadastro para utilização de nossas funcionalidades.
 								</p>
+								<input
+									type="text"
+									name="nome"
+									className="form-input"
+									placeholder="Nome Completo"
+									value={nome}
+									required
+									onChange={(e) => {
+										setNome(e.target.value)
+									}}
+								/>
 								<input
 									type="text"
 									name="usuario"

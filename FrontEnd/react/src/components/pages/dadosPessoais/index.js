@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react"
 // import AddIcon from '@material-ui/icons/Add';
 import { NavBar } from "../../navbar"
+import { HomeButton } from '../../HomeButton'
 
 import api from "../../../services/api"
 
@@ -116,6 +117,7 @@ function DadosPessoais() {
 					<div className="card">{getDadosContent(dados)}</div>
 				</div>
 			</main>
+			<HomeButton />
 		</Fragment>
 	)
 }

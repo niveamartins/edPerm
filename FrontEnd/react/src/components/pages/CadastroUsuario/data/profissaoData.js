@@ -36,6 +36,7 @@ export const profissaoCargo = [
       { label: "Pesquisadora", value: "pesquisador" },
       { label: "Auxiliar/Técnico de Portaria/Recepção", value: "portaria" },
       { label: "Psicólogo", value: "psicologo" },
+      { label: "Residente", value: "residente" },
       { label: "Sanitarista", value: "sanitarista" },
       { label: "Técnico de Enfermagem", value: "tecnicoenfermagem" },
       { label: "Técnico de Laboratório", value: "tecnicolaboratorio" },
@@ -45,6 +46,7 @@ export const profissaoCargo = [
       { label: "Terapeuta", value: "terapeuta" },
       { label: "Trabalhador (cargo)", value: "trabalhador" },
       { label: "Veterinário", value: "veterinario" },
+      { label: "Outra", value: "outra" }
    ]
 
 export const profissaoChefia = [
