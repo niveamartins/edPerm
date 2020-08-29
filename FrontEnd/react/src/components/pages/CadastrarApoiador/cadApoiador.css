@@ -1,0 +1,6 @@
+@media (max-width: 400px) {
+	.form-page-container.apoiador,
+	.form-container.apoiador {
+		width: 320px!important;
+	}
+}

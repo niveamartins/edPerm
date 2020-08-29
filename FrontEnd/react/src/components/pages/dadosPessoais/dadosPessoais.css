@@ -1,6 +1,7 @@
 .QR-container {
    display: flex;
    flex-direction: column;
+   flex-wrap: wrap;
    padding: 20px 20px 10px 20px;
 }
 
@@ -12,4 +13,10 @@
    font-size: 1.1em;
    margin: 10px 0;
 	color: var(--elements-color);
+}
+
+@media (max-width: 480px) {
+	.card.dados-pessoais {
+      margin-top: -10px;
+   }
 }

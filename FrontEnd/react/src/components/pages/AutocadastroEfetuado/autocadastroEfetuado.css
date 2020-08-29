@@ -12,3 +12,29 @@
    color: var(--elements-color);
 }
 
+
+@media (max-width: 500px) {
+   .card-concluido.auto-cad {
+		height: 500px;
+   }
+
+   .card-concluido__header h3 {
+      font-size: 1.8em;
+   }
+   
+   .card-concluido h4.subtitle {
+      margin-top: 10px;
+      font-size: 1.1em;
+   }
+
+	.profile__container-buttons.auto-cad {
+      display: flex;
+      flex-direction: column;
+   }
+
+   .profile__container-buttons.auto-cad button {
+      width: 100%;
+      transform: scale(0.9);
+   }
+}
+

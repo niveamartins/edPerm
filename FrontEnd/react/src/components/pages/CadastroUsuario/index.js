@@ -364,7 +364,8 @@ function Inicio() {
 
 								<input type="submit" className="button" value="cadastrar" />
 								<Link to="/login">
-									Já possui uma conta?{" "}
+									Já possui uma conta?
+									<br/>
 									<span className="form-highlight cad-user">Faça login</span>
 								</Link>
 							</form>

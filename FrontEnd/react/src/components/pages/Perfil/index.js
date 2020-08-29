@@ -44,10 +44,12 @@ function Perfil() {
 
 		dadosQR = JSON.stringify(dadosQR)
 
+		const sizeQR = 300
+
 		let content = []
 		content.push(
 			<div className="QR-container">
-				<QRCode value={dadosQR} size="300" id="qr-code" value="qr-code" />
+				<QRCode value={dadosQR} size={sizeQR} id="qr-code" value="qr-code" />
 				<a className="download-QR__button" onClick={downloadQR}>
 				<img src={Download} alt="Icone download" className="download-icon"></img>Faça download do QR Code
 				</a>
@@ -82,7 +84,7 @@ function Perfil() {
 							Visualize suas informações pessoais nesta página
 						</p>
 						<p className="subtitle-qr bold">Seu QR Code de acesso:</p>
-						<div className="card">{createQR(dados)}</div>
+						<div className="card qr-code">{createQR(dados)}</div>
 						<div className="profile__container-buttons">
 							<Link to="/editarDados">
 								<button size="large" class="personal-buttons bold" disabled>

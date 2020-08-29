@@ -38,13 +38,14 @@ function DadosPessoais() {
 		}
 
 		a = JSON.stringify(a)
+		const sizeQR = 300
 
 		let content = []
 		content.push(
 			<div className="QR-container">
 				<QRCode
 					value={a}
-					size="300"
+					size={sizeQR}
 					id="qr-code"
 					value="qr-code"
 				/>
@@ -114,7 +115,7 @@ function DadosPessoais() {
 			<main className="main">
 				<div className="card-container dados-pessoais">
 					<div className="card">{createQR(dados)}</div>
-					<div className="card">{getDadosContent(dados)}</div>
+					<div className="card dados-pessoais">{getDadosContent(dados)}</div>
 				</div>
 			</main>
 			<HomeButton />

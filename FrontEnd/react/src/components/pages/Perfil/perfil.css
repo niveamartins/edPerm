@@ -97,6 +97,12 @@
 		margin-left: 0px;
 		margin-right: 0px;
 	}
+
+	.card.qr-code,
+	.QR-container {
+		transform: scale(1);
+	}
+
 	.profile__container h1 {
 		margin-top: -20%;
 	}

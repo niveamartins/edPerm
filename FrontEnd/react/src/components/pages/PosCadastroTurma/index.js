@@ -38,7 +38,7 @@ function Inicio(props) {
 				<div className="card-concluido">
 					<div className="card-concluido__header">
 						<h3>Turma cadastrada com sucesso!</h3>
-                  <DoneIcon />
+                  <DoneIcon id="done-icon"/>
 					</div>
 					<p>Utilize o link abaixo para que alunos se inscrevam na turma:</p>
 					<div className="card-concluido__link">
