@@ -33,4 +33,16 @@ form {
     width: 100%;
 }
   
+.selected-tags__container {
+    width: 100%;
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
 
+p.selected-tags {
+    color: var(--elements-color);
+    margin-top: 5px!important;
+    margin-right: -15px!important;
+}

@@ -279,6 +279,13 @@ button:disabled label {
 	cursor: pointer;
 }
 
+/* select */
+label.select-input__label {
+	margin-top: 6px;
+	width: 100%;
+	text-align: start;
+}
+
 /* Cards */
 
 /* Cards */
