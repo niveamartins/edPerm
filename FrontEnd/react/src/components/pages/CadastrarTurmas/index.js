@@ -83,6 +83,11 @@ function CadastrarTurma() {
 	]
 
 	const profissaoAdapted = profissaoCargo.filter((profissao) => profissao.value)
+	profissaoAdapted.push({ label: "Selecione seu público alvo", value: "" })
+
+	useEffect(() => {
+		console.log(turma_tag)
+	}, [turma_tag])
 
 	const BootstrapInput = withStyles((theme) => ({
 		root: {
@@ -186,16 +191,18 @@ function CadastrarTurma() {
 										})}
 									</NativeSelect>
 								</FormControl>
+
 								<label for="select-publico" className="select-input__label">
 									Selecione o público alvo
 								</label>
+
+								{/* multiple */}
 								<FormControl>
-									<Select
+									<NativeSelect
 										id="select-publico"
 										value={turma_tag}
 										onChange={(e) => setTag(e.target.value)}
 										input={<BootstrapInput />}
-										multiple
 										required
 									>
 										{profissaoAdapted.map((option) => {
@@ -203,13 +210,13 @@ function CadastrarTurma() {
 												<option value={option.value}>{option.label}</option>
 											)
 										})}
-									</Select>
+									</NativeSelect>
 								</FormControl>
-								<div className="selected-tags__container">
-									{turma_tag.map((tag) => (
+								{/* <div className="selected-tags__container">
+									{turma_tag && turma_tag.map((tag) => (
 										<p className="selected-tags">{tag}; </p>
 									))}
-								</div>
+								</div> */}
 								<input
 									type="submit"
 									className="button bold"
