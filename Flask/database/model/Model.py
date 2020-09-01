@@ -71,7 +71,6 @@ class Turma(Base):
     carga_horaria_total = Column(Integer, nullable=False)
     tolerancia = Column(Integer, nullable=False)
     modalidade = Column(Text, nullable=False)
-    turma_tag = Column(Text, nullable=True)
 
     # ONE TO MANY
     Aulas = relationship('Aula', backref="Turma")
@@ -79,13 +78,20 @@ class Turma(Base):
     Presencastotais = relationship('PresencaTotal', backref="Turma")
 
     # MANY TO MANY
-    Alunos = relationship('Aluno', secondary='axt',
-                          backref=backref('MinhasTurmas', lazy='dynamic'))
+    Alunos = relationship('Aluno', secondary='axt', backref=backref('MinhasTurmas', lazy='dynamic'))
     AlunosApoiadores = relationship(
         'AlunoApoiador', secondary='aaxt', backref=backref('turmasApoiadas', lazy='dynamic'))
+    PublicosAlvo = relationship(
+        'PublicoAlvo', secondary='paxt', backref=backref('turmasPublicoAlvo', lazy='dynamic'))
 
     def as_dict(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
+class PublicoAlvo(Base):
+    __tablename__ = 'publicoAlvo'
+    id_publicoAlvo = Column(Integer, primary_key=True)
+    nome_publicoAlvo = Column(Text, nullable=False)
+
 
 class AlunoApoiador(Base):
     __tablename__ = 'alunoApoiador'
@@ -111,6 +117,15 @@ class alunoApoiadoXturma(Base):
     aaxt_apoiadorid = Column(Integer, ForeignKey(
         'alunoApoiador.id_alunoApoiador'), nullable=False)
     aaxt_turmaid = Column(Integer, ForeignKey(
+        'turma.id_turma'), nullable=False)
+
+
+class publicoAlvoXturma(Base):
+    __tablename__ = 'paxt'
+    paxt_id = Column(Integer, primary_key=True)
+    paxt_publicoAlvoid = Column(Integer, ForeignKey(
+        'publicoAlvo.id_publicoAlvo'), nullable=False)
+    paxt_turmaid = Column(Integer, ForeignKey(
         'turma.id_turma'), nullable=False)
 
 

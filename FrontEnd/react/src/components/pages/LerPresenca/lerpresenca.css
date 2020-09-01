@@ -58,7 +58,9 @@
         width: 90%;
     }
     .card.qr-reader {
-        width: 90%;
+        width: 80%;
+        margin: auto;
+        margin-top: 20px;
     }
 
     .qr-reader__card {

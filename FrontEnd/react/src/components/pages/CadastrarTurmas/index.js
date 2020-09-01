@@ -1,32 +1,37 @@
-import React, { Fragment, useState } from "react"
+import React, { Fragment, useState, useEffect } from "react"
 import { useHistory } from "react-router-dom"
-import { Redirect } from 'react-router-dom'
+import { Redirect } from "react-router-dom"
 
-import {  withStyles } from "@material-ui/core/styles"
+import { withStyles } from "@material-ui/core/styles"
 import InputLabel from "@material-ui/core/InputLabel"
 import FormControl from "@material-ui/core/FormControl"
 import NativeSelect from "@material-ui/core/NativeSelect"
+import Select from "@material-ui/core/Select"
+import Checkbox from "@material-ui/core/Checkbox"
 import InputBase from "@material-ui/core/InputBase"
 
 import "./cadastroTurma.css"
 import api from "../../../services/api"
+import { profissaoCargo } from "../CadastroUsuario/data/profissaoData"
 
 // import { Link } from './node_modules/react-router-dom';
 import { NavBar } from "../../navbar"
+import { HomeButton } from "../../HomeButton"
 
 function CadastrarTurma() {
 	const responsavel = localStorage.getItem("user_id")
 	const user_type = localStorage.getItem("user_type")
 
 	let redirectIfNotAuth = null
-	if (user_type == "cursista" || user_type == "apoiador") redirectIfNotAuth = <Redirect to="/" />
+	if (user_type == "cursista" || user_type == "apoiador")
+		redirectIfNotAuth = <Redirect to="/" />
 
 	const [nome_do_curso, setTurma] = useState("")
 	const [carga_horaria_total, setCarga] = useState("")
 	// campos iniciais no select (tolerancia e modalidade)
 	const [tolerancia, setTolerancia] = useState("75")
 	const [modalidade, setModalidade] = useState("presencial")
-	const [turma_tag, setTag] = useState("")
+	const [turma_tag, setTag] = useState([])
 
 	const history = useHistory()
 
@@ -77,11 +82,18 @@ function CadastrarTurma() {
 		{ value: "distancia", label: "A distância" },
 	]
 
+	const profissaoAdapted = profissaoCargo.filter((profissao) => profissao.value)
+	profissaoAdapted.push({ label: "Selecione seu público alvo", value: "" })
+
+	useEffect(() => {
+		console.log(turma_tag)
+	}, [turma_tag])
+
 	const BootstrapInput = withStyles((theme) => ({
 		root: {
 			"label + &": {
 				marginTop: theme.spacing(3),
-				marginBottom: "10px"
+				marginBottom: "10px",
 			},
 		},
 		input: {
@@ -143,12 +155,12 @@ function CadastrarTurma() {
 									required
 								/>
 
+								<label for="select-tolerancia" className="select-input__label">
+									Selecione a tolerância
+								</label>
 								<FormControl>
-									<InputLabel htmlFor="demo-customized-select-native">
-										Tolerância
-									</InputLabel>
 									<NativeSelect
-										id="demo-customized-select-native"
+										id="select-tolerancia"
 										value={tolerancia}
 										onChange={(e) => setTolerancia(e.target.value)}
 										input={<BootstrapInput />}
@@ -161,13 +173,12 @@ function CadastrarTurma() {
 										})}
 									</NativeSelect>
 								</FormControl>
-
+								<label for="select-modalidade" className="select-input__label">
+									Selecione a modalidade
+								</label>
 								<FormControl>
-									<InputLabel htmlFor="demo-customized-select-native">
-										Modalidade
-									</InputLabel>
 									<NativeSelect
-										id="demo-customized-select-native"
+										id="select-modalidade"
 										value={modalidade}
 										onChange={(e) => setModalidade(e.target.value)}
 										input={<BootstrapInput />}
@@ -181,14 +192,31 @@ function CadastrarTurma() {
 									</NativeSelect>
 								</FormControl>
 
-								<input
-									name="tag"
-									className="form-input"
-									placeholder="Tag"
-									value={turma_tag}
-									onChange={(e) => setTag(e.target.value)}
-									required
-								/>
+								<label for="select-publico" className="select-input__label">
+									Selecione o público alvo
+								</label>
+
+								{/* multiple */}
+								<FormControl>
+									<NativeSelect
+										id="select-publico"
+										value={turma_tag}
+										onChange={(e) => setTag(e.target.value)}
+										input={<BootstrapInput />}
+										required
+									>
+										{profissaoAdapted.map((option) => {
+											return (
+												<option value={option.value}>{option.label}</option>
+											)
+										})}
+									</NativeSelect>
+								</FormControl>
+								{/* <div className="selected-tags__container">
+									{turma_tag && turma_tag.map((tag) => (
+										<p className="selected-tags">{tag}; </p>
+									))}
+								</div> */}
 								<input
 									type="submit"
 									className="button bold"
@@ -200,6 +228,7 @@ function CadastrarTurma() {
 					</div>
 				</main>
 			</main>
+			<HomeButton />
 		</Fragment>
 	)
 }

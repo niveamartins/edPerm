@@ -32,6 +32,7 @@ export class NavBar extends Component {
 			redirectLogoLink = "/login"
 			barHiddenStatus = "invisible"
 		}
+
 		return (
 				<header>
 					<div className="logo">

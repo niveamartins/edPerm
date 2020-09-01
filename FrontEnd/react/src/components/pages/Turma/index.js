@@ -4,6 +4,7 @@ import { Link } from "../../../../node_modules/react-router-dom"
 
 import api from "../../../services/api"
 import { NavBar } from "../../navbar"
+import { HomeButton } from '../../HomeButton'
 
 import "./Turma.css"
 
@@ -149,6 +150,7 @@ function Turma(props) {
 					{darPresenca}
 				</div>
 			</main>
+			<HomeButton />
 		</Fragment>
 	)
 }

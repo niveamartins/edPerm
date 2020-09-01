@@ -47,5 +47,9 @@
 
   .info-turmas {
     margin-top: -20%!important;
-  }  
+  }
+
+  .nav-info-turmas button {
+    transform: scale(0.85);
+  }
 }

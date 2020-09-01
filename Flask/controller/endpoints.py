@@ -66,7 +66,7 @@ def transformaremadm():
 @jwt_required
 def transformaremcoordenador():
     Token = get_jwt_identity()
-    if not(Token['adm'] or Token['coordenador']):
+    if not(Token['adm']):
         return jsonify({"Error": "Você não tem permissão de acessar essa função"}), 400
     userData = request.get_json()
     userDataFields = ["id"]
@@ -84,7 +84,7 @@ def transformaremcoordenador():
 @jwt_required
 def transformaremgestor():
     Token = get_jwt_identity()
-    if not(Token['adm'] or Token['gestor']):
+    if not(Token['adm']):
         return jsonify({"Error": "Você não tem permissão de acessar essa função"}), 400
     userData = request.get_json()
     userDataFields = ["id"]
@@ -102,7 +102,7 @@ def transformaremgestor():
 @jwt_required
 def transformarempropositor():
     Token = get_jwt_identity()
-    if not(Token['adm'] or Token['propositor']):
+    if not(Token['adm']):
         return jsonify({"Error": "Você não tem permissão de acessar essa função"}), 400
     userData = request.get_json()
     userDataFields = ["id"]
@@ -184,6 +184,7 @@ def dados_pessoais():
 def cadastrar():
 
     userData = request.get_json()
+
     userDataFields = ["usuario", "nome", "email", "senha", "cpf", "telefone", "funcao", "profissao", "UnidadeBasicadeSaude", "CAP"]
 
     if not all(field in userData for field in userDataFields):
@@ -234,6 +235,7 @@ def cadastrarturma():
     turmaData = request.get_json()
     turmaDataFields = ["responsavel", "nome_do_curso",
                        "carga_horaria_total", "tolerancia", "modalidade"]
+
 
     if not all(field in turmaData for field in turmaDataFields):
         return {"Error":"Missing information."}, 400

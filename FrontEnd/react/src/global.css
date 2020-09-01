@@ -69,32 +69,16 @@ body .bold {
 	grid-template-areas: "header" "main";
 }
 
-/* smaller header on mobile */
-@media (max-width: 830px) {
-	.grid-container {
-		grid-template-rows: 90px 1fr;
-	}
-}
-
-@media (max-width: 680px) {
-	.grid-container {
-		grid-template-rows: 70px 1fr;
-	}
-}
-
-@media (max-width: 480px) {
-	.grid-container {
-		grid-template-rows: 60px 1fr;
-	}
-}
-
 header {
 	grid-area: header;
 	background-color: var(--elements-color);
+	width: 100vw;
+	position: sticky;
 }
 
 main {
 	grid-area: main;
+	width: 100vw;
 }
 
 main.main {
@@ -164,14 +148,6 @@ a {
 .form-container form h1 {
 	font-family: "gadugi-bold";
 	margin: -10px 0;
-}
-
-/* mobile */
-@media (max-width: 500px) {
-	.form-container,
-	.main-content-forms {
-		transform: scale(0.9);
-	}
 }
 
 #data {
@@ -303,46 +279,52 @@ button:disabled label {
 	cursor: pointer;
 }
 
+/* select */
+label.select-input__label {
+	margin-top: 6px;
+	width: 100%;
+	text-align: start;
+}
+
 /* Cards */
 
 /* Cards */
 
 .card-container,
 .card-container ul {
-  margin-top: var(--margin-cards);
+	margin-top: var(--margin-cards);
 
-  display: flex;
-  justify-content:center;
-  /* break line */
-  flex-wrap: wrap;
-
+	display: flex;
+	justify-content: center;
+	/* break line */
+	flex-wrap: wrap;
 }
 
 .card {
-  position: relative;
-  background: #fff;
-  border-radius: 6px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  transition: all 0.6s cubic-bezier(.25, .8, .25, 1);
-  margin: 1.5em;
+	position: relative;
+	background: #fff;
+	border-radius: 6px;
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+	transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+	margin: 1.5em;
 
-  display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
+	display: flex;
+	justify-content: flex-start;
+	flex-wrap: wrap;
 }
 
 .card:hover {
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
 /* Card content table */
 
 .card-list {
-  font-family: 'Montserrat', sans-serif;
-  width: 400px;
-  padding: 20px;
+	font-family: "Montserrat", sans-serif;
+	width: 400px;
+	padding: 20px;
 
-  /* display: flex;
+	/* display: flex;
   justify-content: center;
   align-items: center; */
 }
@@ -350,78 +332,77 @@ button:disabled label {
 /* icon for going to more detailed page */
 .class-page,
 .student-state {
-  text-decoration: none;
-  color: var(--elements-second-color);
-  font-family: 'Montserrat', sans-serif;    
-  font-weight: bold; 
-  position: absolute;
-  margin-left: 80%;
-  margin-top: -20px;
+	text-decoration: none;
+	color: var(--elements-second-color);
+	font-family: "Montserrat", sans-serif;
+	font-weight: bold;
+	position: absolute;
+	margin-left: 80%;
+	margin-top: -20px;
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .class-page:hover {
-  transform: translateY(-4px);
+	transform: translateY(-4px);
 }
 
 /* more details icon */
-#more-details { 
-  font-size: 40px;
-} 
+#more-details {
+	font-size: 40px;
+}
 
 .card-list .title {
-  font-size: 1.6em;
-  font-weight: bold;
+	font-size: 1.6em;
+	font-weight: bold;
 
-  /* display: flex;
+	/* display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center; */
 }
 
 .card-list tr.tutor {
-  display: flex;
-  justify-content: flex-start;
-  font-size: 1em;
-  padding-bottom: 10px;
+	display: flex;
+	justify-content: flex-start;
+	font-size: 1em;
+	padding-bottom: 10px;
 }
 
 .card-list .tutor__highlight {
-  color: var(--elements-color);
-  font-weight: bold;
+	color: var(--elements-color);
+	font-weight: bold;
 }
 
-.card-list .header, 
+.card-list .header,
 .presence-list .header {
-  padding: 10px;
-  font-size: 1em;
-  font-weight: 300;
-  text-transform: uppercase;
+	padding: 10px;
+	font-size: 1em;
+	font-weight: 300;
+	text-transform: uppercase;
 
-  /* atentar na hora de migrar */
-  display: flex;
-  justify-content: space-between;
-
+	/* atentar na hora de migrar */
+	display: flex;
+	justify-content: space-between;
 }
 
 .card-list tr td,
 .presence-list tr td {
-  font-size: 1.1em;
-  padding: 6px;
+	font-size: 1.1em;
+	padding: 6px;
 }
 
 .card-list tr td.name {
-  padding-right: 2em;
+	padding-right: 2em;
 }
 
 .card-list .value,
 .presence-list .value {
-  color: var(--elements-color);
-  font-family: "gadugi-bold";
-  font-weight: 700;
+	color: var(--elements-color);
+	font-family: "gadugi-bold";
+	font-weight: 700;
 }
 
 /* PRESENCE LIST AND DETAILED CLASS PAGE */
@@ -506,10 +487,58 @@ button:disabled label {
 	}
 }
 
+/* smaller header on mobile */
+@media (max-width: 830px) {
+	.grid-container {
+		grid-template-rows: 90px 1fr;
+	}
+}
+
 /* Tablets and smaller */
 @media only screen and (max-width: 760px) {
 	#help {
 		width: 80%;
 		left: 10%;
+	}
+}
+
+@media (max-width: 680px) {
+	.grid-container {
+		grid-template-rows: 70px 1fr;
+	}
+}
+
+/* margin-top singup */
+@media (max-width: 510px) {
+	.form-page-container.cad-user {
+		margin-top: -2rem;
+	}
+}
+
+@media (max-width: 480px) {
+	.grid-container {
+		grid-template-rows: 60px 1fr;
+	}
+
+	.form-container,
+	.main-content-forms {
+		transform: scale(0.9);
+	}
+
+	.card {
+		margin-bottom: -20px;
+	}
+}
+
+@media (max-width: 400px) {
+	.card-list {
+		width: 100vw;
+		padding: 0;
+	}
+}
+
+@media (max-width: 330px) {
+	a.link-info {
+		left: -35px;
 	}
 }

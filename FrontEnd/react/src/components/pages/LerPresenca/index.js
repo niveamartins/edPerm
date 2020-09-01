@@ -3,6 +3,8 @@ import React, { Component, useState } from "react"
 import QrReader from "react-qr-reader"
 
 import { NavBar } from "../../navbar"
+import { HomeButton } from '../../HomeButton'
+
 import api from "../../../services/api"
 
 import "./lerpresenca.css"
@@ -68,7 +70,6 @@ function LerPresenca(props) {
 	return (
 		<div>
 			<NavBar />
-
 			<main className="qr-reader">
 				<h2 className="qr-reader__title">Leitor de QrCode</h2>
 				<div className="qr-reader__element">
@@ -98,6 +99,7 @@ function LerPresenca(props) {
 				</button>
         </div>
 			</main>
+			<HomeButton />
 		</div>
 	)
 }

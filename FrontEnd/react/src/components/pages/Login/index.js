@@ -92,6 +92,7 @@ function Inicio() {
 								<input type="submit" className="button" value="Login" />
 								<Link to="cadusuario" className="signup">
 									Não possui conta?
+									<br/>
 									<span className="form-highlight"> Cadastre-se!</span>
 								</Link>
 							</form>

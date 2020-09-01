@@ -1,6 +1,7 @@
 import React, { Fragment } from "react"
 
 import { NavBar } from "../../navbar"
+import { HomeButton } from '../../HomeButton'
 import Button from "../../Button"
 
 const opcoesTurmas = () => {
@@ -40,6 +41,7 @@ const opcoesTurmas = () => {
 					/>
 				</div>
 			</main>
+		<HomeButton />
 		</Fragment>
 	)
 }

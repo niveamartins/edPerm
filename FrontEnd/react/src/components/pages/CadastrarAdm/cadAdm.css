@@ -1,4 +1,11 @@
 .form-page-container.adm,
-.form-container .adm {
-   height: 380px;
+.form-container.adm {
+	height: 380px;
+}
+
+@media (max-width: 380px) {
+	.form-page-container.adm,
+	.form-container.adm {
+		width: 300px;
+	}
 }

@@ -3,6 +3,7 @@ import { Link } from '../../../../node_modules/react-router-dom'
 import { Redirect } from 'react-router-dom'
 
 import { NavBar } from "../../navbar"
+import { HomeButton } from '../../HomeButton'
 import CardRelatorio from "./CardRelatorio"
 
 // import ArrowBackIcon from '@material-ui/icons/ArrowBack';
@@ -47,6 +48,7 @@ const relatorios = () => {
 					</Link>
 				</div>
 			</main>
+			<HomeButton />
 		</Fragment>
 	)
 }

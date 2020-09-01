@@ -4,6 +4,17 @@ header {
 	align-items: center;
 }
 
+.sticky {
+	position: fixed;
+	top: 0;
+	width: 100%
+ }
+ 
+ .sticky + main {
+	padding-top: 102px;
+ }
+
+
 .logo {
 	transform: scale(0.8);
 	margin-top: 10px;
@@ -85,12 +96,12 @@ img.nav-logo {
 	}
 
 	.nav-icons {
-		transform: scale(0.7);
+		transform: scale(0.75);
 		margin: 5px 0 0 0;
 	}
 
 	.header-content {
-		margin-left: -80px;
+		margin-left: -90px;
 	}
 }
 
@@ -102,10 +113,12 @@ img.nav-logo {
 	}
 
 	.nav-icons {
+		transform: scale(0.70);
 		margin: 5px -5px 0 0;
 	}
-
+	
 	.header-content {
-		margin-left: -100px;
+		margin-left: -95px;
 	}
+
 }

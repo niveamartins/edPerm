@@ -9,6 +9,7 @@ import NativeSelect from "@material-ui/core/NativeSelect"
 import InputBase from "@material-ui/core/InputBase"
 
 import { NavBar } from "../../navbar"
+import { HomeButton } from '../../HomeButton'
 import "./cadAdm.css"
 
 function CadastrarAdm(props) {
@@ -139,6 +140,7 @@ function CadastrarAdm(props) {
 					</div>
 				</div>
 			</main>
+			<HomeButton />
 		</Fragment>
 	)
 }

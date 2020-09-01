@@ -1,0 +1,15 @@
+.home-desktop-button {
+   position: fixed;
+   right: 5%;
+   bottom: 8%;
+   cursor: pointer;
+   z-index: 10;
+}
+
+.home-desktop-button:hover {
+   transform: translateY(-5px);
+}
+
+.home-desktop-button img {
+   width: 80px;
+}

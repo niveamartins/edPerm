@@ -5,6 +5,8 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack"
 import api from "../../../services/api"
 
 import { NavBar } from "../../navbar"
+import { HomeButton } from '../../HomeButton'
+import './cadApoiador.css'
 
 function CadastrarApoiador(props) {
 	const [email_apoiador, setAluno] = useState("")
@@ -107,6 +109,7 @@ function CadastrarApoiador(props) {
 					</div>
 				</div>
 			</main>
+			<HomeButton />
 		</Fragment>
 	)
 }
