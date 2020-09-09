@@ -17,15 +17,22 @@ from utilities.loggers import get_logger
 from utilities.DateTimes import tradutor
 from services.CreateUserService import CreateUserService
 from services.DeleteApoiadorService import DeleteApoiadorService
+from services.DeleteAlunoService import DeleteAlunoService
 from services.TransformarEmAdmService import TransformarEmAdmService
+from services.TransformarEmApoiadorService import TransformarEmApoiadorService
+from services.TransformarEmCoordenadorService import TransformarEmCoordenadorService
+from services.TransformarEmGestorService import TransformarEmGestorService
+from services.TransformarEmPropositorService import TransformarEmPropositorService
 from services.AtualizarUserService import AtualizarUserService
 from services.CreateTurmaService import CreateTurmaService
-from services.CreateAlunoService import CreateAlunoService
 from services.CreateApoiadorService import CreateApoiadorService
+from services.CreateAulaService import CreateAulaService
 from services.CreateHorarioService import CreateHorarioService
 from services.AutheticateUserService import AutheticateUserService
 from services.CadastrarAlunoService import CadastrarAlunoService
 from services.ListTurmaService import ListTurmaService
+from services.ListPresencaTotalService import ListPresencaTotalService
+from services.ListAulaService import ListAulaService
 from services.ListUserService import ListUserService
 from services.ListTurmaApoiadorService import ListTurmaApoiadorService
 from services.ListTurmaAlunoService import ListTurmaAlunoService
@@ -38,17 +45,92 @@ CORS(blueprint)
 logger = get_logger(sys.argv[0])
 
 @blueprint.route("/transformaremadm", methods=['POST'])
+@jwt_required
 def transformaremadm():
-
+    Token = get_jwt_identity()
+    if not(Token['adm']):
+        return jsonify({"Error": "Você não tem permissão de acessar essa função"}), 400
     userData = request.get_json()
     userDataFields = ["id"]
 
     if not all(field in userData for field in userDataFields):
-        return "Missing information", 400
+        return {"Error":"Missing information."}, 400
 
     transformarEmAdm = TransformarEmAdmService()
 
     user = transformarEmAdm.execute(userData)
+
+    return jsonify(user)
+
+@blueprint.route("/transformaremcoordenador", methods=['POST'])
+@jwt_required
+def transformaremcoordenador():
+    Token = get_jwt_identity()
+    if not(Token['adm']):
+        return jsonify({"Error": "Você não tem permissão de acessar essa função"}), 400
+    userData = request.get_json()
+    userDataFields = ["id"]
+
+    if not all(field in userData for field in userDataFields):
+        return {"Error":"Missing information."}, 400
+
+    transformaremcoordenador = TransformarEmCoordenadorService()
+
+    user = transformaremcoordenador.execute(userData)
+
+    return jsonify(user)
+
+@blueprint.route("/transformaremgestor", methods=['POST'])
+@jwt_required
+def transformaremgestor():
+    Token = get_jwt_identity()
+    if not(Token['adm']):
+        return jsonify({"Error": "Você não tem permissão de acessar essa função"}), 400
+    userData = request.get_json()
+    userDataFields = ["id"]
+
+    if not all(field in userData for field in userDataFields):
+        return {"Error":"Missing information."}, 400
+
+    transformaremgestor = TransformarEmGestorService()
+
+    user = transformaremgestor.execute(userData)
+
+    return jsonify(user)
+
+@blueprint.route("/transformarempropositor", methods=['POST'])
+@jwt_required
+def transformarempropositor():
+    Token = get_jwt_identity()
+    if not(Token['adm']):
+        return jsonify({"Error": "Você não tem permissão de acessar essa função"}), 400
+    userData = request.get_json()
+    userDataFields = ["id"]
+
+    if not all(field in userData for field in userDataFields):
+        return {"Error":"Missing information."}, 400
+
+    transformarempropositor = TransformarEmPropositorService()
+
+    user = transformarempropositor.execute(userData)
+
+    return jsonify(user)
+
+@blueprint.route("/transformaremapoiador", methods=['POST'])
+@jwt_required
+def transformaremapoiador():
+    Token = get_jwt_identity()
+    if not(Token['adm'] or Token['coordenador'] or Token['propositor'] or Token['gestor']):
+        return jsonify({"Error": "Você não tem permissão de acessar essa função"}), 400
+    userData = request.get_json()
+    userDataFields = ["id"]
+
+    if not all(field in userData for field in userDataFields):
+        return {"Error":"Missing information."}, 400
+
+    transformaremapoiador = TransformarEmApoiadorService()
+
+    user = transformaremapoiador.execute(userData)
 
     return jsonify(user)
 
@@ -67,14 +149,14 @@ def esqueci_():
 @blueprint.route("/logar", methods=['POST'])
 def logar():
     if not request.is_json:
-        return jsonify({"msg": "Missing JSON in request"}), 400
+        return jsonify({"Error": "Missing JSON in request"}), 400
 
     usuario = request.json.get('usuario', None)
     senha = request.json.get('senha', None)
     if not usuario:
-        return jsonify({"msg": "Missing usuario parameter"}), 400
+        return jsonify({"Error": "Missing usuario parameter"}), 400
     if not senha:
-        return jsonify({"msg": "Missing senha parameter"}), 400
+        return jsonify({"Error": "Missing senha parameter"}), 400
     authenticateUser = AutheticateUserService()
     response = authenticateUser.execute(usuario, senha)
     return jsonify(response), 200
@@ -102,10 +184,11 @@ def dados_pessoais():
 def cadastrar():
 
     userData = request.get_json()
-    userDataFields = ["usuario", "email", "senha", "cpf", "telefone", "tipo", "funcao", "profissao", "UnidadeBasicadeSaude", "CAP"]
+
+    userDataFields = ["usuario", "nome", "email", "senha", "cpf", "telefone", "funcao", "profissao", "UnidadeBasicadeSaude", "CAP"]
 
     if not all(field in userData for field in userDataFields):
-        return "Missing information", 400
+        return {"Error":"Missing information."}, 400
 
     createUser = CreateUserService()
 
@@ -120,10 +203,10 @@ def atualizarusuario():
     #Não testado a parte dos Json
     userDataID = get_jwt_identity()
     userData = request.get_json()
-    userDataFields = ["usuario", "email", "senha", "cpf", "telefone", "tipo", "funcao", "profissao", "UnidadeBasicadeSaude", "CAP"]
+    userDataFields = ["usuario", "nome", "email", "senha", "cpf", "telefone", "funcao", "profissao", "UnidadeBasicadeSaude", "CAP"]
     
     if not all(field in userData for field in userDataFields):
-         return "Missing information", 400
+        return {"Error":"Missing information."}, 400
 
     userData['id'] = userDataID['id']
 
@@ -142,16 +225,20 @@ def cadastrarDadosComplementares():
 
 
 @blueprint.route("/cadastrarturma", methods=['POST'])
+@jwt_required
 def cadastrarturma(): 
 
-    # Não testado a parte dos Json
+    Token = get_jwt_identity()
+    if not(Token['adm'] or Token['coordenador'] or Token['propositor'] or Token['gestor']):
+        return jsonify({"Error": "Você não tem permissão de acessar essa função"}), 400
 
     turmaData = request.get_json()
     turmaDataFields = ["responsavel", "nome_do_curso",
                        "carga_horaria_total", "tolerancia", "modalidade"]
 
+
     if not all(field in turmaData for field in turmaDataFields):
-        return "Missing information", 400
+        return {"Error":"Missing information."}, 400
 
     createTurma = CreateTurmaService()
 
@@ -186,43 +273,78 @@ def listarturma():
 
 
 @blueprint.route("/listausuario", methods=['GET'])
+@jwt_required
 def listarusuarios():
+    Token = get_jwt_identity()
+    if not(Token['adm'] or Token['coordenador'] or Token['propositor'] or Token['gestor']):
+        return jsonify({"Error": "Você não tem permissão de acessar essa função"}), 400
     ListUser = ListUserService()
     usuarios = ListUser.execute()
     return jsonify(usuarios)
 
 
 @blueprint.route("/listaturmaapoiador", methods=['Post'])
+@jwt_required
 def listarturmaapoiador():
     apoiadorData = request.get_json()
     apoiadorDataFields = ["usuario"]
 
     if not all(field in apoiadorData for field in apoiadorDataFields):
-        return "Missing information", 400
+        return {"Error":"Missing information."}, 400
 
     ListTurma = ListTurmaApoiadorService()
     Turma = ListTurma.execute(apoiadorData)
     return jsonify(Turma)
 
+@blueprint.route("/listaraulas", methods=['Post'])
+@jwt_required
+def listaraulas():
+    turmaData = request.get_json()
+    turmaDataFields = ["nome_do_curso"]
+
+    if not all(field in turmaData for field in turmaDataFields):
+        return {"Error":"Missing information."}, 400
+
+    ListAula = ListAulaService()
+    Aulas = ListAula.execute(turmaData)
+    return jsonify(Aulas)
+
+
+
+@blueprint.route("/listarPresencaTotal", methods=['Post'])
+@jwt_required
+def listarPresencaTotal():
+    turmaData = request.get_json()
+    turmaDataFields = ["nome_do_curso"]
+
+    if not all(field in turmaData for field in turmaDataFields):
+        return {"Error":"Missing information."}, 400
+
+    ListPresencas = ListPresencaTotalService()
+    Presencas = ListPresencas.execute(turmaData)
+    return jsonify(Presencas)
+
 @blueprint.route("/listaturmaaluno", methods=['Post'])
+@jwt_required
 def listaturmaaluno():
     alunoData = request.get_json()
     alunoDataFields = ["usuario"]
 
     if not all(field in alunoData for field in alunoDataFields):
-        return "Missing information", 400
+        return {"Error":"Missing information."}, 400
 
     ListTurma = ListTurmaAlunoService()
     Turma = ListTurma.execute(alunoData)
     return jsonify(Turma)
 
 @blueprint.route("/listaturmapropositor", methods=['Post'])
+@jwt_required
 def listaturmapropositor():
     propositorData = request.get_json()
     propositorDataFields = ["usuario"]
 
     if not all(field in propositorData for field in propositorDataFields):
-        return "Missing information", 400
+        return {"Error":"Missing information."}, 400
 
     ListTurma = ListTurmaPropositorService()
     Turma = ListTurma.execute(propositorData)
@@ -233,34 +355,16 @@ def listaturmapropositor():
 @jwt_required
 def atualizarpresenca():
     presencaData = request.get_json()
-    presencaDataFields = ["emailAluno","idTurma","Horas"]
+    presencaDataFields = ["emailAluno","id_aula"]
 
     if not all(field in presencaData for field in presencaDataFields):
-        return {"Error":"Bad Request"}
+        return {"Error":"Bad Request"}, 400
 
     marcarPresenca = CreatePresencaService()
     presenca = marcarPresenca.execute(presencaData)
     return jsonify(presenca)
 
-@blueprint.route("/cadastraraluno", methods=['POST'])
-@jwt_required
-def cadastraraluno():
 
-    #Não testado a parte dos Json
-
-    cadastroData = request.get_json()
-    cadastroDataFields = ["usuario", "nome_do_curso"]
-
-    if not all(field in cadastroData for field in cadastroDataFields):
-         return "Missing information", 400
-
-    cadastrarAluno = CreateAlunoService()
-
-    Aluno = cadastrarAluno.execute(cadastroData)
-
-    return jsonify(Aluno)
-
-# Issue 36
 @blueprint.route("/cadastraralunonaturma", methods=['POST'])
 @jwt_required
 def cadastraralunonaturma():
@@ -274,10 +378,8 @@ def cadastraralunonaturma():
     cadastroDataFields = ["cpfAluno", "idTurma"]
 
 
-
-
     if not all(field in cadastroData for field in cadastroDataFields):
-         return "Missing information", 400
+        return {"Error":"Missing information."}, 400
 
     cadastroData['id'] = userData['id']
 
@@ -293,12 +395,18 @@ def cadastraralunonaturma():
 @jwt_required
 def cadastrarapoiador():
 
+    Token = get_jwt_identity()
+    if not(Token['adm'] or Token['coordenador'] or Token['propositor'] or Token['gestor']):
+        return jsonify({"Error": "Você não tem permissão de acessar essa função"}), 400
+
     apoiadorData = request.get_json()
     apoiadorDataFields = ["email_apoiador", "id_turma"]
-
+  
     if not all(field in apoiadorData for field in apoiadorDataFields):
-        return "Missing information", 400
+        return {"Error":"Missing information."}, 400
 
+    apoiadorData['idDoPropositor'] = Token['id']
+  
     cadastrarApoiador = CreateApoiadorService()
 
     msg = cadastrarApoiador.execute(apoiadorData)
@@ -308,16 +416,46 @@ def cadastrarapoiador():
 @jwt_required
 def deletarapoiador():
 
+    Token = get_jwt_identity()
+    if not(Token['adm'] or Token['coordenador'] or Token['propositor'] or Token['gestor']):
+        return jsonify({"Error": "Você não tem permissão de acessar essa função"}), 400
+
     deleteData = request.get_json()
     deleteDataFields = ["cpfApoiador", "idTurma"]
 
 
     if not all(field in deleteData for field in deleteDataFields):
-         return "Missing information", 400
+        return {"Error":"Missing information."}, 400
+
+    deleteData['idDoPropositor'] = Token['id']
 
     deleteApoiador = DeleteApoiadorService()
 
     msg = deleteApoiador.execute(deleteData)
+
+    return jsonify(msg)
+
+
+@blueprint.route("/deletaraluno", methods=['POST'])
+@jwt_required
+def deletaraluno():
+
+    Token = get_jwt_identity()
+    if not(Token['adm'] or Token['coordenador'] or Token['propositor'] or Token['gestor']):
+        return jsonify({"Error": "Você não tem permissão de acessar essa função"}), 400
+
+    deleteData = request.get_json()
+    deleteDataFields = ["cpfAluno", "idTurma"]
+
+
+    if not all(field in deleteData for field in deleteDataFields):
+        return {"Error":"Missing information."}, 400
+
+    deleteData['idDoPropositor'] = Token['id']
+
+    deleteAluno = DeleteAlunoService()
+
+    msg = deleteAluno.execute(deleteData)
 
     return jsonify(msg)
 
@@ -333,12 +471,32 @@ def cadastrarhorario():
     user = get_jwt_identity()
     
     if not all(field in horarioData for field in horarioDataFields):
-        return "Missing information"
+        return {"Error":"Missing information."}, 400
 
     horarioData['idPropositor'] = user['id']
 
     cadastrarHorario = CreateHorarioService()
     response = cadastrarHorario.execute(horarioData)
+    
+    return jsonify(response)
+
+@blueprint.route("/cadastraraula", methods=['POST'])
+@jwt_required
+def cadastraraula():
+    # Não testado a parte dos Json
+
+    AulaData = request.get_json()
+    AulaDataFields = ["nome_do_curso", "nome_da_aula", "hInicio", "hTermino"]
+
+    user = get_jwt_identity()
+    
+    if not all(field in AulaData for field in AulaDataFields):
+        return {"Error":"Missing information."}, 400
+
+    #horarioData['idPropositor'] = user['id']
+
+    cadastrarAula = CreateAulaService()
+    response = cadastrarAula.execute(AulaData)
     
     return jsonify(response)
 
@@ -349,7 +507,7 @@ def autocadastro():
     cadastroDataFields = ["cpf","tokenTurma"]
 
     if not all(field in cadastroData for field in cadastroDataFields):
-        return {"Error":"Missing information"}
+        return {"Error":"Missing information."}, 400
 
     cadastraraluno=CadastrarAlunoService().executeAluno(cadastroData)
     return cadastraraluno
@@ -358,13 +516,13 @@ def autocadastro():
 @jwt_required
 def get_horarios():
     if not request.is_json:
-           return jsonify({"Error": "Missing JSON in request"}), 400
+        return jsonify({"Error": "Missing JSON in request"}), 400
     
     session = get_session()
     turma_id = request.get_json()
     Horarios = session.query(Horario).filter_by(HorarioIdTurma=turma_id["TurmaID"]).all()
     if not Horarios:
-        return jsonify({"Error":"Não há nenhum horario cadastrado para esta turma"})
+        return jsonify({"Error":"Não há nenhum horario cadastrado para esta turma"}), 400
 
     response = [horario.as_dict() for horario in Horarios]
     return jsonify(response)

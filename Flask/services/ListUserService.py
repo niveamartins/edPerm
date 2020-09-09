@@ -8,10 +8,34 @@ from database.model.Model import User
 
 
 def usuario_info(user):
+    adm = 'Não'
+    gestor = 'Não'
+    coordenador = 'Não'
+    propositor = 'Não'
+    cursista = 'Não'
+    apoiador = 'Não'
+    if(user.adm==1):
+        adm = 'Sim'
+    if(user.gestor==1):
+        gestor = 'Sim'
+    if(user.coordenador==1):
+        coordenador = 'Sim'
+    if(user.propositor==1):
+        propositor = 'Sim'
+    if(user.cursista==1):
+        cursista = 'Sim'
+    if(user.apoiador==1):
+        apoiador = 'Sim'
     return {
         'Id': f'{user.Id}',
-        'usuario': f'{user.usuario}',
-        'tipo': f'{user.tipo}'
+        'Nome': f'{user.nome}',
+        'Usuario': f'{user.usuario}',
+        'Adm': f'{adm}',
+        'Gestor': f'{gestor}',
+        'Coordenador': f'{coordenador}',
+        'Propositor': f'{propositor}',
+        'Cursista': f'{cursista}',
+        'Apoiador': f'{apoiador}'
     }
 
 

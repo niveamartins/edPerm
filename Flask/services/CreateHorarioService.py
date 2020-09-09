@@ -7,7 +7,7 @@ from datetime import datetime, time
 class CreateHorarioService:
     def execute(self, horarioData):
         session = get_session()
-        QueryTurma = session.query(Turma).filter_by(id_turma=horarioData['idTurma'],id_responsavel=horarioData["idPropositor"]).first()
+        QueryTurma = session.query(Turma).filter_by(nome_do_curso=horarioData['nome_do_curso'],id_responsavel=horarioData["idPropositor"]).first()
         if not QueryTurma:
           return {"Error":"Turma não cadastrada"}
 
