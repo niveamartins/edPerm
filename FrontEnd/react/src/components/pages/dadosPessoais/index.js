@@ -78,7 +78,7 @@ function DadosPessoais() {
 			<table className="card-list">
 				<tbody>
 					<tr className="title">
-						<td>Usuário</td>
+						<td>{item.usuario}</td>
 					</tr>
 					<tr className="content">
 						<td>Nome de Usuário</td>

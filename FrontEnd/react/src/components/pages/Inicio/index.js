@@ -18,11 +18,11 @@ function Inicio() {
 			description="Crie e Liste Turmas"
 		/>
 	)
-	let cadastrarAdmsButton = (
+	let mudarTipoUsuarioButton = (
 		<Button
-			link="/cadAdm"
-			title="Cadastrar Admins"
-			description="Torne usuários administradores"
+			link="/mudarTipoUsuario"
+			title="Mudar tipo de usuário"
+			description="Mude tipo de usuários (adm, gestão, etc)"
 		/>
 	)
 	let relatoriosButton = (
@@ -38,8 +38,10 @@ function Inicio() {
 			<Button link="/opcoesTurmas" title="Turmas" description="Liste Turmas" />
 		)
 	}
-	if (user_type !== "adm") {
-		cadastrarAdmsButton = null
+	
+	
+	if (user_type === "cursita" || user_type === "propositor") {
+		mudarTipoUsuarioButton = null
 		relatoriosButton = null
 	}
 
@@ -56,7 +58,7 @@ function Inicio() {
 					/>
 					{turmasButton}
 					{relatoriosButton}
-					{cadastrarAdmsButton}
+					{mudarTipoUsuarioButton}
 				</div>
 			</main>
 		</Fragment>

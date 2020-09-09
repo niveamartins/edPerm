@@ -31,6 +31,7 @@ import PosCadastroTurma from './components/pages/PosCadastroTurma'
 import CadastroLink from './components/pages/CadastroLink'
 import AutocadastroEfetuado from './components/pages/AutocadastroEfetuado'
 import CadastrarAdm from './components/pages/CadastrarAdm'
+import MudarTipoUsuario from './components/pages/MudarTipoUsuario'
 
 // Aqui definimos todas as rotas
 export default function Routes() {
@@ -58,6 +59,7 @@ export default function Routes() {
                 <Route exact path="/cadlink/:turma/:token" component={CadastroLink} />
                 <Route path="/cadalunos" component={CadastrarAlunos} />
                 <Route path="/cadapoiador" component={CadastrarApoiador} />
+                <Route path="/mudarTipoUsuario" component={MudarTipoUsuario} />
                 <Route path="/cadAdm" component={CadastrarAdm} />
 
                 <Route path="/cadaula" component={CriarAula}/>
