@@ -9,7 +9,10 @@ function Inicio() {
 	// para o caso de alguém voltar pro início sem cancelar auto cadastro
 	localStorage.removeItem("urlAutoSignup")
 
-	const user_type = localStorage.getItem("user_type")
+	const adm = localStorage.getItem("adm")
+	const gestor = localStorage.getItem("gestor")
+	const coordenador = localStorage.getItem("coordenador")
+	const propositor = localStorage.getItem("propositor")
 
 	let turmasButton = (
 		<Button
@@ -33,15 +36,25 @@ function Inicio() {
 		/>
 	)
 
-	if (user_type === "cursista" || user_type === "apoiador") {
+	const allowedToChangeTurma =
+		adm === "true" ||
+		coordenador === "true" ||
+		gestor === "true" ||
+		propositor === "true"
+		
+	if (!allowedToChangeTurma) {
 		turmasButton = (
 			<Button link="/opcoesTurmas" title="Turmas" description="Liste Turmas" />
 		)
 	}
-	
-	
-	if (user_type === "cursita" || user_type === "propositor") {
+
+	const allowedToChangeUser =
+		adm === "true" || coordenador === "true" || gestor === "true"
+	if (!allowedToChangeUser) {
 		mudarTipoUsuarioButton = null
+	}
+
+	if (adm === "false") {
 		relatoriosButton = null
 	}
 

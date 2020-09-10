@@ -1,74 +1,73 @@
 import React, { Fragment } from "react"
+import { Redirect } from 'react-router-dom'
 
 import { NavBar } from "../../navbar"
 import Button from "../../Button"
 
 
-
 function Inicio() {
 
-	const user_type = localStorage.getItem("user_type")
+	const adm = localStorage.getItem("adm")
+	const gestor = localStorage.getItem("gestor")
+	const coordenador = localStorage.getItem("coordenador")
 
-	let cadastrarAdmsButton = (
-		<Button
-			link="/cadAdm"
-			title="Tornar Adm"
-			description="Torne usuários administradores"
-		/>
-   )
-   
-   let cadastrarGestorButton = (
-		<Button
-			link="/cadGestor"
-			title="Tornar Gestor"
-			description="Torne usuários gestores"
-		/>
-   )
+	let cadastrarAdmsButton = null
+	let cadastrarGestorButton = null
+	let cadastrarCoordenadorButton = null
+	let cadastrarPropositorButton = null
 
-   let cadastrarCoordenadorButton = (
-		<Button
-			link="/cadCoordenador"
-			title="Tornar Coordenador"
-			description="Torne usuários coordenadores"
-		/>
-   )
+	let redirectIfNotAuth = null
 
-   let cadastrarPropositorButton = (
-		<Button
-			link="/cadPropositor"
-			title="Tornar Propositor"
-			description="Torne usuários propositores"
-		/>
-   )
+	const allowedToChangeUser =
+		adm === "true" || coordenador === "true" || gestor === "true"
+	if (!allowedToChangeUser) {
+		redirectIfNotAuth = <Redirect to="/"/>
+	}
 
-   let cadastrarCursistaButton = (
-		<Button
-			link="/cadCursista"
-			title="Tornar Cursista"
-			description="Torne usuários novamente cursistas"
-		/>
-   )
+	if (adm === "true") {
+		cadastrarAdmsButton = (
+			<Button
+				link="/cadAdm"
+				title="Tornar Adm"
+				description="Torne usuários administradores"
+			/>
+		)
+	}
+	const allowedToChangeGestor = (adm === "true") || ("gestor" === "true")
+	if (allowedToChangeGestor) {
+		cadastrarGestorButton = (
+			<Button
+				link="/cadGestor"
+				title="Tornar Gestor"
+				description="Torne usuários gestores"
+			/>
+		)
+	}
 
-   
-	if (user_type !== "adm") {
-      cadastrarAdmsButton = null
-   }
-   
-   if (user_type !== "adm" || user_type === "gestor") {
-		cadastrarGestorButton = null
-   }
-   
-   if (user_type !== "adm" || user_type === "coordenador" ) {
-		cadastrarCoordenadorButton = null
-   }
-   
-   if (user_type !== "adm" || user_type === "coordenador" || user_type === "gestor" ) {
-      cadastrarPropositorButton = null
-      cadastrarCursistaButton = null
+	const allowedToChangeCoordenador = (adm === "true") || (coordenador === "true")
+	if (allowedToChangeCoordenador) {
+		cadastrarCoordenadorButton = (
+			<Button
+				link="/cadCoordenador"
+				title="Tornar Coordenador"
+				description="Torne usuários coordenadores"
+			/>
+		)
+	}
+
+	if (allowedToChangeUser) {
+		cadastrarPropositorButton = (
+			<Button
+				link="/cadPropositor"
+				title="Tornar Propositor"
+				description="Torne usuários propositores"
+			/>
+		)
 	}
 
 	return (
 		<Fragment>
+			{redirectIfNotAuth}
 			<NavBar />
 			<main className="main-inicio">
 				<h1 bold>Mude os tipos dos usuários desejados</h1>
@@ -77,7 +76,6 @@ function Inicio() {
                {cadastrarGestorButton}
                {cadastrarCoordenadorButton}
                {cadastrarPropositorButton}
-               {cadastrarCursistaButton}
 				</div>
 			</main>
 		</Fragment>

@@ -12,12 +12,17 @@ import jwt from "jwt-decode"
 function Inicio() {
 	const [usuario, setUsuario] = useState("")
 	const [senha, setSenha] = useState("")
+	
 	const history = useHistory()
 
 	localStorage.removeItem("token")
+	localStorage.removeItem("expirationDate")
 	localStorage.removeItem("user_id")
 	localStorage.removeItem("user_username")
-	localStorage.removeItem("user_type")
+	localStorage.removeItem("adm")
+	localStorage.removeItem("gestor")
+	localStorage.removeItem("coordenador")
+	localStorage.removeItem("propositor")
 
 	// busca url autoCadastro no localStorage
 	const urlTurmaAutocadastro = localStorage.getItem("urlAutoSignup")
@@ -36,17 +41,23 @@ function Inicio() {
 			await api.post("/logar", data).then((response) => {
 				localStorage.setItem("token", response.data.access_token)
 			})
-
+			
 			let user = jwt(localStorage.getItem("token"))
 			console.log(user.identity)
 			let user_id = user.identity.id
 			localStorage.setItem("user_id", user_id)
-
+			
 			let user_username = user.identity.usuario
 			localStorage.setItem("user_username", user_username)
-
-			let user_type = user.identity.tipo
-			localStorage.setItem("user_type", user_type)
+			
+			let adm = user.identity.adm
+			localStorage.setItem("adm", adm)
+			let coordenador = user.identity.coordenador
+			localStorage.setItem("coordenador", coordenador)
+			let gestor = user.identity.gestor
+			localStorage.setItem("gestor", gestor)
+			let propositor = user.identity.propositor
+			localStorage.setItem("propositor", propositor)
 
 			history.push(redirectAfterAuth)
 		} catch (err) {

@@ -15,6 +15,10 @@
 	color: var(--elements-color);
 }
 
+.card.dados-pessoais {
+   width: fit-content!important;
+}
+
 @media (max-width: 480px) {
 	.card.dados-pessoais {
       margin-top: 10px;
