@@ -20,11 +20,22 @@ import { HomeButton } from "../../HomeButton"
 
 function CadastrarTurma() {
 	const responsavel = localStorage.getItem("user_id")
-	const user_type = localStorage.getItem("user_type")
 
 	let redirectIfNotAuth = null
-	if (user_type == "cursista" || user_type == "apoiador")
-		redirectIfNotAuth = <Redirect to="/" />
+	const adm = localStorage.getItem("adm")
+	const gestor = localStorage.getItem("gestor")
+	const coordenador = localStorage.getItem("coordenador")
+	const propositor = localStorage.getItem("propositor")
+
+	const allowedToCreateTurma =
+		adm === "true" ||
+		coordenador === "true" ||
+		gestor === "true" ||
+		propositor === "true"
+
+	if (!allowedToCreateTurma) {
+		redirectIfNotAuth = <Redirect to="/opcoesTurmas" />
+	}
 
 	const [nome_do_curso, setTurma] = useState("")
 	const [carga_horaria_total, setCarga] = useState("")

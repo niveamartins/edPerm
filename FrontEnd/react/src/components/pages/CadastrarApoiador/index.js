@@ -1,17 +1,19 @@
 import React, { Fragment, useState } from "react"
-import { Link } from "../../../../node_modules/react-router-dom"
-import ArrowBackIcon from "@material-ui/icons/ArrowBack"
+import { Redirect } from "../../../../node_modules/react-router-dom"
 
 import api from "../../../services/api"
 
 import { NavBar } from "../../navbar"
-import { HomeButton } from '../../HomeButton'
-import './cadApoiador.css'
+import { HomeButton } from "../../HomeButton"
+import "./cadApoiador.css"
 
 function CadastrarApoiador(props) {
 	const [email_apoiador, setAluno] = useState("")
-		
+
+	const user_username = localStorage.getItem("user_username")
+
 	let info = props.location.state
+	console.log(info)
 
 	const id_turma = info[0].id_turma
 
@@ -90,7 +92,7 @@ function CadastrarApoiador(props) {
 							<form onSubmit={handleCreate}>
 								<h1>Cadastre o apoiador!</h1>
 								<p>Insira abaixo o código do aluno escolhido</p>
-								<br/>
+								<br />
 								<input
 									name="aluno"
 									class="form-input"

@@ -1,15 +1,32 @@
 import React, { Fragment } from "react"
 
 import { NavBar } from "../../navbar"
-import { HomeButton } from '../../HomeButton'
+import { HomeButton } from "../../HomeButton"
 import Button from "../../Button"
 
 const opcoesTurmas = () => {
-	let criarTurmaButton = <Button link="/cadTurma" title="Criar Turma" description="Crie uma nova turma"/>
+	let criarTurmaButton = (
+		<Button
+			link="/cadTurma"
+			title="Criar Turma"
+			description="Crie uma nova turma"
+		/>
+	)
 
-	const user_type = localStorage.getItem("user_type")
-	if (user_type == "cursista" || user_type == "apoiador")
+	const adm = localStorage.getItem("adm")
+	const gestor = localStorage.getItem("gestor")
+	const coordenador = localStorage.getItem("coordenador")
+	const propositor = localStorage.getItem("propositor")
+
+	const allowedToCreateTurma =
+		adm === "true" ||
+		coordenador === "true" ||
+		gestor === "true" ||
+		propositor === "true"
+
+	if (!allowedToCreateTurma) {
 		criarTurmaButton = null
+	}
 
 	return (
 		<Fragment>
@@ -41,7 +58,7 @@ const opcoesTurmas = () => {
 					/>
 				</div>
 			</main>
-		<HomeButton />
+			<HomeButton />
 		</Fragment>
 	)
 }

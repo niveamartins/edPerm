@@ -13,6 +13,23 @@
   display: flex;
 }
 
+.link-info {
+	text-decoration: none;
+	color: var(--elements-second-color);
+	font-weight: bold;
+	/* position: absolute; */
+	margin-left: 35%;
+	margin-top: -10px;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.link-info:hover {
+	transform: translateY(-4px);
+}
+
 .nav-info-turmas {
   display: flex;
   flex-direction: column;
@@ -41,10 +58,7 @@
   .main.turma {
      transform: scale(0.9);
   }
-  .nav-info-turmas {
-    margin-top: -10%;
-  }
-
+  
   .info-turmas {
     margin-top: -20%!important;
   }

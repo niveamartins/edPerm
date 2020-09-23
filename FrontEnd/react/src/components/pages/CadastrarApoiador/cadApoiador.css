@@ -4,3 +4,9 @@
 		width: 320px!important;
 	}
 }
+
+@media (max-width: 840px) {
+	.info-turmas.apoiador {
+		margin-top: -200px!important;
+	}
+}

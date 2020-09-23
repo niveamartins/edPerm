@@ -4,7 +4,7 @@ import { Link } from "../../../../node_modules/react-router-dom"
 
 import api from "../../../services/api"
 import { NavBar } from "../../navbar"
-import { HomeButton } from '../../HomeButton'
+import { HomeButton } from "../../HomeButton"
 
 import "./listarTurmas.css"
 
@@ -12,15 +12,17 @@ function ListarTurmas() {
 	const [turmas, setTurmas] = useState([])
 
 	let empty = null
-   if (turmas.length === 0) empty = <p className="empty">Não há turmas</p>
+	if (turmas.length === 0) empty = <p className="empty">Não há turmas</p>
 
 	useEffect(() => {
 		try {
 			const token = localStorage.getItem("token")
-            const AuthStr = 'Bearer '.concat(token); 
-			api.get("listaturma", { headers: { Authorization: AuthStr }}).then((response) => {
-				setTurmas(response.data)
-			})
+			const AuthStr = "Bearer ".concat(token)
+			api
+				.get("listaturma", { headers: { Authorization: AuthStr } })
+				.then((response) => {
+					setTurmas(response.data)
+				})
 		} catch (err) {
 			alert("Não foi possível encontrar as turmas, tente novamente")
 		}
@@ -85,7 +87,10 @@ function ListarTurmas() {
 		<Fragment>
 			<NavBar />
 			<main>
-				<div className="card-container">{getTurmasContent(turmas)}</div>
+				<div className="card-container">
+					{empty}
+					{getTurmasContent(turmas)}
+				</div>
 			</main>
 			<HomeButton />
 		</Fragment>

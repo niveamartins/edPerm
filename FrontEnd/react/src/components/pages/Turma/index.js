@@ -18,8 +18,19 @@ function Turma(props) {
 	let cadastrarApoiador = null
 	let darPresenca = null
 
-	const user_type = localStorage.getItem("user_type")
 	const user_username = localStorage.getItem("user_username")
+
+	const adm = localStorage.getItem("adm")
+	const gestor = localStorage.getItem("gestor")
+	const coordenador = localStorage.getItem("coordenador")
+	const propositor = localStorage.getItem("propositor")
+
+	// usuários que poderiam ter cadastrado a turma
+	const allowedAllUser =
+		adm === "true" ||
+		coordenador === "true" ||
+		gestor === "true" ||
+		propositor === "true"
 
 	const id = props.location.state
 	const url = "listaturma/" + id
@@ -79,10 +90,9 @@ function Turma(props) {
 		return content
 	}
 
-	const propositor = turma[0] ? turma[0].NomeDoPropositor : ''
-	const isPropositor = user_username == propositor
-	// usuários que poderiam ter cadastrado a turma
-	const allowedAllUser = user_type == "propositor" || user_type == "adm" || user_type == "gestor" || user_type == "coordenador"
+	// checando se nome do usuário é o mesmo que o nome do propositor que está na turma
+	const propositorTurma = turma[0] ? turma[0].NomeDoPropositor : ''
+	const isPropositor = user_username == propositorTurma
 
 	if (allowedAllUser &&  isPropositor) {
 		cadastrarApoiador = (
