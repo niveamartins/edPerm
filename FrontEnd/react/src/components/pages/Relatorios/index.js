@@ -12,9 +12,9 @@ import "./relatorios.css"
 
 const relatorios = () => {
 
-	const user_type = localStorage.getItem("user_type")
-   let redirectIfNotAuth = null
-   if (user_type !== "adm") redirectIfNotAuth = <Redirect to="/" />
+	const adm = localStorage.getItem("adm")
+	let redirectIfNotAuth = null
+   if (adm !== "true") redirectIfNotAuth = <Redirect to="/" />
 
 	return (
 		<Fragment>
