@@ -13,6 +13,14 @@ const opcoesTurmas = () => {
 		/>
 	)
 
+	let cadastrarPublicoAlvoButton = (
+		<Button 
+			link="/cadPublicoAlvo"
+			title="Cadastrar Público Alvo"
+			description="Cadastre o público alvo de sua turma"
+		/>
+	)
+
 	const adm = localStorage.getItem("adm")
 	const gestor = localStorage.getItem("gestor")
 	const coordenador = localStorage.getItem("coordenador")
@@ -26,6 +34,7 @@ const opcoesTurmas = () => {
 
 	if (!allowedToCreateTurma) {
 		criarTurmaButton = null
+		cadastrarPublicoAlvoButton = null
 	}
 
 	return (
@@ -35,6 +44,7 @@ const opcoesTurmas = () => {
 				<h1>Funções disponíveis para Turmas:</h1>
 				<div className="button__link-container">
 					{criarTurmaButton}
+					{cadastrarPublicoAlvoButton}
 					<Button
 						// link="turmasCriadas"
 						link="turmas"

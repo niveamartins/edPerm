@@ -8,6 +8,8 @@ import { HomeButton } from "../../HomeButton"
 
 import "./listarTurmas.css"
 
+//listar de acordo com o público alvo, e mostrar aviso de não há turmas caso não haja nenhuma
+
 function ListarTurmas() {
 	const [turmas, setTurmas] = useState([])
 

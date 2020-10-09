@@ -15,10 +15,12 @@ function CadastrarGestor(props) {
 	const [listaUsers, setListaUsers] = useState([])
 	const [id, setGestorId] = useState("")
 
+	// const gestor = localStorage.getItem("gestor")
+	// const allowedUsers = adm === "true" || gestor === "true"
+	
 	const adm = localStorage.getItem("adm")
-	const gestor = localStorage.getItem("gestor")
+	const allowedUsers = adm === "true" 
 	let redirectIfNotAuth = null
-	const allowedUsers = adm === "true" || gestor === "true"
 	if (!allowedUsers) redirectIfNotAuth = <Redirect to="/" />
 
 	const history = useHistory()

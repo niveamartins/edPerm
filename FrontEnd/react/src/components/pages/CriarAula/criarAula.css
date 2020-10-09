@@ -2,6 +2,22 @@
 
 /* ajustar fonte h1 */
 
+form.cadAula {
+    height: 520px!important;
+}
+
+form.cadAula h1 {
+    margin-top: 40px!important;
+    margin-bottom: 5px!important;
+}
+
+form.cadAula label {
+    font-family: "gadugi-normal";
+    display: flex;
+    width: 100%;
+    justify-content: left;
+}
+
 .info-turmas {
     margin-top: -10px;
     margin-bottom: 2rem!important;
@@ -10,4 +26,10 @@
 
 .info-turmas h1 {
     font-weight: bold;
+}
+
+@media (max-width: 400px) {
+    .form-page-container.cadAulaContainer {
+        width: 100%;
+    }
 }

@@ -35,6 +35,7 @@ import MudarTipoUsuario from './components/pages/MudarTipoUsuario'
 import CadastrarGestor from './components/pages/CadastrarGestor'
 import CadastrarCoordenador from './components/pages/CadastrarCoordenador'
 import CadastrarPropositor from './components/pages/CadastrarPropositor'
+import CadastrarPublicoAlvo from './components/pages/CadastrarPúblicoAlvo'
 
 // Aqui definimos todas as rotas
 export default function Routes() {
@@ -56,6 +57,7 @@ export default function Routes() {
                 <Route path="/turmasPropositor" component={ListarTurmasPropositor} />
                 <Route path="/turma" component={Turma} />
                 <Route path="/cadturma" component={CadastrarTurma} />
+                <Route path="/cadPublicoAlvo" component={CadastrarPublicoAlvo} />
                 <Route path="/cadastroTurmaEfetuado" component={PosCadastroTurma} />
                 <Route path="/autocadastroTurmaEfetuado" component={AutocadastroEfetuado} />
                 

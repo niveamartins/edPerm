@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom'
 
 import { NavBar } from "../../navbar"
 import Button from "../../Button"
-
+import { HomeButton } from "../../HomeButton"
 
 function Inicio() {
 
@@ -33,7 +33,10 @@ function Inicio() {
 			/>
 		)
 	}
-	const allowedToChangeGestor = (adm === "true") || (gestor === "true")
+	
+	// const allowedToChangeGestor = (adm === "true") || (gestor === "true")
+
+	const allowedToChangeGestor = (adm === "true") 
 	if (allowedToChangeGestor) {
 		cadastrarGestorButton = (
 			<Button
@@ -44,7 +47,9 @@ function Inicio() {
 		)
 	}
 
-	const allowedToChangeCoordenador = (adm === "true") || (coordenador === "true")
+	// const allowedToChangeCoordenador = (adm === "true") || (coordenador === "true")
+
+	const allowedToChangeCoordenador = (adm === "true") 
 	if (allowedToChangeCoordenador) {
 		cadastrarCoordenadorButton = (
 			<Button
@@ -78,6 +83,7 @@ function Inicio() {
                {cadastrarPropositorButton}
 				</div>
 			</main>
+			<HomeButton />
 		</Fragment>
 	)
 }

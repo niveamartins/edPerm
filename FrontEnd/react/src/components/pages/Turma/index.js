@@ -24,6 +24,7 @@ function Turma(props) {
 	const gestor = localStorage.getItem("gestor")
 	const coordenador = localStorage.getItem("coordenador")
 	const propositor = localStorage.getItem("propositor")
+	const apoiador = localStorage.getItem("apoiador")
 
 	// usuários que poderiam ter cadastrado a turma
 	const allowedAllUser =
@@ -117,17 +118,18 @@ function Turma(props) {
 					</Link>
 		)
 	}
-
-	// const apoiador = user_type == 'apoiador'
-	// if (apoiador) {
-	// 	darPresenca = (
-	// 		<Link to={"/leitor/" + id} className="link">
-	// 					<button className="button bold">
-	// 						<label>Dar Presença</label>
-	// 					</button>
-	// 				</Link>
-	// 	)
-	// }
+	
+	// se for usuário apoiador o leitor de presença também é exibido
+	// se não for apoiador da turma o back irá proibir
+	if (apoiador === "true") {
+		darPresenca = (
+			<Link to={"/leitor/" + id} className="link">
+						<button className="button bold">
+							<label>Dar Presença</label>
+						</button>
+					</Link>
+		)
+	}
 
 	return (
 		<Fragment>
@@ -147,7 +149,7 @@ function Turma(props) {
 						}}
 						className="link"
 					>
-						<button className="button bold" disabled>
+						<button className="button bold">
 							<label>Criar Aula</label>
 						</button>
 					</Link>

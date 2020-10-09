@@ -15,10 +15,12 @@ function CadastrarCoordenador(props) {
 	const [listaUsers, setListaUsers] = useState([])
 	const [id, setCoordenadorId] = useState("")
 
+	// const coordenador = localStorage.getItem("coordenador")
+	// const allowedUsers = adm === "true" || coordenador === "true"
+	
 	const adm = localStorage.getItem("adm")
-	const coordenador = localStorage.getItem("coordenador")
 	let redirectIfNotAuth = null
-	const allowedUsers = adm === "true" || coordenador === "true"
+	const allowedUsers = adm === "true" 
 	if (!allowedUsers) redirectIfNotAuth = <Redirect to="/" />
 
 	const history = useHistory()

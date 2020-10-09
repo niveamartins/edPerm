@@ -1,23 +1,32 @@
-import React, { Fragment } from 'react'
-// import AddIcon from '@material-ui/icons/Add';
+import React, { Fragment, useEffect, useState } from 'react'
 import { Link } from '../../../../node_modules/react-router-dom';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import api from "../../../services/api"
 
 import './aulas.css'
 
 import { NavBar } from '../../navbar'
 
 function Aulas() {
+    const [aulas, setAulas] = useState("")
 
-    //preencher dados da turma com db
+    useEffect(() => {
+		try {
+			const token = localStorage.getItem("token")
+			const AuthStr = "Bearer ".concat(token)
+			api
+				.get("listaturma", { headers: { Authorization: AuthStr } })
+				.then((response) => {
+					setAulas(response.data)
+				})
+		} catch (err) {
+			alert("Não foi possível encontrar as turmas, tente novamente")
+		}
+	}, [])
 
     return (
         <Fragment>
             <NavBar />
             <main className="main">
-                {/* <Link to="/turma">
-                    <ArrowBackIcon id="return-icon" />
-                </Link> */}
                 <div className="card-container">
                     <div className="card">
                         <table className="card-list">
