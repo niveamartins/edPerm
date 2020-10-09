@@ -17,8 +17,6 @@ import NavBar from "../../navbar"
 import { capData, caps } from "./data/capData"
 // dados pré estabelecidos Profissão
 import { profissaoCargo, profissaoChefia } from "./data/profissaoData"
-// dados pré estabelecidos usuário (tipo)
-import { userType } from "./data/userData"
 
 import "./cadUsuario.css"
 
@@ -336,25 +334,6 @@ function Inicio() {
 										input={<BootstrapInput />}
 									>
 										{profissaoChefia.map((option) => {
-											return (
-												<option value={option.value}>{option.label}</option>
-											)
-										})}
-									</NativeSelect>
-								</FormControl>
-
-								<FormControl>
-									<InputLabel htmlFor="demo-customized-select-native">
-										Tipo de usuário
-									</InputLabel>
-									<NativeSelect
-										id="demo-customized-select-native"
-										value={tipo}
-										onChange={(e) => setTipo(e.target.value)}
-										input={<BootstrapInput />}
-										required
-									>
-										{userType.map((option) => {
 											return (
 												<option value={option.value}>{option.label}</option>
 											)

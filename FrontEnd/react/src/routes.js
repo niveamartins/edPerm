@@ -32,6 +32,9 @@ import CadastroLink from './components/pages/CadastroLink'
 import AutocadastroEfetuado from './components/pages/AutocadastroEfetuado'
 import CadastrarAdm from './components/pages/CadastrarAdm'
 import MudarTipoUsuario from './components/pages/MudarTipoUsuario'
+import CadastrarGestor from './components/pages/CadastrarGestor'
+import CadastrarCoordenador from './components/pages/CadastrarCoordenador'
+import CadastrarPropositor from './components/pages/CadastrarPropositor'
 
 // Aqui definimos todas as rotas
 export default function Routes() {
@@ -61,6 +64,9 @@ export default function Routes() {
                 <Route path="/cadapoiador" component={CadastrarApoiador} />
                 <Route path="/mudarTipoUsuario" component={MudarTipoUsuario} />
                 <Route path="/cadAdm" component={CadastrarAdm} />
+                <Route path="/cadGestor" component={CadastrarGestor} />
+                <Route path="/cadCoordenador" component={CadastrarCoordenador} />
+                <Route path="/cadPropositor" component={CadastrarPropositor} />
 
                 <Route path="/cadaula" component={CriarAula}/>
                 <Route path="/aulas" component= {Aulas} />

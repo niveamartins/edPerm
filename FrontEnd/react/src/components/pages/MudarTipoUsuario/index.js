@@ -33,7 +33,7 @@ function Inicio() {
 			/>
 		)
 	}
-	const allowedToChangeGestor = (adm === "true") || ("gestor" === "true")
+	const allowedToChangeGestor = (adm === "true") || (gestor === "true")
 	if (allowedToChangeGestor) {
 		cadastrarGestorButton = (
 			<Button

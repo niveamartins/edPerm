@@ -10,15 +10,16 @@ import InputBase from "@material-ui/core/InputBase"
 
 import { NavBar } from "../../navbar"
 import { HomeButton } from "../../HomeButton"
-import "./cadAdm.css"
 
-function CadastrarAdm(props) {
+function CadastrarCoordenador(props) {
 	const [listaUsers, setListaUsers] = useState([])
-	const [id, setAdmId] = useState("")
+	const [id, setCoordenadorId] = useState("")
 
 	const adm = localStorage.getItem("adm")
+	const coordenador = localStorage.getItem("coordenador")
 	let redirectIfNotAuth = null
-	if (adm !== "true") redirectIfNotAuth = <Redirect to="/" />
+	const allowedUsers = adm === "true" || coordenador === "true"
+	if (!allowedUsers) redirectIfNotAuth = <Redirect to="/" />
 
 	const history = useHistory()
 
@@ -27,13 +28,13 @@ function CadastrarAdm(props) {
 		try {
 			const token = localStorage.getItem("token")
 			const AuthStr = "Bearer ".concat(token)
-			
+	
 			api
 				.get("/listausuario", { headers: { Authorization: AuthStr } })
 				.then((response) => {
-					const notAdms = response.data.filter((user) => user.Adm == "Não")
-					setListaUsers(notAdms)
-					setAdmId(notAdms[0].Id)
+					const notCoordenadores = response.data.filter((user) => user.Adm == "Não").filter((user) => user.Coordenador == "Não")
+					setListaUsers(notCoordenadores)
+					setCoordenadorId(notCoordenadores[0].Id)
 				})
 		} catch (err) {
 			console.log(err)
@@ -51,14 +52,14 @@ function CadastrarAdm(props) {
 			const token = localStorage.getItem("token")
 			const AuthStr = "Bearer ".concat(token)
 			api
-				.post("/transformaremadm", data, {
+				.post("/transformaremcoordenador", data, {
 					headers: { Authorization: AuthStr },
 				})
 				.then((response) => {
 					if (response.data.hasOwnProperty("error") === true) {
-						alert("Não foi possível promover usuário a adm")
+						alert("Não foi possível promover usuário a coordenador")
 					} else {
-						alert("O usuário foi promovido a administrador com sucesso!")
+						alert("O usuário foi promovido a coordenador com sucesso!")
 						history.go(0)
 					}
 				})
@@ -114,9 +115,9 @@ function CadastrarAdm(props) {
 					<div className="form-page-container adm">
 						<div className="form-container adm">
 							<form onSubmit={handleCreate}>
-								<h1>Cadastre o Admistrador!</h1>
+								<h1>Cadastre o Coordenador!</h1>
 								<p>
-									Selecione abaixo o usuário a ser promovido para administrador
+									Selecione abaixo o usuário a ser promovido para coordenador
 								</p>
 								<br />
 								<FormControl>
@@ -126,7 +127,7 @@ function CadastrarAdm(props) {
 									<NativeSelect
 										id="demo-customized-select-native"
 										value={id}
-										onChange={(e) => setAdmId(e.target.value)}
+										onChange={(e) => setCoordenadorId(e.target.value)}
 										input={<BootstrapInput />}
 										required
 									>
@@ -139,7 +140,7 @@ function CadastrarAdm(props) {
 										})}
 									</NativeSelect>
 								</FormControl>
-								<input type="submit" className="button" value="cadastrar adm" />
+								<input type="submit" className="button" value="cadastrar coordenador" />
 							</form>
 						</div>
 					</div>
@@ -150,4 +151,4 @@ function CadastrarAdm(props) {
 	)
 }
 
-export default CadastrarAdm
+export default CadastrarCoordenador
