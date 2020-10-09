@@ -257,7 +257,7 @@ def adicionarpublico():
         return jsonify({"Error": "Você não tem permissão de acessar essa função"}), 400
 
     turmaData = request.get_json()
-    turmaDataFields = ["nome_do_curso", "publico-alvo"]
+    turmaDataFields = ["nome_do_curso", "publico_alvo"]
 
 
     if not all(field in turmaData for field in turmaDataFields):

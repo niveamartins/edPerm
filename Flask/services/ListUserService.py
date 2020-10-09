@@ -41,7 +41,6 @@ def usuario_info(user):
 
 class ListUserService:
     def execute(self):
-        logger = get_logger(sys.argv[0])
         try:
             session = get_session()
             data = session.query(User).all()
@@ -49,5 +48,4 @@ class ListUserService:
             session.close()
             return usuarios
         except InternalError:
-            logger.error("Banco de dados (EdPermanente) desconhecido")
             return "502ERROR"

@@ -23,10 +23,10 @@ class AdicionarPublicoService:
             if not(QueryTurma.id_responsavel == busca.Id):
                 return {"Error":"Você não é responsavel dessa turma."}, 400
 
-            if (turmaData['publico-alvo']):
-                QueryPublicoAlvo = session.query(PublicoAlvo).filter_by(nome_publicoAlvo=turmaData['publico-alvo']).first()
+            if (turmaData['publico_alvo']):
+                QueryPublicoAlvo = session.query(PublicoAlvo).filter_by(nome_publicoAlvo=turmaData['publico_alvo']).first()
                 if not QueryPublicoAlvo:
-                    QueryPublicoAlvo = PublicoAlvo(nome_publicoAlvo = turmaData['publico-alvo'])
+                    QueryPublicoAlvo = PublicoAlvo(nome_publicoAlvo = turmaData['publico_alvo'])
                     QueryTurma.PublicosAlvo.append(QueryPublicoAlvo)
                 else:
                     if not (QueryPublicoAlvo in QueryTurma.PublicosAlvo):
