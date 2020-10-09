@@ -27,6 +27,7 @@ from services.AtualizarUserService import AtualizarUserService
 from services.CreateTurmaService import CreateTurmaService
 from services.CreateApoiadorService import CreateApoiadorService
 from services.CreateAulaService import CreateAulaService
+from services.AdicionarPublicoService import AdicionarPublicoService
 from services.CreateHorarioService import CreateHorarioService
 from services.AutheticateUserService import AutheticateUserService
 from services.CadastrarAlunoService import CadastrarAlunoService
@@ -245,6 +246,30 @@ def cadastrarturma():
     turma = createTurma.execute(turmaData)
 
     return jsonify(turma)
+
+
+@blueprint.route("/adicionarpublico", methods=['POST'])
+@jwt_required
+def adicionarpublico(): 
+
+    Token = get_jwt_identity()
+    if not(Token['adm'] or Token['coordenador'] or Token['propositor'] or Token['gestor']):
+        return jsonify({"Error": "Você não tem permissão de acessar essa função"}), 400
+
+    turmaData = request.get_json()
+    turmaDataFields = ["nome_do_curso", "publico-alvo"]
+
+
+    if not all(field in turmaData for field in turmaDataFields):
+        return {"Error":"Missing information."}, 400
+
+    turmaData['responsavel'] = Token['id']	
+
+    adicionarpublico = AdicionarPublicoService()
+
+    publico = adicionarpublico.execute(turmaData)
+
+    return jsonify(publico)
 
 
 
