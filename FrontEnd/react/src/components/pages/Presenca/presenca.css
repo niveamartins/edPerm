@@ -7,8 +7,17 @@
     padding-right: 10em;
 }
 
+.students__data {
+    padding: 0 50px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
 tr.students td.presence__name {
     padding-right: 13em;
+    font-family: "gadugi-bold";
+    text-transform: uppercase;
 }
 
 @media (max-width: 500px) {

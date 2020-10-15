@@ -2,6 +2,10 @@
     margin-top: -10px;
 }
 
+#title td {
+    text-align: center!important;
+}
+
 @media(max-width: 900px) {
     .card-container.aulas {
         margin-top: -35%;
