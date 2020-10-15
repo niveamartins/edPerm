@@ -13,7 +13,7 @@ function CadastrarApoiador(props) {
 	const user_username = localStorage.getItem("user_username")
 
 	let info = props.location.state
-	console.log(info)
+	// console.log(info)
 
 	const id_turma = info[0].id_turma
 
@@ -50,9 +50,6 @@ function CadastrarApoiador(props) {
 		<Fragment>
 			<NavBar />
 			<main className="main">
-				{/* <Link to="/turma">
-                    <ArrowBackIcon id="return-icon" />
-                </Link> */}
 				<div className="card-container">
 					<div className="card">
 						<table className="card-list">

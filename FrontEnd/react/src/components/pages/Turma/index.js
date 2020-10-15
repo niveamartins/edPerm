@@ -4,7 +4,7 @@ import { Link } from "../../../../node_modules/react-router-dom"
 
 import api from "../../../services/api"
 import { NavBar } from "../../navbar"
-import { HomeButton } from '../../HomeButton'
+import { HomeButton } from "../../HomeButton"
 
 import "./Turma.css"
 
@@ -92,10 +92,10 @@ function Turma(props) {
 	}
 
 	// checando se nome do usuário é o mesmo que o nome do propositor que está na turma
-	const propositorTurma = turma[0] ? turma[0].NomeDoPropositor : ''
+	const propositorTurma = turma[0] ? turma[0].NomeDoPropositor : ""
 	const isPropositor = user_username == propositorTurma
 
-	if (allowedAllUser &&  isPropositor) {
+	if (allowedAllUser && isPropositor) {
 		cadastrarApoiador = (
 			<Link
 				to={{
@@ -112,22 +112,22 @@ function Turma(props) {
 
 		darPresenca = (
 			<Link to={"/leitor/" + id} className="link">
-						<button className="button bold">
-							<label>Dar Presença</label>
-						</button>
-					</Link>
+				<button className="button bold">
+					<label>Dar Presença</label>
+				</button>
+			</Link>
 		)
 	}
-	
+
 	// se for usuário apoiador o leitor de presença também é exibido
 	// se não for apoiador da turma o back irá proibir
 	if (apoiador === "true") {
 		darPresenca = (
 			<Link to={"/leitor/" + id} className="link">
-						<button className="button bold">
-							<label>Dar Presença</label>
-						</button>
-					</Link>
+				<button className="button bold">
+					<label>Dar Presença</label>
+				</button>
+			</Link>
 		)
 	}
 
@@ -137,8 +137,14 @@ function Turma(props) {
 			<main className="main turma">
 				{getTurmaContent(turma)}
 				<div className="nav-info-turmas">
-					<Link to="/presenca" className="link">
-						<button className="button bold" disabled>
+					<Link
+						to={{
+							pathname: "/presenca",
+							state: turma,
+						}}
+						className="link"
+					>
+						<button className="button bold">
 							<label>Lista de Presença</label>
 						</button>
 					</Link>
@@ -153,9 +159,15 @@ function Turma(props) {
 							<label>Criar Aula</label>
 						</button>
 					</Link>
-						{cadastrarApoiador}
-					<Link to="/aulas" className="link">
-						<button className="button bold" disabled>
+					{cadastrarApoiador}
+					<Link
+						to={{
+							pathname: "/aulas",
+							state: turma,
+						}}
+						className="link"
+					>
+						<button className="button bold">
 							<label>Aulas</label>
 						</button>
 					</Link>

@@ -1,5 +1,5 @@
 export const profissaoCargo = [
-      { label: "Selecione sua profissão", value: "" },
+      { label: "Selecione a profissão", value: "" },
       { label: "Agente Comunitário de Saúde", value: "acs" },
       { label: "Setor Administrativo", value: "administrativo" },
       { label: "Agente de Saúde", value: "agentesaude" },

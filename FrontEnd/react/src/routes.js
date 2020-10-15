@@ -20,7 +20,6 @@ import Presenca from './components/pages/Presenca'
 import CriarAula from './components/pages/CriarAula'
 import CadastrarApoiador from './components/pages/CadastrarApoiador'
 import Aulas from './components/pages/Aulas'
-import Aula from './components/pages/Aula'
 import LerPresenca from './components/pages/LerPresenca'
 import Perfil from './components/pages/Perfil'
 import EditarCadastro from './components/pages/editarCadastro'
@@ -72,7 +71,6 @@ export default function Routes() {
 
                 <Route path="/cadaula" component={CriarAula}/>
                 <Route path="/aulas" component= {Aulas} />
-                <Route path="/aula" component={Aula} />
                 <Route path="/presenca" component={Presenca}/>
                 <Route path="/leitor/:id_turma" component= {LerPresenca} />
 

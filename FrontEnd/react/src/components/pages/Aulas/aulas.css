@@ -1,18 +1,11 @@
-/* Arrumar novo das turmas em formato de coluna */
-
-.header__first {
-    padding-right: 250px;
+.card-container.aulas tr.title {
+    margin-top: -10px;
 }
 
-.info-turmas .card {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-tr.students td {
-    /* alguma coisa */
+@media(max-width: 900px) {
+    .card-container.aulas {
+        margin-top: -35%;
+    }
 }
 
 /* FOR CARDS */
