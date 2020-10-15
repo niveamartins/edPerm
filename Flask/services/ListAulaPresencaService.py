@@ -10,13 +10,11 @@ from utilities.montaRelatorio import frequencia
 def aula_info(aula):
     return {
         'id_aula': f'{aula.id_aula}',
-        'nome_da_aula': f'{aula.nome_da_aula}',
-	'hora_de_inicio': f'{aula.hora_de_inicio}',
-	'hora_de_termino': f'{aula.hora_de_termino}'
+        'nome_da_aula': f'{aula.nome_da_aula}'
     }
 
 
-class ListAulaService:
+class ListAulaPresencaService:
     def execute(self, turmaData):
         logger = get_logger(sys.argv[0])
         try:

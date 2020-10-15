@@ -34,6 +34,8 @@ from services.CadastrarAlunoService import CadastrarAlunoService
 from services.ListTurmaService import ListTurmaService
 from services.ListPresencaTotalService import ListPresencaTotalService
 from services.ListAulaService import ListAulaService
+from services.ListAulaPresencaService import ListAulaPresencaService
+ListAulaPresencaService
 from services.ListUserService import ListUserService
 from services.ListTurmaApoiadorService import ListTurmaApoiadorService
 from services.ListTurmaAlunoService import ListTurmaAlunoService
@@ -333,6 +335,20 @@ def listaraulas():
     ListAula = ListAulaService()
     Aulas = ListAula.execute(turmaData)
     return jsonify(Aulas)
+
+@blueprint.route("/listaraulasparapresenca", methods=['Post'])
+@jwt_required
+def listaraulasparapresenca():
+    turmaData = request.get_json()
+    turmaDataFields = ["nome_do_curso"]
+
+    if not all(field in turmaData for field in turmaDataFields):
+        return {"Error":"Missing information."}, 400
+
+    ListAula = ListAulaPresencaService()
+    Aulas = ListAula.execute(turmaData)
+    return jsonify(Aulas)
+
 
 
 
