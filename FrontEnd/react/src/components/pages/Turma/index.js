@@ -17,6 +17,8 @@ function Turma(props) {
 
 	let cadastrarApoiador = null
 	let darPresenca = null
+	let listaDePresenca = null
+	let criarAula = null
 
 	const user_username = localStorage.getItem("user_username")
 
@@ -110,22 +112,30 @@ function Turma(props) {
 			</Link>
 		)
 
-		darPresenca = (
-			<Link to={"/leitor/" + id} className="link">
+		listaDePresenca = (
+			<Link
+				to={{
+					pathname: "/presenca",
+					state: turma,
+				}}
+				className="link"
+			>
 				<button className="button bold">
-					<label>Dar Presença</label>
+					<label>Lista de Presença</label>
 				</button>
 			</Link>
 		)
-	}
 
-	// se for usuário apoiador o leitor de presença também é exibido
-	// se não for apoiador da turma o back irá proibir
-	if (apoiador === "true") {
-		darPresenca = (
-			<Link to={"/leitor/" + id} className="link">
+		criarAula = (
+			<Link
+				to={{
+					pathname: "/cadaula",
+					state: turma,
+				}}
+				className="link"
+			>
 				<button className="button bold">
-					<label>Dar Presença</label>
+					<label>Criar Aula</label>
 				</button>
 			</Link>
 		)
@@ -137,28 +147,7 @@ function Turma(props) {
 			<main className="main turma">
 				{getTurmaContent(turma)}
 				<div className="nav-info-turmas">
-					<Link
-						to={{
-							pathname: "/presenca",
-							state: turma,
-						}}
-						className="link"
-					>
-						<button className="button bold">
-							<label>Lista de Presença</label>
-						</button>
-					</Link>
-					<Link
-						to={{
-							pathname: "/cadaula",
-							state: turma,
-						}}
-						className="link"
-					>
-						<button className="button bold">
-							<label>Criar Aula</label>
-						</button>
-					</Link>
+					{listaDePresenca}
 					{cadastrarApoiador}
 					<Link
 						to={{
@@ -171,7 +160,17 @@ function Turma(props) {
 							<label>Aulas</label>
 						</button>
 					</Link>
-					{darPresenca}
+					<Link
+						to={{
+							pathname: `/leitor/${id}`,
+							state: turma,
+						}}
+						className="link"
+					>
+						<button className="button bold">
+							<label>Dar Presença</label>
+						</button>
+					</Link>
 				</div>
 			</main>
 			<HomeButton />

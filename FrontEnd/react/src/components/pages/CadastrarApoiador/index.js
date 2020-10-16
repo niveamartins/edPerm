@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react"
-import { Redirect } from "../../../../node_modules/react-router-dom"
+import { useHistory } from "react-router-dom"
 
 import api from "../../../services/api"
 
@@ -16,6 +16,8 @@ function CadastrarApoiador(props) {
 	// console.log(info)
 
 	const id_turma = info[0].id_turma
+
+	const history = useHistory()
 
 	async function handleCreate(e) {
 		e.preventDefault()
@@ -38,6 +40,7 @@ function CadastrarApoiador(props) {
 						alert("O e-mail cadastrado não existe no banco de dados")
 					} else {
 						alert(`O aluno foi cadastrado como apoiador da turma com sucesso!`)
+						history.go(0)
 					}
 				})
 		} catch (err) {
