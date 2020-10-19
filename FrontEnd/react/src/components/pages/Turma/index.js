@@ -160,6 +160,7 @@ function Turma(props) {
 							<label>Aulas</label>
 						</button>
 					</Link>
+					{criarAula}
 					<Link
 						to={{
 							pathname: `/leitor/${id}`,
