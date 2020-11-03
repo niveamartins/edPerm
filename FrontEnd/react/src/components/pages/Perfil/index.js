@@ -87,7 +87,7 @@ function Perfil() {
 						<div className="card qr-code">{createQR(dados)}</div>
 						<div className="profile__container-buttons">
 							<Link to="/editarDados">
-								<button size="large" class="personal-buttons bold" disabled>
+								<button size="large" class="personal-buttons bold">
 									<img src={Lapis} alt="Icone editar"></img>
 									<label>Editar Dados</label>
 								</button>
@@ -100,20 +100,14 @@ function Perfil() {
 							</Link>
 						</div>
 					</div>
-					<div className="profile__container-options">
-						<Link to="/turmasinscritas" className="link">
-							<button size="large" class="button bold" disabled>
-								<img src={Turmas} alt="Icone turmas"></img>
-								<label>Turmas Inscritas</label>
-							</button>
-						</Link>
+					{/* <div className="profile__container-options">
 						<Link to="/presencaspessoais" className="link">
 							<button size="large" class="button bold" disabled>
 								<img src={Checkmark} alt="Icone checkmarck"></img>
 								<label>Presenças</label>
 							</button>
 						</Link>
-					</div>
+					</div> */}
 				</div>
 			</main>
 			<HomeButton />

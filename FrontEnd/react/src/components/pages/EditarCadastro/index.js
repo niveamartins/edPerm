@@ -1,24 +1,26 @@
-import React, { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
-import api from "../../../services/api"
+import React, { Fragment, useState, useEffect } from "react"
 import { useHistory } from "react-router-dom"
+import api from "../../../services/api"
 
+import './editUsuario.css'
 import { makeStyles, withStyles } from "@material-ui/core/styles"
 import InputLabel from "@material-ui/core/InputLabel"
 import FormControl from "@material-ui/core/FormControl"
 import NativeSelect from "@material-ui/core/NativeSelect"
 import InputBase from "@material-ui/core/InputBase"
 
-import NavBar from "../../navbar"
-
 // dados pré estabelecidos CAP
-import { capData, caps } from "./data/capData"
+import { capData, caps } from "../CadastroUsuario/data/capData"
 // dados pré estabelecidos Profissão
-import { profissaoCargo, profissaoChefia } from "./data/profissaoData"
+import {
+	profissaoCargo,
+	profissaoChefia,
+} from "../CadastroUsuario/data/profissaoData"
 
-import "./cadUsuario.css"
+import { NavBar } from "../../navbar"
+import { HomeButton } from "../../HomeButton"
 
-function Inicio() {
+function EditarCadastro() {
 	const [nome, setNome] = useState("")
 	const [usuario, setUsuario] = useState("")
 	const [email, setEmail] = useState("")
@@ -53,32 +55,36 @@ function Inicio() {
 		setUnidadeBasicadeSaude(unidadeInicial)
 	}, [CAP])
 
-	async function handleCreate(e) {
+	async function handleEdit(e) {
 		e.preventDefault()
 
 		const data = {
-			nome,
 			usuario,
+			nome,
 			email,
 			senha,
 			cpf,
 			telefone,
-			tipo,
-			CAP,
-			UnidadeBasicadeSaude,
 			funcao,
 			profissao,
+			UnidadeBasicadeSaude,
+			CAP,
 		}
 
 		if (senha == confirm_password) {
 			try {
-				api.post("/cadastrar", data)
+				const token = localStorage.getItem("token")
+				const AuthStr = "Bearer ".concat(token)
 
-				alert(`O usuário foi cadastrado com sucesso!`)
-				history.push("/login")
+				await api.post("/atualizarusuario", data, {
+					headers: { Authorization: AuthStr },
+				})
+
+				alert(`Dados foram alterados com sucesso!`)
+				history.go(0)
 			} catch (err) {
 				console.log(err)
-				alert("Erro no cadastro, tente novamente")
+				alert("Ocorreu um erro, tente novamente")
 			}
 		} else {
 			alert("As senhas não coincidem.")
@@ -133,24 +139,21 @@ function Inicio() {
 	}))
 
 	return (
-		<>
-			<NavBar login />
+		<Fragment>
+			<NavBar />
 			<main className="main">
 				<main className="main-content-forms">
-					<div className="form-page-container cad-user">
+					<div className="form-page-container edit-user">
 						<div className="form-container">
-							<form onSubmit={handleCreate}>
-								<h1 style={title}>Bem vindo(a)!</h1>
-								<p>
-									Efetue cadastro para utilização de nossas funcionalidades.
-								</p>
+							<form onSubmit={handleEdit}>
+								<h1 style={title}>Edite seus dados</h1>
+								<p>Mude os campos que desejar e deixe os demais em branco</p>
 								<input
 									type="text"
 									name="nome"
 									className="form-input"
 									placeholder="Nome Completo"
 									value={nome}
-									required
 									onChange={(e) => {
 										setNome(e.target.value)
 									}}
@@ -161,7 +164,6 @@ function Inicio() {
 									className="form-input"
 									placeholder="Usuário"
 									value={usuario}
-									required
 									onChange={(e) => {
 										setUsuario(e.target.value)
 										const regex = new RegExp("^[a-zA-Z0-9]+$")
@@ -182,7 +184,6 @@ function Inicio() {
 									className="form-input"
 									placeholder="Email"
 									value={email}
-									required
 									onChange={(e) => {
 										setEmail(e.target.value)
 										const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
@@ -199,7 +200,6 @@ function Inicio() {
 									className="form-input"
 									placeholder="Senha"
 									value={senha}
-									required
 									onChange={(e) => {
 										setSenha(e.target.value)
 										const regex = new RegExp("^.{4,15}$")
@@ -220,7 +220,6 @@ function Inicio() {
 									placeholder="Confirme a Senha"
 									value={confirm_password}
 									onChange={(e) => setConfPass(e.target.value)}
-									required
 								/>
 								<input
 									type="text"
@@ -229,7 +228,6 @@ function Inicio() {
 									className="form-input"
 									placeholder="CPF"
 									value={cpf}
-									required
 									onChange={(e) => {
 										setCpf(e.target.value)
 										const regex = new RegExp("^([0-9]{11})$")
@@ -251,7 +249,6 @@ function Inicio() {
 									className="form-input"
 									placeholder="Telefone"
 									value={telefone}
-									required
 									onChange={(e) => {
 										setTelefone(e.target.value)
 										const regex = new RegExp("^([0-9]{8,9})$")
@@ -276,7 +273,7 @@ function Inicio() {
 										value={CAP}
 										onChange={(e) => setCAP(e.target.value)}
 										input={<BootstrapInput />}
-										required
+
 									>
 										{caps.map((option) => {
 											return (
@@ -295,7 +292,7 @@ function Inicio() {
 										value={UnidadeBasicadeSaude}
 										onChange={(e) => setUnidadeBasicadeSaude(e.target.value)}
 										input={<BootstrapInput />}
-										required
+
 									>
 										{listaUnidades.map((option) => {
 											return (
@@ -314,7 +311,7 @@ function Inicio() {
 										value={profissao}
 										onChange={(e) => setProfissao(e.target.value)}
 										input={<BootstrapInput />}
-										required
+
 									>
 										{profissaoCargo.map((option) => {
 											return (
@@ -341,20 +338,20 @@ function Inicio() {
 										})}
 									</NativeSelect>
 								</FormControl>
-
-								<input type="submit" className="button" value="cadastrar" />
-								<Link to="/login">
-									Já possui uma conta?
-									<br />
-									<span className="form-highlight cad-user">Faça login</span>
-								</Link>
+								<input
+									type="submit"
+									className="button bold"
+									id="cad__class-button"
+									value="editar dados"
+								/>
 							</form>
 						</div>
 					</div>
 				</main>
 			</main>
-		</>
+			<HomeButton />
+		</Fragment>
 	)
 }
 
-export default Inicio
+export default EditarCadastro

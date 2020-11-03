@@ -1,0 +1,13 @@
+.form-page-container.edit-user {
+  height: 920px;
+  margin-top: 150px;
+}
+
+.form-page-container.edit-user .form-container h1 {
+  margin-top: 45px!important;
+}
+
+.form-page-container.edit-user p {
+  margin-bottom: 20px;
+}
+
