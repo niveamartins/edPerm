@@ -32,6 +32,7 @@ from services.CreateHorarioService import CreateHorarioService
 from services.AutheticateUserService import AutheticateUserService
 from services.CadastrarAlunoService import CadastrarAlunoService
 from services.ListTurmaService import ListTurmaService
+from services.ListTurmaPublicoAlvoService import ListTurmaPublicoAlvoService
 from services.ListPresencaTotalService import ListPresencaTotalService
 from services.ListAulaService import ListAulaService
 from services.ListAulaPresencaService import ListAulaPresencaService
@@ -297,6 +298,20 @@ def listarturma():
     turmas = listTurma.execute()
     print(turmas)
     return jsonify(turmas)
+
+@blueprint.route("/listapublicoalvo", methods=['Post'])
+@jwt_required
+def listarpublicoalvo():
+    
+    turmaData = request.get_json()
+    turmaDataFields = ["nome_do_curso"]
+
+    if not all(field in turmaData for field in turmaDataFields):
+        return {"Error":"Missing information."}, 400
+    
+    listPublicoAlvo = ListTurmaPublicoAlvoService()
+    PublicoAlvos = listPublicoAlvo.execute(turmaData)
+    return jsonify(PublicoAlvos)
 
 
 @blueprint.route("/listausuario", methods=['GET'])
