@@ -36,13 +36,14 @@ from services.ListTurmaPublicoAlvoService import ListTurmaPublicoAlvoService
 from services.ListPresencaTotalService import ListPresencaTotalService
 from services.ListAulaService import ListAulaService
 from services.ListAulaPresencaService import ListAulaPresencaService
-ListAulaPresencaService
+from services.ListTurmaPorPublicoService import ListTurmaPorPublicoService
 from services.ListUserService import ListUserService
 from services.ListTurmaApoiadorService import ListTurmaApoiadorService
 from services.ListTurmaAlunoService import ListTurmaAlunoService
 from services.ListTurmaPropositorService import ListTurmaPropositorService
 from services.CreatePresencaService import CreatePresencaService
 from services.makeValidacaoService import makeValidacaoService
+
 
 blueprint = Blueprint('endpoints', __name__) 
 CORS(blueprint)
@@ -289,14 +290,16 @@ def turma(codigo_turma):
     return jsonify(JSON)
 
 
-
-@blueprint.route("/listaturma", methods=['GET'])
+@blueprint.route("/listaturma", methods=['Post'])
+@jwt_required
 def listarturma():
     #user_id = request.json.get('user_id', None)
-
-    listTurma = ListTurmaService()
-    turmas = listTurma.execute()
-    print(turmas)
+    Token = get_jwt_identity()
+    userData = {}
+    userData['Id'] = Token['id']
+    print(userData['Id'])
+    listTurma = ListTurmaPorPublicoService()
+    turmas = listTurma.execute(userData)
     return jsonify(turmas)
 
 @blueprint.route("/listapublicoalvo", methods=['Post'])
