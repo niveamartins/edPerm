@@ -24,9 +24,7 @@ class ListTurmaPorPublicoService:
         try:
             session = get_session()
             QueryAluno = session.query(User).filter(User.Id == userData["Id"]).first()
-            print(QueryAluno.profissao)
             QueryPublicoAlvo = session.query(PublicoAlvo).filter(PublicoAlvo.nome_publicoAlvo == QueryAluno.profissao).first()
-            print(QueryPublicoAlvo.nome_publicoAlvo)
             if(QueryPublicoAlvo):
                 turmas = [turma_info(i) for i in QueryPublicoAlvo.turmasPublicoAlvo]
             else:

@@ -302,6 +302,15 @@ def listarturma():
     turmas = listTurma.execute(userData)
     return jsonify(turmas)
 
+
+@blueprint.route("/listatodasturmas", methods=['GET'])
+@jwt_required
+def listartodasturma():
+    listTurma = ListTurmaService()
+    turmas = listTurma.execute()
+    print(turmas)
+    return jsonify(turmas)
+
 @blueprint.route("/listapublicoalvo", methods=['Post'])
 @jwt_required
 def listarpublicoalvo():
