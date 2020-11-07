@@ -290,7 +290,7 @@ def turma(codigo_turma):
     return jsonify(JSON)
 
 
-@blueprint.route("/listaturma", methods=['Post'])
+@blueprint.route("/listaturma", methods=['GET'])
 @jwt_required
 def listarturma():
     #user_id = request.json.get('user_id', None)
