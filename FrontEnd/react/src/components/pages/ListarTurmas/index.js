@@ -14,16 +14,24 @@ function ListarTurmas() {
 	const [turmas, setTurmas] = useState([])
 
 	let empty = null
-	if (turmas.length === 0) empty = <p className="empty">Não há turmas</p>
+	if (turmas.length == 0) empty = <p className="empty">Não há turmas</p>
 
 	useEffect(() => {
 		try {
 			const token = localStorage.getItem("token")
 			const AuthStr = "Bearer ".concat(token)
+			let turmas = null
 			api
 				.get("listaturma", { headers: { Authorization: AuthStr } })
 				.then((response) => {
-					setTurmas(response.data)
+					// setar null em turmas se db tiver enviado mensagem de erro (nenhuma turma)
+					if (response.data[0].Error && response.data[1] == "400") {
+						console.log(response.data[0].Error)
+						alert("Não foram encontradas turmas para seu público alvo")
+						return
+					}					
+					else turmas = response.data
+					setTurmas(turmas)
 				})
 		} catch (err) {
 			alert("Não foi possível encontrar as turmas, tente novamente")

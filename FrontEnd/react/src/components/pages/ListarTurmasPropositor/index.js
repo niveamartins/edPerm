@@ -31,7 +31,12 @@ function ListarTurmas() {
 					headers: { Authorization: AuthStr },
 				})
 				.then((response) => {
-					setTurmasPropositor(response.data)
+					if (response.data.length == 0) {
+						console.log("Usuário não é propositor de nenhuma turma")
+						alert("Usuário não é propositor de nenhuma turma")
+						return
+					}
+					else setTurmasPropositor(response.data)
 				})
 		} catch (err) {
 			alert("Não foi possível encontrar as turmas, tente novamente")

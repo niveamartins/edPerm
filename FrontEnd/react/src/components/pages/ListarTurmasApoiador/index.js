@@ -28,6 +28,7 @@ function ListarTurmas() {
 			api.post("listaturmaapoiador", data, { headers: { Authorization: AuthStr }}).then((response) => {
 				if (response.data[0].Error && response.data[1] == "400") {
 					console.log(response.data[0].Error)
+					alert(response.data[0].Error)
 					return
 				}
 				else {

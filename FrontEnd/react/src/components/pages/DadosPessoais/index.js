@@ -20,6 +20,7 @@ function DadosPessoais() {
 			api
 				.get("/dadosPessoais", { headers: { Authorization: AuthStr } })
 				.then((response) => {
+					console.log(response.data)
 					setDados(response.data)
 				})
 		} catch (err) {
@@ -78,7 +79,7 @@ function DadosPessoais() {
 			<table className="card-list">
 				<tbody>
 					<tr className="title">
-						<td>{item.usuario}</td>
+						<td>{item.nome}</td>
 					</tr>
 					<tr className="content">
 						<td>Nome de Usuário</td>
@@ -98,10 +99,22 @@ function DadosPessoais() {
 						<td className="name">Telefone</td>
 						<td className="value">{item.telefone}</td>
 					</tr>
-					{/* {<tr className="content">
-                                <td className="name">Tipo</td>
-                                <td className="value">{item.tipo}</td>
-                            </tr>} */}
+					<tr className="content">
+						<td className="name">Função</td>
+						<td className="value">{item.funcao}</td>
+					</tr>
+					<tr className="content">
+						<td className="name">Profissão</td>
+						<td className="value">{item.profissao}</td>
+					</tr>
+					<tr className="content">
+						<td className="name">CAP</td>
+						<td className="value">{item.CAP}</td>
+					</tr>
+					<tr className="content">
+						<td className="name">Unidade</td>
+						<td className="value">{item.UnidadeBasicadeSaude}</td>
+					</tr>
 				</tbody>
 			</table>
 		)

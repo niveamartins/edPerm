@@ -16,7 +16,7 @@ function Turma(props) {
 	const [turma, setTurmas] = useState([])
 
 	let cadastrarApoiador = null
-	let darPresenca = null
+	// let darPresenca = null
 	let listaDePresenca = null
 	let criarAula = null
 
@@ -26,7 +26,7 @@ function Turma(props) {
 	const gestor = localStorage.getItem("gestor")
 	const coordenador = localStorage.getItem("coordenador")
 	const propositor = localStorage.getItem("propositor")
-	const apoiador = localStorage.getItem("apoiador")
+	// const apoiador = localStorage.getItem("apoiador")
 
 	// usuários que poderiam ter cadastrado a turma
 	const allowedAllUser =
@@ -37,6 +37,7 @@ function Turma(props) {
 
 	const id = props.location.state
 	const url = "listaturma/" + id
+	
 	useEffect(() => {
 		try {
 			const token = localStorage.getItem("token")
@@ -47,6 +48,10 @@ function Turma(props) {
 		} catch (err) {
 			alert("Não foi possível encontrar a turma desejada, tente novamente")
 		}
+	}, [])
+
+	useEffect(() => {
+
 	}, [])
 
 	const getTurmaContent = (turma) => {

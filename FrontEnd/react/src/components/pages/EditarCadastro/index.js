@@ -81,7 +81,7 @@ function EditarCadastro() {
 				})
 
 				alert(`Dados foram alterados com sucesso!`)
-				history.go(0)
+				history.push("/perfil")
 			} catch (err) {
 				console.log(err)
 				alert("Ocorreu um erro, tente novamente")
