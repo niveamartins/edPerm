@@ -13,7 +13,8 @@ import LinkIcon from "@material-ui/icons/Link"
 import { capitalize } from "@material-ui/core"
 
 function Turma(props) {
-	const [turma, setTurmas] = useState([])
+	const [turma, setTurma] = useState([])
+	const [publico, setPublico] = useState([])
 
 	let cadastrarApoiador = null
 	// let darPresenca = null
@@ -37,22 +38,43 @@ function Turma(props) {
 
 	const id = props.location.state
 	const url = "listaturma/" + id
-	
+
+	// carrega dados da turma
 	useEffect(() => {
 		try {
 			const token = localStorage.getItem("token")
 			const AuthStr = "Bearer ".concat(token)
 			api.get(url, { headers: { Authorization: AuthStr } }).then((response) => {
-				setTurmas(response.data)
+				setTurma(response.data)
 			})
 		} catch (err) {
 			alert("Não foi possível encontrar a turma desejada, tente novamente")
 		}
 	}, [])
 
+	// carrega dados do público alvo
 	useEffect(() => {
+		try {
+			const token = localStorage.getItem("token")
+			const AuthStr = "Bearer ".concat(token)
+			const nome_do_curso = turma[0].nome_do_curso
+			const data = {
+				nome_do_curso,
+			}
+			api
+				.post("listapublicoalvo", data, { headers: { Authorization: AuthStr } })
+				.then((response) => {
+					setPublico(response.data)
+					console.log(response.data)
+				})
+		} catch (err) {
+			console.log("Não foi possível encontrar o público alvo da turma desejada")
+		}
+	}, [turma])
 
-	}, [])
+	const publicoListed = publico
+		? publico.map((publico) => `${publico.nome_publicoAlvo}; `)
+		: "-"
 
 	const getTurmaContent = (turma) => {
 		let content = []
@@ -88,6 +110,10 @@ function Turma(props) {
 							<tr className="content">
 								<td className="name">Modalidade</td>
 								<td className="value">{capitalize(item.modalidade)}</td>
+							</tr>
+							<tr className="content">
+								<td className="name">Publico</td>
+								<td className="value">{publicoListed}</td>
 							</tr>
 						</table>
 					</div>

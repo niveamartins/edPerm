@@ -16,13 +16,17 @@ function ListarTurmas() {
 	let empty = null
 	if (turmas.length == 0) empty = <p className="empty">Não há turmas</p>
 
+	let url = "listaturma"
+	const adm = localStorage.getItem("adm")
+	if (adm === "true") url = "listatodasturmas"
+
 	useEffect(() => {
 		try {
 			const token = localStorage.getItem("token")
 			const AuthStr = "Bearer ".concat(token)
 			let turmas = null
 			api
-				.get("listaturma", { headers: { Authorization: AuthStr } })
+				.get(url, { headers: { Authorization: AuthStr } })
 				.then((response) => {
 					// setar null em turmas se db tiver enviado mensagem de erro (nenhuma turma)
 					if (response.data[0].Error && response.data[1] == "400") {
